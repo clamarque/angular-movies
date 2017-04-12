@@ -1,0 +1,57 @@
+<md-card *ngIf="movie">
+  <img src="https://image.tmdb.org/t/p/w780/{{movie.backdrop_path}}" alt="poster movie">
+  <md-card-header>
+    <md-card-title>{{movie.title}}</md-card-title>
+    <md-card-subtitle>
+      <md-icon>date_range</md-icon> {{movie.release_date | date}}
+      <span *ngIf="movie.vote_average >= 5"> <md-icon class="md-green">thumb_up</md-icon> {{movie.vote_average}} </span>
+      <span *ngIf="movie.vote_average < 5"> <md-icon class="md-red">thumb_down</md-icon> {{movie.vote_average}} </span>
+      <button md-icon-button [mdMenuTriggerFor]="menu">
+                <md-icon>share</md-icon>
+      </button>
+      <md-menu #menu="mdMenu">
+        <a md-menu-item href="https://plus.google.com/share?url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">Google +
+                </a>
+        <a md-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}">Facebook</a>
+        <a md-menu-item href="https://twitter.com/intent/tweet?text=Discovers the movie {{movie.title}}%20on%20&url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}&hashtags=hubmovies, {{movie.title}}">Twitter</a>
+        <a md-menu-item href="mailto:?subject={{movie.title}} on Hubmovies&body=Discovers the movie on https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}">Email</a>
+      </md-menu>
+      <div class="genre">
+        <ul *ngFor="let genre of movie.genres; let i=index">
+          <li  *ngIf="i < 3"> {{genre.name}}</li>
+        </ul>
+      </div>
+    </md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <p>{{movie.overview}}</p>
+  </md-card-content>
+  <md-card-actions>
+    <div [hidden]="!isConnected">
+      <button md-button (click)="saveMovie(movie, 'MovieLater')"><md-icon class="md-teal">watch_later</md-icon> Watch later</button>
+      <button md-button (click)="saveMovie(movie, 'FavoriteMovie')"><md-icon class="md-yellow">star</md-icon> Favorite</button>
+    </div>
+  </md-card-actions>
+</md-card>
+
+<md-card *ngIf="movieVideo">
+  <div *ngFor="let movies of movieVideo.results; let i=index">
+    <div *ngIf="url != null && i < 1">
+      <iframe [src]="url" allowfullscreen></iframe>
+    </div>
+    <a (click)="seeTrailer(movies.key)">
+      <md-icon>local_movies</md-icon> See trailer {{i + 1}}</a>
+  </div>
+</md-card>
+<h1 *ngIf="similarMovies"> Similar movies</h1>
+<div class="items" *ngIf="similarMovies">
+  <div class="item" *ngFor="let movie of similarMovies.results; let i=index">
+    <div *ngIf=" i < 12">
+      <a [routerLink]="['/movie', movie.id]">
+        <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie" width="200">
+        <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available"
+          width="200">
+        <p>{{movie.title}}</p>
+      </a>
+    </div>
+  </div>

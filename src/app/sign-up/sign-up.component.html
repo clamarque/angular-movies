@@ -1,0 +1,17 @@
+<h1>Sign up with</h1>
+<form (ngSubmit)="onSubmit(formData.value)" #formData='ngForm'>
+    <md-card>
+        <md-input-container>
+            <input mdInput type="text" name="username" ngModel placeholder="Username" required>
+        </md-input-container>
+        <md-input-container>
+            <input mdInput type="email" name="email" ngModel placeholder="Email address" required>
+        </md-input-container>
+        <md-input-container>
+            <input mdInput type="password" name="password" ngModel placeholder="Password" required>
+        </md-input-container>
+        <button md-raised-button color="primary" type="submit" [disabled]="!formData.valid">Send</button>
+    </md-card>
+</form>
+<h2>Or</h2>
+<a routerLink="/sign-in">Already have an account ?</a>

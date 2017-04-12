@@ -1,0 +1,28 @@
+<div class="items" *ngIf="movies">
+    <div class="item" *ngFor="let movie of movies.results">
+        <a [routerLink]="['/movie', movie.id]">
+            <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie" width="200"> 
+            <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available" width="200">
+            <p>{{movie.title}}</p>
+        </a>
+    </div>
+    <div class="item">
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(1)"><md-icon>first_page</md-icon></a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(pager.currentPage - 1)"><md-icon>chevron_left</md-icon></a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="setPage(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.currentPage + 1)"><md-icon>chevron_right</md-icon></a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.totalPages)"><md-icon>last_page</md-icon></a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div *ngIf="photoURL">
+    <img src="{{photoURL}}" alt="profile" width="150">
+</div>
+<h1>Hello {{displayName}}</h1>
+<form (ngSubmit)="onSubmit(formData)" #formData='ngForm'>
+    <md-card>
+        <md-input-container>
+            <input mdInput type="text" name="displayName" [(ngModel)]="displayName" required>
+        </md-input-container>
+        <md-input-container>
+            <input mdInput type="email" name="email" [(ngModel)]="email" required>
+        </md-input-container>
+        <md-checkbox type="checkbox" name="emailVerified" [(ngModel)]="emailVerified" disabled>
+            <label>Email Verified</label>
+        </md-checkbox>
+        <button md-raised-button color="primary" type="submit" [disabled]="!formData.valid">Send</button>
+    </md-card>
+</form>
+<h2>Delete your account ?</h2>
+<a (click)="confirmDialog()">Delete</a>

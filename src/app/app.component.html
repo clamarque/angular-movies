@@ -1,0 +1,54 @@
+<md-sidenav-container>
+    <md-sidenav #end align="start" mode="push">
+        <nav class="" id="navigation" role="navigation">
+            <ul class="nav">
+                <li>
+                    <md-input-container>
+                        <input mdInput #search placeholder="search a movie" (keyup.enter)="searchMovie(search.value); search.value=''"
+                            (keyup.enter)="end.close()">
+                    </md-input-container>
+                </li>
+                <li>
+                    <a routerLink="/index" routerLinkActive="active" (click)="end.close()">
+                        <md-icon>today</md-icon> Currently</a>
+                </li>
+                <li>
+                    <a routerLink="/upcoming" routerLinkActive="active" (click)="end.close()">
+                        <md-icon>date_range</md-icon> Coming soon</a>
+                </li>
+                <li>
+                    <a routerLink="/discover" routerLinkActive="active" (click)="end.close()">
+                        <md-icon>explore</md-icon> Trending</a>
+                </li>
+                <li [hidden]="!isConnected">
+                    <a routerLink="/watch-later" routerLinkActive="active" (click)="end.close()">
+                        <md-icon>watch_later</md-icon> Watch later</a>
+                </li>
+                <li [hidden]="!isConnected">
+                    <a routerLink="/favorites" routerLinkActive="active" (click)="end.close()">
+                        <md-icon>star</md-icon> Favorites</a>
+                </li>
+                <li [hidden]="!isConnected">
+                    <a routerLink="/profile" routerLinkActive="active" (click)="end.close()">
+                        <md-icon>account_circle</md-icon> Profil</a>
+                </li>
+                <li [hidden]="isConnected">
+                    <a routerLink="/sign-in" routerLinkActive="active" (click)="end.close()">
+                        <md-icon>account_circle</md-icon> Sign in</a>
+                </li>
+                <li [hidden]="!isConnected">
+                    <a (click)="end.close()" (click)="onSignOut()">
+                        <md-icon>cancel</md-icon> Sign out</a>
+                </li>
+                <li>
+                    <a href="mailto:chabox59@gmail.com">
+                        <md-icon>bug_report</md-icon> Feebacks</a>
+                </li>
+            </ul>
+        </nav>
+    </md-sidenav>
+    <button class="app-icon-button" (click)="end.toggle()">
+            <i class="material-icons app-toolbar-menu">menu</i>
+    </button>
+        <router-outlet></router-outlet>
+</md-sidenav-container>

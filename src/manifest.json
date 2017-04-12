@@ -1,0 +1,21 @@
+{
+    "name": "Hub-movies",
+    "short_name": "Hubmovies",
+    "icons": [
+        {
+            "src": "assets/icons/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "types": "image\/png"
+        },
+        {
+            "src": "assets/icons/android-chrome-192x192.png",
+            "sizes": "256x256",
+            "type": "image\/png"
+        }
+    ],
+    "theme_color": "#b92B27",
+    "background_color": "#FFFFFF",
+    "display": "standalone",
+    "orientation": "portrait",
+    "start_url": "./?utm_source=web_app_manifest"
+}

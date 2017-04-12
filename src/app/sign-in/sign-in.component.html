@@ -1,0 +1,27 @@
+<h1>signIn</h1>
+<form (ngSubmit)="onSubmit(formData.value)" #formData='ngForm'>
+    <md-card>
+        <md-input-container>
+            <input mdInput type="email" name="email" ngModel placeholder="Email address" required>
+        </md-input-container>
+        <md-input-container>
+            <input mdInput type="password" name="password" ngModel placeholder="Password" required>
+        </md-input-container>
+        <button md-raised-button color="primary" type="submit" [disabled]="!formData.valid">Submit</button>
+    </md-card>
+</form>
+<h2>Or</h2>
+<button md-raised-button (click)="login('facebook')">
+    <img class="img-social" src="https://firebasestorage.googleapis.com/v0/b/hubmovies-a26fc.appspot.com/o/facebook-logo.png?alt=media&token=8fa7710c-7a4f-477f-abe9-d4f3f7e79b0c"> Use my Facebook account
+</button>
+<button md-raised-button (click)="login('google')">
+    <img class="img-social" src="https://firebasestorage.googleapis.com/v0/b/hubmovies-a26fc.appspot.com/o/google-logo.png?alt=media&token=2ef1937b-a492-4f18-9c46-75178c59d012"> Use my Google account
+</button>
+<button md-raised-button (click)="login('twitter')">
+    <img class="img-social" src="https://firebasestorage.googleapis.com/v0/b/hubmovies-a26fc.appspot.com/o/twitter-logo.png?alt=media&token=ae5ba3f0-1bb9-4746-a52c-bbb5d0325987"> Use my Twitter account
+</button>
+<h3>And </h3>
+<p>If you don't have an account ?</p>
+<a routerLink="/sign-up"> here</a>
+<p>If you forgot your password ?</p>
+<a routerLink="/reset-password"> here</a>
