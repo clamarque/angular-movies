@@ -39,18 +39,17 @@
     <div *ngIf="url != null && i < 1">
       <iframe [src]="url" allowfullscreen></iframe>
     </div>
-    <a (click)="seeTrailer(movies.key)">
+    <a *ngIf="i < 5" (click)="seeTrailer(movies.key)">
       <md-icon>local_movies</md-icon> See trailer {{i + 1}}</a>
   </div>
 </md-card>
 <h1 *ngIf="similarMovies"> Similar movies</h1>
 <div class="items" *ngIf="similarMovies">
   <div class="item" *ngFor="let movie of similarMovies.results; let i=index">
-    <div *ngIf=" i < 12">
+    <div *ngIf=" i < 8">
       <a [routerLink]="['/movie', movie.id]">
-        <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie" width="200">
-        <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available"
-          width="200">
+        <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie">
+        <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
         <p>{{movie.title}}</p>
       </a>
     </div>

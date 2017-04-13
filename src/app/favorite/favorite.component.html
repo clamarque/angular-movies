@@ -1,15 +1,14 @@
 <div class="items">
     <md-card class="item" *ngFor="let movie of movies">
-        <img *ngIf="movie.poster_path"  src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie">
-        <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+        <a [routerLink]="['/movie', movie.id]">
+            <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie">
+            <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+        </a>
         <md-card-header>
             <md-card-title>{{movie.original_title}}</md-card-title>
             <md-card-subtitle>{{movie.release_date | date}}</md-card-subtitle>
         </md-card-header>
         <md-card-actions>
-            <a [routerLink]="['/movie', movie.id]">
-                <md-icon>visibility</md-icon>
-            </a>
             <button md-icon-button [mdMenuTriggerFor]="menu">
                 <md-icon>share</md-icon>
             </button>

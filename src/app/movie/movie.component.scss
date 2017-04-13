@@ -1,0 +1,45 @@
+.mat-card {
+    &-header, &-content, &-actions {
+         text-align: left;
+    }
+}
+
+.mat-card {
+    &-title {
+        margin: 1rem 0;
+        font-size: 1.5rem !important;
+    }
+    &-subtitle {
+        color: inherit;
+    }
+    &-subtitle, &-content {
+        font-size: inherit !important;
+    }
+}
+
+.md {
+    &-green{
+        color: #4caf50
+    }
+    &-orange {
+        color: rgb(255, 87, 34);
+    }
+    &-red {
+        color: #f44336;
+    }
+    &-yellow {
+        color: #ffc107;
+    }
+    &-teal {
+        color: #009688
+    }
+}
+
+.genre {
+    display: block;
+
+    ul {
+        display: inline-block;
+        padding: 0 .325rem 0 0;
+    }
+}
