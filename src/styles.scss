@@ -1,0 +1,158 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+*/
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500);
+@import 'assets/scss/custom_theme';
+@import 'assets/scss/palette';
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: $primary-light;
+}
+
+li {
+    list-style: none;
+}
+h1, h2, h3, h4 {
+    font-weight: normal;
+    text-align: center;
+    color: $white;
+}
+[id="launcher"] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+[id="navigation"] {
+    .mat-input-underline {
+        border-color: $white;
+    }
+    .mat-input-placeholder, .mat-input-element {
+        color: $white;
+    }
+}
+h1.mat-dialog-title {
+    color: $primary-dark;
+}
+
+.mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+    background: $primary-light;
+}
+/* Navigation */
+.app-icon-button {
+    padding: 1.25rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: $white;
+}
+
+md-sidenav-container {
+    height: 100%;
+}
+[id="hub-movies"] {
+    margin: 1rem;
+    text-align: center;
+}
+.mat {
+    &-icon {
+        vertical-align: middle;
+    }
+    &-sidenav-container {
+        background: $primary-dark;
+    }
+    &-sidenav.mat-sidenav-push {
+        background-color: $accent-dark;
+    }
+    &-sidenav-backdrop.mat-sidenav-shown{
+        background-color: rgba(14,17,20,1);
+    }
+    &-input-ripple{
+        background-color: $primary-light;
+    }
+    &-menu-content {
+        background: $primary-dark;
+    }
+    &-menu-item {
+        color: $primary-light;
+    }
+    &-card{
+        background: $white;
+        color: $primary-dark;
+    }
+}
+/* Pagination */
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.items .item {
+    margin: 1rem .625rem;
+    /*padding: .625rem; */
+    text-align: center;
+}
+
+.items .item:last-child {
+    width: 100%;
+}
+app-movie .items .item:nth-child(n+7),
+app-watch-later .items .item:last-child,
+app-favorite .items .item:last-child {
+    width: inherit;
+}
+.pagination li {
+    display: inline-block;
+    padding: 0 .5rem;
+}
+.pagination .disabled a {
+    cursor: default;
+    pointer-events: none;
+    color: $disable;
+}
+/* Movie  */
+img {
+    width: 100%;
+}
+md-card-header .mat-card-header-text {
+    margin: 1rem 0 0;
+    text-align: left;
+}
+
+iframe {
+    display: block;
+    margin: .625rem auto;
+}
+
+/* Responsive */
+@media screen and (max-width: 480px){
+    md-checkbox, .mat-input-container {
+        display: block !important;
+        margin: 3rem 0;
+    }
+    .pagination {
+        -webkit-padding-start: 0;
+    }
+    app-sign-in a {
+        display: block;
+        margin: 0 0 .625rem 0;
+    }
+}
