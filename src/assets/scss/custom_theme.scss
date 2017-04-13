@@ -2,11 +2,10 @@
 
 @include mat-core();
 
-$candy-app-primary: mat-palette($mat-blue);
-$candy-app-accent: mat-palette($mat-grey, A500);
+$my-app-primary: mat-palette($mat-red, 500);
+$my-app-accent:  mat-palette($mat-red, A100);
+$my-app-warn:    mat-palette($mat-orange);
 
-$candy-app-warn: mat-palette($mat-red);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 
-$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
-
-@include angular-material-theme($candy-app-theme);
+@include angular-material-theme($my-app-theme);
