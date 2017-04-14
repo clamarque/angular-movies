@@ -1,8 +1,10 @@
 # HubMovies
 
 <p align="center">
-    <a href="https://hubmovies-a26fc.firebaseapp.com" src="https://github.com/clamarque/hub-movies/blob/master/src/assets/icons/android-chrome-192x192.png?raw=true" alt="logo" width="200" >Hubmovies</a>
+    <a href="https://hubmovies-a26fc.firebaseapp.com"><img src="https://github.com/clamarque/hub-movies/blob/master/src/assets/icons/android-chrome-192x192.png?raw=true" alt="logo" />
+    </a>
 </p>
+
 <p align="center">
     A progressive web apps of movies built with Angular
 </p>
