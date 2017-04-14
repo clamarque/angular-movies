@@ -20,3 +20,7 @@ This app has been checked by the open source tool, [**lighthouse**](https://gith
 **Lighthouse score:** 97 / 100
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+
+## Become a contributor ?
+
+Find a bug, contribute some code or suggest ideas ? don't hesitate ! Create a pull request or an issue :wink:
