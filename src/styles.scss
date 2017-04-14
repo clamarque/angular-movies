@@ -38,6 +38,11 @@ h1, h2, h3, h4 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
+
+    img {
+        width: auto;
+    }
 }
 [id="navigation"] {
     .mat-input-underline {
@@ -80,9 +85,6 @@ md-sidenav-container {
     }
     &-sidenav.mat-sidenav-push {
         background-color: $accent-dark;
-    }
-    &-sidenav-backdrop.mat-sidenav-shown{
-        background-color: rgba(14,17,20,1);
     }
     &-input-ripple{
         background-color: $primary-light;
