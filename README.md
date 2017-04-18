@@ -1,7 +1,7 @@
 # HubMovies
 
 <p align="center">
-    <a href="https://hubmovies-a26fc.firebaseapp.com"><img src="https://github.com/clamarque/hub-movies/blob/master/src/assets/icons/android-chrome-192x192.png?raw=true" alt="logo" />
+    <a href="https://hubmovies-a26fc.firebaseapp.com"><img src="https://rawgit.com/clamarque/hub-movies/master/src/assets/icons/android-chrome-192x192.png" alt="logo" />
     </a>
 </p>
 
