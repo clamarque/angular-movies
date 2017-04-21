@@ -1,0 +1,17 @@
+<div *ngIf="person">
+  <img class="img_person" src="https://image.tmdb.org/t/p/w185/{{person.profile_path}}" alt="profile">
+  <h1>{{person.name}}</h1>
+  <p>{{person.birthday | date}}</p>
+  <p>{{person.biography}}</p>
+</div>
+
+<section id="known" class="items" *ngIf="movies">
+  <h1>Known for</h1>
+  <div class="item" *ngFor="let movie of movies">
+    <a [routerLink]="['/movie', movie.id]">
+      <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w185/{{movie.poster_path}}" alt="poster movie">
+      <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+      <p>{{movie.title}}</p>
+    </a>
+  </div>
+</section>

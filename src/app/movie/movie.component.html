@@ -1,5 +1,5 @@
 <md-card *ngIf="movie">
-  <img src="https://image.tmdb.org/t/p/w780/{{movie.backdrop_path}}" alt="poster movie">
+  <img src="https://image.tmdb.org/t/p/w300/{{movie.backdrop_path}}" alt="poster movie">
   <md-card-header>
     <md-card-title>{{movie.title}}</md-card-title>
     <md-card-subtitle>
@@ -18,7 +18,7 @@
       </md-menu>
       <div class="genre">
         <ul *ngFor="let genre of movie.genres; let i=index">
-          <li  *ngIf="i < 3"> {{genre.name}}</li>
+          <li *ngIf="i < 3"> {{genre.name}}</li>
         </ul>
       </div>
     </md-card-subtitle>
@@ -34,23 +34,34 @@
   </md-card-actions>
 </md-card>
 
-<md-card *ngIf="movieVideo">
-  <div *ngFor="let movies of movieVideo.results; let i=index">
-    <div *ngIf="url != null && i < 1">
-      <iframe [src]="url" allowfullscreen></iframe>
-    </div>
-    <a *ngIf="i < 5" (click)="seeTrailer(movies.key)">
-      <md-icon>local_movies</md-icon> See trailer {{i + 1}}</a>
+<section id="cast" class="items" *ngIf="cast">
+  <h1>Cast</h1>
+  <md-card class="item" *ngFor="let person of cast">
+    <a [routerLink]="['/star', person.id]">
+      <img src="https://image.tmdb.org/t/p/w185/{{person.profile_path}}" alt="profile">
+      <h3>{{person.name}}</h3>
+      <p>{{person.character}}</p>
+    </a>
+  </md-card>
+</section>
+
+<section id="trailer" *ngIf="videos">
+  <h1>Trailer</h1>
+  <iframe *ngIf="url != null" [src]="url" allowfullscreen></iframe>
+  <ng-template ngFor let-video let-i="index" [ngForOf]="videos">
+    <a (click)="seeTrailer(video.key)">
+      <md-icon>local_movies</md-icon> See trailer {{i + 1}}
+    </a>
+  </ng-template>
+</section>
+
+<section id="similar" class="items" *ngIf="similarMovies">
+  <h1>Similar movies</h1>
+  <div class="item" *ngFor="let movie of similarMovies">
+    <a [routerLink]="['/movie', movie.id]">
+      <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w185/{{movie.poster_path}}" alt="poster movie">
+      <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+      <p>{{movie.title}}</p>
+    </a>
   </div>
-</md-card>
-<h1 *ngIf="similarMovies"> Similar movies</h1>
-<div class="items" *ngIf="similarMovies">
-  <div class="item" *ngFor="let movie of similarMovies.results; let i=index">
-    <div *ngIf=" i < 8">
-      <a [routerLink]="['/movie', movie.id]">
-        <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie">
-        <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
-        <p>{{movie.title}}</p>
-      </a>
-    </div>
-  </div>
+</section>

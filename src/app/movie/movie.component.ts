@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { Location, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -13,8 +13,9 @@ import 'rxjs/add/operator/switchMap';
 })
 export class MovieComponent implements OnInit {
   movie: any[];
-  movieVideo: any[];
+  videos: any[];
   similarMovies: any[];
+  cast: any[];
   error: string;
   isConnected: boolean = false;
   baseUrl: string = 'https://www.youtube.com/embed/';
@@ -62,13 +63,20 @@ export class MovieComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.dataService.getVideoMovie(+params['id']))
       .subscribe(response => {
-        this.movieVideo = response
+        this.videos = response.results.slice(0,3)
       });
 
     this.route.params
       .switchMap((params: Params) => this.dataService.getSimilarMovies(+params['id']))
       .subscribe(response => {
-        this.similarMovies = response
+        this.similarMovies = response.results.slice(0,6);
+      })
+
+    this.route.params
+      .switchMap((params: Params) => this.dataService.getCastMovie(+params['id']))
+      .subscribe(response => {
+        console.log(response)
+        this.cast = response.cast.slice(0,6)
       })
 
     return this.authService.isLoggedIn().subscribe(

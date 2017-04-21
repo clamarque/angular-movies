@@ -1,35 +1,23 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders  } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './shared/index'
-import { IndexComponent } from './index/index.component'
-import { DiscoverComponent } from './discover/discover.component';
-import { FavoriteComponent } from './favorite/favorite.component'
-import { MovieComponent } from './movie/movie.component';
-import { ProfileComponent } from './profile/profile.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component'
+import { AuthGuard } from './shared/index';
+import { IndexComponent } from './index/index.component';
 import { SearchComponent } from './search/search.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
 import { UpcomingComponent } from './upcoming/upcoming.component';
-import { WatchLaterComponent } from './watch-later/watch-later.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
     { path: 'index', component: IndexComponent },
-    { path: 'discover', component: DiscoverComponent },
-    { path: 'favorites', component: FavoriteComponent, canActivate: [AuthGuard] },
-    { path: 'movie/:id', component: MovieComponent },
-    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-    { path: 'reset-password', component: ResetPasswordComponent },
+    { path: 'discover', loadChildren: 'app/discover/discover.module#DiscoverModule' },
+    { path: 'favorites', loadChildren: 'app/favorite/favorite.module#FavoriteModule', canActivate: [AuthGuard] },
+    { path: 'movie/:id', loadChildren: 'app/movie/movie.module#MovieModule' },
+    { path: 'profile', loadChildren: 'app/profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
+    { path: 'reset-password', loadChildren: 'app/reset-password/reset-password.module#ResetPasswordModule' },
     { path: 'search/:term', component: SearchComponent },
-    { path: 'sign-in', component: SignInComponent },
-    { path: 'sign-up', component: SignUpComponent },
+    { path: 'sign-in', loadChildren: 'app/sign-in/sign-in.module#SignInModule' },
+    { path: 'sign-up', loadChildren: 'app/sign-up/sign-up.module#SignUpModule' },
+    { path: 'star/:id', loadChildren: 'app/star/star.module#StarModule' },
     { path: 'upcoming', component: UpcomingComponent },
-    { path: 'watch-later' , component: WatchLaterComponent, canActivate: [AuthGuard] }
+    { path: 'watch-later' , loadChildren: 'app/watch-later/watch-later.module#WatchLaterModule', canActivate: [AuthGuard] }
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

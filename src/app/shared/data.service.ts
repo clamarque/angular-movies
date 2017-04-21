@@ -6,45 +6,54 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataService {
 
-    private url = 'https://api.themoviedb.org/3/';
-    private partner = '431bc17da732dfb3be082e58f7a5cf27';
+    private api_key = '431bc17da732dfb3be082e58f7a5cf27';
+    private url_discover = 'https://api.themoviedb.org/3/discover/movie';
+    private url_search = 'https://api.themoviedb.org/3/search/movie';
+    private url_movie = 'https://api.themoviedb.org/3/movie/';
+    private url_person = 'https://api.themoviedb.org/3/person/';
 
     constructor(private http: Http) { }
 
     getSearchMovie(name: string, page: number) {
-        return this.http.get(this.url + 'search/movie?api_key=' + this.partner + '&language=en' + '&query=' + name + '&page=' + page)
+        return this.http.get(this.url_search + '?api_key=' + this.api_key + '&language=en' + '&query=' + name + '&page=' + page)
             .map(res => res.json())
     }
-
     getNowPlaying(page: number) {
-        return this.http.get(this.url + 'movie/now_playing?api_key=' + this.partner + '&language=en' + '&page=' + page)
+        return this.http.get(this.url_movie + 'now_playing?api_key=' + this.api_key + '&language=en' + '&page=' + page)
             .map((res: Response) => res.json())
     }
-
-
     getDetailsMovie(code: number) {
-        return this.http.get(this.url + 'movie/' + code + '?api_key=' + this.partner + '&language=en')
+        return this.http.get(this.url_movie + code + '?api_key=' + this.api_key + '&language=en')
             .map((res: Response) => res.json())
     }
     getMovieDiscover(page: number) {
-        return this.http.get(this.url + 'discover/movie?api_key=' + this.partner + '&language=en&sort_by=popularity.desc&include_video=false&page=' + page)
+        return this.http.get(this.url_discover + '?api_key=' + this.api_key + '&language=en&sort_by=popularity.desc&include_video=false&page=' + page)
             .map((res: Response) => res.json())
     }
-
+    getCastMovie(code: number) {
+        return this.http.get(this.url_movie + code + '/credits?api_key=' + this.api_key)
+            .map((res: Response) => res.json())
+    }
     getVideoMovie(code: number) {
-        return this.http.get(this.url + 'movie/' + code + '/videos?api_key=' + this.partner + '&language=en')
+        return this.http.get(this.url_movie + code + '/videos?api_key=' + this.api_key + '&language=en')
             .map((res: Response) => res.json())
     }
     getSimilarMovies(code: number) {
-        return this.http.get(this.url + 'movie/' + code + '/similar?api_key=' + this.partner + '&language=en')
+        return this.http.get(this.url_movie + code + '/similar?api_key=' + this.api_key + '&language=en')
             .map((res: Response) => res.json())
     }
-
     getUpComing(page: number) {
-        return this.http.get(this.url + 'movie/upcoming?api_key=' + this.partner + '&language=en&page=' + page)
+        return this.http.get(this.url_movie + 'upcoming?api_key=' + this.api_key + '&language=en&page=' + page)
             .map((res: Response) => res.json())
     }
-
+    getPerson(code: number) {
+        return this.http.get(this.url_person + code + '?api_key=' + this.api_key + '&language=en')
+            .map((res: Response) => res.json())
+    }
+    getPersonMovies(code: number) {
+        return this.http.get(this.url_person + code + '/movie_credits?api_key=' + this.api_key + '&language=en')
+            .map((res: Response) => res.json())
+    }
     getPager(totalItems: number, currentPage: number = 1) {
         let totalPages = totalItems
         let startPage: number, endPage: number;
