@@ -18,7 +18,7 @@
       </md-menu>
       <div class="genre">
         <ul *ngFor="let genre of movie.genres; let i=index">
-          <li *ngIf="i < 3"> {{genre.name}}</li>
+          <li *ngIf="i < 3"><a [routerLink]="['/genre', genre.id, genre.name]"> {{genre.name}}</a></li>
         </ul>
       </div>
     </md-card-subtitle>

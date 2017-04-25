@@ -7,7 +7,7 @@ import { DataService } from '../shared/data.service';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
-    movies: any[];
+    movies: Object;
     totalPages: number;
     pager: any = {}
     currentPage: number;

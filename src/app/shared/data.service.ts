@@ -11,6 +11,7 @@ export class DataService {
     private url_search = 'https://api.themoviedb.org/3/search/movie';
     private url_movie = 'https://api.themoviedb.org/3/movie/';
     private url_person = 'https://api.themoviedb.org/3/person/';
+    private url_genre = "https://api.themoviedb.org/3/genre/"
 
     constructor(private http: Http) { }
 
@@ -36,6 +37,10 @@ export class DataService {
     }
     getVideoMovie(code: number) {
         return this.http.get(this.url_movie + code + '/videos?api_key=' + this.api_key + '&language=en')
+            .map((res: Response) => res.json())
+    }
+    getGenreMovie(code: number) {
+        return this.http.get(this.url_genre + code + '/movies?api_key=' + this.api_key + '&language=en')
             .map((res: Response) => res.json())
     }
     getSimilarMovies(code: number) {

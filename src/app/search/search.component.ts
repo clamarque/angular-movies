@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { ActivatedRoute, Params } from '@angular/router';
-import 'rxjs/add/operator/switchMap';
 import { DataService } from '../shared/index';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-search',
@@ -11,12 +10,12 @@ import { DataService } from '../shared/index';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  movies: any[];
+  movies: Object;
   totalPages: number;
   pager: any = {}
   currentPage: number;
 
-  constructor(private dataService: DataService, private route: ActivatedRoute, private location: Location, private snackbar: MdSnackBar) { }
+  constructor(private dataService: DataService, private route: ActivatedRoute, private snackbar: MdSnackBar) { }
 
   setPage(page: number) {
     if (page < 1 || page > this.pager.totalPages) {

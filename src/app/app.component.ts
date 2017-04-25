@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './shared/index';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
-
 
 @Component({
   selector: 'app-root',

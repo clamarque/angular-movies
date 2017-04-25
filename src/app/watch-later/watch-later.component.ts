@@ -10,9 +10,9 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./watch-later.component.scss']
 })
 export class WatchLaterComponent implements OnInit {
- error: string;
+    error: string;
     isConnected: boolean = false;
-    movies = [];
+    movies: Array<Object>;
     baseUrl: string = 'https://www.youtube.com/embed/';
     url: any;
     sub: Subscription;

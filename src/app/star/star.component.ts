@@ -1,6 +1,5 @@
-import { Location, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { AuthService, DataService } from '../shared/index';
 
 @Component({
@@ -9,15 +8,13 @@ import { AuthService, DataService } from '../shared/index';
   styleUrls: ['./star.component.scss']
 })
 export class StarComponent implements OnInit {
-  person: any[];
-  movies: any[];
+  person: Object;
+  movies: Array<Object>;
 
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private location: Location,
-    private authService: AuthService,
-    private router: Router
+    private authService: AuthService
   ) { }
 
   ngOnInit() {

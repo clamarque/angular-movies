@@ -11,6 +11,7 @@ const routes: Routes = [
     { path: 'discover', loadChildren: 'app/discover/discover.module#DiscoverModule' },
     { path: 'favorites', loadChildren: 'app/favorite/favorite.module#FavoriteModule', canActivate: [AuthGuard] },
     { path: 'movie/:id', loadChildren: 'app/movie/movie.module#MovieModule' },
+    { path: 'genre/:id/:name', loadChildren: 'app/genre/genre.module#GenreModule'},
     { path: 'profile', loadChildren: 'app/profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
     { path: 'reset-password', loadChildren: 'app/reset-password/reset-password.module#ResetPasswordModule' },
     { path: 'search/:term', component: SearchComponent },

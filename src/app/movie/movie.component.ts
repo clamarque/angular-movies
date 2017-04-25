@@ -1,8 +1,7 @@
-import { Location, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { AuthService, DataService } from '../shared/index';
 import 'rxjs/add/operator/switchMap';
 
@@ -12,10 +11,10 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./movie.component.scss']
 })
 export class MovieComponent implements OnInit {
-  movie: any[];
-  videos: any[];
-  similarMovies: any[];
-  cast: any[];
+  movie: Object;
+  videos: Array<Object>;
+  similarMovies: Array<Object>;
+  cast: Array<Object>;
   error: string;
   isConnected: boolean = false;
   baseUrl: string = 'https://www.youtube.com/embed/';
@@ -25,9 +24,7 @@ export class MovieComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private dataService: DataService,
     private route: ActivatedRoute,
-    private location: Location,
     private authService: AuthService,
-    private router: Router,
     private snackbar: MdSnackBar) { }
 
   saveMovie(movie: any, category: string) {
@@ -47,13 +44,8 @@ export class MovieComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.events.subscribe((evt) => {
-      if(!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      window.scrollTo(0,0)
-    })
-  
+    window.scrollTo(0,0)
+ 
     this.route.params
       .switchMap((params: Params) => this.dataService.getDetailsMovie(+params['id']))
       .subscribe(response => {
@@ -75,7 +67,6 @@ export class MovieComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.dataService.getCastMovie(+params['id']))
       .subscribe(response => {
-        console.log(response)
         this.cast = response.cast.slice(0,6)
       })
 

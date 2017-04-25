@@ -8,7 +8,7 @@ import { DataService } from '../shared/index';
 })
 
 export class DiscoverComponent implements OnInit {
-  movies: any[];
+  movies: Object;
   totalPages: number;
   pager: any = {}
   currentPage: number;
