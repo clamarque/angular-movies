@@ -1,59 +1,65 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, FirebaseAuthState, AuthMethods, AuthProviders } from 'angularfire2'
 import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
 @Injectable()
 
 export class AuthService {
 
-    authState: FirebaseAuthState
     redirectUrl: string;
     uid: string = '';
 
-    constructor(private af: AngularFire, private router: Router) {
-        this.af.auth.subscribe(auth => {
+    constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
+        this.afAuth.subscribe(auth => {
             if (auth) this.uid = auth.uid
         })
     }
 
     signIn(email: string, password: string, callback: any) {
-        return this.af.auth.login({ email: email, password: password })
+        return firebase.auth().signInWithEmailAndPassword(email, password)
             .then(success => callback())
             .catch(error => callback(error))
     }
     signInAccount(name: string, callback: any) {
-        return this.af.auth.login({
-            provider: this.getProvider(name),
-            method: AuthMethods.Popup,
-        })
+        return firebase.auth().signInWithPopup(this.getProvider(name))
             .then(success => callback())
             .catch(error => callback(error))
     }
 
     getProvider(name: string) {
         switch (name) {
-            case 'google': return AuthProviders.Google;
-            case 'facebook': return AuthProviders.Facebook;
-            case 'twitter': return AuthProviders.Twitter;
+            case 'google': return new firebase.auth.GoogleAuthProvider();
+            //case 'facebook': return new firebase.auth.FacebookAuthProvider();
+            case 'twitter': return new firebase.auth.TwitterAuthProvider();
         }
     }
 
     signOut() {
-        this.af.auth.logout()
+        firebase.auth().signOut()
     }
 
-    signUp(formData, callback: any): firebase.Promise<FirebaseAuthState> {
-        return this.af.auth.createUser({
-            email: formData.email, password: formData.password
-        }).then(authState => {
-            authState.auth.updateProfile({
-                displayName: formData.username,
-                photoURL: ''
-            }), callback();
-            return authState;
-        }, (error) => callback(error));
+    signUp(formData, callback: any) {
+        return firebase.auth().createUserWithEmailAndPassword(formData.email, formData.password)
+            .then(success => {
+                return firebase.auth().currentUser.updateProfile({
+                    displayName: formData.username,
+                    photoURL: ''
+                }), callback();
+            })
+            .catch(error => callback(error))
+
+        /* this.af.auth.createUser({
+             email: formData.email, password: formData.password
+         }).then(authState => {
+             authState.auth.updateProfile({
+                 displayName: formData.username,
+                 photoURL: ''
+             }), callback();
+             return authState;
+         }, (error) => callback(error));*/
     }
 
     resetPasswordEmail(email: string, callback: any) {
@@ -63,18 +69,18 @@ export class AuthService {
     }
 
     getMovies(category: string) {
-        return this.af.database.list(category + '/' + this.uid)
+        return this.db.list(category + '/' + this.uid)
     }
 
     setMovies(movie: any, category: string, callback: any) {
-        return this.af.database.list(category + '/' + this.uid).subscribe(data => {
+        return this.db.list(category + '/' + this.uid).subscribe(data => {
             let exists = false
             for (let x of data) {
                 if (x.id == movie.id) exists = true
                 callback('The movie is already recorded')
             }
             if (exists == false) {
-                return this.af.database.list(category + '/' + this.uid).push({
+                return this.db.list(category + '/' + this.uid).push({
                     'id': movie.id,
                     'original_title': movie.original_title,
                     'overview': movie.overview,
@@ -89,23 +95,23 @@ export class AuthService {
     }
 
     deleteMovies(category: string, id: string) {
-        let item = this.af.database.list(category + '/' + this.uid)
+        let item = this.db.list(category + '/' + this.uid)
         item.remove(id)
     }
 
     deleteDatafromUser() {
-        let item = this.af.database.list('MovieLater/' + this.uid)
+        let item = this.db.list('MovieLater/' + this.uid)
         item.remove()
-        let item1 = this.af.database.list('FavoriteMovie/' + this.uid)
+        let item1 = this.db.list('FavoriteMovie/' + this.uid)
         item1.remove()
     }
 
     readUser() {
-        return this.af.auth
+        return this.afAuth
     }
 
     updateUser(formData, callback: any) {
-        return this.af.auth.subscribe(authState => {
+        return this.afAuth.subscribe(authState => {
             authState.auth.updateEmail(formData.value.email).then(success => {
                 return authState.auth.updateProfile({
                     displayName: formData.value.displayName,
@@ -117,7 +123,7 @@ export class AuthService {
     }
 
     deleteUser(callback: any) {
-        return this.af.auth.subscribe(authState => {
+        return this.afAuth.subscribe(authState => {
             authState.auth.delete()
                 .then(success => callback())
                 .catch(error => callback(error))
@@ -125,7 +131,7 @@ export class AuthService {
     }
 
     isLoggedIn() {
-        return this.af.auth.map((auth) => {
+        return this.afAuth.map((auth) => {
             if (auth === null) return false
             else return true
         });

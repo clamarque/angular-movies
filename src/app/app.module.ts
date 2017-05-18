@@ -5,8 +5,10 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 
-import { AngularFireModule, FIREBASE_PROVIDERS, AngularFire, AuthMethods, AuthProviders } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import * as firebase from 'firebase/app';
 import 'hammerjs';
 
 import { routing } from './app-routing.module';
@@ -32,7 +34,7 @@ import { AuthGuard, AuthService, DataService } from './shared/index';
     NoopAnimationsModule,
     HttpModule,
     SharedModule,
-    AngularFireModule.initializeApp(environment.firebase, environment.firebaseAuthConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     routing
   ],
   providers: [AuthGuard, AuthService, DataService],

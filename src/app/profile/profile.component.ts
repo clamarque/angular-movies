@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/index';
-import { MdDialog, MdDialogRef } from '@angular/material'
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { Subscription } from 'rxjs/Subscription';
+
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +18,7 @@ export class ProfileComponent implements OnInit {
   emailVerified: boolean;
   photoURL: any;
   selectedOption: string;
+  sub: Subscription;
 
   dialogRef: MdDialogRef<DialogDeleteUser>;
 
@@ -62,7 +65,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.readUser().subscribe(authData => {
+    this.sub = this.authService.readUser().subscribe(authData => {
       if (authData) {
         this.displayName = authData.auth.displayName
         this.email = authData.auth.email;
@@ -71,6 +74,10 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
+
+  ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
 }
 
 @Component({

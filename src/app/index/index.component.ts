@@ -20,9 +20,7 @@ export class IndexComponent implements OnInit {
         }
         this.pager = this.dataService.getPager(this.totalPages, page);
         this.currentPage = this.pager.currentPage;
-        this.dataService.getNowPlaying(this.currentPage).subscribe(response => {
-            this.movies = response
-        })
+        this.dataService.getNowPlaying(this.currentPage).subscribe(response => this.movies = response)
     }
 
     ngOnInit() {

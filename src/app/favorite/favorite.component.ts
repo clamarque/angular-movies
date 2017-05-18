@@ -26,9 +26,7 @@ export class FavoriteComponent implements OnInit {
         this.authService.deleteMovies('FavoriteMovie', key);
     }
     ngOnInit() {
-        this.sub = this.authService.getMovies('FavoriteMovie').subscribe(data => {
-            this.movies = data
-        })
+        this.sub = this.authService.getMovies('FavoriteMovie').subscribe(data => this.movies = data)
 
         return this.authService.isLoggedIn().subscribe(
             authStatus => {

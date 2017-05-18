@@ -26,9 +26,7 @@ export class GenreComponent implements OnInit {
     }
     this.pager = this.dataService.getPager(this.totalPages, page);
     this.currentPage = this.pager.currentPage;
-    this.dataService.getNowPlaying(this.currentPage).subscribe(response => {
-      this.movies = response
-    })
+    this.dataService.getNowPlaying(this.currentPage).subscribe(response => this.movies = response)
   }
 
   ngOnInit() {
@@ -38,16 +36,10 @@ export class GenreComponent implements OnInit {
     })
 
     this.route.params
-      .switchMap((params: Params) =>
-        this.dataService.getGenreMovie(+params['id'])
-      )
-      .subscribe(response => {
-        this.movies = response
-      })
+      .switchMap((params: Params) => this.dataService.getGenreMovie(+params['id']))
+      .subscribe(response => this.movies = response)
 
-    this.route.params.subscribe((params) => {
-      this.title = (params['name'])
-    })
+    this.route.params.subscribe((params) => this.title = (params['name']))
   }
 
 }

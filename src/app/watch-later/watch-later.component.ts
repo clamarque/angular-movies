@@ -26,9 +26,7 @@ export class WatchLaterComponent implements OnInit {
         this.authService.deleteMovies('MovieLater', key);
     }
     ngOnInit() {
-        this.sub = this.authService.getMovies('MovieLater').subscribe(data => {
-            this.movies = data
-        })
+        this.sub = this.authService.getMovies('MovieLater').subscribe( data => this.movies = data )
 
         return this.authService.isLoggedIn().subscribe(
             authStatus => {

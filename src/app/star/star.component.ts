@@ -20,15 +20,11 @@ export class StarComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .switchMap((params: Params) => this.dataService.getPerson(+params['id']))
-      .subscribe(response => {
-        this.person = response
-      })
+      .subscribe(response => this.person = response )
 
     this.route.params
       .switchMap((params: Params) => this.dataService.getPersonMovies(+params['id']))
-      .subscribe(response => {
-        this.movies = response.cast.slice(0,6)
-      })
+      .subscribe(response => this.movies = response.cast.slice(0,6))
   }
 
 }

@@ -21,9 +21,7 @@ export class UpcomingComponent implements OnInit {
         }
         this.pager = this.dataService.getPager(this.totalPages, page);
         this.currentPage = this.pager.currentPage;
-        this.dataService.getUpComing(this.currentPage).subscribe(response => {
-            this.movies = response
-        })
+        this.dataService.getUpComing(this.currentPage).subscribe( response => this.movies = response )
     }
 
     ngOnInit() {
