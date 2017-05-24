@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanActivateChild, CanLoad, ActivatedRouteSnapshot, NavigationExtras, Route, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from './auth.service';
-import { AngularFire } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/first';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  constructor(private authService: AuthService, private router: Router, private af: AngularFire) { }
+  constructor(private authService: AuthService, private router: Router, private af: AngularFireAuth) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     checkLogin(url: string): Observable<boolean> {
-        return this.af.auth.map((auth) => {
+        return this.af.authState.map((auth) => {
             if (auth === null) {
                 // Store the attempted URL for redirecting
                 this.authService.redirectUrl = url;

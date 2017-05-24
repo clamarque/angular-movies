@@ -23,7 +23,7 @@ export class SignInComponent implements OnInit {
         else {
           this.authService.readUser().subscribe(authData => {
             if (authData) {
-              this.snackbar.open('Welcome ' + authData.auth.displayName + ' !', '', { duration: 5000 })
+              this.snackbar.open('Welcome ' + authData.displayName + ' !', '', { duration: 5000 })
               this.router.navigate(['/index'])
             }
           })
@@ -40,7 +40,7 @@ export class SignInComponent implements OnInit {
       else {
         this.authService.readUser().subscribe(authData => {
           if (authData) {
-            this.snackbar.open('Welcome ' + authData.auth.displayName + ' !', '', { duration: 5000 })
+            this.snackbar.open('Welcome ' + authData.displayName + ' !', '', { duration: 5000 })
             this.router.navigate(['/index'])
           }
         })

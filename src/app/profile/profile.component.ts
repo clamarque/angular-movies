@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
       disableClose: true
     });
 
-    this.dialogRef.afterClosed().subscribe(result => {
+    this.sub = this.dialogRef.afterClosed().subscribe(result => {
       this.dialogRef = null;
       if (result === 'yes') this.deleteAccount()
       else console.log('cancel')
@@ -67,10 +67,10 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.sub = this.authService.readUser().subscribe(authData => {
       if (authData) {
-        this.displayName = authData.auth.displayName
-        this.email = authData.auth.email;
-        this.emailVerified = authData.auth.emailVerified
-        this.photoURL = authData.auth.photoURL;
+        this.displayName = authData.displayName
+        this.email = authData.email;
+        this.emailVerified = authData.emailVerified
+        this.photoURL = authData.photoURL;
       }
     })
   }

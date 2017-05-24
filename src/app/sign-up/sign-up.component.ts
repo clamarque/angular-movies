@@ -21,7 +21,7 @@ export class SignUpComponent implements OnInit {
       else {
         this.authService.readUser().subscribe(authData => {
           if (authData) {
-            this.snackbar.open('✓ Welcome ' + authData.auth.displayName, 'Your account was been created', { duration: 5000 })
+            this.snackbar.open('✓ Welcome ' + authData.displayName, 'Your account was been created', { duration: 5000 })
             this.router.navigate(['/index'])
           }
         })

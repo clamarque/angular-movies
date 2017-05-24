@@ -13,7 +13,7 @@ export class AuthService {
     uid: string = '';
 
     constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
-        this.afAuth.subscribe(auth => {
+        this.afAuth.authState.subscribe(auth => {
             if (auth) this.uid = auth.uid
         })
     }
@@ -107,13 +107,13 @@ export class AuthService {
     }
 
     readUser() {
-        return this.afAuth
+        return this.afAuth.authState
     }
 
     updateUser(formData, callback: any) {
-        return this.afAuth.subscribe(authState => {
-            authState.auth.updateEmail(formData.value.email).then(success => {
-                return authState.auth.updateProfile({
+        return this.afAuth.authState.subscribe(authState => {
+            authState.updateEmail(formData.value.email).then(success => {
+                return authState.updateProfile({
                     displayName: formData.value.displayName,
                     photoURL: ''
                 })
@@ -123,15 +123,15 @@ export class AuthService {
     }
 
     deleteUser(callback: any) {
-        return this.afAuth.subscribe(authState => {
-            authState.auth.delete()
+        return this.afAuth.authState.subscribe(authState => {
+            authState.delete()
                 .then(success => callback())
                 .catch(error => callback(error))
         })
     }
 
     isLoggedIn() {
-        return this.afAuth.map((auth) => {
+        return this.afAuth.authState.map((auth) => {
             if (auth === null) return false
             else return true
         });
