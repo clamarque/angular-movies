@@ -6,8 +6,10 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+
 import * as firebase from 'firebase/app';
 import 'hammerjs';
 
@@ -16,6 +18,7 @@ import { AppComponent } from './app.component';
 import { DialogDeleteUser } from './profile/profile.component';
 import { IndexComponent } from './index/index.component';
 import { SearchComponent } from './search/search.component';
+import { PageNotFoundComponent } from './not-found.component';
 import { UpcomingComponent } from './upcoming/upcoming.component';
 
 import { AuthGuard, AuthService, DataService } from './shared/index';
@@ -25,6 +28,7 @@ import { AuthGuard, AuthService, DataService } from './shared/index';
     AppComponent,
     DialogDeleteUser,
     IndexComponent,
+    PageNotFoundComponent,
     SearchComponent,
     UpcomingComponent
   ],
@@ -35,6 +39,8 @@ import { AuthGuard, AuthService, DataService } from './shared/index';
     HttpModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     routing
   ],
   providers: [AuthGuard, AuthService, DataService],
