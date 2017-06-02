@@ -32,16 +32,12 @@ h3,
 h4 {
   font-weight: normal;
   text-align: center;
+}
+
+h1, h2, h3, .date {
   color: $white;
 }
 
-h4 {
-  color: inherit;
-}
-
-.date {
-  color: $white;
-}
 
 [id="launcher"] {
   display: flex;
@@ -99,7 +95,8 @@ md-sidenav-container {
     vertical-align: middle;
   }
   &-sidenav-container {
-    background: $primary-dark;
+    background-color: $primary-dark;
+    color: $dark;
   }
   &-sidenav.mat-sidenav-push {
     background-color: $accent-dark;
