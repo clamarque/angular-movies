@@ -21,8 +21,11 @@
 This app has been checked by the open source tool, [**lighthouse**](https://github.com/GoogleChrome/lighthouse) for improve the quality from the app. 
 
 - :heart_eyes: **Progressive Web App**: 100 / 100
+
 - :cry: **Performance**: 35 / 100
+
 - :ok_hand: **Accessibility**: 100 / 100
+
 - :thumbsup: **Best Practices**: 100 / 100
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
