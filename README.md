@@ -21,6 +21,12 @@ This app has been checked by the open source tool, [**lighthouse**](https://gith
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
+## How to use it ?
+
+The idea is that can you get the news about movies who interested you. [**Sign in**](https://hubmovies-a26fc.firebaseapp.com/sign-in) for record movies in the playlists available. For the moment, two playlists exists: "watch later" and "favorites". Tell me if you want that I add new functions, I will try. 
+
+My purpose is to built a great application as allocine or tv show time, using the power of Angular.
+
 ## Become a contributor ?
 
 Find a bug, contribute some code or suggest ideas ? don't hesitate ! Create a pull request or an issue :wink:
