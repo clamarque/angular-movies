@@ -16,8 +16,14 @@
 
 - :ok_hand: **Engaging** : Immersive experience in full screen ! At the launch of the app, it offers you to add it directly on your home screen as a true native app.
 
-This app has been checked by the open source tool, [**lighthouse**](https://github.com/GoogleChrome/lighthouse) for improve the quality from the app.   
-**Lighthouse score:** 97 / 100
+## Lighthouse score
+
+This app has been checked by the open source tool, [**lighthouse**](https://github.com/GoogleChrome/lighthouse) for improve the quality from the app. 
+
+- :ok_hand: **Progressive Web App**: 100 / 100
+- :cry: **Performance**: 35 / 100
+- :ok_hand: **Accessibility**: 100 / 100
+- :ok_hand: **Best Practices**: 100 / 100
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
