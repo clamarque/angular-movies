@@ -14,12 +14,14 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^4.1.3",
+    "@angular/cli": "^1.1.0",
+    "@angular/compiler-cli": "^4.1.3",
     "@angular/common": "^4.1.3",
     "@angular/compiler": "^4.1.3",
     "@angular/core": "^4.1.3",
     "@angular/forms": "^4.1.3",
     "@angular/http": "^4.1.3",
-    "@angular/material": "^2.0.0-beta.6",
+    "@angular/material": "^2.0.0-beta.7",
     "@angular/platform-browser": "^4.1.3",
     "@angular/platform-browser-dynamic": "^4.1.3",
     "@angular/router": "^4.1.3",
@@ -28,11 +30,10 @@
     "firebase": "^4.0.0",
     "hammerjs": "^2.0.8",
     "rxjs": "^5.4.0",
+    "typescript": "~2.3.2",
     "zone.js": "^0.8.11"
   },
   "devDependencies": {
-    "@angular/cli": "^1.1.0",
-    "@angular/compiler-cli": "^4.1.3",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.74",
     "codelyzer": "~2.0.0",
@@ -47,12 +48,12 @@
     "protractor": "~5.1.0",
     "sw-precache": "^5.1.1",
     "ts-node": "~2.0.0",
-    "tslint": "~4.5.0",
-    "typescript": "~2.3.2"
+    "tslint": "~4.5.0"
   },
   "browserslist": [
     "last 2 versions",
     "not ie <= 10",
     "not ie_mob <= 10"
-  ]
+  ],
+  "false": {}
 }
