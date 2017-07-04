@@ -1,7 +1,7 @@
 <div class="items" *ngIf="movies">
   <div class="item" *ngFor="let movie of movies.results">
     <a [routerLink]="['/movie', movie.id]">
-      <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie" width="200">
+     <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie" width="200">
       <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available"
         width="200">
       <h4>{{movie.title}}</h4>

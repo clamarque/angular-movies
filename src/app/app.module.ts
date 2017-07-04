@@ -16,10 +16,8 @@ import 'hammerjs';
 import { routing } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DialogDeleteUser } from './profile/profile.component';
-import { IndexComponent } from './index/index.component';
 import { SearchComponent } from './search/search.component';
 import { PageNotFoundComponent } from './not-found.component';
-import { UpcomingComponent } from './upcoming/upcoming.component';
 
 import { AuthGuard, AuthService, DataService } from './shared/index';
 
@@ -27,10 +25,8 @@ import { AuthGuard, AuthService, DataService } from './shared/index';
   declarations: [
     AppComponent,
     DialogDeleteUser,
-    IndexComponent,
     PageNotFoundComponent,
     SearchComponent,
-    UpcomingComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,9 @@
 <div class="items">
     <md-card class="item" *ngFor="let movie of movies">
         <a [routerLink]="['/movie', movie.id]">
-            <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie">
+          <!--  <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie">
             <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+        -->
         </a>
         <md-card-header>
             <md-card-title>{{movie.original_title}}</md-card-title>
@@ -14,7 +15,7 @@
             </button>
             <md-menu #menu="mdMenu">
                 <a md-menu-item href="https://plus.google.com/share?url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                    Google +
+                     Google +
                 </a>
                 <a md-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}">Facebook</a>
                 <a md-menu-item href="https://twitter.com/intent/tweet?text={{movie.original_title}}%20on%20&url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}&hashtags=hubmovies, {{movie.title}}">Twitter</a>

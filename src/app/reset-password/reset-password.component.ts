@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/index';
@@ -8,7 +8,7 @@ import { AuthService } from '../shared/index';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordComponent {
   error: string;
 
   constructor(private router: Router, private authService: AuthService, private snackbar: MdSnackBar) { }
@@ -21,12 +21,8 @@ export class ResetPasswordComponent implements OnInit {
         }
         else {
           this.snackbar.open('Email sent', '', { duration: 5000 })
-          this.router.navigate(['/index'])
+          this.router.navigate(['/movies/now-playing'])
         }
       })
-  }
-
-  ngOnInit() {
-
   }
 }

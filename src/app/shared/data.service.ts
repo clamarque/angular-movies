@@ -15,6 +15,13 @@ export class DataService {
 
     constructor(private http: Http) { }
 
+    getMovie(page: number, category: string) {
+        switch (category) {
+            case 'now-playing': return this.getNowPlaying(page);
+            case 'upcoming': return this.getUpComing(page);
+            case 'discover': return this.getMovieDiscover(page);
+        }
+    }
     getSearchMovie(name: string, page: number) {
         return this.http.get(`${this.url_search}?api_key=${this.api_key}&language=en&query=${name}&page=${page}`)
             .map(res => res.json())
@@ -60,8 +67,7 @@ export class DataService {
             .map((res: Response) => res.json())
     }
     getPager(totalItems: number, currentPage: number = 1) {
-        let totalPages = totalItems
-        let startPage: number, endPage: number;
+        let totalPages = totalItems, startPage: number, endPage: number;
         if (totalPages <= 10) {
             // less than 10 total pages so show all
             startPage = 1;

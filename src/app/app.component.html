@@ -9,15 +9,15 @@
                     </md-input-container>
                 </li>
                 <li>
-                    <a routerLink="/index" routerLinkActive="active" (click)="end.close()">
+                    <a [routerLink]="['/movies', 'now-playing']" routerLinkActive="active" (click)="end.close()">
                         <md-icon>today</md-icon> Currently</a>
                 </li>
                 <li>
-                    <a routerLink="/upcoming" routerLinkActive="active" (click)="end.close()">
+                    <a [routerLink]="['/movies', 'upcoming']" routerLinkActive="active" (click)="end.close()">
                         <md-icon>date_range</md-icon> Coming soon</a>
                 </li>
                 <li>
-                    <a routerLink="/discover" routerLinkActive="active" (click)="end.close()">
+                    <a [routerLink]="['/movies', 'discover']" routerLinkActive="active" (click)="end.close()">
                         <md-icon>explore</md-icon> Trending</a>
                 </li>
                 <li [hidden]="!isConnected">

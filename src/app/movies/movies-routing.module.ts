@@ -1,9 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FavoriteComponent } from './favorite.component';
+import { MoviesComponent } from './movies.component';
 
 const routes: Routes = [
-  { path: '', component: FavoriteComponent }
+  { path: '', component: MoviesComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);

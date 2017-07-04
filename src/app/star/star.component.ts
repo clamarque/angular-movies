@@ -26,5 +26,4 @@ export class StarComponent implements OnInit {
       .switchMap((params: Params) => this.dataService.getPersonMovies(+params['id']))
       .subscribe(response => this.movies = response.cast.slice(0,6))
   }
-
 }

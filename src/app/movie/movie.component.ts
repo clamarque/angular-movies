@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AuthService, DataService } from '../shared/index';
 import 'rxjs/add/operator/switchMap';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-movie',
@@ -19,6 +20,7 @@ export class MovieComponent implements OnInit {
   isConnected: boolean = false;
   baseUrl: string = 'https://www.youtube.com/embed/';
   url: any;
+  sub: Subscription;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -44,23 +46,23 @@ export class MovieComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scrollTo(0,0)
- 
+    window.scrollTo(0, 0)
+
     this.route.params
       .switchMap((params: Params) => this.dataService.getDetailsMovie(+params['id']))
       .subscribe(response => this.movie = response)
 
     this.route.params
       .switchMap((params: Params) => this.dataService.getVideoMovie(+params['id']))
-      .subscribe(response => this.videos = response.results.slice(0,3))
+      .subscribe(response => this.videos = response.results.slice(0, 3))
 
     this.route.params
       .switchMap((params: Params) => this.dataService.getSimilarMovies(+params['id']))
-      .subscribe(response => this.similarMovies = response.results.slice(0,6))
+      .subscribe(response => this.similarMovies = response.results.slice(0, 6))
 
     this.route.params
       .switchMap((params: Params) => this.dataService.getCastMovie(+params['id']))
-      .subscribe(response => this.cast = response.cast.slice(0,6))
+      .subscribe(response => this.cast = response.cast.slice(0, 6))
 
     return this.authService.isLoggedIn().subscribe(
       authStatus => {

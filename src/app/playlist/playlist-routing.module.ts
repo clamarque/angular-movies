@@ -1,9 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DiscoverComponent } from './discover.component';
+import { PlaylistComponent } from './playlist.component';
 
 const routes: Routes = [
-  { path: '', component: DiscoverComponent }
+  { path: '', component: PlaylistComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);

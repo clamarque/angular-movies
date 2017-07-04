@@ -22,7 +22,7 @@ export class SignUpComponent implements OnInit {
         this.authService.readUser().subscribe(authData => {
           if (authData) {
             this.snackbar.open('✓ Welcome ' + authData.displayName, 'Your account was been created', { duration: 5000 })
-            this.router.navigate(['/index'])
+            this.router.navigate(['/movies/now-playing'])
           }
         })
       }

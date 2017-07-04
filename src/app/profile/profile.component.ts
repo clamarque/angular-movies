@@ -5,7 +5,6 @@ import { AuthService } from '../shared/index';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -45,7 +44,7 @@ export class ProfileComponent implements OnInit {
       }
       else {
         this.snackbar.open('Good bye ! We hope that our site has pleased you.', '', { duration: 5000 })
-        this.router.navigate(['/index'])
+        this.router.navigate(['/movies/now-playing'])
       }
     })
   }

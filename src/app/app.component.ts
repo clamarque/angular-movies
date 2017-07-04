@@ -17,7 +17,7 @@ export class AppComponent {
 
     searchMovie(term: string) {
         if (term === '') {
-            this.router.navigate(['/index']);
+            this.router.navigate(['/movies/now-playing']);
         }
         else {
             this.router.navigate(['/search', term]);
@@ -26,7 +26,7 @@ export class AppComponent {
     onSignOut() {
         this.authService.signOut();
         this.snackbar.open('Already Gone ? We Hope to see you again soon', '', { duration: 5000 })
-        this.router.navigate(['/index'])
+        this.router.navigate(['/movies/now-playing'])
     }
     ngOnInit() {
       return this.authService.isLoggedIn().subscribe(
