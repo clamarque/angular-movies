@@ -32,6 +32,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## How to use it ?
 
+<p align="center">
+    <a href="https://hubmovies-a26fc.firebaseapp.com"><img src="https://github.com/clamarque/hub-movies/blob/master/src/assets/images/demo.gif" alt="demo" />
+    </a>
+</p>
+
 The idea is that can you get the news about movies who interested you. [**Sign in**](https://hubmovies-a26fc.firebaseapp.com/sign-in) for record movies in the playlists available. For the moment, two playlists exists: "watch later" and "favorites". Tell me if you want that I add new functions, I will try. 
 
 My purpose is to built a great application as allocine or tv show time, using the power of Angular.
