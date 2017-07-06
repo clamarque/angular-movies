@@ -21,11 +21,11 @@
                         <md-icon>explore</md-icon> Trending</a>
                 </li>
                 <li [hidden]="!isConnected">
-                    <a routerLink="/watch-later" routerLinkActive="active" (click)="end.close()">
+                    <a [routerLink]="['/playlist', 'MovieLater']" routerLinkActive="active" (click)="end.close()">
                         <md-icon>watch_later</md-icon> Watch later</a>
                 </li>
                 <li [hidden]="!isConnected">
-                    <a routerLink="/favorites" routerLinkActive="active" (click)="end.close()">
+                    <a [routerLink]="['/playlist', 'FavoriteMovie']" routerLinkActive="active" (click)="end.close()">
                         <md-icon>star</md-icon> Favorites</a>
                 </li>
                 <li [hidden]="!isConnected">
