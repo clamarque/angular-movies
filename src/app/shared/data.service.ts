@@ -46,8 +46,8 @@ export class DataService {
         return this.http.get(`${this.url_movie}${code}/videos?api_key=${this.api_key}&language=en`)
             .map((res: Response) => res.json())
     }
-    getGenreMovie(code: number) {
-        return this.http.get(`${this.url_genre }${code}/movies?api_key=${this.api_key}&language=en`)
+    getGenreMovie(code: number, page: number) {
+        return this.http.get(`${this.url_genre }${code}/movies?api_key=${this.api_key}&language=en&page=${page}`)
             .map((res: Response) => res.json())
     }
     getSimilarMovies(code: number) {
