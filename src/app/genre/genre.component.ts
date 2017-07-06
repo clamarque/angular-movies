@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { DataService } from '../shared/index';
 import 'rxjs/add/operator/switchMap';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-genre',
@@ -15,7 +14,6 @@ export class GenreComponent implements OnInit {
   totalPages: number;
   pager: any = {}
   currentPage: number;
-  sub: Subscription;
 
   constructor(
     private dataService: DataService,
@@ -28,23 +26,19 @@ export class GenreComponent implements OnInit {
     }
     this.pager = this.dataService.getPager(this.totalPages, page);
     this.currentPage = this.pager.currentPage;
-    this.sub = this.dataService.getNowPlaying(this.currentPage).subscribe(response => this.movies = response)
+    this.route.params
+      .switchMap((params: Params) => this.dataService.getGenreMovie(+params['id'], this.currentPage))
+      .subscribe(response => this.movies = response)
   }
 
   ngOnInit() {
-    this.sub = this.dataService.getNowPlaying(1).subscribe(response => {
-      this.totalPages = response.total_pages
-      this.setPage(1)
-    })
-
     this.route.params
-      .switchMap((params: Params) => this.dataService.getGenreMovie(+params['id']))
-      .subscribe(response => this.movies = response)
+      .switchMap((params: Params) => this.dataService.getGenreMovie(+params['id'], 1))
+      .subscribe(response => {
+          this.totalPages = response.total_pages
+          this.setPage(1)
+      })
 
     this.route.params.subscribe((params) => this.title = (params['name']))
-  }
-  
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 }
