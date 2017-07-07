@@ -34,34 +34,37 @@
   </md-card-actions>
 </md-card>
 
-<section id="cast" class="items" *ngIf="cast">
-  <h1>Cast</h1>
-  <md-card class="item" *ngFor="let person of cast">
-    <a [routerLink]="['/star', person.id]">
-      <img src="https://image.tmdb.org/t/p/w185/{{person.profile_path}}" alt="profile">
-      <h3>{{person.name}}</h3>
-      <p>{{person.character}}</p>
-    </a>
-  </md-card>
-</section>
-
-<section id="trailer" *ngIf="videos">
-  <h1>Trailer</h1>
-  <iframe *ngIf="url != null" [src]="url" allowfullscreen></iframe>
-  <ng-template ngFor let-video let-i="index" [ngForOf]="videos">
-    <a (click)="seeTrailer(video.key)">
-      <md-icon>local_movies</md-icon> See trailer {{i + 1}}
-    </a>
-  </ng-template>
-</section>
-
-<section id="similar" class="items" *ngIf="similarMovies">
-  <h1>Similar movies</h1>
-  <div class="item" *ngFor="let movie of similarMovies">
-    <a [routerLink]="['/movie', movie.id]">
-      <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w185/{{movie.poster_path}}" alt="poster movie">
-      <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
-      <p>{{movie.title}}</p>
-    </a>
-  </div>
-</section>
+<md-tab-group>
+  <md-tab label="Cast">
+    <section id="cast" class="items" *ngIf="cast">
+      <md-card class="item" *ngFor="let person of cast">
+        <a [routerLink]="['/star', person.id]">
+          <img src="https://image.tmdb.org/t/p/w185/{{person.profile_path}}" alt="profile">
+          <h3>{{person.name}}</h3>
+          <p>{{person.character}}</p>
+        </a>
+      </md-card>
+    </section>
+  </md-tab>
+  <md-tab label="Trailer">
+    <section id="trailer" *ngIf="videos">
+      <iframe *ngIf="url != null" [src]="url" allowfullscreen></iframe>
+      <ng-template ngFor let-video let-i="index" [ngForOf]="videos">
+        <a (click)="seeTrailer(video.key)">
+          {{i + 1}} - <md-icon>local_movies</md-icon>
+        </a>
+      </ng-template>
+    </section>
+  </md-tab>
+  <md-tab label="Similar Movies">
+    <section id="similar" class="items" *ngIf="similarMovies">
+      <div class="item" *ngFor="let movie of similarMovies">
+        <a [routerLink]="['/movie', movie.id]">
+          <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w185/{{movie.poster_path}}" alt="poster movie">
+          <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+          <p>{{movie.title}}</p>
+        </a>
+      </div>
+    </section>
+  </md-tab>
+</md-tab-group>
