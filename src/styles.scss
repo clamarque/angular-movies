@@ -114,6 +114,17 @@ md-sidenav-container {
     background: $white;
     color: $primary-dark;
   }
+  &-tab {
+    &-group {
+      margin: 50px 0;
+    }
+    &-labels {
+      justify-content: center
+    }
+    &-label {
+      color: #FFF;
+    }
+  }
 }
 
 /* Column Flex */
