@@ -12,8 +12,13 @@ export class MoviesComponent implements OnInit {
     totalPages: number;
     pager: any = {}
     currentPage: number;
+    SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight'};
 
     constructor(private dataService: DataService, private route: ActivatedRoute) { }
+
+    swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT) {
+        if(action === this.SWIPE_ACTION.RIGHT || action === this.SWIPE_ACTION.LEFT) this.setPage(currentIndex);
+    }
 
     setPage(page: number) {
         if (page < 1 || page > this.pager.totalPages) {

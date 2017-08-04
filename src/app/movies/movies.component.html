@@ -1,4 +1,4 @@
-<div class="items" *ngIf="movies">
+<div class="items" *ngIf="movies" (swipeleft)="swipe(pager.currentPage +1, $event.type)" (swiperight)="swipe(pager.currentPage -1, $event.type)">
   <div class="item" *ngFor="let movie of movies.results">
     <a [routerLink]="['/movie', movie.id]">
      <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie" width="200">
