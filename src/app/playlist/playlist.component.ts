@@ -29,10 +29,7 @@ export class PlaylistComponent implements OnInit {
     ngOnInit() {
         this.route.params
             .switchMap((params: Params) => this.authService.getMovies(params['category']))
-            .subscribe(response => {
-                console.log('res', response)
-                this.movies = response
-            })
+            .subscribe(response => this.movies = response)
 
         return this.authService.isLoggedIn().subscribe(
             authStatus => {
