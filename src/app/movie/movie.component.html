@@ -47,13 +47,8 @@
     </section>
   </md-tab>
   <md-tab label="Trailer">
-    <section id="trailer" *ngIf="videos">
-      <iframe *ngIf="url != null" [src]="url" allowfullscreen></iframe>
-      <ng-template ngFor let-video let-i="index" [ngForOf]="videos">
-        <a (click)="seeTrailer(video.key)">
-          {{i + 1}} - <md-icon>local_movies</md-icon>
-        </a>
-      </ng-template>
+    <section id="trailer">
+      <iframe width="560" height="315" [src]="safeUrl" frameborder="0" allowfullscreen></iframe>
     </section>
   </md-tab>
   <md-tab label="Similar Movies">

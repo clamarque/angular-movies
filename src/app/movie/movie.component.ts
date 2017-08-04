@@ -19,7 +19,7 @@ export class MovieComponent implements OnInit {
   error: string;
   isConnected: boolean = false;
   baseUrl: string = 'https://www.youtube.com/embed/';
-  url: any;
+  safeUrl: any;
   sub: Subscription;
 
   constructor(
@@ -41,9 +41,9 @@ export class MovieComponent implements OnInit {
     })
   }
 
-  seeTrailer(id: string) {
-    this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + id);
-  }
+  getMovieVideoUrl(id: string){
+		return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + id);
+	}
 
   ngOnInit() {
     window.scrollTo(0, 0)
@@ -54,7 +54,12 @@ export class MovieComponent implements OnInit {
 
     this.route.params
       .switchMap((params: Params) => this.dataService.getVideoMovie(+params['id']))
-      .subscribe(response => this.videos = response.results.slice(0, 3))
+      .subscribe(response => { 
+        this.videos = response.results.slice(0, 1);
+        for (let x of this.videos) {
+            this.getMovieVideoUrl(x["key"]); 
+        }
+      })
 
     this.route.params
       .switchMap((params: Params) => this.dataService.getSimilarMovies(+params['id']))
