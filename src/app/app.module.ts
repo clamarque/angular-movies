@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -21,6 +21,13 @@ import { PageNotFoundComponent } from './not-found.component';
 
 import { AuthGuard, AuthService, DataService } from './shared/index';
 
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any> {
+    'pinch': { enable: false},
+    'rotate': { enable: false}
+  }
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +46,7 @@ import { AuthGuard, AuthService, DataService } from './shared/index';
     AngularFireAuthModule,
     routing
   ],
-  providers: [AuthGuard, AuthService, DataService],
+  providers: [AuthGuard, AuthService, DataService, { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}],
   entryComponents: [
         DialogDeleteUser
     ],
