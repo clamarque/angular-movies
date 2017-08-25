@@ -1,38 +1,45 @@
-<div class="items" *ngIf="movies" (swipeleft)="swipe(pager.currentPage +1, $event.type)" (swiperight)="swipe(pager.currentPage -1, $event.type)">
+<h1>{{title}}</h1>
+<div class="items" *ngIf="movies; else noMovies" (swipeleft)="swipe(pager.currentPage +1, $event.type)" (swiperight)="swipe(pager.currentPage -1, $event.type)">
   <div class="item" *ngFor="let movie of movies.results">
     <a [routerLink]="['/movie', movie.id]">
-     <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie" width="200">
-      <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available"
-        width="200">
+      <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w185/{{movie.poster_path}}" alt="poster movie">
+      <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
       <h4>{{movie.title}}</h4>
+      {{action}}
     </a>
     <p class="date">{{movie.release_date | date}}</p>
   </div>
 </div>
-<div class="pagination">
-  <ul *ngIf="pager.pages && pager.pages.length">
-    <li [ngClass]="{disabled:pager.currentPage === 1}">
-      <a (click)="setPage(1)">
-        <md-icon>first_page</md-icon>
-      </a>
-    </li>
-    <li [ngClass]="{disabled:pager.currentPage === 1}">
-      <a (click)="setPage(pager.currentPage - 1)">
-        <md-icon>chevron_left</md-icon>
-      </a>
-    </li>
-    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-      <a (click)="setPage(page)">{{page}}</a>
-    </li>
-    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-      <a (click)="setPage(pager.currentPage + 1)">
-        <md-icon>chevron_right</md-icon>
-      </a>
-    </li>
-    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-      <a (click)="setPage(pager.totalPages)">
-        <md-icon>last_page</md-icon>
-      </a>
-    </li>
-  </ul>
-</div>
+<ng-template #noMovies>
+  <md-icon>sentiment_very_dissatisfied</md-icon>
+  <h1>No results found</h1>
+</ng-template>
+<footer class="pagination">
+  <nav>
+    <ul >
+      <li [ngClass]="{disabled:pager.currentPage === 1}">
+        <a (click)="setPage(parameter, 1)">
+          <md-icon>first_page</md-icon>
+        </a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === 1}">
+        <a (click)="setPage(parameter, pager.currentPage - 1)">
+          <md-icon>chevron_left</md-icon>
+        </a>
+      </li>
+      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+        <a (click)="setPage(page, action)">{{page}}</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <a (click)="setPage(parameter, pager.currentPage + 1)">
+          <md-icon>chevron_right</md-icon>
+        </a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <a (click)="setPage(parameter, pager.totalPages)">
+          <md-icon>last_page</md-icon>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</footer>

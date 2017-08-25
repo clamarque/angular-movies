@@ -1,0 +1,36 @@
+<section>
+  <h1>History</h1>
+
+  <md-table #table [dataSource]="dataSource">
+
+      <ng-container cdkColumnDef="poster_path">
+          <md-header-cell *cdkHeaderCellDef></md-header-cell>
+          <md-cell *cdkCellDef="let row"><a [routerLink]="['/movie', row.id]"><img src="https://image.tmdb.org/t/p/w45/{{row.poster_path}}" alt="poster movie"></a> </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="original_title">
+          <md-header-cell *cdkHeaderCellDef> Title </md-header-cell>
+          <md-cell *cdkCellDef="let row"><a [routerLink]="['/movie', row.id]">{{row.original_title}}</a> </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="category">
+          <md-header-cell *cdkHeaderCellDef> Category </md-header-cell>
+          <md-cell *cdkCellDef="let row"> {{row.category}} </md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="action">
+          <md-header-cell *cdkHeaderCellDef> Delete </md-header-cell>
+          <md-cell *cdkCellDef="let row"> <md-icon (click)="deleteMovie(row.$key)">delete_forever</md-icon> </md-cell>
+      </ng-container>
+
+      <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+      <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+      <!--
+  <md-paginator #paginator
+                [length]="length"
+                [pageIndex]="0"
+                [pageSize]="25" 
+                [pageSizeOptions]="[5, 10, 25, 100]">
+  </md-paginator> -->
+  </md-table>
+</section>

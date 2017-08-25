@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
   providers: [MdDialog]
 })
 export class ProfileComponent implements OnInit {

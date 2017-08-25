@@ -4,8 +4,7 @@
             <ul class="nav">
                 <li>
                     <md-input-container>
-                        <input mdInput #search placeholder="search a movie" (keyup.enter)="searchMovie(search.value); search.value=''"
-                            (keyup.enter)="end.close()">
+                        <input mdInput #search placeholder="search a movie" (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="end.close()">
                     </md-input-container>
                 </li>
                 <li>
@@ -29,6 +28,10 @@
                         <md-icon>star</md-icon> Favorites</a>
                 </li>
                 <li [hidden]="!isConnected">
+                    <a routerLink="/history" routerLinkActive="active" (click)="end.close()">
+                        <md-icon>history</md-icon> History</a>
+                </li>
+                <li [hidden]="!isConnected">
                     <a routerLink="/profile" routerLinkActive="active" (click)="end.close()">
                         <md-icon>account_circle</md-icon> Profil</a>
                 </li>
@@ -43,6 +46,10 @@
                 <li>
                     <a href="mailto:chabox59@gmail.com">
                         <md-icon>bug_report</md-icon> Feebacks</a>
+                </li>
+                <li>
+                    <a href="https://github.com/clamarque/hub-movies">
+                        <md-icon>code</md-icon> Fork me</a>
                 </li>
             </ul>
         </nav>

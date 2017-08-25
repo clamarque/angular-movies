@@ -5,8 +5,7 @@ import { AuthService } from './shared/index';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   movieSearching: any[];
@@ -20,7 +19,7 @@ export class AppComponent {
             this.router.navigate(['/movies/now-playing']);
         }
         else {
-            this.router.navigate(['/search', term]);
+            this.router.navigate(['/search', { term: term}]);
         }
     }
     onSignOut() {

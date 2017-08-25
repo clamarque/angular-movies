@@ -59,7 +59,7 @@ export class DataService {
             .map((res: Response) => res.json())
     }
     getPerson(code: number) {
-        return this.http.get(`${this.url_person}${code}'?api_key=${this.api_key}&language=en`)
+        return this.http.get(`${this.url_person}${code}?api_key=${this.api_key}&language=en`)
             .map((res: Response) => res.json())
     }
     getPersonMovies(code: number) {

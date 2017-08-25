@@ -5,8 +5,7 @@ import { AuthService } from '../shared/index';
 
 @Component({
   selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  templateUrl: './reset-password.component.html'
 })
 export class ResetPasswordComponent {
   error: string;

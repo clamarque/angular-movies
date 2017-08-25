@@ -1,9 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GenreComponent } from './genre.component';
+import { HistoryComponent } from './history.component';
 
 const routes: Routes = [
-  { path: '', component: GenreComponent }
+  { path: '', component: HistoryComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);

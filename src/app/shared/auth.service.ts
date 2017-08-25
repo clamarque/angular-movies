@@ -40,7 +40,7 @@ export class AuthService {
     signOut() {
         firebase.auth().signOut()
     }
-
+    /* //
     signUp(formData, callback: any) {
         return firebase.auth().createUserWithEmailAndPassword(formData.email, formData.password)
             .then(success => {
@@ -50,7 +50,7 @@ export class AuthService {
                 }), callback();
             })
             .catch(error => callback(error))
-
+       */
         /* this.af.auth.createUser({
              email: formData.email, password: formData.password
          }).then(authState => {
@@ -60,7 +60,7 @@ export class AuthService {
              }), callback();
              return authState;
          }, (error) => callback(error));*/
-    }
+    //}
 
     resetPasswordEmail(email: string, callback: any) {
         return firebase.auth().sendPasswordResetEmail(email)
@@ -86,9 +86,18 @@ export class AuthService {
                     'overview': movie.overview,
                     'popularity': movie.popularity,
                     'release_date': movie.release_date,
-                    'poster_path': movie.poster_path
+                    'poster_path': movie.poster_path,
+                    'category': category
                 })
-                    .then(success => callback())
+                    .then(success => {
+                        this.db.list('History/' + this.uid).push({
+                            'category': category,
+                            'id': movie.id,
+                            'original_title': movie.original_title,
+                            'poster_path': movie.poster_path
+                        })
+                        callback()
+                    })
                     .catch(error => callback(error))
             }
         })

@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService, DataService } from '../shared/index';
 import 'rxjs/add/operator/switchMap';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-movie',
-  templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.scss']
+  templateUrl: './movie.component.html'
 })
 export class MovieComponent implements OnInit {
   movie: Object;
@@ -20,13 +18,12 @@ export class MovieComponent implements OnInit {
   isConnected: boolean = false;
   baseUrl: string = 'https://www.youtube.com/embed/';
   safeUrl: any;
-  sub: Subscription;
 
   constructor(
-    private sanitizer: DomSanitizer,
+    private authService: AuthService,
     private dataService: DataService,
     private route: ActivatedRoute,
-    private authService: AuthService,
+    private sanitizer: DomSanitizer,
     private snackbar: MdSnackBar) { }
 
   saveMovie(movie: any, category: string) {
@@ -41,33 +38,31 @@ export class MovieComponent implements OnInit {
     })
   }
 
-  getMovieVideoUrl(id: string){
-		return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + id);
-	}
+  getMovieVideoUrl(id: string) {
+    return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + id);
+  }
 
   ngOnInit() {
-    window.scrollTo(0, 0)
+    this.route.paramMap
+      .switchMap((params: ParamMap) => this.dataService.getDetailsMovie(+params.get('id')))
+      .subscribe(response => this.movie = response);
 
-    this.route.params
-      .switchMap((params: Params) => this.dataService.getDetailsMovie(+params['id']))
-      .subscribe(response => this.movie = response)
+    this.route.paramMap
+      .switchMap((params: ParamMap) => this.dataService.getCastMovie(+params.get('id')))
+      .subscribe(response => this.cast = response.cast.slice(0, 6));
 
-    this.route.params
-      .switchMap((params: Params) => this.dataService.getVideoMovie(+params['id']))
-      .subscribe(response => { 
+    this.route.paramMap
+      .switchMap((params: ParamMap) => this.dataService.getVideoMovie(+params.get('id')))
+      .subscribe(response => {
         this.videos = response.results.slice(0, 1);
         for (let x of this.videos) {
-            this.getMovieVideoUrl(x["key"]); 
+          this.getMovieVideoUrl(x["key"])
         }
-      })
+      });
 
-    this.route.params
-      .switchMap((params: Params) => this.dataService.getSimilarMovies(+params['id']))
-      .subscribe(response => this.similarMovies = response.results.slice(0, 6))
-
-    this.route.params
-      .switchMap((params: Params) => this.dataService.getCastMovie(+params['id']))
-      .subscribe(response => this.cast = response.cast.slice(0, 6))
+    this.route.paramMap
+      .switchMap((params: ParamMap) => this.dataService.getSimilarMovies(+params.get('id')))
+      .subscribe(response => this.similarMovies = response.results.slice(0, 6));
 
     return this.authService.isLoggedIn().subscribe(
       authStatus => {

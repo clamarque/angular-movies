@@ -1,40 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
-import { ActivatedRoute, Params } from '@angular/router';
-import { AuthService, DataService } from '../shared/index';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { AuthService } from '../shared/index';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'app-playlist',
-    templateUrl: './playlist.component.html',
-    styleUrls: ['./playlist.component.scss']
+    templateUrl: './playlist.component.html'
 })
 export class PlaylistComponent implements OnInit {
-    error: string;
     isConnected: boolean = false;
     movies: Array<Object>;
-    baseUrl: string = 'https://www.youtube.com/embed/';
-    url: any;
     sub: Subscription;
 
     constructor(
         private authService: AuthService,
         private route: ActivatedRoute,
-        private dataService: DataService,
-        private snackbar: MdSnackBar) { }
+    ) { }
 
     deleteMovie(key: any) {
-        this.authService.deleteMovies('MovieLater', key);
+        let category = this.route.snapshot.paramMap.get('category')
+        this.authService.deleteMovies(category, key);
     }
     ngOnInit() {
-        this.route.params
-            .switchMap((params: Params) => this.authService.getMovies(params['category']))
-            .subscribe(response => this.movies = response)
+        this.sub = this.route.paramMap
+            .switchMap((params: ParamMap) => this.authService.getMovies(params.get('category')))
+            .subscribe(response => this.movies = response);
 
         return this.authService.isLoggedIn().subscribe(
             authStatus => {
                 if (authStatus == true) return this.isConnected = true
                 else return this.isConnected = false
             })
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 }

@@ -1,5 +1,9 @@
 <md-card *ngIf="movie">
-  <img src="https://image.tmdb.org/t/p/w780/{{movie.backdrop_path}}" alt="poster background movie">
+  <picture>
+    <source media="(min-width: 1280px)" srcset="https://image.tmdb.org/t/p/w1280/{{movie.backdrop_path}}">
+    <source media="(min-width: 780px)" srcset="https://image.tmdb.org/t/p/w780/{{movie.backdrop_path}}">
+    <img src="https://image.tmdb.org/t/p/w300/{{movie.backdrop_path}}" alt="backdrop movie">
+  </picture>
   <md-card-header>
     <md-card-title>{{movie.title}}</md-card-title>
     <md-card-subtitle>
@@ -18,7 +22,7 @@
       </md-menu>
       <div class="genre">
         <ul *ngFor="let genre of movie.genres; let i=index">
-          <li *ngIf="i < 3"><a [routerLink]="['/genre', genre.id, genre.name]"> {{genre.name}}</a></li>
+          <li *ngIf="i < 3"><a [routerLink]="['/genre', {id: genre.id, name: genre.name}]"> {{genre.name}}</a></li>
         </ul>
       </div>
     </md-card-subtitle>
