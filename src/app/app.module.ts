@@ -21,6 +21,7 @@ import { DialogDeleteUser } from './profile/profile.component';
 import { PageNotFoundComponent } from './not-found.component';
 
 import { AuthGuard, AuthService, DataService } from './shared/index';
+import { MoviesComponent } from './movies/movies.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any> {
@@ -33,7 +34,8 @@ export class MyHammerConfig extends HammerGestureConfig {
   declarations: [
     AppComponent,
     DialogDeleteUser,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    MoviesComponent
   ],
   imports: [
     BrowserModule,
