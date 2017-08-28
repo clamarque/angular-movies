@@ -18,11 +18,6 @@ export class AuthService {
         })
     }
 
-    signIn(email: string, password: string, callback: any) {
-        return firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(success => callback())
-            .catch(error => callback(error))
-    }
     signInAccount(name: string, callback: any) {
         return firebase.auth().signInWithPopup(this.getProvider(name))
             .then(success => callback())
@@ -32,40 +27,13 @@ export class AuthService {
     getProvider(name: string) {
         switch (name) {
             case 'google': return new firebase.auth.GoogleAuthProvider();
-            //case 'facebook': return new firebase.auth.FacebookAuthProvider();
+            case 'facebook': return new firebase.auth.FacebookAuthProvider();
             case 'twitter': return new firebase.auth.TwitterAuthProvider();
         }
     }
 
     signOut() {
         firebase.auth().signOut()
-    }
-    /* //
-    signUp(formData, callback: any) {
-        return firebase.auth().createUserWithEmailAndPassword(formData.email, formData.password)
-            .then(success => {
-                return firebase.auth().currentUser.updateProfile({
-                    displayName: formData.username,
-                    photoURL: ''
-                }), callback();
-            })
-            .catch(error => callback(error))
-       */
-        /* this.af.auth.createUser({
-             email: formData.email, password: formData.password
-         }).then(authState => {
-             authState.auth.updateProfile({
-                 displayName: formData.username,
-                 photoURL: ''
-             }), callback();
-             return authState;
-         }, (error) => callback(error));*/
-    //}
-
-    resetPasswordEmail(email: string, callback: any) {
-        return firebase.auth().sendPasswordResetEmail(email)
-            .then(success => callback())
-            .catch(error => callback(error))
     }
 
     getMovies(category: string) {
