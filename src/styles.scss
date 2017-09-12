@@ -13,6 +13,11 @@ body {
     height: 100%;
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
+    /*background-color: $primary-dark;*/
+
+    @media (max-width: 960px) {
+        height: inherit;
+    }
 }
 a {
     cursor: pointer;
@@ -98,6 +103,9 @@ md-card-header .mat-card-header-text {
     text-align: center;
 }
 /* Navigation */
+.mat-drawer.mat-drawer-push {
+    background-color: $primary-dark;
+}
 
 [id="navigation"] {
     li {
@@ -331,4 +339,23 @@ app-history {
     md-icon {
         cursor: pointer;
     }
+}
+
+[id="return-to-top"] {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+   
+    md-icon {
+        vertical-align: inherit;
+    }
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
 }
