@@ -64,6 +64,17 @@ md-card-header .mat-card-header-text {
         color: $primary-dark;
     }
 }
+.mat-tab {
+    &-group {
+        margin: 50px 0;
+    }
+    &-labels {
+        justify-content: center;
+    }
+    &-label {
+        color: #FFF !important;
+    }
+}
 [alt="No poster available"] {
     width: 185px;
     height: 278px;
@@ -242,17 +253,6 @@ app-movie {
             font-size: inherit !important;
         }
     }
-    .mat-tab {
-        &-group {
-            margin: 50px 0;
-        }
-        &-labels {
-            justify-content: center;
-        }
-        &-label {
-            color: #FFF !important;
-        }
-    }
     [alt="backdrop movie"] {
         @media (min-width: 600px) {
             width: 100%;
@@ -265,6 +265,11 @@ app-movie {
     }
     [alt="poster movie"] {
         height: 278px;
+    }
+    [id=cast] {
+        p {
+            color: #9E9E9E;
+        }
     }
 }
 /* Playlist */
@@ -311,6 +316,9 @@ app-star {
         p {
             color: $white;
         }
+    }
+    md-tab-group p:nth-child(3) {
+        color: #9E9E9E;
     }
 }
 

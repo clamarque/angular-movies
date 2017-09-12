@@ -46,10 +46,10 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.title = (params['name']);
-
+     
       if (params['term']) {
         this.dataService.getSearchMovie(params['term'], 1).subscribe(response => {
+          this.title = (params['term']);
           this.totalPages = response.total_pages
           this.parameter = params['term']
           this.setPage(this.parameter, 1);
@@ -57,6 +57,7 @@ export class MoviesComponent implements OnInit {
       }
       if (params['category']) {
         this.dataService.getMovie(1, params['category']).subscribe(response => {
+          this.title = (params['category']);
           this.totalPages = response.total_pages
           this.parameter = params['category']
           this.setPage(this.parameter, 1)
@@ -64,6 +65,7 @@ export class MoviesComponent implements OnInit {
       }
       if (params['id'] && params['name']) {
         this.dataService.getGenreMovie(+params['id'], 1).subscribe(response => {
+          this.title = (params['name'])
           this.totalPages = response.total_pages
           this.parameter = +params['id'];
           this.setPage(this.parameter, 1)

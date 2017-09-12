@@ -5,7 +5,7 @@ import { PageNotFoundComponent } from './not-found.component';
 import { MoviesComponent } from './movies/movies.component';
 
 const routes: Routes = [
-  { path: 'movie/:id', component: MoviesComponent },
+  { path: 'movie/:id', loadChildren: 'app/movie/movie.module#MovieModule' },
   { path: 'genre', component: MoviesComponent },
   { path: 'movies/:category', component: MoviesComponent },
   { path: 'search', component: MoviesComponent },

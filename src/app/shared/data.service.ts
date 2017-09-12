@@ -66,6 +66,10 @@ export class DataService {
         return this.http.get(`${this.url_person}${code}/movie_credits?api_key=${this.api_key}&language=en`)
             .map((res: Response) => res.json())
     }
+    getPersonTv(code: number) {
+        return this.http.get(`${this.url_person}${code}/tv_credits?api_key=${this.api_key}&language=en`)
+            .map((res: Response) => res.json())
+    }
     getPager(totalItems: number, currentPage: number = 1) {
         let totalPages = totalItems, startPage: number, endPage: number;
         if (totalPages <= 10) {

@@ -41,17 +41,17 @@
 <md-tab-group>
   <md-tab label="Cast">
     <section id="cast" class="items" *ngIf="cast">
-      <md-card class="item" *ngFor="let person of cast">
+      <div class="item" *ngFor="let person of cast">
         <a [routerLink]="['/star', person.id]">
-          <img src="https://image.tmdb.org/t/p/w185/{{person.profile_path}}" alt="profile">
-          <h3>{{person.name}}</h3>
+            <img src="https://image.tmdb.org/t/p/w185/{{person.profile_path}}" alt="profile">
+            <h3>{{person.name}}</h3> 
+          </a>
           <p>{{person.character}}</p>
-        </a>
-      </md-card>
+      </div>
     </section>
   </md-tab>
   <md-tab label="Trailer">
-    <section id="trailer">
+    <section id="trailer" *ngIf="safeUrl">
       <iframe width="560" height="315" [src]="safeUrl" frameborder="0" allowfullscreen></iframe>
     </section>
   </md-tab>
