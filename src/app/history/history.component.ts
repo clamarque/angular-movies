@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 import { MdSnackBar, MdSnackBarConfig, MdPaginator } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthService } from '../shared/index';
