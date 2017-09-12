@@ -37,7 +37,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     </a>
 </p>
 
-The idea is that can you get the news about movies who interested you. [**Sign in**](https://hubmovies-a26fc.firebaseapp.com/sign-in) for record movies in the playlists available. For the moment, two playlists exists: "watch later" and "favorites". Tell me if you want that I add new functions, I will try. 
+* User authentification (Google, Twitter and Facebook)
+* Get informations about a movie (description, cast, similar movies, etc.)
+* Save the movies you want to watch later or save your favorites movies
+* Share a movie with your community (Google +, Facebook, Twitter or by mail)
+* Firebase implementations for data in real time
+* Keep navigation when you are offline !
 
 My purpose is to built a great application as allocine or tv show time, using the power of Angular.
 
