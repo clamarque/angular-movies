@@ -12,8 +12,8 @@
     </div>
   </section>
   -->
-  <md-tab-group>
-    <md-tab label="Known in movies for">
+  <mat-tab-group>
+    <mat-tab label="Known in movies for">
       <section class="items" *ngIf="movies">
         <div class="item" *ngFor="let movie of movies">
           <a [routerLink]="['/movie', movie.id]">
@@ -25,8 +25,8 @@
           </a>
         </div>
       </section>
-    </md-tab>
-    <md-tab label="Known in TV for">
+    </mat-tab>
+    <mat-tab label="Known in TV for">
       <section class="items" *ngIf="tv_credits">
         <div class="item" *ngFor="let tv of tv_credits">
           <img *ngIf="tv.poster_path" src="https://image.tmdb.org/t/p/w185/{{tv.poster_path}}" alt="poster movie">
@@ -35,5 +35,5 @@
           <p>{{tv.character}}</p>
         </div>
       </section>
-    </md-tab>
-  </md-tab-group>
+    </mat-tab>
+  </mat-tab-group>

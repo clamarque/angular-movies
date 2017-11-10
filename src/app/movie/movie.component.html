@@ -1,45 +1,45 @@
-<md-card *ngIf="movie">
+<mat-card *ngIf="movie">
   <picture>
     <source media="(min-width: 1280px)" srcset="https://image.tmdb.org/t/p/w1280/{{movie.backdrop_path}}">
     <source media="(min-width: 780px)" srcset="https://image.tmdb.org/t/p/w780/{{movie.backdrop_path}}">
     <img src="https://image.tmdb.org/t/p/w300/{{movie.backdrop_path}}" alt="backdrop movie">
   </picture>
-  <md-card-header>
-    <md-card-title>{{movie.title}}</md-card-title>
-    <md-card-subtitle>
-      <md-icon>date_range</md-icon> {{movie.release_date | date}}
-      <span *ngIf="movie.vote_average >= 5"> <md-icon class="md-green">thumb_up</md-icon> {{movie.vote_average}} </span>
-      <span *ngIf="movie.vote_average < 5"> <md-icon class="md-red">thumb_down</md-icon> {{movie.vote_average}} </span>
-      <button md-icon-button [mdMenuTriggerFor]="menu">
-                <md-icon>share</md-icon>
+  <mat-card-header>
+    <mat-card-title>{{movie.title}}</mat-card-title>
+    <mat-card-subtitle>
+      <mat-icon>date_range</mat-icon> {{movie.release_date | date}}
+      <span *ngIf="movie.vote_average >= 5"> <mat-icon class="mat-green">thumb_up</mat-icon> {{movie.vote_average}} </span>
+      <span *ngIf="movie.vote_average < 5"> <mat-icon class="mat-red">thumb_down</mat-icon> {{movie.vote_average}} </span>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>share</mat-icon>
       </button>
-      <md-menu #menu="mdMenu">
-        <a md-menu-item href="https://plus.google.com/share?url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">Google +
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item href="https://plus.google.com/share?url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">Google +
                 </a>
-        <a md-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}">Facebook</a>
-        <a md-menu-item href="https://twitter.com/intent/tweet?text=Discovers the movie {{movie.title}}%20on%20&url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}&hashtags=hubmovies, {{movie.title}}">Twitter</a>
-        <a md-menu-item href="mailto:?subject={{movie.title}} on Hubmovies&body=Discovers the movie on https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}">Email</a>
-      </md-menu>
+        <a mat-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}">Facebook</a>
+        <a mat-menu-item href="https://twitter.com/intent/tweet?text=Discovers the movie {{movie.title}}%20on%20&url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}&hashtags=hubmovies, {{movie.title}}">Twitter</a>
+        <a mat-menu-item href="mailto:?subject={{movie.title}} on Hubmovies&body=Discovers the movie on https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}">Email</a>
+      </mat-menu>
       <div class="genre">
         <ul *ngFor="let genre of movie.genres; let i=index">
           <li *ngIf="i < 3"><a [routerLink]="['/genre', {id: genre.id, name: genre.name}]"> {{genre.name}}</a></li>
         </ul>
       </div>
-    </md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
     <p>{{movie.overview}}</p>
-  </md-card-content>
-  <md-card-actions>
+  </mat-card-content>
+  <mat-card-actions>
     <div [hidden]="!isConnected">
-      <button md-button (click)="saveMovie(movie, 'MovieLater')"><md-icon class="md-teal">watch_later</md-icon> Watch later</button>
-      <button md-button (click)="saveMovie(movie, 'FavoriteMovie')"><md-icon class="md-yellow">star</md-icon> Favorite</button>
+      <button mat-button (click)="saveMovie(movie, 'MovieLater')"><mat-icon class="mat-teal">watch_later</mat-icon> Watch later</button>
+      <button mat-button (click)="saveMovie(movie, 'FavoriteMovie')"><mat-icon class="mat-yellow">star</mat-icon> Favorite</button>
     </div>
-  </md-card-actions>
-</md-card>
+  </mat-card-actions>
+</mat-card>
 
-<md-tab-group>
-  <md-tab label="Cast">
+<mat-tab-group>
+  <mat-tab label="Cast">
     <section id="cast" class="items" *ngIf="cast">
       <div class="item" *ngFor="let person of cast">
         <a [routerLink]="['/star', person.id]">
@@ -49,13 +49,13 @@
           <p>{{person.character}}</p>
       </div>
     </section>
-  </md-tab>
-  <md-tab label="Trailer">
+  </mat-tab>
+  <mat-tab label="Trailer">
     <section id="trailer" *ngIf="safeUrl">
       <iframe width="560" height="315" [src]="safeUrl" frameborder="0" allowfullscreen></iframe>
     </section>
-  </md-tab>
-  <md-tab label="Similar Movies">
+  </mat-tab>
+  <mat-tab label="Similar Movies">
     <section id="similar" class="items" *ngIf="similarMovies">
       <div class="item" *ngFor="let movie of similarMovies">
         <a [routerLink]="['/movie', movie.id]">
@@ -65,5 +65,5 @@
         </a>
       </div>
     </section>
-  </md-tab>
-</md-tab-group>
+  </mat-tab>
+</mat-tab-group>

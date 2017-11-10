@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService, DataService } from '../shared/index';
@@ -24,7 +24,7 @@ export class MovieComponent implements OnInit {
     private dataService: DataService,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private snackbar: MdSnackBar) { }
+    private snackbar: MatSnackBar) { }
 
   saveMovie(movie: any, category: string) {
     this.authService.setMovies(movie, category, (error) => {

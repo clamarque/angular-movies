@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/index';
 
@@ -10,7 +10,7 @@ import { AuthService } from '../shared/index';
 export class SignInComponent {
   error: string;
 
-  constructor(private router: Router, private authService: AuthService, private snackbar: MdSnackBar) { }
+  constructor(private router: Router, private authService: AuthService, private snackbar: MatSnackBar) { }
    
   login(name: string) {
     this.authService.signInAccount(name, (error) => {

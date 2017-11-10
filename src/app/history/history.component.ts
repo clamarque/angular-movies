@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
-import { MdSnackBar, MdSnackBarConfig, MdPaginator } from '@angular/material';
+import { MatSnackBar, MatPaginator } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthService } from '../shared/index';
 import { Observable } from 'rxjs/Observable';
@@ -26,9 +26,9 @@ export class HistoryComponent implements OnInit {
     dataSource: HistoryDataSource;
     sub: Subscription;
 
-    @ViewChild(MdPaginator) paginator: MdPaginator;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private snackbar: MdSnackBar) {
+    constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private snackbar: MatSnackBar) {
         //this.getData();
     }
 

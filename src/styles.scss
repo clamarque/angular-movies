@@ -13,7 +13,7 @@ body {
     height: 100%;
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
-    /*background-color: $primary-dark;*/
+    background-color: $primary-dark;
 
     @media (max-width: 960px) {
         height: inherit;
@@ -224,7 +224,7 @@ app-movie {
     [id="trailer"] {
         margin: 30px 0 0;
     }
-    .md {
+    .mat {
         &-green {
             color: #4caf50
         }

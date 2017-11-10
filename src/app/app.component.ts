@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './shared/index';
 
@@ -12,7 +12,7 @@ export class AppComponent {
     isConnected: boolean = false;
     color = 'primary';
 
-    constructor(private authService: AuthService, private router: Router, private snackbar: MdSnackBar) { }
+    constructor(private authService: AuthService, private router: Router, private snackbar: MatSnackBar) { }
 
     @HostListener('window:scroll', ['$event']) scrollHandler(event) {
         const number = window.scrollY;

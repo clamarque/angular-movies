@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
 @Injectable()
@@ -37,14 +38,15 @@ export class AuthService {
     }
 
     getMovies(category: string) {
-        return this.db.list(category + '/' + this.uid)
+        return this.db.list(category + '/' + this.uid).valueChanges()
     }
 
     setMovies(movie: any, category: string, callback: any) {
-        return this.db.list(category + '/' + this.uid).subscribe(data => {
+        return this.db.list(category + '/' + this.uid).valueChanges().subscribe(data => {
+            console.log(data)
             let exists = false
             for (let x of data) {
-                if (x.id == movie.id) exists = true
+                //if (x.id == movie.id) exists = true
                 callback('The movie is already recorded')
             }
             if (exists == false) {
@@ -66,13 +68,13 @@ export class AuthService {
                         })
                         callback()
                     })
-                    .catch(error => callback(error))
+                    //.catch(error => callback(error))
             }
         })
     }
 
     deleteMovies(category: string, id: string) {
-        let item = this.db.list(category + '/' + this.uid)
+        let item = this.db.list(category + '/' + this.uid);
         item.remove(id)
     }
 
@@ -109,8 +111,7 @@ export class AuthService {
 
     isLoggedIn() {
         return this.afAuth.authState.map((auth) => {
-            if (auth === null) return false
-            else return true
+            return auth === null ? false : true
         });
     }
 }

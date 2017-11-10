@@ -11,7 +11,7 @@
   </div>
 </div>
 <ng-template #noMovies>
-  <md-icon>sentiment_very_dissatisfied</md-icon>
+  <mat-icon>sentiment_very_dissatisfied</mat-icon>
   <h1>No results found</h1>
 </ng-template>
 <footer class="pagination">
@@ -19,12 +19,12 @@
     <ul >
       <li [ngClass]="{disabled:pager.currentPage === 1}">
         <a (click)="setPage(parameter, 1)">
-          <md-icon>first_page</md-icon>
+          <mat-icon>first_page</mat-icon>
         </a>
       </li>
       <li [ngClass]="{disabled:pager.currentPage === 1}">
         <a (click)="setPage(parameter, pager.currentPage - 1)">
-          <md-icon>chevron_left</md-icon>
+          <mat-icon>chevron_left</mat-icon>
         </a>
       </li>
       <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
@@ -32,12 +32,12 @@
       </li>
       <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
         <a (click)="setPage(parameter, pager.currentPage + 1)">
-          <md-icon>chevron_right</md-icon>
+          <mat-icon>chevron_right</mat-icon>
         </a>
       </li>
       <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
         <a (click)="setPage(parameter, pager.totalPages)">
-          <md-icon>last_page</md-icon>
+          <mat-icon>last_page</mat-icon>
         </a>
       </li>
     </ul>

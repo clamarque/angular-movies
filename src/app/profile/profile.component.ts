@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/index';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  providers: [MdDialog]
 })
 export class ProfileComponent implements OnInit {
   displayName: string;
@@ -17,22 +16,24 @@ export class ProfileComponent implements OnInit {
   photoURL: any;
   selectedOption: string;
   sub: Subscription;
-
-  dialogRef: MdDialogRef<DialogDeleteUser>;
-
-  constructor(private authService: AuthService, private snackbar: MdSnackBar, private router: Router, private dialog: MdDialog) { }
   error: string;
+ 
+  constructor(private authService: AuthService, private snackbar: MatSnackBar, private router: Router, private dialog: MatDialog) { }
 
   confirmDialog() {
-    this.dialogRef = this.dialog.open(DialogDeleteUser, {
-      disableClose: true
-    });
-
+    let dialogRef = this.dialog.open(DialogDeleteUser)
+    //this.dialogRef = this.dialog.open(DialogDeleteUser, {
+      //disableClose: true
+    //});
+     /*
     this.sub = this.dialogRef.afterClosed().subscribe(result => {
       this.dialogRef = null;
       if (result === 'yes') this.deleteAccount()
       else console.log('cancel')
-    });
+    });*/
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') this.deleteAccount();
+    })
   }
   deleteAccount() {
     this.authService.deleteDatafromUser()
@@ -81,12 +82,13 @@ export class ProfileComponent implements OnInit {
 @Component({
   selector: 'dialog-delete-user',
   template: ` 
-  <h1 md-dialog-title>Delete your account ?</h1>
-    <button md-raised-button color="primary" (click)="dialogRef.close('yes')">Yes</button>
-    <button md-raised-button color="primary" md-dialog-close (click)="dialogRef.close('no')">No</button>
+  <h1 mat-dialog-title>Delete your account ?</h1>
+    <button mat-raised-button color="primary" (click)="dialogRef.close('yes')">Yes</button>
+    <button mat-raised-button color="primary" (click)="dialogRef.close('no')">No</button>
  `
 })
 
 export class DialogDeleteUser {
-  constructor(public dialogRef: MdDialogRef<DialogDeleteUser>) { }
+  constructor(public dialogRef: MatDialogRef<DialogDeleteUser>) { }
+
 }

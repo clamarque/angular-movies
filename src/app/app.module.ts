@@ -8,11 +8,14 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
+
+
 import { environment } from '../environments/environment';
 
-import * as firebase from 'firebase/app';
 import 'hammerjs';
 
 import { routing } from './app-routing.module';
@@ -45,11 +48,11 @@ export class MyHammerConfig extends HammerGestureConfig {
     CdkTableModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
+    AngularFirestoreModule,
     AngularFireAuthModule,
     routing
   ],
-  providers: [AuthGuard, AuthService, DataService, { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}],
+  providers: [AuthGuard, AuthService, DataService, { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}, AngularFireDatabase],
   entryComponents: [
         DialogDeleteUser
     ],
