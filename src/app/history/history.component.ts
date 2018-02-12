@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import { MatSnackBar, MatPaginator } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -6,7 +6,6 @@ import { AuthService } from '../shared/index';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/of';
-
 
 interface History {
     category: string;
@@ -19,7 +18,7 @@ interface History {
     selector: 'app-history',
     templateUrl: './history.component.html'
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent implements OnInit, OnDestroy {
     isConnected: boolean = false;
     movies: Array<any>;
     displayedColumns = ['poster_path', 'original_title', 'category', 'action'];
@@ -29,7 +28,7 @@ export class HistoryComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
     constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private snackbar: MatSnackBar) {
-        //this.getData();
+        // this.getData();
     }
 
     deleteMovie(key: any) {
@@ -40,16 +39,19 @@ export class HistoryComponent implements OnInit {
     ngOnInit() {
 
         this.sub = this.authService.getMovies('History').subscribe(response => {
+            console.log(this.movies);
             this.movies = response;
-            this.dataSource = new HistoryDataSource(this.movies)
+            this.dataSource = new HistoryDataSource(this.movies);
         });
 
-        return this.authService.isLoggedIn().subscribe(
+        /* return this.authService.isLoggedIn().subscribe(
             authStatus => {
-                if (authStatus == true) return this.isConnected = true
-                else return this.isConnected = false
-            })
+                authStatus === true ? this.isConnected = true : this.isConnected = false;
+                console.log(this.isConnected);
+            });
+            */
     }
+
     ngOnDestroy() {
         this.sub.unsubscribe();
     }

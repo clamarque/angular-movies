@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './shared/index';
@@ -7,7 +7,7 @@ import { AuthService } from './shared/index';
     selector: 'app-root',
     templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     movieSearching: any[];
     isConnected: boolean = false;
     color = 'primary';
@@ -15,13 +15,14 @@ export class AppComponent {
     constructor(private authService: AuthService, private router: Router, private snackbar: MatSnackBar) { }
 
     @HostListener('window:scroll', ['$event']) scrollHandler(event) {
+        console.log(event);
         const number = window.scrollY;
-        let el = document.getElementById('return-to-top');
+        const el = document.getElementById('return-to-top');
         if (number >= 50) {
-            el.className = "show";
+            el.className = 'show';
 
         } else {
-            el.className = "hide";
+            el.className = 'hide';
         }
     }
 
@@ -32,22 +33,22 @@ export class AppComponent {
     searchMovie(term: string) {
         if (term === '') {
             this.router.navigate(['/movies/now-playing']);
-        }
-        else {
+        } else {
             this.router.navigate(['/search', { term: term }]);
         }
     }
+
     onSignOut() {
         this.authService.signOut();
-        this.snackbar.open('Already Gone ? We Hope to see you again soon', '', { duration: 5000 })
-        this.router.navigate(['/movies/now-playing'])
+        this.snackbar.open('Already Gone ? We Hope to see you again soon', '', { duration: 5000 });
+        this.router.navigate(['/movies/now-playing']);
     }
+
     ngOnInit() {
         return this.authService.isLoggedIn().subscribe(
             authStatus => {
-                console.log('connected:', authStatus)
-                if (authStatus == true) return this.isConnected = true
-                else return this.isConnected = false
-            })
+                console.log('connected:', authStatus);
+                authStatus === true ? this.isConnected = true : this.isConnected = false;
+            });
     }
 }

@@ -49,6 +49,7 @@ md-card-header .mat-card-header-text {
         vertical-align: middle;
     }
     &-sidenav-container {
+        min-height: 100vh;
         background-color: $primary-dark;
         color: $dark;
     }
@@ -346,6 +347,7 @@ app-history {
     bottom: 20px;
     right: 20px;
     display: none;
+    z-index: 1;
    
     md-icon {
         vertical-align: inherit;

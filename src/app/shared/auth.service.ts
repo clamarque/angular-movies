@@ -11,18 +11,18 @@ import * as firebase from 'firebase';
 export class AuthService {
 
     redirectUrl: string;
-    uid: string = '';
+    uid = '';
 
     constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
         this.afAuth.authState.subscribe(auth => {
-            if (auth) this.uid = auth.uid
-        })
+            auth ? this.uid = auth.uid : this.uid = null;
+        });
     }
 
     signInAccount(name: string, callback: any) {
         return firebase.auth().signInWithPopup(this.getProvider(name))
             .then(success => callback())
-            .catch(error => callback(error))
+            .catch(error => callback(error));
     }
 
     getProvider(name: string) {
@@ -34,22 +34,22 @@ export class AuthService {
     }
 
     signOut() {
-        firebase.auth().signOut()
+        firebase.auth().signOut();
     }
 
     getMovies(category: string) {
-        return this.db.list(category + '/' + this.uid).valueChanges()
+        return this.db.list(category + '/' + this.uid).valueChanges();
     }
 
     setMovies(movie: any, category: string, callback: any) {
-        return this.db.list(category + '/' + this.uid).valueChanges().subscribe(data => {
-            console.log(data)
-            let exists = false
+        /* return this.db.list(category + '/' + this.uid).valueChanges().subscribe(data => {
+            console.log(data);
+            const exists = false;
             for (let x of data) {
-                //if (x.id == movie.id) exists = true
-                callback('The movie is already recorded')
+                // if (x.id == movie.id) exists = true
+                callback('The movie is already recorded');
             }
-            if (exists == false) {
+            if (exists === false) {
                 return this.db.list(category + '/' + this.uid).push({
                     'id': movie.id,
                     'original_title': movie.original_title,
@@ -65,28 +65,28 @@ export class AuthService {
                             'id': movie.id,
                             'original_title': movie.original_title,
                             'poster_path': movie.poster_path
-                        })
-                        callback()
-                    })
-                    //.catch(error => callback(error))
+                        });
+                        callback();
+                    });
+                    // .catch(error => callback(error))
             }
-        })
+        });*/
     }
 
     deleteMovies(category: string, id: string) {
-        let item = this.db.list(category + '/' + this.uid);
-        item.remove(id)
+        const item = this.db.list(category + '/' + this.uid);
+        item.remove(id);
     }
 
     deleteDatafromUser() {
-        let item = this.db.list('MovieLater/' + this.uid)
-        item.remove()
-        let item1 = this.db.list('FavoriteMovie/' + this.uid)
-        item1.remove()
+        const item = this.db.list('MovieLater/' + this.uid);
+        item.remove();
+        const item1 = this.db.list('FavoriteMovie/' + this.uid);
+        item1.remove();
     }
 
     readUser() {
-        return this.afAuth.authState
+        return this.afAuth.authState;
     }
 
     updateUser(formData, callback: any) {
@@ -95,23 +95,23 @@ export class AuthService {
                 return authState.updateProfile({
                     displayName: formData.value.displayName,
                     photoURL: ''
-                })
+                });
             }, callback())
-                .catch(error => callback(error))
-        })
+                .catch(error => callback(error));
+        });
     }
 
     deleteUser(callback: any) {
         return this.afAuth.authState.subscribe(authState => {
             authState.delete()
                 .then(success => callback())
-                .catch(error => callback(error))
-        })
+                .catch(error => callback(error));
+        });
     }
 
     isLoggedIn() {
         return this.afAuth.authState.map((auth) => {
-            return auth === null ? false : true
+            return auth === null ? false : true;
         });
     }
 }
