@@ -15,8 +15,8 @@ export class MovieComponent implements OnInit {
   similarMovies: Array<Object>;
   cast: Array<Object>;
   error: string;
-  isConnected: boolean = false;
-  baseUrl: string = 'https://www.youtube.com/embed/';
+  isConnected = false;
+  baseUrl = 'https://www.youtube.com/embed/';
   safeUrl: any;
 
   constructor(
@@ -29,13 +29,12 @@ export class MovieComponent implements OnInit {
   saveMovie(movie: any, category: string) {
     this.authService.setMovies(movie, category, (error) => {
       if (error) {
-        this.error = error
-        this.snackbar.open(this.error, 'Hide', { duration: 10000 })
+        this.error = error;
+        this.snackbar.open(this.error, 'Hide', { duration: 10000 });
+      } else {
+        this.snackbar.open('Your movie was been save', '', { duration: 5000 });
       }
-      else {
-        this.snackbar.open('Your movie was been save', '', { duration: 5000 })
-      }
-    })
+    });
   }
 
   getMovieVideoUrl(id: string) {
@@ -55,8 +54,8 @@ export class MovieComponent implements OnInit {
       .switchMap((params: ParamMap) => this.dataService.getVideoMovie(+params.get('id')))
       .subscribe(response => {
         this.videos = response.results.slice(0, 1);
-        for (let x of this.videos) {
-          this.getMovieVideoUrl(x["key"])
+        for (const x of this.videos) {
+          this.getMovieVideoUrl(x['key']);
         }
       });
 
@@ -66,8 +65,7 @@ export class MovieComponent implements OnInit {
 
     return this.authService.isLoggedIn().subscribe(
       authStatus => {
-        if (authStatus == true) return this.isConnected = true
-        else return this.isConnected = false
-      })
+        authStatus === true ? this.isConnected = true : this.isConnected = false;
+      });
   }
 }

@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanActivateChild, CanLoad, ActivatedRouteSnapshot, NavigationExtras, Route, Router, RouterStateSnapshot } from '@angular/router';
+import {
+    CanActivate,
+    CanActivateChild,
+    CanLoad,
+    ActivatedRouteSnapshot,
+    NavigationExtras,
+    Route,
+    Router,
+    RouterStateSnapshot } from '@angular/router';
 import { AuthService } from './auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
@@ -13,7 +21,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | boolean {
-      let url: string = state.url;
+      const url: string = state.url;
     return this.checkLogin(url);
   }
 
@@ -21,7 +29,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
         return this.canActivate(route, state);
     }
     canLoad(route: Route): boolean | Observable<boolean> {
-        let url = `/${route.path}`;
+        const url = `/${route.path}`;
 
         return this.checkLogin(url);
     }
@@ -32,11 +40,11 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
                 // Store the attempted URL for redirecting
                 this.authService.redirectUrl = url;
                 // Create a dummy session id
-                let sessionId = 123456789;
+                const sessionId = 123456789;
 
                 // Set our navigation extras object
                 // that contains our global query params and fragment
-                let navigationExtras: NavigationExtras = {
+                const navigationExtras: NavigationExtras = {
                     queryParams: { 'session_id': sessionId },
                     fragment: 'anchor'
                 };
@@ -45,8 +53,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
                 this.router.navigate(['/sign-in'], navigationExtras);
                 return false;
             } else {
-                return true
+                return true;
             }
-        })
+        });
     }
 }

@@ -10,7 +10,7 @@ import 'rxjs/add/operator/switchMap';
 export class StarComponent implements OnInit {
   person: Object;
   movies: Array<Object>;
-  tv_credits : Array<Object>;
+  tv_credits: Array<Object>;
 
   constructor(
     private dataService: DataService,
@@ -19,10 +19,10 @@ export class StarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
 
     this.dataService.getPerson(+id).subscribe(response => this.person = response);
-    this.dataService.getPersonMovies(+id).subscribe(response => this.movies = response.cast.slice(0, 6))
-    this.dataService.getPersonTv(+id).subscribe(response => {  this.tv_credits = response.cast.slice(0,10)})    
+    this.dataService.getPersonMovies(+id).subscribe(response => this.movies = response.cast.slice(0, 6));
+    this.dataService.getPersonTv(+id).subscribe(response => this.tv_credits = response.cast.slice(0, 10));
   }
 }

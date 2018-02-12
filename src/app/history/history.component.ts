@@ -19,7 +19,6 @@ interface History {
     templateUrl: './history.component.html'
 })
 export class HistoryComponent implements OnInit, OnDestroy {
-    isConnected: boolean = false;
     movies: Array<any>;
     displayedColumns = ['poster_path', 'original_title', 'category', 'action'];
     dataSource: HistoryDataSource;
@@ -43,13 +42,6 @@ export class HistoryComponent implements OnInit, OnDestroy {
             this.movies = response;
             this.dataSource = new HistoryDataSource(this.movies);
         });
-
-        /* return this.authService.isLoggedIn().subscribe(
-            authStatus => {
-                authStatus === true ? this.isConnected = true : this.isConnected = false;
-                console.log(this.isConnected);
-            });
-            */
     }
 
     ngOnDestroy() {
