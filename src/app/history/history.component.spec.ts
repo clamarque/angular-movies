@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HistoryComponent } from './history.component';
+import { MatPaginatorModule, MatSnackBarModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HistoryComponent', () => {
   let component: HistoryComponent;
@@ -8,6 +10,11 @@ describe('HistoryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        MatPaginatorModule,
+        MatSnackBarModule,
+        RouterTestingModule
+      ],
       declarations: [ HistoryComponent ]
     })
     .compileComponents();

@@ -9,13 +9,12 @@ import { AuthService } from './shared/index';
 })
 export class AppComponent implements OnInit {
     movieSearching: any[];
-    isConnected: boolean = false;
+    isConnected = false;
     color = 'primary';
 
     constructor(private authService: AuthService, private router: Router, private snackbar: MatSnackBar) { }
 
     @HostListener('window:scroll', ['$event']) scrollHandler(event) {
-        console.log(event);
         const number = window.scrollY;
         const el = document.getElementById('return-to-top');
         if (number >= 50) {

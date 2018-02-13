@@ -10,10 +10,10 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
     .then(() => {
-        if ('serviceWorker' in navigator) {
+        /* if ('serviceWorker' in navigator) {
             navigator.serviceWorker
                 .register('/service-worker.js')
                 .then(registration => console.log('SW registration successfull with scope: ', registration.scope))
-        }
+        }*/
     })
     .catch(err => console.error(err));

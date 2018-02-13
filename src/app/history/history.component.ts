@@ -38,7 +38,6 @@ export class HistoryComponent implements OnInit, OnDestroy {
     ngOnInit() {
 
         this.sub = this.authService.getMovies('History').subscribe(response => {
-            console.log(this.movies);
             this.movies = response;
             this.dataSource = new HistoryDataSource(this.movies);
         });
