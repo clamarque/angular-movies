@@ -36,7 +36,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
             .switchMap((params: ParamMap) => this.authService.getMovies(params.get('category')))
             .subscribe(response => {
                 if (response !== null) {
-                    this.movies = response
+                    this.movies = response;
                 } else {
                     this.movies = null;
                     this.getData = true;

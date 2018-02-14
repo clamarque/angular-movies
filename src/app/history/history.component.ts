@@ -19,28 +19,36 @@ interface History {
     templateUrl: './history.component.html'
 })
 export class HistoryComponent implements OnInit, OnDestroy {
-    movies: Array<any>;
+    movies: any[];
     displayedColumns = ['poster_path', 'original_title', 'category', 'action'];
     dataSource: HistoryDataSource;
     sub: Subscription;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private snackbar: MatSnackBar) {
-        // this.getData();
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        private authService: AuthService,
+        private snackBar: MatSnackBar) {
     }
 
     deleteMovie(key: any) {
         console.log(`key ${key}`);
-        this.authService.deleteMovies('History', key);
+        this.authService.deleteMovies('History', key, (error) => {
+            if (error) {
+                this.snackBar.open(error, 'hide' , { duration: 5000});
+            } else {
+                this.snackBar.open('Your movie was been delete', null , { duration: 5000 });
+            }
+        });
     }
 
     ngOnInit() {
-
-       /* this.sub = this.authService.getMovies('History').subscribe(response => {
+        this.sub = this.authService.getMovies('History').subscribe(response => {
             this.movies = response;
             this.dataSource = new HistoryDataSource(this.movies);
-        });*/
+        });
     }
 
     ngOnDestroy() {

@@ -51,7 +51,6 @@ export class AuthService {
 
     setMovies(movie: any, category: string, callback: any) {
         console.log('movies:::', movie);
-
         const movieDetails = {
             userId: this.uid,
             movieId: movie.id,
@@ -68,7 +67,7 @@ export class AuthService {
         return this.dbf.doc(`${category}/${this.uid}_${movie.id}`)
             .set(movieDetails)
             .then(success => {
-                this.dbf.doc(`history/${this.uid}_${movie.id}`).set(movieDetails)
+                this.dbf.doc(`History/${this.uid}_${movie.id}`).set(movieDetails)
                 callback()
             })
             .catch(err => callback(err));

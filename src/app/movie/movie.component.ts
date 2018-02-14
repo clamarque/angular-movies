@@ -18,6 +18,7 @@ export class MovieComponent implements OnInit {
   isConnected = false;
   baseUrl = 'https://www.youtube.com/embed/';
   safeUrl: any;
+  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
   constructor(
     private authService: AuthService,
@@ -25,6 +26,12 @@ export class MovieComponent implements OnInit {
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private snackbar: MatSnackBar) { }
+
+    swipe(action = this.SWIPE_ACTION.RIGHT) {
+      if (action === this.SWIPE_ACTION.RIGHT || action === this.SWIPE_ACTION.LEFT) {
+        window.history.back();
+      }
+    }
 
   saveMovie(movie: any, category: string) {
     this.authService.setMovies(movie, category, (error) => {

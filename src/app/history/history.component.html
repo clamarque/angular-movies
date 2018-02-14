@@ -20,7 +20,7 @@
 
       <ng-container cdkColumnDef="action">
           <mat-header-cell *cdkHeaderCellDef> Delete </mat-header-cell>
-          <mat-cell *cdkCellDef="let row"> <mat-icon (click)="deleteMovie(row.$key)">delete_forever</mat-icon> </mat-cell>
+          <mat-cell *cdkCellDef="let row"> <mat-icon (click)="deleteMovie(row.movieId)">delete_forever</mat-icon> </mat-cell>
       </ng-container>
 
       <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
