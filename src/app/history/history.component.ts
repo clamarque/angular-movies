@@ -37,10 +37,10 @@ export class HistoryComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        this.sub = this.authService.getMovies('History').subscribe(response => {
+       /* this.sub = this.authService.getMovies('History').subscribe(response => {
             this.movies = response;
             this.dataSource = new HistoryDataSource(this.movies);
-        });
+        });*/
     }
 
     ngOnDestroy() {

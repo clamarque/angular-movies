@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
@@ -12,8 +12,13 @@ export class AuthService {
 
     redirectUrl: string;
     uid = '';
+    moviesLaterCollection: AngularFirestoreCollection<any> = this.dbf.collection('movies-later');
 
-    constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
+    constructor(
+        private afAuth: AngularFireAuth,
+        private db: AngularFireDatabase,
+        private dbf: AngularFirestore,
+        private router: Router) {
         this.afAuth.authState.subscribe(auth => {
             auth ? this.uid = auth.uid : this.uid = null;
         });
@@ -38,10 +43,36 @@ export class AuthService {
     }
 
     getMovies(category: string) {
-        return this.db.list(category + '/' + this.uid).valueChanges();
+        return this.dbf.collection(`${category}`, ref => ref
+        .where('userId', '==', this.uid)
+        .orderBy('date', 'desc')
+        ).valueChanges()
     }
 
     setMovies(movie: any, category: string, callback: any) {
+        console.log('movies:::', movie);
+
+        const movieDetails = {
+            userId: this.uid,
+            movieId: movie.id,
+            date: new Date(),
+            original_title: movie.original_title,
+            overview: movie.overview,
+            popularity: movie.popularity,
+            release_date: movie.release_date,
+            poster_path: movie.poster_path,
+            category: category,
+            status: movie.status
+        }
+
+        return this.dbf.doc(`${category}/${this.uid}_${movie.id}`)
+            .set(movieDetails)
+            .then(success => {
+                this.dbf.doc(`history/${this.uid}_${movie.id}`).set(movieDetails)
+                callback()
+            })
+            .catch(err => callback(err));
+
         /* return this.db.list(category + '/' + this.uid).valueChanges().subscribe(data => {
             console.log(data);
             const exists = false;
@@ -73,9 +104,11 @@ export class AuthService {
         });*/
     }
 
-    deleteMovies(category: string, id: string) {
-        const item = this.db.list(category + '/' + this.uid);
-        item.remove(id);
+    deleteMovies(category: string, id: string, callback: any) {
+        return this.dbf.doc(`${category}/${this.uid}_${id}`)
+            .delete()
+            .then(success => callback())
+            .catch(err => callback(err))
     }
 
     deleteDatafromUser() {
