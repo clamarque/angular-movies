@@ -1,3 +1,6 @@
+<div class="loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+</div>
 <div (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
   <mat-card *ngIf="movie">
     <picture>

@@ -18,7 +18,8 @@ import {
   MatCardModule,
   MatSidenavModule,
   MatTabsModule,
-  MatTableModule } from '@angular/material';
+  MatTableModule,
+  MatProgressSpinnerModule} from '@angular/material';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import {
     MatCardModule,
     CdkTableModule,
     MatSidenavModule,
+    MatProgressSpinnerModule,
     MatTabsModule,
     MatTableModule]
 })

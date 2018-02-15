@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { AuthService } from '../shared/index';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
+import { AuthService } from '../shared/auth/auth.service';
+import { DatabaseService } from '../shared/database/database.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +19,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   sub: Subscription;
   error: string;
 
-  constructor(private authService: AuthService, private snackbar: MatSnackBar, private router: Router, private dialog: MatDialog) { }
+  constructor(
+    private authService: AuthService,
+    private databaseService: DatabaseService,
+    private snackbar: MatSnackBar,
+    private router: Router,
+    private dialog: MatDialog) { }
 
   confirmDialog() {
     const dialogRef = this.dialog.open(DialogDeleteUser);
@@ -36,7 +42,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
   deleteAccount() {
-    this.authService.deleteDatafromUser();
+    this.databaseService.deleteDatafromUser();
     this.authService.deleteUser((error) => {
       if (error) {
         this.error = error;
@@ -79,7 +85,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 @Component({
   selector: 'app-dialog-delete-user',
-  template: ` 
+  template: `
   <h1 mat-dialog-title>Delete your account ?</h1>
     <button mat-raised-button color="primary" (click)="dialogRef.close('yes')">Yes</button>
     <button mat-raised-button color="primary" (click)="dialogRef.close('no')">No</button>

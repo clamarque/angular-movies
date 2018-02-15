@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
 import { MatSnackBar, MatPaginator } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { AuthService } from '../shared/index';
+import { DatabaseService } from '../shared/database/database.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/of';
@@ -29,13 +29,13 @@ export class HistoryComponent implements OnInit, OnDestroy {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private authService: AuthService,
+        private databaseService: DatabaseService,
         private snackBar: MatSnackBar) {
     }
 
     deleteMovie(key: any) {
         console.log(`key ${key}`);
-        this.authService.deleteMovies('History', key, (error) => {
+        this.databaseService.deleteMovies('History', key, (error) => {
             if (error) {
                 this.snackBar.open(error, 'hide' , { duration: 5000});
             } else {
@@ -45,7 +45,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.sub = this.authService.getMovies('History').subscribe(response => {
+        this.sub = this.databaseService.getMovies('History').subscribe(response => {
             this.movies = response;
             this.dataSource = new HistoryDataSource(this.movies);
         });

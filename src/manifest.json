@@ -22,6 +22,5 @@
     "background_color": "#FFFFFF",
     "display": "standalone",
     "orientation": "portrait",
-    "start_url": "http://localhost:8080"
-    // "start_url": "./?utm_source=web_app_manifest"
+    "start_url": "./?utm_source=web_app_manifest"
 }

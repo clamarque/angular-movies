@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { AuthService } from '../shared/index';
+import { AuthService } from '../shared/auth/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,7 +10,10 @@ import { AuthService } from '../shared/index';
 export class SignInComponent {
   error: string;
 
-  constructor(private router: Router, private authService: AuthService, private snackbar: MatSnackBar) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private snackbar: MatSnackBar) { }
 
   login(name: string) {
     this.authService.signInAccount(name, (error) => {

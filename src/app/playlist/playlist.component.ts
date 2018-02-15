@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { AuthService } from '../shared/index';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
 import { MatSnackBar } from '@angular/material';
+import { DatabaseService } from '../shared/database/database.service';
 
 @Component({
     selector: 'app-playlist',
@@ -15,14 +15,14 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     sub: Subscription;
 
     constructor(
-        private authService: AuthService,
+        private databaseService: DatabaseService,
         private route: ActivatedRoute,
         private snackBar: MatSnackBar
     ) { }
 
     deleteMovie(key: any) {
         const category = this.route.snapshot.paramMap.get('category');
-        this.authService.deleteMovies(category, key, (error) => {
+        this.databaseService.deleteMovies(category, key, (error) => {
             if (error) {
               this.snackBar.open(error, 'Hide', { duration: 10000 });
             } else {
@@ -33,7 +33,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.sub = this.route.paramMap
-            .switchMap((params: ParamMap) => this.authService.getMovies(params.get('category')))
+            .switchMap((params: ParamMap) => this.databaseService.getMovies(params.get('category')))
             .subscribe(response => {
                 if (response !== null) {
                     this.movies = response;

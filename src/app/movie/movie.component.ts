@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { AuthService, DataService } from '../shared/index';
 import 'rxjs/add/operator/switchMap';
+import { DatabaseService } from '../shared/database/database.service';
+import { AuthService } from '../shared/auth/auth.service';
+import { TmdbService } from '../shared/tmdb/tmdb.service';
 
 @Component({
   selector: 'app-movie',
-  templateUrl: './movie.component.html'
+  templateUrl: './movie.component.html',
+  styleUrls: ['./movie.component.scss']
 })
 export class MovieComponent implements OnInit {
   movie: Object;
@@ -19,13 +22,15 @@ export class MovieComponent implements OnInit {
   baseUrl = 'https://www.youtube.com/embed/';
   safeUrl: any;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
+  isLoadingResults = false;
 
   constructor(
     private authService: AuthService,
-    private dataService: DataService,
+    private databaseService: DatabaseService,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private snackbar: MatSnackBar) { }
+    private snackbar: MatSnackBar,
+    private tmdbService: TmdbService) { }
 
     swipe(action = this.SWIPE_ACTION.RIGHT) {
       if (action === this.SWIPE_ACTION.RIGHT || action === this.SWIPE_ACTION.LEFT) {
@@ -34,7 +39,7 @@ export class MovieComponent implements OnInit {
     }
 
   saveMovie(movie: any, category: string) {
-    this.authService.setMovies(movie, category, (error) => {
+    this.databaseService.setMovies(movie, category, (error) => {
       if (error) {
         this.error = error;
         this.snackbar.open(this.error, 'Hide', { duration: 10000 });
@@ -49,16 +54,20 @@ export class MovieComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoadingResults = true;
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.dataService.getDetailsMovie(+params.get('id')))
-      .subscribe(response => this.movie = response);
+      .switchMap((params: ParamMap) => this.tmdbService.getDetailsMovie(+params.get('id')))
+      .subscribe(response => {
+        this.isLoadingResults = false;
+        this.movie = response;
+      });
 
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.dataService.getCastMovie(+params.get('id')))
+      .switchMap((params: ParamMap) => this.tmdbService.getCastMovie(+params.get('id')))
       .subscribe(response => this.cast = response.cast.slice(0, 6));
 
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.dataService.getVideoMovie(+params.get('id')))
+      .switchMap((params: ParamMap) => this.tmdbService.getVideoMovie(+params.get('id')))
       .subscribe(response => {
         this.videos = response.results.slice(0, 1);
         for (const x of this.videos) {
@@ -67,7 +76,7 @@ export class MovieComponent implements OnInit {
       });
 
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.dataService.getSimilarMovies(+params.get('id')))
+      .switchMap((params: ParamMap) => this.tmdbService.getSimilarMovies(+params.get('id')))
       .subscribe(response => this.similarMovies = response.results.slice(0, 6));
 
     return this.authService.isLoggedIn().subscribe(

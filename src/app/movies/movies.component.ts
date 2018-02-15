@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../shared/data.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { DatabaseService } from '../shared/database/database.service';
+import { TmdbService } from '../shared/tmdb/tmdb.service';
 
 @Component({
   selector: 'app-movies',
@@ -15,8 +16,9 @@ export class MoviesComponent implements OnInit {
   totalPages: number;
   title: string;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
+  isLoadingResults = true;
 
-  constructor(private dataService: DataService, private route: ActivatedRoute) { }
+  constructor(private tmdbService: TmdbService, private route: ActivatedRoute) { }
 
   swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT) {
     if (action === this.SWIPE_ACTION.RIGHT || action === this.SWIPE_ACTION.LEFT) {
@@ -28,26 +30,28 @@ export class MoviesComponent implements OnInit {
 
     if (page < 1 || page > this.pager.totalPages) { return; }
 
-    this.pager = this.dataService.getPager(this.totalPages, page);
+    this.pager = this.tmdbService.getPager(this.totalPages, page);
     this.currentPage = this.pager.currentPage;
 
     if (typeof param === 'string') {
       if (param === 'discover' || param === 'upcoming' || param === 'now-playing') {
-        this.dataService.getMovie(this.currentPage, param).subscribe(response => this.movies = response);
+        this.tmdbService.getMovie(this.currentPage, param).subscribe(response => this.movies = response);
       } else {
-        this.dataService.getSearchMovie(param, this.currentPage).subscribe(response => this.movies = response);
+        this.tmdbService.getSearchMovie(param, this.currentPage).subscribe(response => this.movies = response);
       }
     }
 
     if (typeof param === 'number') {
-      this.dataService.getGenreMovie(param, this.currentPage).subscribe(response => this.movies = response);
+      this.tmdbService.getGenreMovie(param, this.currentPage).subscribe(response => this.movies = response);
     }
   }
 
   ngOnInit() {
+    this.isLoadingResults = true;
     this.route.params.subscribe((params: Params) => {
       if (params['term']) {
-        this.dataService.getSearchMovie(params['term'], 1).subscribe(response => {
+        this.tmdbService.getSearchMovie(params['term'], 1).subscribe(response => {
+          this.isLoadingResults = false;
           this.title = (params['term']);
           this.totalPages = response.total_pages;
           this.parameter = params['term'];
@@ -55,7 +59,8 @@ export class MoviesComponent implements OnInit {
         });
       }
       if (params['category']) {
-        this.dataService.getMovie(1, params['category']).subscribe(response => {
+        this.tmdbService.getMovie(1, params['category']).subscribe(response => {
+          this.isLoadingResults = false;
           this.title = (params['category']);
           this.totalPages = response.total_pages;
           this.parameter = params['category'];
@@ -63,7 +68,8 @@ export class MoviesComponent implements OnInit {
         });
       }
       if (params['id'] && params['name']) {
-        this.dataService.getGenreMovie(+params['id'], 1).subscribe(response => {
+        this.tmdbService.getGenreMovie(+params['id'], 1).subscribe(response => {
+          this.isLoadingResults = false;
           this.title = (params['name']);
           this.totalPages = response.total_pages;
           this.parameter = +params['id'];

@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { AuthService } from './shared/index';
+import { AuthService } from './shared/auth/auth.service';
 import { SwUpdate } from '@angular/service-worker';
 
 @Component({
@@ -57,8 +57,6 @@ export class AppComponent implements OnInit {
                 }
             })
         }
-
-
 
         return this.authService.isLoggedIn().subscribe(
             authStatus => {

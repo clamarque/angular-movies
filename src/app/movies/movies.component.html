@@ -1,5 +1,8 @@
 <h1>{{title}}</h1>
-<div class="items" *ngIf="movies; else noMovies" (swipeleft)="swipe(pager.currentPage +1, $event.type)" (swiperight)="swipe(pager.currentPage -1, $event.type)">
+<div class="loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+</div>
+<div class="items" *ngIf="movies" (swipeleft)="swipe(pager.currentPage +1, $event.type)" (swiperight)="swipe(pager.currentPage -1, $event.type)">
   <div class="item" *ngFor="let movie of movies.results">
     <a [routerLink]="['/movie', movie.id]">
       <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w185/{{movie.poster_path}}" alt="poster movie">
@@ -10,10 +13,6 @@
     <p class="date">{{movie.release_date | date}}</p>
   </div>
 </div>
-<ng-template #noMovies>
-  <mat-icon>sentiment_very_dissatisfied</mat-icon>
-  <h1>No results found</h1>
-</ng-template>
 <footer class="pagination">
   <nav>
     <ul >
