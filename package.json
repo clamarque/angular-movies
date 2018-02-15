@@ -9,7 +9,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "precache": "sw-precache --verbose --config=sw-precache-config.js"
+    "precache": "sw-precache --verbose --config=sw-precache-config.js",
+    "ngsw-config": "node_modules/.bin/ngsw-config dist ./src/ngsw-config.json",
+    "serve:ngsw": "npm run ngsw-config && http-server dist -p 8080"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +28,7 @@
     "@angular/platform-browser": "^5.2.4",
     "@angular/platform-browser-dynamic": "^5.2.4",
     "@angular/router": "^5.2.4",
+    "@angular/service-worker": "^5.2.5",
     "angularfire2": "^5.0.0-rc.6",
     "code-point-at": "^1.1.0",
     "core-js": "^2.5.3",
@@ -48,7 +51,6 @@
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.3.0",
-    "sw-precache": "^5.2.1",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1"
   },

@@ -24,7 +24,7 @@ import { AppComponent } from './app.component';
 import { DialogDeleteUser } from './profile/profile.component';
 import { PageNotFoundComponent } from './not-found.component';
 
-import { AuthGuard, AuthService, DataService } from './shared/index';
+import { AuthGuard, AuthService, DataService, LogUpdateService, CheckForUpdateService, PromptUpdateService } from './shared/index';
 import { MoviesComponent } from './movies/movies.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -52,11 +52,18 @@ export class MyHammerConfig extends HammerGestureConfig {
     AngularFirestoreModule,
     AngularFireAuthModule,
     routing,
-    ServiceWorkerModule.register('/ngsw-worker.js', {
-      enabled: environment.production
-    })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AuthGuard, AuthService, DataService, { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}, AngularFireDatabase],
+  providers: [
+    AuthGuard,
+    AuthService,
+    DataService,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig},
+    AngularFireDatabase,
+    CheckForUpdateService,
+    LogUpdateService,
+    PromptUpdateService
+  ],
   entryComponents: [
         DialogDeleteUser
     ],

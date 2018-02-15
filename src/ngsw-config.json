@@ -1,27 +1,31 @@
 {
-    "index": "/index.html",
-    "assetGroups": [{
-      "name": "movies time",
-      "installMode": "prefetch",
-      "resources": {
-        "files": [
-          "/favicon.ico",
-          "/index.html"
-        ],
-        "versionedFiles": [
-          "/*.bundle.css",
-          "/*.bundle.js",
-          "/*.chunk.js"
-        ]
-      }
-    }, {
-      "name": "assets",
-      "installMode": "lazy",
-      "updateMode": "prefetch",
-      "resources": {
-        "files": [
-          "/assets/**"
-        ]
-      }
-    }]
-  }
+  "index": "/index.html",
+  "assetGroups": [{
+    "name": "Movie Time",
+    "installMode": "prefetch",
+    "resources": {
+      "files": [
+        "/favicon.ico",
+        "/index.html"
+      ],
+      "versionedFiles": [
+        "/*.bundle.css",
+        "/*.bundle.js",
+        "/*.chunk.js"
+      ]
+    }
+  }, {
+    "name": "assets",
+    "installMode": "lazy",
+    "updateMode": "prefetch",
+    "resources": {
+      "files": [
+        "/assets/**"
+      ],
+      "urls": [
+        "https://fonts.googleapis.com/css?family=Material+Icons",
+        "https://fonts.googleapis.com/css?family=Roboto:400,500"
+    ]
+    }
+  }]
+}

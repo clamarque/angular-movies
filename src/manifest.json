@@ -1,6 +1,6 @@
 {
-    "name": "Hubmovies",
-    "short_name": "Hubmovies",
+    "name": "Movie Time",
+    "short_name": "MovieTime",
     "icons": [
         {
             "src": "assets/icons/android-chrome-192x192.png",
@@ -22,5 +22,6 @@
     "background_color": "#FFFFFF",
     "display": "standalone",
     "orientation": "portrait",
-    "start_url": "./?utm_source=web_app_manifest"
+    "start_url": "http://localhost:8080"
+    // "start_url": "./?utm_source=web_app_manifest"
 }

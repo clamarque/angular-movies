@@ -8,12 +8,8 @@ if (environment.production) {
     enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-    .then(() => {
-        /* if ('serviceWorker' in navigator) {
-            navigator.serviceWorker
-                .register('/service-worker.js')
-                .then(registration => console.log('SW registration successfull with scope: ', registration.scope))
-        }*/
-    })
-    .catch(err => console.error(err));
+platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
+    if ('serviceWorker' in navigator && environment.production) {
+        navigator.serviceWorker.register('/ngsw-worker.js');
+    }
+}).catch(err => console.error(err));

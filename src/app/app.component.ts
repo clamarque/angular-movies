@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './shared/index';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
     selector: 'app-root',
@@ -12,7 +13,12 @@ export class AppComponent implements OnInit {
     isConnected = false;
     color = 'primary';
 
-    constructor(private authService: AuthService, private router: Router, private snackbar: MatSnackBar) { }
+    constructor(
+        private authService: AuthService,
+        private router: Router,
+        private snackbar: MatSnackBar,
+        private swUpdate: SwUpdate
+    ) { }
 
     @HostListener('window:scroll', ['$event']) scrollHandler(event) {
         const number = window.scrollY;
@@ -44,6 +50,16 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (this.swUpdate.isEnabled) {
+            this.swUpdate.available.subscribe(() => {
+                if (confirm('New version available. Load New Version?')) {
+                    window.location.reload();
+                }
+            })
+        }
+
+
+
         return this.authService.isLoggedIn().subscribe(
             authStatus => {
                 console.log('connected:', authStatus);
