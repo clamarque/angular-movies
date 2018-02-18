@@ -5,6 +5,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import 'hammerjs';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 /* FIREBASE */
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
@@ -31,6 +32,8 @@ import { PromptUpdateService } from './shared/sw/prompt-update.service';
 import { AuthGuard } from './shared/guard/auth.guard';
 /* SHARED */
 import { SharedModule } from './shared/shared.module';
+// import { MovieListComponent } from './movies/movie-list/movie-list.component';
+// import { MovieComponent } from './movies/movie/movie.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any> {
@@ -44,7 +47,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     AppComponent,
     DialogDeleteUser,
     PageNotFoundComponent,
-    MoviesComponent
+    MoviesComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     HttpModule,
     CdkTableModule,
     SharedModule,
+    LazyLoadImageModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,

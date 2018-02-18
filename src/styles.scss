@@ -400,3 +400,8 @@ app-history {
     align-items: center;
     justify-content: center;
 }
+
+img[ng-reflect-default-image] {
+    width: 185px;
+    height: 278px;
+}
