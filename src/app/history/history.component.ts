@@ -23,6 +23,8 @@ export class HistoryComponent implements OnInit, OnDestroy {
     displayedColumns = ['poster_path', 'original_title', 'category', 'action'];
     dataSource: HistoryDataSource;
     sub: Subscription;
+    isLoadingResults = true;
+
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -45,7 +47,10 @@ export class HistoryComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.isLoadingResults = true;
+
         this.sub = this.databaseService.getMovies('History').subscribe(response => {
+            this.isLoadingResults = false;
             this.movies = response;
             this.dataSource = new HistoryDataSource(this.movies);
         });

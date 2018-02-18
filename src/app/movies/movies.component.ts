@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { DatabaseService } from '../shared/database/database.service';
 import { TmdbService } from '../shared/tmdb/tmdb.service';
 
@@ -9,6 +9,9 @@ import { TmdbService } from '../shared/tmdb/tmdb.service';
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
+  request: any;
+  dataTitle: any;
+  dataParam: any;
   movies: Object;
   currentPage: number;
   parameter: any;
@@ -35,47 +38,41 @@ export class MoviesComponent implements OnInit {
 
     if (typeof param === 'string') {
       if (param === 'discover' || param === 'upcoming' || param === 'now-playing') {
-        this.tmdbService.getMovie(this.currentPage, param).subscribe(response => this.movies = response);
+        this.request = this.tmdbService.getMovie(this.currentPage, param);
       } else {
-        this.tmdbService.getSearchMovie(param, this.currentPage).subscribe(response => this.movies = response);
+        this.request = this.tmdbService.getSearchMovie(param, this.currentPage);
       }
     }
 
     if (typeof param === 'number') {
-      this.tmdbService.getGenreMovie(param, this.currentPage).subscribe(response => this.movies = response);
+      this.request = this.tmdbService.getGenreMovie(param, this.currentPage);
     }
+
+    this.request.subscribe(response => this.movies = response);
   }
 
   ngOnInit() {
     this.isLoadingResults = true;
+
     this.route.params.subscribe((params: Params) => {
       if (params['term']) {
-        this.tmdbService.getSearchMovie(params['term'], 1).subscribe(response => {
-          this.isLoadingResults = false;
-          this.title = (params['term']);
-          this.totalPages = response.total_pages;
-          this.parameter = params['term'];
-          this.setPage(this.parameter, 1);
-        });
+        this.request = this.tmdbService.getSearchMovie(params['term'], 1);
+        this.parameter = params['term'];
+      } else if (params['category']) {
+        this.request = this.tmdbService.getMovie(1, params['category'])
+        this.parameter = params['category'];
+      } else if (params['id'] && params['name']) {
+        this.request = this.tmdbService.getGenreMovie(+params['id'], 1);
+        this.parameter = +params['id'];
+        this.dataParam = params['name'];
       }
-      if (params['category']) {
-        this.tmdbService.getMovie(1, params['category']).subscribe(response => {
-          this.isLoadingResults = false;
-          this.title = (params['category']);
-          this.totalPages = response.total_pages;
-          this.parameter = params['category'];
-          this.setPage(this.parameter, 1);
-        });
-      }
-      if (params['id'] && params['name']) {
-        this.tmdbService.getGenreMovie(+params['id'], 1).subscribe(response => {
-          this.isLoadingResults = false;
-          this.title = (params['name']);
-          this.totalPages = response.total_pages;
-          this.parameter = +params['id'];
-          this.setPage(this.parameter, 1);
-        });
-      }
+      this.request.subscribe(response => {
+        console.log(response);
+        this.isLoadingResults = false;
+        this.title = this.parameter;
+        this.totalPages = response.total_pages;
+        this.setPage(this.parameter, 1);
+      });
     });
   }
 

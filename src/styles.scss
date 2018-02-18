@@ -284,6 +284,7 @@ app-movie {
 /* Playlist */
 
 app-playlist {
+    position: relative;
     [alt="poster movie"] {
         width: 100%;
     }
@@ -357,6 +358,7 @@ app-star {
 
 /* History */
 app-history {
+    position: relative;
     img {
         width: 32px;
         vertical-align: middle;
@@ -384,4 +386,17 @@ app-history {
 
 .hide {
     display: none;
+}
+
+.loading-shade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

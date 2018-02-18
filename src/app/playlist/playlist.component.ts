@@ -13,6 +13,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     movies: any[];
     getData = false;
     sub: Subscription;
+    isLoadingResults = true;
 
     constructor(
         private databaseService: DatabaseService,
@@ -32,9 +33,13 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.isLoadingResults = true;
+
         this.sub = this.route.paramMap
             .switchMap((params: ParamMap) => this.databaseService.getMovies(params.get('category')))
             .subscribe(response => {
+                this.isLoadingResults = false;
+
                 if (response !== null) {
                     this.movies = response;
                 } else {
