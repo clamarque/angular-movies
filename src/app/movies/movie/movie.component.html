@@ -68,7 +68,7 @@
   <mat-tab label="Similar Movies">
     <section id="similar" class="items" *ngIf="similarMovies">
       <div class="item" *ngFor="let movie of similarMovies">
-        <a [routerLink]="['/movie', movie.id]">
+        <a [routerLink]="['/movies/movie', movie.id]">
           <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w185/{{movie.poster_path}}" alt="poster movie">
           <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
           <p>{{movie.title}}</p>

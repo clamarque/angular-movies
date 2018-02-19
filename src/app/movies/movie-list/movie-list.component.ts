@@ -4,9 +4,9 @@ import { DatabaseService } from '../../shared/database/database.service';
 import { TmdbService } from '../../shared/tmdb/tmdb.service';
 
 @Component({
-  selector: 'app-movies',
-  templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.scss']
+  selector: 'app-movie-list',
+  templateUrl: './movie-list.component.html',
+  styleUrls: ['./movie-list.component.scss']
 })
 export class MovieListComponent implements OnInit {
   request: any;
@@ -55,6 +55,7 @@ export class MovieListComponent implements OnInit {
     this.isLoadingResults = true;
 
     this.route.params.subscribe((params: Params) => {
+      console.log(params);
       if (params['term']) {
         this.request = this.tmdbService.getSearchMovie(params['term'], 1);
         this.parameter = params['term'];

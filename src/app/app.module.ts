@@ -32,6 +32,8 @@ import { PromptUpdateService } from './shared/sw/prompt-update.service';
 import { AuthGuard } from './shared/guard/auth.guard';
 /* SHARED */
 import { SharedModule } from './shared/shared.module';
+import { MovieListComponent } from './movies/movie-list/movie-list.component';
+import { MovieComponent } from './movies/movie/movie.component';
 // import { MovieListComponent } from './movies/movie-list/movie-list.component';
 // import { MovieComponent } from './movies/movie/movie.component';
 
@@ -48,6 +50,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     DialogDeleteUser,
     PageNotFoundComponent,
     MoviesComponent,
+    MovieListComponent,
+    MovieComponent
   ],
   imports: [
     BrowserModule,

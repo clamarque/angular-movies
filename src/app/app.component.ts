@@ -37,9 +37,9 @@ export class AppComponent implements OnInit {
 
     searchMovie(term: string) {
         if (term === '') {
-            this.router.navigate(['/movies/now-playing']);
+            this.router.navigate(['/movies/list/now-playing']);
         } else {
-            this.router.navigate(['/search', { term: term }]);
+            this.router.navigate(['/movies/search', { term: term }]);
         }
     }
 
