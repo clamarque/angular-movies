@@ -46,36 +46,6 @@ export class DatabaseService {
         callback()
       })
       .catch(err => callback(err));
-
-    /* return this.db.list(category + '/' + this.uid).valueChanges().subscribe(data => {
-        console.log(data);
-        const exists = false;
-        for (let x of data) {
-            // if (x.id == movie.id) exists = true
-            callback('The movie is already recorded');
-        }
-        if (exists === false) {
-            return this.db.list(category + '/' + this.uid).push({
-                'id': movie.id,
-                'original_title': movie.original_title,
-                'overview': movie.overview,
-                'popularity': movie.popularity,
-                'release_date': movie.release_date,
-                'poster_path': movie.poster_path,
-                'category': category
-            })
-                .then(success => {
-                    this.db.list('History/' + this.uid).push({
-                        'category': category,
-                        'id': movie.id,
-                        'original_title': movie.original_title,
-                        'poster_path': movie.poster_path
-                    });
-                    callback();
-                });
-                // .catch(error => callback(error))
-        }
-    });*/
   }
 
   deleteMovies(category: string, id: string, callback: any) {
