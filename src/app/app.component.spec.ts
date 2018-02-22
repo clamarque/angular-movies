@@ -2,16 +2,25 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
+import { MatFormFieldModule, MatIconModule, MatSidenavModule } from '@angular/material';
+
+import { AuthService } from './shared/auth/auth.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        MatFormFieldModule,
+        MatIconModule,
+        MatSidenavModule,
         RouterTestingModule
       ],
       declarations: [
         AppComponent
       ],
+      providers: [
+        AuthService
+      ]
     }).compileComponents();
   }));
 
