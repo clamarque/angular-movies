@@ -1,25 +1,48 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { AppComponent } from './app.component';
-import { MatFormFieldModule, MatIconModule, MatSidenavModule } from '@angular/material';
+import { MatFormFieldModule, MatIconModule, MatSidenavModule, MatSnackBarModule } from '@angular/material';
 
 import { AuthService } from './shared/auth/auth.service';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { SwUpdate, ServiceWorkerModule } from '@angular/service-worker';
+import {NgswCommChannel} from '@angular/service-worker/src/low_level';
+
 
 describe('AppComponent', () => {
+  const firebaseConfig = {
+    apiKey: 'foo',
+    authDomain: 'bar',
+    databaseURL: 'baz',
+    projectId: '0',
+    storageBucket: 'foo',
+    messagingSenderId: 'bar'
+  };
+
   beforeEach(async(() => {
+
     TestBed.configureTestingModule({
       imports: [
         MatFormFieldModule,
         MatIconModule,
         MatSidenavModule,
-        RouterTestingModule
+        MatSnackBarModule,
+        RouterTestingModule,
+        AngularFireAuthModule,
+        AngularFireModule.initializeApp(firebaseConfig),
+        HttpClientTestingModule,
       ],
       declarations: [
         AppComponent
       ],
       providers: [
-        AuthService
+        AuthService,
+        AngularFireAuthModule,
+        SwUpdate,
+        NgswCommChannel
       ]
     }).compileComponents();
   }));

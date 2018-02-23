@@ -2,7 +2,7 @@ import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angu
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import 'hammerjs';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
@@ -20,6 +20,8 @@ import { routing } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DialogDeleteUser } from './profile/profile.component';
 import { MoviesComponent } from './movies/movies.component';
+import { MovieListComponent } from './movies/movie-list/movie-list.component';
+import { MovieComponent } from './movies/movie/movie.component';
 import { PageNotFoundComponent } from './not-found.component';
 /* SERVICES */
 import { AuthService } from './shared/auth/auth.service';
@@ -32,10 +34,6 @@ import { PromptUpdateService } from './shared/sw/prompt-update.service';
 import { AuthGuard } from './shared/guard/auth.guard';
 /* SHARED */
 import { SharedModule } from './shared/shared.module';
-import { MovieListComponent } from './movies/movie-list/movie-list.component';
-import { MovieComponent } from './movies/movie/movie.component';
-// import { MovieListComponent } from './movies/movie-list/movie-list.component';
-// import { MovieComponent } from './movies/movie/movie.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any> {
@@ -57,7 +55,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     BrowserModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
-    HttpModule,
+    HttpClientModule,
     CdkTableModule,
     SharedModule,
     LazyLoadImageModule,

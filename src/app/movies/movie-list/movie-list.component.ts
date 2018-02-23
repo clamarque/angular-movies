@@ -66,14 +66,18 @@ export class MovieListComponent implements OnInit {
         this.request = this.tmdbService.getGenreMovie(+params['id'], 1);
         this.parameter = +params['id'];
         this.dataParam = params['name'];
+      } else {
+        this.request = null;
       }
-      this.request.subscribe(response => {
-        console.log(response);
-        this.isLoadingResults = false;
-        this.title = this.parameter;
-        this.totalPages = response.total_pages;
-        this.setPage(this.parameter, 1);
-      });
+      if (this.request) {
+        this.request.subscribe(response => {
+          console.log(response);
+          this.isLoadingResults = false;
+          this.title = this.parameter;
+          this.totalPages = response.total_pages;
+          this.setPage(this.parameter, 1);
+        });
+      }
     });
   }
 

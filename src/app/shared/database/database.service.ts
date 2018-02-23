@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import * as firebase from 'firebase';
@@ -8,11 +7,7 @@ import * as firebase from 'firebase';
 export class DatabaseService {
   uid = '';
 
-  constructor(
-    private afAuth: AngularFireAuth,
-    private dbf: AngularFirestore,
-    private router: Router
-  ) {
+  constructor(private afAuth: AngularFireAuth, private dbf: AngularFirestore) {
     this.afAuth.authState.subscribe(auth => {
       auth ? this.uid = auth.uid : this.uid = null;
     });

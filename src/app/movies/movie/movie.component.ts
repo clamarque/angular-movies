@@ -8,6 +8,10 @@ import { AuthService } from '../../shared/auth/auth.service';
 import { TmdbService } from '../../shared/tmdb/tmdb.service';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
+import { CastModel } from '../shared/cast.model';
+import { CastMovieModel } from '../shared/cast-movie.model';
+import { VideoMovieModel } from '../shared/video-movie.model';
+
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
@@ -19,7 +23,7 @@ export class MovieComponent implements OnInit {
   movie: Object;
   videos: Array<Object>;
   similarMovies: Array<Object>;
-  cast: Array<Object>;
+  cast: CastModel;
   isConnected = false;
   baseUrl = 'https://www.youtube.com/embed/';
   safeUrl: any;
@@ -66,14 +70,19 @@ export class MovieComponent implements OnInit {
       const similarVideo = this.tmdbService.getSimilarMovies(this.id);
 
       forkJoin(dataMovie, castMovie, videoMovie, similarVideo).subscribe(results => {
+        console.log(results);
           this.isLoadingResults = false;
           this.movie = results[0];
-          this.cast = results[1].cast.slice(0, 6);
-          if (results[2].results.length !== 0) {
+          console.log(this.movie);
+          this.cast = results[1].cast;
+          console.log(this.cast);
+         // this.videos = results[2].results
+         // console.log(this.cast['cast'].slice(0, 6));
+         /* if (results[2].results.length !== 0) {
             this.videos = results[2].results.slice(0, 1);
             this.getMovieVideoUrl(this.videos[0]['key']);
           }
-          this.similarMovies = results[3].results.slice(0, 6);
+          this.similarMovies = results[3].results.slice(0, 6); */
       })
     })
 
