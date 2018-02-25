@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './shared/auth/auth.service';
-import { SwUpdate } from '@angular/service-worker';
+// import { SwUpdate } from '@angular/service-worker';
 
 @Component({
     selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
         private authService: AuthService,
         private router: Router,
         private snackbar: MatSnackBar,
-        private swUpdate: SwUpdate
+        // private swUpdate: SwUpdate
     ) { }
 
     @HostListener('window:scroll', ['$event']) scrollHandler(event) {
@@ -50,13 +50,13 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (this.swUpdate.isEnabled) {
+       /* if (this.swUpdate.isEnabled) {
             this.swUpdate.available.subscribe(() => {
                 if (confirm('New version available. Load New Version?')) {
                     window.location.reload();
                 }
             })
-        }
+        } */
 
         return this.authService.isLoggedIn().subscribe(
             authStatus => {
