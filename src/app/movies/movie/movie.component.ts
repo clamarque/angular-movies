@@ -23,7 +23,7 @@ export class MovieComponent implements OnInit {
   movie: Object;
   videos: Array<Object>;
   similarMovies: Array<Object>;
-  cast: CastModel;
+  cast: Array<Object>;
   isConnected = false;
   baseUrl = 'https://www.youtube.com/embed/';
   safeUrl: any;
@@ -70,19 +70,14 @@ export class MovieComponent implements OnInit {
       const similarVideo = this.tmdbService.getSimilarMovies(this.id);
 
       forkJoin(dataMovie, castMovie, videoMovie, similarVideo).subscribe(results => {
-        console.log(results);
-          this.isLoadingResults = false;
-          this.movie = results[0];
-          console.log(this.movie);
-          this.cast = results[1].cast;
-          console.log(this.cast);
-         // this.videos = results[2].results
-         // console.log(this.cast['cast'].slice(0, 6));
-         /* if (results[2].results.length !== 0) {
-            this.videos = results[2].results.slice(0, 1);
-            this.getMovieVideoUrl(this.videos[0]['key']);
-          }
-          this.similarMovies = results[3].results.slice(0, 6); */
+        this.isLoadingResults = false;
+        this.movie = results[0];
+        this.cast = results[1]['cast'].slice(0, 9);
+        this.videos = results[2]['results'].slice(0, 1);
+        if (this.videos.length > 0) {
+          this.getMovieVideoUrl(this.videos[0]['key'])
+        }
+        this.similarMovies = results[3]['results'].slice(0, 9);
       })
     })
 

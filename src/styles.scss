@@ -272,6 +272,10 @@ app-movie {
             width: 100%;
         }
     }
+    [alt="No profile available"] {
+        width: 185px;
+        height: 277px;
+    }
     [alt="poster movie"] {
         height: 278px;
     }

@@ -53,7 +53,8 @@
     <section id="cast" class="items" *ngIf="cast">
       <div class="item" *ngFor="let person of cast">
         <a [routerLink]="['/star', person.id]">
-          <img src="https://image.tmdb.org/t/p/w185/{{person.profile_path}}" alt="profile">
+          <img *ngIf="person.profile_path" src="https://image.tmdb.org/t/p/w185/{{person.profile_path}}" alt="profile">
+          <img *ngIf="!person.profile_path" src="assets/images/no_poster_available.jpg" alt="No profile available">
           <h3>{{person.name}}</h3>
         </a>
         <p>{{person.character}}</p>
@@ -70,7 +71,7 @@
       <div class="item" *ngFor="let movie of similarMovies">
         <a [routerLink]="['/movies/movie', movie.id]">
           <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w185/{{movie.poster_path}}" alt="poster movie">
-          <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+          <img *ngIf="!movie.poster_path" src="assets/images/no_poster_available.jpg" alt="No poster available">
           <p>{{movie.title}}</p>
         </a>
       </div>

@@ -55,7 +55,6 @@ export class MovieListComponent implements OnInit {
     this.isLoadingResults = true;
 
     this.route.params.subscribe((params: Params) => {
-      console.log(params);
       if (params['term']) {
         this.request = this.tmdbService.getSearchMovie(params['term'], 1);
         this.parameter = params['term'];

@@ -34,8 +34,8 @@ export class TmdbService {
   getMovieDiscover(page: number) {
     return this.http.get(`${this.url_discover}?api_key=${this.api_key}&language=en&sort_by=popularity.desc&page=${page}`);
   }
-  getCastMovie(code: number): Observable<CastMovieModel> {
-    return this.http.get<CastMovieModel>(`${this.url_movie}${code}/credits?api_key=${this.api_key}`)
+  getCastMovie(code: number) {
+    return this.http.get(`${this.url_movie}${code}/credits?api_key=${this.api_key}`)
   }
   getVideoMovie(code: number) {
     return this.http.get(`${this.url_movie}${code}/videos?api_key=${this.api_key}&language=en`);
