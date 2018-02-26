@@ -2,29 +2,39 @@ import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angu
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
-import { SharedModule } from './shared/shared.module';
-
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
-import * as firebase from 'firebase/app';
-
-
-import { environment } from '../environments/environment';
-
 import 'hammerjs';
-
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+/* FIREBASE */
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+/* Environment & ServiceWorker */
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+/* ROUTING */
 import { routing } from './app-routing.module';
+/* COMPONENT */
 import { AppComponent } from './app.component';
 import { DialogDeleteUser } from './profile/profile.component';
-import { PageNotFoundComponent } from './not-found.component';
-
-import { AuthGuard, AuthService, DataService } from './shared/index';
 import { MoviesComponent } from './movies/movies.component';
+import { MovieListComponent } from './movies/movie-list/movie-list.component';
+import { MovieComponent } from './movies/movie/movie.component';
+import { PageNotFoundComponent } from './not-found.component';
+/* SERVICES */
+import { AuthService } from './shared/auth/auth.service';
+import { DatabaseService } from './shared/database/database.service';
+import { TmdbService } from './shared/tmdb/tmdb.service';
+import { CheckForUpdateService } from './shared/sw/check-for-update.service';
+import { LogUpdateService } from './shared/sw/log-update.service';
+import { PromptUpdateService } from './shared/sw/prompt-update.service';
+import { StorageService } from './shared/storage/storage.service';
+/* GUARD */
+import { AuthGuard } from './shared/guard/auth.guard';
+/* SHARED */
+import { SharedModule } from './shared/shared.module';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any> {
@@ -38,21 +48,35 @@ export class MyHammerConfig extends HammerGestureConfig {
     AppComponent,
     DialogDeleteUser,
     PageNotFoundComponent,
-    MoviesComponent
+    MoviesComponent,
+    MovieListComponent,
+    MovieComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
-    HttpModule,
+    HttpClientModule,
     CdkTableModule,
     SharedModule,
+    LazyLoadImageModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    routing
+    routing,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AuthGuard, AuthService, DataService, { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}, AngularFireDatabase],
+  providers: [
+    AuthGuard,
+    AuthService,
+    DatabaseService,
+    TmdbService,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig},
+    CheckForUpdateService,
+    LogUpdateService,
+    PromptUpdateService,
+    StorageService
+  ],
   entryComponents: [
         DialogDeleteUser
     ],

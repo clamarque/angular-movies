@@ -1,66 +1,76 @@
 <mat-sidenav-container>
-    <mat-sidenav #end align="start" mode="push">
-        <nav class="" id="navigation" role="navigation">
-            <ul class="nav">
-                <li>
-                    <mat-form-field>
-                        <input matInput #search placeholder="search a movie" (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="end.close()">
-                    </mat-form-field>
-                </li>
-                <li>
-                    <a [routerLink]="['/movies', 'now-playing']" routerLinkActive="active" (click)="end.close()">
-                        <mat-icon>today</mat-icon> Currently</a>
-                </li>
-                <li>
-                    <a [routerLink]="['/movies', 'upcoming']" routerLinkActive="active" (click)="end.close()">
-                        <mat-icon>date_range</mat-icon> Coming soon</a>
-                </li>
-                <li>
-                    <a [routerLink]="['/movies', 'discover']" routerLinkActive="active" (click)="end.close()">
-                        <mat-icon>explore</mat-icon> Trending</a>
-                </li>
-                <li [hidden]="!isConnected">
-                    <a [routerLink]="['/playlist', 'MovieLater']" routerLinkActive="active" (click)="end.close()">
-                        <mat-icon>watch_later</mat-icon> Watch later</a>
-                </li>
-                <li [hidden]="!isConnected">
-                    <a [routerLink]="['/playlist', 'FavoriteMovie']" routerLinkActive="active" (click)="end.close()">
-                        <mat-icon>star</mat-icon> Favorites</a>
-                </li>
-                <li [hidden]="!isConnected">
-                    <a routerLink="/history" routerLinkActive="active" (click)="end.close()">
-                        <mat-icon>history</mat-icon> History</a>
-                </li>
-                <li [hidden]="!isConnected">
-                    <a routerLink="/profile" routerLinkActive="active" (click)="end.close()">
-                        <mat-icon>account_circle</mat-icon> Profil</a>
-                </li>
-                <li [hidden]="isConnected">
-                    <a routerLink="/sign-in" routerLinkActive="active" (click)="end.close()">
-                        <mat-icon>account_circle</mat-icon> Sign in</a>
-                </li>
-                <li [hidden]="!isConnected">
-                    <a (click)="end.close()" (click)="onSignOut()">
-                        <mat-icon>cancel</mat-icon> Sign out</a>
-                </li>
-                <li>
-                    <a href="mailto:chabox59@gmail.com">
-                        <mat-icon>bug_report</mat-icon> Feebacks</a>
-                </li>
-                <li>
-                    <a href="https://github.com/clamarque/angular-movies">
-                        <mat-icon>code</mat-icon> Fork me</a>
-                </li>
-            </ul>
-        </nav>
-    </mat-sidenav>
-    <button class="app-icon-button" (click)="end.toggle()">
-            <i class="material-icons app-toolbar-menu">menu</i>
-    </button>
-    <div id="hub-movies">
-        <router-outlet></router-outlet>
-    </div>
+  <mat-sidenav #end align="start" mode="push">
+    <nav class="" id="navigation" role="navigation">
+      <ul class="nav">
+        <li>
+          <mat-form-field>
+            <input matInput #search placeholder="search a movie" (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="end.close()">
+          </mat-form-field>
+        </li>
+        <li>
+          <a [routerLink]="['/movies/list', 'now-playing']" routerLinkActive="active" (click)="end.close()">
+            <mat-icon>today</mat-icon> Currently</a>
+        </li>
+        <li>
+          <a [routerLink]="['/movies/list', 'upcoming']" routerLinkActive="active" (click)="end.close()">
+            <mat-icon>date_range</mat-icon> Coming soon</a>
+        </li>
+        <li>
+          <a [routerLink]="['/movies/list', 'discover']" routerLinkActive="active" (click)="end.close()">
+            <mat-icon>explore</mat-icon> Trending</a>
+        </li>
+        <li [hidden]="!isConnected">
+          <a [routerLink]="['/playlist', 'MovieLater']" routerLinkActive="active" (click)="end.close()">
+            <mat-icon>watch_later</mat-icon> Watch later</a>
+        </li>
+        <li [hidden]="!isConnected">
+          <a [routerLink]="['/playlist', 'FavoriteMovie']" routerLinkActive="active" (click)="end.close()">
+            <mat-icon>star</mat-icon> Favorites</a>
+        </li>
+        <li [hidden]="!isConnected">
+          <a routerLink="/history" routerLinkActive="active" (click)="end.close()">
+            <mat-icon>history</mat-icon> History</a>
+        </li>
+        <li [hidden]="!isConnected">
+          <a routerLink="/profile" routerLinkActive="active" (click)="end.close()">
+            <mat-icon>account_circle</mat-icon> Profil</a>
+        </li>
+        <li [hidden]="isConnected">
+          <a routerLink="/sign-in" routerLinkActive="active" (click)="end.close()">
+            <mat-icon>account_circle</mat-icon> Sign in</a>
+        </li>
+        <li [hidden]="!isConnected">
+          <a (click)="end.close()" (click)="onSignOut()">
+            <mat-icon>cancel</mat-icon> Sign out</a>
+        </li>
+        <li>
+          <a href="mailto:chabox59@gmail.com">
+            <mat-icon>bug_report</mat-icon> Feebacks</a>
+        </li>
+        <li>
+          <a href="https://github.com/clamarque/angular-movies">
+            <mat-icon>star_rate</mat-icon> Star me</a>
+        </li>
+        <li>
+          <mat-icon>language</mat-icon>
+          <mat-select placeholder="Language" [ngModel]="lang" (selectionChange)="getChangedValue($event)">
+            <mat-option *ngFor="let language of languages" [value]="language.value">
+              {{ language.viewValue }}
+            </mat-option>
+          </mat-select>
+        </li>
+      </ul>
+    </nav>
+  </mat-sidenav>
+  <button class="app-icon-button" (click)="end.toggle()">
+    <i class="material-icons app-toolbar-menu">menu</i>
+  </button>
+  <div id="hub-movies">
+    <router-outlet></router-outlet>
+  </div>
 </mat-sidenav-container>
 <div id="return-to-top">
-    <button mat-mini-fab color="primary" (click)="scrollTop()"><mat-icon class="md-24">arrow_upward</mat-icon></button>
+  <button mat-mini-fab color="primary" (click)="scrollTop()">
+    <mat-icon class="md-24">arrow_upward</mat-icon>
+  </button>
 </div>

@@ -13,7 +13,7 @@ body {
     height: 100%;
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
-    background-color: $primary-dark;
+    background-color: white;
 
     @media (max-width: 960px) {
         height: inherit;
@@ -49,6 +49,7 @@ md-card-header .mat-card-header-text {
         vertical-align: middle;
     }
     &-sidenav-container {
+        min-height: 100vh;
         background-color: $primary-dark;
         color: $dark;
     }
@@ -117,6 +118,10 @@ md-card-header .mat-card-header-text {
         &:hover {
             background-color: $background-color;
         }
+
+        &:last-child {
+            color: white;
+        }
     }
     a {
         display: block;
@@ -136,6 +141,14 @@ md-card-header .mat-card-header-text {
         &-placeholder,
         &-element {
             color: $white;
+        }
+    }
+    .mat-select {
+        padding: .625rem 0;
+        width: 140px;
+
+        &-placeholder, &-value {
+            color: white;
         }
     }
 }
@@ -271,6 +284,10 @@ app-movie {
             width: 100%;
         }
     }
+    [alt="No profile available"] {
+        width: 185px;
+        height: 277px;
+    }
     [alt="poster movie"] {
         height: 278px;
     }
@@ -283,8 +300,33 @@ app-movie {
 /* Playlist */
 
 app-playlist {
+    position: relative;
     [alt="poster movie"] {
         width: 100%;
+    }
+
+    .mat-list {
+        width: 100%;
+        background: white;
+
+        &-item:hover {
+            background: #9E9E9E;
+            
+            h3 {
+                color: white;
+            }
+        }
+
+        h3 {
+            margin: 0 10px;
+            color: #000;
+        }
+
+        a {
+            display: inherit;
+            align-items: center;
+            flex: 1;
+        }
     }
 }
 /* Sign in */
@@ -332,6 +374,7 @@ app-star {
 
 /* History */
 app-history {
+    position: relative;
     img {
         width: 32px;
         vertical-align: middle;
@@ -343,9 +386,10 @@ app-history {
 
 [id="return-to-top"] {
     position: fixed;
-    bottom: 20px;
+    bottom: 40px;
     right: 20px;
     display: none;
+    z-index: 1;
    
     md-icon {
         vertical-align: inherit;
@@ -358,4 +402,22 @@ app-history {
 
 .hide {
     display: none;
+}
+
+.loading-shade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img[ng-reflect-default-image] {
+    width: 185px;
+    height: 278px;
 }

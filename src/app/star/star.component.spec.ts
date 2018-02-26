@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatTabsModule } from '@angular/material';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { StarComponent } from './star.component';
+
+import { TmdbService } from '../shared/tmdb/tmdb.service';
+import { StorageService } from '../shared/storage/storage.service';
 
 describe('StarComponent', () => {
   let component: StarComponent;
@@ -8,7 +15,18 @@ describe('StarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StarComponent ]
+      imports: [
+        BrowserAnimationsModule,
+        NoopAnimationsModule,
+        MatTabsModule,
+        HttpClientTestingModule,
+        RouterTestingModule,
+      ],
+      declarations: [ StarComponent ],
+      providers: [
+        StorageService,
+        TmdbService
+      ]
     })
     .compileComponents();
   }));

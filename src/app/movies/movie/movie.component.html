@@ -1,3 +1,7 @@
+<div class="loading-shade" *ngIf="isLoadingResults">
+  <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+</div>
+<div (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
 <mat-card *ngIf="movie">
   <picture>
     <source media="(min-width: 1280px)" srcset="https://image.tmdb.org/t/p/w1280/{{movie.backdrop_path}}">
@@ -8,21 +12,25 @@
     <mat-card-title>{{movie.title}}</mat-card-title>
     <mat-card-subtitle>
       <mat-icon>date_range</mat-icon> {{movie.release_date | date}}
-      <span *ngIf="movie.vote_average >= 5"> <mat-icon class="mat-green">thumb_up</mat-icon> {{movie.vote_average}} </span>
-      <span *ngIf="movie.vote_average < 5"> <mat-icon class="mat-red">thumb_down</mat-icon> {{movie.vote_average}} </span>
+      <span *ngIf="movie.vote_average >= 5">
+        <mat-icon class="mat-green">thumb_up</mat-icon> {{movie.vote_average}} </span>
+      <span *ngIf="movie.vote_average < 5">
+        <mat-icon class="mat-red">thumb_down</mat-icon> {{movie.vote_average}} </span>
       <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>share</mat-icon>
+        <mat-icon>share</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <a mat-menu-item href="https://plus.google.com/share?url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">Google +
-                </a>
+        </a>
         <a mat-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}">Facebook</a>
         <a mat-menu-item href="https://twitter.com/intent/tweet?text=Discovers the movie {{movie.title}}%20on%20&url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}&hashtags=hubmovies, {{movie.title}}">Twitter</a>
         <a mat-menu-item href="mailto:?subject={{movie.title}} on Hubmovies&body=Discovers the movie on https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}">Email</a>
       </mat-menu>
       <div class="genre">
         <ul *ngFor="let genre of movie.genres; let i=index">
-          <li *ngIf="i < 3"><a [routerLink]="['/genre', {id: genre.id, name: genre.name}]"> {{genre.name}}</a></li>
+          <li *ngIf="i < 3">
+            <a [routerLink]="['/genre', {id: genre.id, name: genre.name}]"> {{genre.name}}</a>
+          </li>
         </ul>
       </div>
     </mat-card-subtitle>
@@ -32,8 +40,10 @@
   </mat-card-content>
   <mat-card-actions>
     <div [hidden]="!isConnected">
-      <button mat-button (click)="saveMovie(movie, 'MovieLater')"><mat-icon class="mat-teal">watch_later</mat-icon> Watch later</button>
-      <button mat-button (click)="saveMovie(movie, 'FavoriteMovie')"><mat-icon class="mat-yellow">star</mat-icon> Favorite</button>
+      <button mat-button (click)="saveMovie(movie, 'MovieLater')">
+        <mat-icon class="mat-teal">watch_later</mat-icon> Watch later</button>
+      <button mat-button (click)="saveMovie(movie, 'FavoriteMovie')">
+        <mat-icon class="mat-yellow">star</mat-icon> Favorite</button>
     </div>
   </mat-card-actions>
 </mat-card>
@@ -43,10 +53,11 @@
     <section id="cast" class="items" *ngIf="cast">
       <div class="item" *ngFor="let person of cast">
         <a [routerLink]="['/star', person.id]">
-            <img src="https://image.tmdb.org/t/p/w185/{{person.profile_path}}" alt="profile">
-            <h3>{{person.name}}</h3> 
-          </a>
-          <p>{{person.character}}</p>
+          <img *ngIf="person.profile_path" src="https://image.tmdb.org/t/p/w185/{{person.profile_path}}" alt="profile">
+          <img *ngIf="!person.profile_path" src="assets/images/no_poster_available.jpg" alt="No profile available">
+          <h3>{{person.name}}</h3>
+        </a>
+        <p>{{person.character}}</p>
       </div>
     </section>
   </mat-tab>
@@ -58,12 +69,13 @@
   <mat-tab label="Similar Movies">
     <section id="similar" class="items" *ngIf="similarMovies">
       <div class="item" *ngFor="let movie of similarMovies">
-        <a [routerLink]="['/movie', movie.id]">
+        <a [routerLink]="['/movies/movie', movie.id]">
           <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w185/{{movie.poster_path}}" alt="poster movie">
-          <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+          <img *ngIf="!movie.poster_path" src="assets/images/no_poster_available.jpg" alt="No poster available">
           <p>{{movie.title}}</p>
         </a>
       </div>
     </section>
   </mat-tab>
 </mat-tab-group>
+</div>
