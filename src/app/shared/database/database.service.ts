@@ -51,12 +51,7 @@ export class DatabaseService {
   }
 
   deleteDatafromUser() {
-    /*
-    const item = this.db.list('MovieLater/' + this.uid);
-    item.remove();
-    const item1 = this.db.list('FavoriteMovie/' + this.uid);
-    item1.remove();
-    */
+  // waiting fea from firebase
   }
 
 }

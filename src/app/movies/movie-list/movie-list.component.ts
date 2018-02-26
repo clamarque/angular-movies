@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { DatabaseService } from '../../shared/database/database.service';
 import { TmdbService } from '../../shared/tmdb/tmdb.service';
-import { StorageService } from '../../shared/storage/storage.service';
+
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
@@ -20,22 +20,13 @@ export class MovieListComponent implements OnInit {
   title: string;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
   isLoadingResults = true;
-  languages = [
-    {value: 'en-En', viewValue: 'English'},
-    {value: 'fr-FR', viewValue: 'French'},
-  ];
 
-  constructor(private tmdbService: TmdbService, private route: ActivatedRoute, private storageService: StorageService) { }
+  constructor(private tmdbService: TmdbService, private route: ActivatedRoute) { }
 
   swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT) {
     if (action === this.SWIPE_ACTION.RIGHT || action === this.SWIPE_ACTION.LEFT) {
       this.setPage(this.parameter, currentIndex);
     }
-  }
-
-  getChangedValue(event) {
-    console.log(event);
-    this.storageService.save('language', event.value);
   }
 
   setPage(param: any, page: number) {
@@ -79,7 +70,6 @@ export class MovieListComponent implements OnInit {
       }
       if (this.request) {
         this.request.subscribe(response => {
-          console.log(response);
           this.isLoadingResults = false;
           this.title = this.parameter;
           this.totalPages = response.total_pages;

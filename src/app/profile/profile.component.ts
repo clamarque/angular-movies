@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.snackbar.open(this.error, 'hide', { duration: 10000 });
       } else {
         this.snackbar.open('Good bye ! We hope that our site has pleased you.', '', { duration: 5000 });
-        this.router.navigate(['/movies/now-playing']);
+        this.router.navigate(['/movies/list/now-playing']);
       }
     });
   }

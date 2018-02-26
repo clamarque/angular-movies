@@ -49,11 +49,11 @@
         </li>
         <li>
           <a href="https://github.com/clamarque/angular-movies">
-            <mat-icon>code</mat-icon> Fork me</a>
+            <mat-icon>star_rate</mat-icon> Star me</a>
         </li>
         <li>
-          <mat-icon>Language</mat-icon>
-          <mat-select placeholder="Language" (selectionChange)="getChangedValue($event)">
+          <mat-icon>language</mat-icon>
+          <mat-select placeholder="Language" [ngModel]="lang" (selectionChange)="getChangedValue($event)">
             <mat-option *ngFor="let language of languages" [value]="language.value">
               {{ language.viewValue }}
             </mat-option>

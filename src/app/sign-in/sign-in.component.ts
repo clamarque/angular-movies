@@ -24,7 +24,7 @@ export class SignInComponent {
         this.authService.readUser().subscribe(authData => {
           if (authData) {
             this.snackbar.open('Welcome ' + authData.displayName + ' !', '', { duration: 5000 });
-            this.router.navigate(['/movies/now-playing']);
+            this.router.navigate(['/movies/list/now-playing']);
           }
         });
       }

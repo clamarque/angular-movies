@@ -36,7 +36,6 @@ export class HistoryComponent implements OnInit, OnDestroy {
     }
 
     deleteMovie(key: any) {
-        console.log(`key ${key}`);
         this.databaseService.deleteMovies('History', key, (error) => {
             if (error) {
                 this.snackBar.open(error, 'hide' , { duration: 5000});

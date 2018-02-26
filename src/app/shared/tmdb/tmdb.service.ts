@@ -29,7 +29,6 @@ export class TmdbService {
     return this.http.get(`${this.url_search}?api_key=${this.api_key}&language=${this.lang}&query=${name}&page=${page}`);
   }
   getNowPlaying(page: number) {
-    console.log(this.lang);
     return this.http.get(`${this.url_movie}now_playing?api_key=${this.api_key}&language=${this.lang}&page=${page}`);
   }
   getDetailsMovie(code: number) {

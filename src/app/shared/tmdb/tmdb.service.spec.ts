@@ -2,6 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { TmdbService } from './tmdb.service';
+import { StorageService } from '../storage/storage.service';
 
 describe('TmdbService', () => {
   beforeEach(() => {
@@ -9,7 +10,10 @@ describe('TmdbService', () => {
       imports: [
         HttpClientTestingModule
       ],
-      providers: [TmdbService]
+      providers: [
+        StorageService,
+        TmdbService
+      ]
     });
   });
 

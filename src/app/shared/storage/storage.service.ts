@@ -28,13 +28,11 @@ export class StorageService {
 
   private getSettable(value: any): string {
     const data = this.encode(typeof value === 'string' ? value : JSON.stringify(value));
-    console.log(data);
     return data;
   }
 
   private getGettable(value: string): any {
     const data = this.decode(value);
-    console.log(data);
     try {
       return JSON.parse(data);
     } catch (e) {

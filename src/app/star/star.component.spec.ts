@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StarComponent } from './star.component';
 
 import { TmdbService } from '../shared/tmdb/tmdb.service';
+import { StorageService } from '../shared/storage/storage.service';
 
 describe('StarComponent', () => {
   let component: StarComponent;
@@ -23,6 +24,7 @@ describe('StarComponent', () => {
       ],
       declarations: [ StarComponent ],
       providers: [
+        StorageService,
         TmdbService
       ]
     })

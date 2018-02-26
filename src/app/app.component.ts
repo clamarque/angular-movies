@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, NgModule } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './shared/auth/auth.service';
@@ -17,12 +17,13 @@ export class AppComponent implements OnInit {
         {value: 'en-En', viewValue: 'English'},
         {value: 'fr-FR', viewValue: 'French'},
       ];
+      lang = this.storageService.read('language');
 
     constructor(
         private authService: AuthService,
         private router: Router,
         private snackbar: MatSnackBar,
-        private storageService: StorageService
+        private storageService: StorageService,
         // private swUpdate: SwUpdate
     ) { }
 
@@ -41,9 +42,9 @@ export class AppComponent implements OnInit {
         window.scrollTo(0, 0);
     }
     getChangedValue(event) {
-        console.log(event);
         this.storageService.save('language', event.value);
-      }
+        location.reload();
+    }
 
     searchMovie(term: string) {
         if (term === '') {
@@ -56,7 +57,7 @@ export class AppComponent implements OnInit {
     onSignOut() {
         this.authService.signOut();
         this.snackbar.open('Already Gone ? We Hope to see you again soon', '', { duration: 5000 });
-        this.router.navigate(['/movies/now-playing']);
+        this.router.navigate(['/movies/list/now-playing']);
     }
 
     ngOnInit() {

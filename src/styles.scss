@@ -118,6 +118,10 @@ md-card-header .mat-card-header-text {
         &:hover {
             background-color: $background-color;
         }
+
+        &:last-child {
+            color: white;
+        }
     }
     a {
         display: block;
@@ -137,6 +141,14 @@ md-card-header .mat-card-header-text {
         &-placeholder,
         &-element {
             color: $white;
+        }
+    }
+    .mat-select {
+        padding: .625rem 0;
+        width: 140px;
+
+        &-placeholder, &-value {
+            color: white;
         }
     }
 }

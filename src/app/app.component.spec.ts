@@ -2,14 +2,17 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule, MatIconModule, MatSidenavModule, MatSnackBarModule, MatSelectModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
-import { MatFormFieldModule, MatIconModule, MatSidenavModule, MatSnackBarModule } from '@angular/material';
 
 import { AuthService } from './shared/auth/auth.service';
+import { StorageService } from './shared/storage/storage.service';
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { SwUpdate, ServiceWorkerModule } from '@angular/service-worker';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   const firebaseConfig = {
@@ -26,8 +29,10 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        FormsModule,
         MatFormFieldModule,
         MatIconModule,
+        MatSelectModule,
         MatSidenavModule,
         MatSnackBarModule,
         RouterTestingModule,
@@ -41,6 +46,7 @@ describe('AppComponent', () => {
       providers: [
         AuthService,
         AngularFireAuthModule,
+        StorageService
       ]
     }).compileComponents();
   }));

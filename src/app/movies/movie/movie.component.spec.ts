@@ -9,6 +9,7 @@ import { MovieComponent } from './movie.component';
 import { AuthService } from '../../shared/auth/auth.service';
 import { DatabaseService } from '../../shared/database/database.service';
 import { TmdbService } from '../../shared/tmdb/tmdb.service';
+import { StorageService } from '../../shared/storage/storage.service';
 
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
@@ -50,7 +51,8 @@ describe('MovieComponent', () => {
         AngularFireAuthModule,
         AuthService,
         DatabaseService,
-        TmdbService
+        TmdbService,
+        StorageService
       ]
     })
     .compileComponents();
