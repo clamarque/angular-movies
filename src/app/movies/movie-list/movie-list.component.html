@@ -2,6 +2,13 @@
 <div class="loading-shade" *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
 </div>
+<mat-form-field>
+    <mat-select placeholder="Language" (selectionChange)="getChangedValue($event)">
+        <mat-option *ngFor="let language of languages" [value]="language.value">
+          {{ language.viewValue }}
+        </mat-option>
+      </mat-select>
+</mat-form-field>
 <div class="items" *ngIf="movies" (swipeleft)="swipe(pager.currentPage +1, $event.type)" (swiperight)="swipe(pager.currentPage -1, $event.type)">
   <div class="item" *ngFor="let movie of movies.results">
     <a [routerLink]="['/movies/movie', movie.id]">

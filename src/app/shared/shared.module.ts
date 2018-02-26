@@ -13,6 +13,7 @@ import {
   MatGridListModule,
   MatMenuModule,
   MatSnackBarModule,
+  MatSelectModule,
   MatListModule,
   MatProgressBarModule,
   MatCardModule,
@@ -41,7 +42,8 @@ import {
     MatCardModule,
     CdkTableModule,
     MatSidenavModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule
   ],
   exports: [
     CommonModule,
@@ -63,6 +65,8 @@ import {
     MatSidenavModule,
     MatProgressSpinnerModule,
     MatTabsModule,
-    MatTableModule]
+    MatTableModule,
+    MatSelectModule
+  ]
 })
 export class SharedModule { }

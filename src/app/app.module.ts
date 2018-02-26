@@ -30,6 +30,7 @@ import { TmdbService } from './shared/tmdb/tmdb.service';
 import { CheckForUpdateService } from './shared/sw/check-for-update.service';
 import { LogUpdateService } from './shared/sw/log-update.service';
 import { PromptUpdateService } from './shared/sw/prompt-update.service';
+import { StorageService } from './shared/storage/storage.service';
 /* GUARD */
 import { AuthGuard } from './shared/guard/auth.guard';
 /* SHARED */
@@ -73,7 +74,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig},
     CheckForUpdateService,
     LogUpdateService,
-    PromptUpdateService
+    PromptUpdateService,
+    StorageService
   ],
   entryComponents: [
         DialogDeleteUser

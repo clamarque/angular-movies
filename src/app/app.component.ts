@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './shared/auth/auth.service';
+import { StorageService } from './shared/storage/storage.service';
 // import { SwUpdate } from '@angular/service-worker';
 
 @Component({
@@ -12,11 +13,16 @@ export class AppComponent implements OnInit {
     movieSearching: any[];
     isConnected = false;
     color = 'primary';
+    languages = [
+        {value: 'en-En', viewValue: 'English'},
+        {value: 'fr-FR', viewValue: 'French'},
+      ];
 
     constructor(
         private authService: AuthService,
         private router: Router,
         private snackbar: MatSnackBar,
+        private storageService: StorageService
         // private swUpdate: SwUpdate
     ) { }
 
@@ -34,6 +40,10 @@ export class AppComponent implements OnInit {
     scrollTop() {
         window.scrollTo(0, 0);
     }
+    getChangedValue(event) {
+        console.log(event);
+        this.storageService.save('language', event.value);
+      }
 
     searchMovie(term: string) {
         if (term === '') {
