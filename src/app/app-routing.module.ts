@@ -7,13 +7,12 @@ import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieComponent } from './movies/movie/movie.component';
 
 const routes: Routes = [
-  { path: 'genre', component: MoviesComponent },
   { path: 'movies', component: MoviesComponent, children: [
     { path: 'list/:category', component: MovieListComponent },
+    { path: 'genre', component: MovieListComponent },
     { path: 'movie/:id', component: MovieComponent},
     { path: 'search', component: MovieListComponent}
   ] },
-  // { path: 'search', component: MovieListComponent },
   { path: 'history', loadChildren: 'app/history/history.module#HistoryModule', canActivate: [AuthGuard] },
   { path: 'playlist/:category', loadChildren: 'app/playlist/playlist.module#PlaylistModule', canActivate: [AuthGuard] },
   { path: 'profile', loadChildren: 'app/profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
