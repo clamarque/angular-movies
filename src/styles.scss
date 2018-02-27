@@ -257,6 +257,10 @@ app-movie {
     iframe {
         display: block;
         margin: .625rem auto;
+
+        @media only screen and (max-width: 731px) {
+            width: 100%;
+        }
     }
     .mat-card {
         &-header, &-content, &-actions {
@@ -318,8 +322,10 @@ app-playlist {
         }
 
         h3 {
+            flex: 1;
             margin: 0 10px;
             color: #000;
+            text-align: left;
         }
 
         a {

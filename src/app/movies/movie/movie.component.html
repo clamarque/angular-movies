@@ -29,7 +29,7 @@
       <div class="genre">
         <ul *ngFor="let genre of movie.genres; let i=index">
           <li *ngIf="i < 3">
-            <a [routerLink]="['/genre', {id: genre.id, name: genre.name}]"> {{genre.name}}</a>
+            <a [routerLink]="['/movies/genre', {id: genre.id, name: genre.name}]"> {{genre.name}}</a>
           </li>
         </ul>
       </div>
