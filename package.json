@@ -29,6 +29,7 @@
     "@angular/platform-browser-dynamic": "5.2.6",
     "@angular/router": "5.2.6",
     "@angular/service-worker": "5.2.6",
+    "angular-calendar": "0.22.1",
     "angularfire2": "^5.0.0-rc.6",
     "code-point-at": "^1.1.0",
     "core-js": "^2.5.3",

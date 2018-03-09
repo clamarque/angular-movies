@@ -2,8 +2,13 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500);
 @import 'assets/scss/custom_theme';
 @import 'assets/scss/palette';
-* {
+
+html {
     box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
 }
 html,
 body {
@@ -153,12 +158,25 @@ md-card-header .mat-card-header-text {
     }
 }
 .app-icon-button {
-    padding: 1.25rem;
+    margin: 1.25rem;
     cursor: pointer;
     border: none;
     outline: none;
     background-color: transparent;
     color: $white;
+}
+
+.btn-back {
+    margin: 20px -20px 0 10px;
+    border: none;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    vertical-align: top;
+
+    &:focus, &:active {
+        outline: none;
+    }
 }
 md-sidenav-container {
     height: 100%;
@@ -252,6 +270,34 @@ app-movie {
         }
         &-teal {
             color: #009688
+        }
+    }
+    .mat-list {
+        width: 100%;
+        background: transparent;
+
+        &-item:hover {
+            background: #9E9E9E;
+            
+            h3 {
+                color: white;
+            }
+        }
+
+        h3 {
+            flex: 1;
+            margin: 0 10px;
+            color: $primary-light;
+            text-align: left;
+        }
+
+        a {
+            display: inherit;
+            align-items: center;
+            flex: 1;
+        }
+        p {
+            color: #9E9E9E;
         }
     }
     iframe {

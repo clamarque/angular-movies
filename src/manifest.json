@@ -1,6 +1,7 @@
 {
     "name": "Movie Time",
     "short_name": "MovieTime",
+    "description": "a movie manager",
     "icons": [
         {
             "src": "assets/icons/android-chrome-192x192.png",
@@ -18,9 +19,9 @@
             "type": "image\/png"
         }
     ],
-    "theme_color": "#F83745",
-    "background_color": "#FFFFFF",
+    "start_url": "index.html",
     "display": "standalone",
     "orientation": "portrait",
-    "start_url": "./?utm_source=web_app_manifest"
+    "background_color": "#FFFFFF",
+    "theme_color": "#F83745"
 }

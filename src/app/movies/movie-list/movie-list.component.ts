@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { DatabaseService } from '../../shared/database/database.service';
 import { TmdbService } from '../../shared/tmdb/tmdb.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-movie-list',
@@ -21,7 +22,7 @@ export class MovieListComponent implements OnInit {
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
   isLoadingResults = true;
 
-  constructor(private tmdbService: TmdbService, private route: ActivatedRoute) { }
+  constructor(private tmdbService: TmdbService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
   swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT) {
     if (action === this.SWIPE_ACTION.RIGHT || action === this.SWIPE_ACTION.LEFT) {
@@ -47,8 +48,11 @@ export class MovieListComponent implements OnInit {
     if (typeof param === 'number') {
       this.request = this.tmdbService.getGenreMovie(param, this.currentPage);
     }
-
-    this.request.subscribe(response => this.movies = response);
+    if (!navigator.onLine) {
+      this.snackBar.open('Sorry, you\'re offline', null, { duration: 5000});
+    } else {
+      this.request.subscribe(response => this.movies = response);
+    }
   }
 
   ngOnInit() {

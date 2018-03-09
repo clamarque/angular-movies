@@ -36,7 +36,7 @@ export class MovieComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private snackbar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private tmdbService: TmdbService) { }
 
   swipe(action = this.SWIPE_ACTION.RIGHT) {
@@ -48,9 +48,9 @@ export class MovieComponent implements OnInit {
   saveMovie(movie: any, category: string) {
     this.databaseService.setMovies(movie, category, (error) => {
       if (error) {
-        this.snackbar.open(error, 'Hide', { duration: 10000 });
+        this.snackBar.open(error, 'Hide', { duration: 10000 });
       } else {
-        this.snackbar.open('Your movie was been save', '', { duration: 5000 });
+        this.snackBar.open('Your movie was been save', '', { duration: 5000 });
       }
     });
   }
