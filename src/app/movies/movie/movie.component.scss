@@ -1,3 +1,5 @@
+@import '../../../assets/scss/palette';
+
 app-movie {
     position: relative;
 }
@@ -12,4 +14,114 @@ app-movie {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.movie-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    padding: 20px;
+    // height: 50vh;
+    background-position: top;
+    background-size: cover;
+    color: white;
+    text-align: left;
+
+    .movie {
+
+        &__head {
+            display: inherit;
+            .btn-back {
+                border: none;
+                background: transparent;
+                color: white;
+                cursor: pointer;
+            }
+            h1 {
+                color: white;
+                text-align: left !important;
+            }
+        }
+        &__body {
+            .mat {
+                &-green {
+                    color: #4caf50
+                }
+                &-orange {
+                    color: rgb(255, 87, 34);
+                }
+                &-red {
+                    color: #f44336;
+                }
+                &-yellow {
+                    color: #ffc107;
+                }
+                &-teal {
+                    color: #009688
+                }
+            }
+            .movie {
+                &--overview {
+                    font-weight: 500;
+                    text-align: justify;
+                }
+                &--genre {
+                    ul {
+                        display: inline-block;
+                        padding: 0 5px 0 0;
+                    }
+                }
+            }
+        }
+
+        &__footer {
+            .movie {
+                &--cast {
+                    a.mat-list-item {
+                        &:hover {
+                            background: rgba(192, 138, 138, 0.1);
+                        }
+                    }
+                    .icon-container {
+                        border: 1px solid $primary-light;
+                        line-height: 2;
+                    
+                        .icon-person {
+                            color: $primary-light;
+                        }
+                    }
+                }
+                &--trailer {
+                    margin: 30px 0 0;
+
+                    iframe {
+                        display: block;
+                        margin: .625rem auto;
+                    
+                        @media only screen and (max-width: 731px) {
+                            width: 100%;
+                        }
+                    }
+                }
+                &--similar {
+                    [alt="poster movie"] {
+                        height: 278px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/deep/ .mat-list-text {
+    h3 {
+        color: $primary-light;
+        text-align: left;
+    }
+
+    p {
+        color: $grey;
+        text-align: left;
+    }
 }

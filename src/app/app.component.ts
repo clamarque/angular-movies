@@ -3,7 +3,6 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './shared/auth/auth.service';
 import { StorageService } from './shared/storage/storage.service';
-import { Location } from '@angular/common';
 // import { SwUpdate } from '@angular/service-worker';
 
 @Component({
@@ -22,7 +21,6 @@ export class AppComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
-        private location: Location,
         private router: Router,
         private snackbar: MatSnackBar,
         private storageService: StorageService,
@@ -76,10 +74,5 @@ export class AppComponent implements OnInit {
                 console.log('connected:', authStatus);
                 authStatus === true ? this.isConnected = true : this.isConnected = false;
             });
-    }
-
-    back() {
-        console.log('location?', this.location);
-        this.location.back();
     }
 }

@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { CastMovieModel } from '../../movies/shared/cast-movie.model';
 import { StorageService } from '../../shared/storage/storage.service';
+import { MovieCreditsModel } from '../../movies/shared/movie-credits.model';
+import { MovieVideosModel } from '../../movies/shared/movie-videos.model';
+import { MovieSimilarModel } from '../../movies/shared/movie-similar.model';
 
 @Injectable()
 export class TmdbService {
@@ -37,17 +39,17 @@ export class TmdbService {
   getMovieDiscover(page: number) {
     return this.http.get(`${this.url_discover}?api_key=${this.api_key}&language=${this.lang}&sort_by=popularity.desc&page=${page}`);
   }
-  getCastMovie(code: number) {
-    return this.http.get(`${this.url_movie}${code}/credits?api_key=${this.api_key}`)
+  getCastMovie(code: number): Observable<MovieCreditsModel> {
+    return this.http.get<MovieCreditsModel>(`${this.url_movie}${code}/credits?api_key=${this.api_key}`)
   }
-  getVideoMovie(code: number) {
-    return this.http.get(`${this.url_movie}${code}/videos?api_key=${this.api_key}&language=${this.lang}`);
+  getVideoMovie(code: number): Observable<MovieVideosModel> {
+    return this.http.get<MovieVideosModel>(`${this.url_movie}${code}/videos?api_key=${this.api_key}&language=${this.lang}`);
   }
   getGenreMovie(code: number, page: number) {
     return this.http.get(`${this.url_genre}${code}/movies?api_key=${this.api_key}&language=${this.lang}&page=${page}`);
   }
-  getSimilarMovies(code: number) {
-    return this.http.get(`${this.url_movie}${code}/similar?api_key=${this.api_key}&language=${this.lang}`);
+  getSimilarMovies(code: number): Observable<MovieSimilarModel> {
+    return this.http.get<MovieSimilarModel>(`${this.url_movie}${code}/similar?api_key=${this.api_key}&language=${this.lang}`);
   }
   getUpComing(page: number) {
     return this.http.get(`${this.url_movie}upcoming?api_key=${this.api_key}&language=${this.lang}&page=${page}`);

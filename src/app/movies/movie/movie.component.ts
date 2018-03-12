@@ -8,9 +8,12 @@ import { AuthService } from '../../shared/auth/auth.service';
 import { TmdbService } from '../../shared/tmdb/tmdb.service';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
-import { CastModel } from '../shared/cast.model';
-import { CastMovieModel } from '../shared/cast-movie.model';
 import { VideoMovieModel } from '../shared/video-movie.model';
+import { MovieCastModel } from '../shared/movie-cast.model';
+import { MovieCrewModel } from '../shared/movie-crew.model';
+import { MovieVideosModel } from '../shared/movie-videos.model';
+import { MovieSimilarModel } from '../shared/movie-similar.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-movie',
@@ -23,16 +26,19 @@ export class MovieComponent implements OnInit {
   movie: Object;
   videos: Array<Object>;
   similarMovies: Array<Object>;
-  cast: Array<Object>;
+  cast: MovieCastModel[];
+  crew: MovieCrewModel[];
   isConnected = false;
   baseUrl = 'https://www.youtube.com/embed/';
   safeUrl: any;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
   isLoadingResults = false;
+  test: any;
 
   constructor(
     private authService: AuthService,
     private databaseService: DatabaseService,
+    private location: Location,
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
@@ -69,15 +75,17 @@ export class MovieComponent implements OnInit {
       const videoMovie = this.tmdbService.getVideoMovie(this.id);
       const similarVideo = this.tmdbService.getSimilarMovies(this.id);
 
-      forkJoin(dataMovie, castMovie, videoMovie, similarVideo).subscribe(results => {
+      forkJoin(dataMovie, castMovie, videoMovie, similarVideo).subscribe(([movie, cast, video, similar]) => {
+        console.log(movie);
         this.isLoadingResults = false;
-        this.movie = results[0];
-        this.cast = results[1]['cast'].slice(0, 9);
-        this.videos = results[2]['results'].slice(0, 1);
+        this.movie = movie;
+        this.cast = cast.cast.slice(0, 10);
+
+        this.videos = video.results.slice(0, 1);
         if (this.videos.length > 0) {
           this.getMovieVideoUrl(this.videos[0]['key'])
         }
-        this.similarMovies = results[3]['results'].slice(0, 9);
+        this.similarMovies = similar.results;
       })
     })
 
@@ -86,4 +94,8 @@ export class MovieComponent implements OnInit {
         authStatus === true ? this.isConnected = true : this.isConnected = false;
       });
   }
+
+  back() {
+    this.location.back();
+}
 }

@@ -105,7 +105,7 @@ md-card-header .mat-card-header-text {
 /* Container principal */
 
 [id="hub-movies"] {
-    margin: 1rem;
+    // margin: 1rem;
     text-align: center;
 }
 /* Navigation */
@@ -166,14 +166,7 @@ md-card-header .mat-card-header-text {
     color: $white;
 }
 
-.btn-back {
-    margin: 20px -20px 0 10px;
-    border: none;
-    background: transparent;
-    color: white;
-    cursor: pointer;
-    vertical-align: top;
-
+a, button {
     &:focus, &:active {
         outline: none;
     }
@@ -236,117 +229,7 @@ h1.mat-dialog-title {
         color: $disable;
     }
 }
-/* Movie */
 
-app-movie {
-    .genre {
-        display: block;
-        ul {
-            display: inline-block;
-            padding: 0 .325rem 0 0;
-        }
-    }
-    section {
-        h3 {
-            margin: .625rem 0 0;
-            color: inherit;
-        }
-    }
-    [id="trailer"] {
-        margin: 30px 0 0;
-    }
-    .mat {
-        &-green {
-            color: #4caf50
-        }
-        &-orange {
-            color: rgb(255, 87, 34);
-        }
-        &-red {
-            color: #f44336;
-        }
-        &-yellow {
-            color: #ffc107;
-        }
-        &-teal {
-            color: #009688
-        }
-    }
-    .mat-list {
-        width: 100%;
-        background: transparent;
-
-        &-item:hover {
-            background: #9E9E9E;
-            
-            h3 {
-                color: white;
-            }
-        }
-
-        h3 {
-            flex: 1;
-            margin: 0 10px;
-            color: $primary-light;
-            text-align: left;
-        }
-
-        a {
-            display: inherit;
-            align-items: center;
-            flex: 1;
-        }
-        p {
-            color: #9E9E9E;
-        }
-    }
-    iframe {
-        display: block;
-        margin: .625rem auto;
-
-        @media only screen and (max-width: 731px) {
-            width: 100%;
-        }
-    }
-    .mat-card {
-        &-header, &-content, &-actions {
-            text-align: left;
-        }
-        &-title {
-            margin: 1rem 0;
-            font-size: 1.5rem !important;
-        }
-        &-subtitle {
-            color: inherit;
-        }
-        &-subtitle,
-        &-content {
-            font-size: inherit !important;
-        }
-    }
-    [alt="backdrop movie"] {
-        @media (min-width: 600px) {
-            width: 100%;
-        }
-    }
-    [alt="profile"] {
-        @media (min-width: 600px) {
-            width: 100%;
-        }
-    }
-    [alt="No profile available"] {
-        width: 185px;
-        height: 277px;
-    }
-    [alt="poster movie"] {
-        height: 278px;
-    }
-    [id=cast] {
-        p {
-            color: #9E9E9E;
-        }
-    }
-}
 /* Playlist */
 
 app-playlist {
