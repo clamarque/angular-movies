@@ -27,6 +27,8 @@ export class DatabaseService {
     .update({
       'watched': watched
     })
+    .then(success => callback())
+    .catch(err => callback(err));
   }
 
   setMovies(movie: any, category: string, callback: any) {
@@ -46,10 +48,7 @@ export class DatabaseService {
 
     return this.dbf.doc(`${category}/${this.uid}_${movie.id}`)
       .set(movieDetails)
-      .then(success => {
-        // this.dbf.doc(`History/${this.uid}_${movie.id}`).set(movieDetails)
-        callback()
-      })
+      .then(success => callback())
       .catch(err => callback(err));
   }
 

@@ -45,7 +45,7 @@ export class MovieComponent implements OnInit {
 
   swipe(action = this.SWIPE_ACTION.RIGHT) {
     if (action === this.SWIPE_ACTION.RIGHT || action === this.SWIPE_ACTION.LEFT) {
-      window.history.back();
+      this.location.back();
     }
   }
 

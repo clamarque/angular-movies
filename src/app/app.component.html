@@ -23,14 +23,11 @@
           <a [routerLink]="['/playlist', 'MovieLater']" routerLinkActive="active" (click)="end.close()">
             <mat-icon>watch_later</mat-icon> Watch later</a>
         </li>
+        <!--
         <li [hidden]="!isConnected">
           <a [routerLink]="['/playlist', 'FavoriteMovie']" routerLinkActive="active" (click)="end.close()">
             <mat-icon>star</mat-icon> Favorites</a>
-        </li>
-        <li [hidden]="!isConnected">
-          <a routerLink="/history" routerLinkActive="active" (click)="end.close()">
-            <mat-icon>history</mat-icon> History</a>
-        </li>
+        </li> -->
         <li [hidden]="!isConnected">
           <a routerLink="/profile" routerLinkActive="active" (click)="end.close()">
             <mat-icon>account_circle</mat-icon> Profil</a>

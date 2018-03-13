@@ -41,11 +41,8 @@ export class PlaylistComponent implements OnInit, OnDestroy {
         this.sub = this.route.paramMap
             .switchMap((params: ParamMap) => this.databaseService.getMovies(params.get('category')))
             .subscribe(response => {
-                console.log(response);
                 this.moviesToWatch = response.filter(val => val['watched'] === false);
-                console.log(this.moviesToWatch);
                 this.moviesWatched = response.filter(val => val['watched'] === true);
-                console.log(this.moviesWatched);
                 this.isLoadingResults = false;
             });
     }
@@ -55,12 +52,11 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     }
 
     watchedMovie(movieId: any, watched: boolean) {
-        console.log(movieId);
         this.databaseService.updateMovie(movieId, watched, (error) => {
             if (error) {
                 this.snackBar.open(error, 'Hide', { duration: 10000 });
               } else {
-                this.snackBar.open('Your movie was been save', '', { duration: 5000 });
+                this.snackBar.open('Your movie was been update', null, { duration: 5000 });
               }
         })
       }

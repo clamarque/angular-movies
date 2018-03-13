@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatProgressSpinnerModule, MatIconModule, MatMenuModule, MatListModule, MatSnackBarModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatIconModule, MatMenuModule, MatListModule, MatSnackBarModule, MatTabsModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { PlaylistComponent } from './playlist.component';
@@ -33,6 +33,7 @@ describe('PlaylistComponent', () => {
         MatListModule,
         MatMenuModule,
         MatProgressSpinnerModule,
+        MatTabsModule,
         MatSnackBarModule,
         RouterTestingModule
       ],
