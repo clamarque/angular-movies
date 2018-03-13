@@ -10,7 +10,7 @@
         <ng-container cdkColumnDef="poster_path">
             <mat-header-cell *cdkHeaderCellDef></mat-header-cell>
             <mat-cell *cdkCellDef="let row">
-                <a [routerLink]="['/movie', row.id]">
+                <a [routerLink]="['/movies/movie', row.id]">
                     <img src="https://image.tmdb.org/t/p/w45/{{row.poster_path}}" alt="poster movie">
                 </a>
             </mat-cell>
@@ -19,7 +19,7 @@
         <ng-container cdkColumnDef="original_title">
             <mat-header-cell *cdkHeaderCellDef> Title </mat-header-cell>
             <mat-cell *cdkCellDef="let row">
-                <a [routerLink]="['/movie', row.id]">{{row.original_title}}</a>
+                <a [routerLink]="['/movies/movie', row.id]">{{row.original_title}}</a>
             </mat-cell>
         </ng-container>
 

@@ -1,23 +1,21 @@
-<section *ngIf="person">
+<div class="person">
+  <button class="btn-back" (click)="back()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <section *ngIf="person">
     <img class="img_profile" src="https://image.tmdb.org/t/p/w185/{{person.profile_path}}" alt="profile">
     <h1>{{person.name}}</h1>
     <p>{{person.birthday | date}}</p>
     <p>{{person.biography}}</p>
   </section>
-  <!--
-  <h2>Known for</h2>
-  <section class="items" *ngIf="movies">
-    <div class="item" *ngFor="let movie of movies">
-  
-    </div>
-  </section>
-  -->
+
   <mat-tab-group>
     <mat-tab label="Known in movies for">
       <section class="items" *ngIf="movies">
         <div class="item" *ngFor="let movie of movies">
           <a [routerLink]="['/movies/movie', movie.id]">
-            <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w185/{{movie.poster_path}}" alt="poster movie">
+            <img *ngIf="movie.poster_path" [defaultImage]="'assets/images/no_poster_available.jpg'" [lazyLoad]="'https://image.tmdb.org/t/p/w185/' + movie.poster_path"
+              alt="poster movie">
             <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available"
               width="185">
             <p>{{movie.title}}</p>
@@ -29,7 +27,8 @@
     <mat-tab label="Known in TV for">
       <section class="items" *ngIf="tv_credits">
         <div class="item" *ngFor="let tv of tv_credits">
-          <img *ngIf="tv.poster_path" src="https://image.tmdb.org/t/p/w185/{{tv.poster_path}}" alt="poster movie">
+          <img *ngIf="tv.poster_path" [defaultImage]="'assets/images/no_poster_available.jpg'" [lazyLoad]="'https://image.tmdb.org/t/p/w185/' + tv.poster_path"
+            alt="poster movie">
           <img *ngIf="!tv.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
           <p>{{tv.name}}</p>
           <p>{{tv.character}}</p>
@@ -37,3 +36,4 @@
       </section>
     </mat-tab>
   </mat-tab-group>
+</div>

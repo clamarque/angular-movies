@@ -2,31 +2,71 @@
     <div class="loading-shade" *ngIf="isLoadingResults">
         <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     </div>
-    <mat-list *ngIf="movies">
-        <mat-list-item *ngFor="let movie of movies">
-            <a [routerLink]="['/movie', movie.movieId]">
-                <img matListAvatar *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie">
-                <img matListAvatar *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
-                <h3>{{movie.original_title}}</h3>
-                <p>{{movie.release_date | date}}</p>
-            </a>
-            <div class="actions">
-                <button mat-icon-button [matMenuTriggerFor]="menu">
-                    <mat-icon>share</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                    <a mat-menu-item href="https://plus.google.com/share?url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}"
-                        onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                        Google +
+    <mat-tab-group>
+        <mat-tab label="TO WATCH">
+            <mat-list *ngIf="moviesToWatch">
+                <mat-list-item *ngFor="let movie of moviesToWatch">
+                    <a [routerLink]="['/movies/movie', movie.movieId]">
+                        <img matListAvatar *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie">
+                        <img matListAvatar *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+                        <h3>{{movie.original_title}}</h3>
+                        <p>{{movie.release_date | date}}</p>
                     </a>
-                    <a mat-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}">Facebook</a>
-                    <a mat-menu-item href="https://twitter.com/intent/tweet?text={{movie.original_title}}%20on%20&url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}&hashtags=hubmovies, {{movie.original_title}}">Twitter</a>
-                    <a mat-menu-item href="mailto:?subject={{movie.original_title}} on Hubmovies&body=Discovers the movie on https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}">Email</a>
-                </mat-menu>
-                <button mat-button (click)="deleteMovie(movie.movieId)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </div>
-        </mat-list-item>
-    </mat-list>
+                    <div class="actions">
+                        <button mat-icon-button [matMenuTriggerFor]="menu">
+                            <mat-icon>share</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <a mat-menu-item href="https://plus.google.com/share?url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}"
+                                onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                Google +
+                            </a>
+                            <a mat-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}">Facebook</a>
+                            <a mat-menu-item href="https://twitter.com/intent/tweet?text={{movie.original_title}}%20on%20&url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}&hashtags=hubmovies, {{movie.original_title}}">Twitter</a>
+                            <a mat-menu-item href="mailto:?subject={{movie.original_title}} on Hubmovies&body=Discovers the movie on https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}">Email</a>
+                        </mat-menu>
+                        <button mat-icon-button (click)="deleteMovie(movie.movieId)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="watchedMovie(movie.movieId, true)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </mat-tab>
+        <mat-tab label="WATCHED">
+            <mat-list *ngIf="moviesWatched">
+                <mat-list-item *ngFor="let movie of moviesWatched">
+                    <a [routerLink]="['/movies/movie', movie.movieId]">
+                        <img matListAvatar *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie">
+                        <img matListAvatar *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+                        <h3>{{movie.original_title}}</h3>
+                        <p>{{movie.release_date | date}}</p>
+                    </a>
+                    <div class="actions">
+                        <button mat-icon-button [matMenuTriggerFor]="menu">
+                            <mat-icon>share</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <a mat-menu-item href="https://plus.google.com/share?url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}"
+                                onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                Google +
+                            </a>
+                            <a mat-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}">Facebook</a>
+                            <a mat-menu-item href="https://twitter.com/intent/tweet?text={{movie.original_title}}%20on%20&url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}&hashtags=hubmovies, {{movie.original_title}}">Twitter</a>
+                            <a mat-menu-item href="mailto:?subject={{movie.original_title}} on Hubmovies&body=Discovers the movie on https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}">Email</a>
+                        </mat-menu>
+                        <button mat-icon-button (click)="deleteMovie(movie.movieId)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="watchedMovie(movie.movieId, false)">
+                            <mat-icon>visibility_off</mat-icon>
+                        </button>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+
+        </mat-tab>
+    </mat-tab-group>
 </div>

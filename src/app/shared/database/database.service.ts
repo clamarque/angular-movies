@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import * as firebase from 'firebase';
+import { Observable } from '@firebase/util';
+import { MovieCategoryModel } from '../../playlist/shared/movie-category.model';
 
 @Injectable()
 export class DatabaseService {
@@ -20,6 +22,13 @@ export class DatabaseService {
     ).valueChanges()
   }
 
+  updateMovie(movieId: number, watched: boolean, callback: any) {
+    this.dbf.doc(`MovieLater/${this.uid}_${movieId}`)
+    .update({
+      'watched': watched
+    })
+  }
+
   setMovies(movie: any, category: string, callback: any) {
     const movieDetails = {
       userId: this.uid,
@@ -31,13 +40,14 @@ export class DatabaseService {
       release_date: movie.release_date,
       poster_path: movie.poster_path,
       category: category,
-      status: movie.status
+      status: movie.status,
+      watched: false
     }
 
     return this.dbf.doc(`${category}/${this.uid}_${movie.id}`)
       .set(movieDetails)
       .then(success => {
-        this.dbf.doc(`History/${this.uid}_${movie.id}`).set(movieDetails)
+        // this.dbf.doc(`History/${this.uid}_${movie.id}`).set(movieDetails)
         callback()
       })
       .catch(err => callback(err));
@@ -51,7 +61,7 @@ export class DatabaseService {
   }
 
   deleteDatafromUser() {
-  // waiting fea from firebase
+  // waiting feature from firebase
   }
 
 }

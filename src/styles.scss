@@ -230,40 +230,6 @@ h1.mat-dialog-title {
     }
 }
 
-/* Playlist */
-
-app-playlist {
-    position: relative;
-    [alt="poster movie"] {
-        width: 100%;
-    }
-
-    .mat-list {
-        width: 100%;
-        background: white;
-
-        &-item:hover {
-            background: #9E9E9E;
-            
-            h3 {
-                color: white;
-            }
-        }
-
-        h3 {
-            flex: 1;
-            margin: 0 10px;
-            color: #000;
-            text-align: left;
-        }
-
-        a {
-            display: inherit;
-            align-items: center;
-            flex: 1;
-        }
-    }
-}
 /* Sign in */
 
 app-sign-in {
@@ -289,21 +255,6 @@ app-sign-in {
         height: 24px;
         width: 24px;
         margin: 0 10px 0 -6px;
-    }
-}
-/* Star */
-
-app-star {
-    .img_profile {
-        width: auto;
-    }
-    section:first-child {
-        p {
-            color: $white;
-        }
-    }
-    md-tab-group p:nth-child(3) {
-        color: #9E9E9E;
     }
 }
 

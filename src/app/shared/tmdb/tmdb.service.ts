@@ -3,18 +3,22 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { StorageService } from '../../shared/storage/storage.service';
+
+import { MovieDetailsModel } from '../../movies/shared/movie-details.model';
+import { MovieCategoryModel } from '../../movies/shared/movie-category.model';
 import { MovieCreditsModel } from '../../movies/shared/movie-credits.model';
+import { MoviePersonModel } from '../../movies/shared/movie-person.model';
 import { MovieVideosModel } from '../../movies/shared/movie-videos.model';
-import { MovieSimilarModel } from '../../movies/shared/movie-similar.model';
+import { TvCreditsModel } from '../../movies/shared/tv-credits.model';
 
 @Injectable()
 export class TmdbService {
   private api_key = '431bc17da732dfb3be082e58f7a5cf27';
   private url_discover = 'https://api.themoviedb.org/3/discover/movie';
   private url_search = 'https://api.themoviedb.org/3/search/movie';
-  private url_movie = 'https://api.themoviedb.org/3/movie/';
-  private url_person = 'https://api.themoviedb.org/3/person/';
-  private url_genre = 'https://api.themoviedb.org/3/genre/';
+  private url_movie = 'https://api.themoviedb.org/3/movie';
+  private url_person = 'https://api.themoviedb.org/3/person';
+  private url_genre = 'https://api.themoviedb.org/3/genre';
 
   private lang = this.storageService.read('language');
 
@@ -27,41 +31,45 @@ export class TmdbService {
       case 'discover': return this.getMovieDiscover(page);
     }
   }
-  getSearchMovie(name: string, page: number) {
-    return this.http.get(`${this.url_search}?api_key=${this.api_key}&language=${this.lang}&query=${name}&page=${page}`);
+  getSearchMovie(name: string, page: number): Observable<MovieCategoryModel> {
+    return this.http.get<MovieCategoryModel>(`${this.url_search}?api_key=${this.api_key}&language=${this.lang}&query=${name}&page=${page}`);
   }
-  getNowPlaying(page: number) {
-    return this.http.get(`${this.url_movie}now_playing?api_key=${this.api_key}&language=${this.lang}&page=${page}`);
+  getNowPlaying(page: number): Observable<MovieCategoryModel> {
+    return this.http.get<MovieCategoryModel>(`${this.url_movie}/now_playing?api_key=${this.api_key}&language=${this.lang}&page=${page}`);
   }
-  getDetailsMovie(code: number) {
-    return this.http.get(`${this.url_movie}${code}?api_key=${this.api_key}&language=${this.lang}`);
+  getDetailsMovie(movie_id: number): Observable<MovieDetailsModel> {
+    return this.http.get<MovieDetailsModel>(`${this.url_movie}/${movie_id}?api_key=${this.api_key}&language=${this.lang}`);
   }
-  getMovieDiscover(page: number) {
-    return this.http.get(`${this.url_discover}?api_key=${this.api_key}&language=${this.lang}&sort_by=popularity.desc&page=${page}`);
+  getMovieDiscover(page: number): Observable<MovieCategoryModel> {
+    return this.http.get<MovieCategoryModel>(`
+      ${this.url_discover}?api_key=${this.api_key}&language=${this.lang}&sort_by=popularity.desc&page=${page}
+    `);
   }
-  getCastMovie(code: number): Observable<MovieCreditsModel> {
-    return this.http.get<MovieCreditsModel>(`${this.url_movie}${code}/credits?api_key=${this.api_key}`)
+  getCastMovie(movie_id: number): Observable<MovieCreditsModel> {
+    return this.http.get<MovieCreditsModel>(`${this.url_movie}/${movie_id}/credits?api_key=${this.api_key}`)
   }
-  getVideoMovie(code: number): Observable<MovieVideosModel> {
-    return this.http.get<MovieVideosModel>(`${this.url_movie}${code}/videos?api_key=${this.api_key}&language=${this.lang}`);
+  getVideoMovie(movie_id: number): Observable<MovieVideosModel> {
+    return this.http.get<MovieVideosModel>(`${this.url_movie}/${movie_id}/videos?api_key=${this.api_key}&language=${this.lang}`);
   }
-  getGenreMovie(code: number, page: number) {
-    return this.http.get(`${this.url_genre}${code}/movies?api_key=${this.api_key}&language=${this.lang}&page=${page}`);
+  getGenreMovie(genre_id: number, page: number): Observable<MovieCategoryModel> {
+    return this.http.get<MovieCategoryModel>(`
+      ${this.url_genre}/${genre_id}/movies?api_key=${this.api_key}&language=${this.lang}&page=${page}
+    `);
   }
-  getSimilarMovies(code: number): Observable<MovieSimilarModel> {
-    return this.http.get<MovieSimilarModel>(`${this.url_movie}${code}/similar?api_key=${this.api_key}&language=${this.lang}`);
+  getSimilarMovies(movie_id: number): Observable<MovieCategoryModel> {
+    return this.http.get<MovieCategoryModel>(`${this.url_movie}/${movie_id}/similar?api_key=${this.api_key}&language=${this.lang}`);
   }
-  getUpComing(page: number) {
-    return this.http.get(`${this.url_movie}upcoming?api_key=${this.api_key}&language=${this.lang}&page=${page}`);
+  getUpComing(page: number): Observable<MovieCategoryModel> {
+    return this.http.get<MovieCategoryModel>(`${this.url_movie}/upcoming?api_key=${this.api_key}&language=${this.lang}&page=${page}`);
   }
-  getPerson(code: number) {
-    return this.http.get(`${this.url_person}${code}?api_key=${this.api_key}&language=${this.lang}`);
+  getPerson(person_id: number): Observable<MoviePersonModel> {
+    return this.http.get<MoviePersonModel>(`${this.url_person}/${person_id}?api_key=${this.api_key}&language=${this.lang}`);
   }
-  getPersonMovies(code: number) {
-    return this.http.get(`${this.url_person}${code}/movie_credits?api_key=${this.api_key}&language=${this.lang}`);
+  getPersonMovies(person_id: number): Observable<MovieCreditsModel> {
+    return this.http.get<MovieCreditsModel>(`${this.url_person}/${person_id}/movie_credits?api_key=${this.api_key}&language=${this.lang}`);
   }
-  getPersonTv(code: number) {
-    return this.http.get(`${this.url_person}${code}/tv_credits?api_key=${this.api_key}&language=${this.lang}`);
+  getPersonTv(person_id: number): Observable<TvCreditsModel> {
+    return this.http.get<TvCreditsModel>(`${this.url_person}/${person_id}/tv_credits?api_key=${this.api_key}&language=${this.lang}`);
   }
   getPager(totalItems: number, currentPage: number = 1) {
     const totalPages = totalItems;

@@ -3,6 +3,10 @@ import { ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { DatabaseService } from '../../shared/database/database.service';
 import { TmdbService } from '../../shared/tmdb/tmdb.service';
 import { MatSnackBar } from '@angular/material';
+import { MovieModel } from '../shared/movie.model';
+
+import * as moment from 'moment';
+import { MovieCategoryModel } from '../shared/movie-category.model';
 
 @Component({
   selector: 'app-movie-list',
@@ -13,7 +17,7 @@ export class MovieListComponent implements OnInit {
   request: any;
   dataTitle: any;
   dataParam: any;
-  movies: Object;
+  movies: MovieModel[];
   currentPage: number;
   parameter: any;
   pager: any = {};
@@ -51,7 +55,13 @@ export class MovieListComponent implements OnInit {
     if (!navigator.onLine) {
       this.snackBar.open('Sorry, you\'re offline', null, { duration: 5000});
     } else {
-      this.request.subscribe(response => this.movies = response);
+      this.request.subscribe(response => {
+        if (param === 'upcoming') {
+          this.movies = response.results.filter(val => moment(val.release_date).isAfter(moment().startOf('year')));
+        } else {
+          this.movies = response.results;
+        }
+      });
     }
   }
 
@@ -76,7 +86,7 @@ export class MovieListComponent implements OnInit {
         this.request.subscribe(response => {
           this.isLoadingResults = false;
           this.title = this.parameter;
-          this.totalPages = response.total_pages;
+          this.totalPages = response.totalPages;
           this.setPage(this.parameter, 1);
         });
       }

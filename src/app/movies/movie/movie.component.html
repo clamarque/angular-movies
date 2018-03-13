@@ -3,7 +3,7 @@
 </div>
 <ng-template [ngIf]="!isLoadingResults">
 
-  <div class="movie-container" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" *ngIf="movie" [ngStyle]="{
+  <div class="movie" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" *ngIf="movie" [ngStyle]="{
   'background-image': 'linear-gradient(to right, rgba(25,28,31, 1), rgba(25,28,31,0.2)), url('+'https://image.tmdb.org/t/p/original'+movie.backdrop_path+')'}">
 
     <div class="movie__head">
@@ -38,7 +38,7 @@
         </ul>
       </div>
       <p class="movie--overview">{{movie.overview}}</p>
-      <div [hidden]="isConnected">
+      <div [hidden]="!isConnected">
         <button mat-button (click)="saveMovie(movie, 'MovieLater')">
           <mat-icon class="mat-teal">watch_later</mat-icon> Watch later</button>
         <button mat-button (click)="saveMovie(movie, 'FavoriteMovie')">
@@ -46,18 +46,14 @@
       </div>
     </div>
   </div>
-  <mat-tab-group class="movie__footer">
+  <mat-tab-group class="movie__tab">
     <mat-tab label="Cast">
       <section class="movie--cast" *ngIf="cast">
         <mat-nav-list *ngFor="let person of cast">
           <a mat-list-item [routerLink]="['/star', person.id]">
-            <span class="icon-container" matListAvatar >
+            <div class="icon-container" matListAvatar [ngStyle]="{'background-image': 'url('+'https://image.tmdb.org/t/p/original'+person.profile_path+')'}">
               <mat-icon *ngIf="!person.profile_path" class="icon-person">person</mat-icon>
-              <span *ngIf="person.profile_path"  [ngStyle]="{ 'background-image': 'url('+'https://image.tmdb.org/t/p/w45'+person.profile_path+')'}">
-              </span>
-            </span>
-
-            <!--<img matListAvatar *ngIf="person.profile_path" src="https://image.tmdb.org/t/p/w45/{{person.profile_path}}" alt="profile"> -->
+            </div>
             <h3 matLine>{{person.name}}</h3>
             <p matLine>{{person.character}}</p>
           </a>

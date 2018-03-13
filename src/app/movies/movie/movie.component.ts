@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap, Router, Event as NavigationEvent } from '@angular/router';
-import 'rxjs/add/operator/switchMap';
 import { DatabaseService } from '../../shared/database/database.service';
 import { AuthService } from '../../shared/auth/auth.service';
 import { TmdbService } from '../../shared/tmdb/tmdb.service';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
-import { VideoMovieModel } from '../shared/video-movie.model';
 import { MovieCastModel } from '../shared/movie-cast.model';
 import { MovieCrewModel } from '../shared/movie-crew.model';
 import { MovieVideosModel } from '../shared/movie-videos.model';
-import { MovieSimilarModel } from '../shared/movie-similar.model';
 import { Location } from '@angular/common';
+import { MovieModel } from '../shared/movie.model';
+import { MovieDetailsModel } from '../shared/movie-details.model';
 
 @Component({
   selector: 'app-movie',
@@ -23,9 +22,9 @@ import { Location } from '@angular/common';
 export class MovieComponent implements OnInit {
   id: number;
   url: string;
-  movie: Object;
+  movie: MovieDetailsModel;
   videos: Array<Object>;
-  similarMovies: Array<Object>;
+  similarMovies: MovieModel[];
   cast: MovieCastModel[];
   crew: MovieCrewModel[];
   isConnected = false;
@@ -33,7 +32,6 @@ export class MovieComponent implements OnInit {
   safeUrl: any;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
   isLoadingResults = false;
-  test: any;
 
   constructor(
     private authService: AuthService,
@@ -75,15 +73,13 @@ export class MovieComponent implements OnInit {
       const videoMovie = this.tmdbService.getVideoMovie(this.id);
       const similarVideo = this.tmdbService.getSimilarMovies(this.id);
 
-      forkJoin(dataMovie, castMovie, videoMovie, similarVideo).subscribe(([movie, cast, video, similar]) => {
-        console.log(movie);
+      forkJoin(dataMovie, castMovie, videoMovie, similarVideo).subscribe(([movie, credits, video, similar]) => {
         this.isLoadingResults = false;
         this.movie = movie;
-        this.cast = cast.cast.slice(0, 10);
-
+        this.cast = credits.cast.slice(0, 10);
         this.videos = video.results.slice(0, 1);
         if (this.videos.length > 0) {
-          this.getMovieVideoUrl(this.videos[0]['key'])
+          this.getMovieVideoUrl(this.videos[0]['key']);
         }
         this.similarMovies = similar.results;
       })
@@ -97,5 +93,5 @@ export class MovieComponent implements OnInit {
 
   back() {
     this.location.back();
-}
+  }
 }

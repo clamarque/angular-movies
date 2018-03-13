@@ -4,16 +4,19 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
 import { MatSnackBar } from '@angular/material';
 import { DatabaseService } from '../shared/database/database.service';
+import { MovieCategoryModel } from './shared/movie-category.model';
 
 @Component({
     selector: 'app-playlist',
-    templateUrl: './playlist.component.html'
+    templateUrl: './playlist.component.html',
+    styleUrls: ['./playlist.component.scss']
 })
 export class PlaylistComponent implements OnInit, OnDestroy {
-    movies: any[];
-    getData = false;
+    movies: MovieCategoryModel;
     sub: Subscription;
     isLoadingResults = true;
+    moviesToWatch: any;
+    moviesWatched: any;
 
     constructor(
         private databaseService: DatabaseService,
@@ -38,18 +41,27 @@ export class PlaylistComponent implements OnInit, OnDestroy {
         this.sub = this.route.paramMap
             .switchMap((params: ParamMap) => this.databaseService.getMovies(params.get('category')))
             .subscribe(response => {
+                console.log(response);
+                this.moviesToWatch = response.filter(val => val['watched'] === false);
+                console.log(this.moviesToWatch);
+                this.moviesWatched = response.filter(val => val['watched'] === true);
+                console.log(this.moviesWatched);
                 this.isLoadingResults = false;
-
-                if (response !== null) {
-                    this.movies = response;
-                } else {
-                    this.movies = null;
-                    this.getData = true;
-                }
             });
     }
 
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
+
+    watchedMovie(movieId: any, watched: boolean) {
+        console.log(movieId);
+        this.databaseService.updateMovie(movieId, watched, (error) => {
+            if (error) {
+                this.snackBar.open(error, 'Hide', { duration: 10000 });
+              } else {
+                this.snackBar.open('Your movie was been save', '', { duration: 5000 });
+              }
+        })
+      }
 }
