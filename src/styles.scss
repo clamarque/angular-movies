@@ -78,15 +78,8 @@ md-card-header .mat-card-header-text {
     &-menu-item {
         color: $primary-light;
     }
-    &-card {
-        background: $white;
-        color: $primary-dark;
-    }
 }
 .mat-tab {
-    &-group {
-        margin: 50px 0;
-    }
     &-labels {
         justify-content: center;
     }

@@ -14,7 +14,7 @@
                             <p>{{movie.release_date | date}}</p>
                         </a>
                         <div class="actions">
-                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                            <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Shared ?">
                                 <mat-icon>share</mat-icon>
                             </button>
                             <mat-menu #menu="matMenu">
@@ -26,10 +26,10 @@
                                 <a mat-menu-item href="https://twitter.com/intent/tweet?text={{movie.original_title}}%20on%20&url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}&hashtags=hubmovies, {{movie.original_title}}">Twitter</a>
                                 <a mat-menu-item href="mailto:?subject={{movie.original_title}} on Hubmovies&body=Discovers the movie on https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}">Email</a>
                             </mat-menu>
-                            <button mat-icon-button (click)="deleteMovie(movie.movieId)">
+                            <button mat-icon-button (click)="deleteMovie(movie.movieId)" matTooltip="Delete ?">
                                 <mat-icon>delete</mat-icon>
                             </button>
-                            <button mat-icon-button (click)="watchedMovie(movie.movieId, true)">
+                            <button mat-icon-button (click)="watchedMovie(movie.movieId, true)" matTooltip="Watched ?">
                                 <mat-icon>visibility</mat-icon>
                             </button>
                         </div>

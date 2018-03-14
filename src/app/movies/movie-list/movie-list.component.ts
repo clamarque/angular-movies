@@ -24,7 +24,7 @@ export class MovieListComponent implements OnInit {
   totalPages: number;
   title: string;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
-  isLoadingResults = true;
+  isLoadingResults: boolean;
 
   constructor(private tmdbService: TmdbService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
@@ -35,7 +35,7 @@ export class MovieListComponent implements OnInit {
   }
 
   setPage(param: any, page: number) {
-
+    this.isLoadingResults = true;
     if (page < 1 || page > this.pager.totalPages) { return; }
 
     this.pager = this.tmdbService.getPager(this.totalPages, page);
@@ -56,6 +56,7 @@ export class MovieListComponent implements OnInit {
       this.snackBar.open('Sorry, you\'re offline', null, { duration: 5000});
     } else {
       this.request.subscribe(response => {
+        this.isLoadingResults = false;
         if (param === 'upcoming') {
           this.movies = response.results.filter(val => moment(val.release_date).isAfter(moment().startOf('year')));
         } else {

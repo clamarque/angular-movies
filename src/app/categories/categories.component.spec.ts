@@ -1,33 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+
+import { CategoriesComponent } from './categories.component';
 import {
   MatProgressSpinnerModule,
-  MatCardModule,
   MatIconModule,
+  MatListModule,
   MatMenuModule,
   MatTabsModule,
-  MatSnackBarModule,
-  MatListModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+  MatTooltipModule,
+  MatSnackBarModule
+} from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
-
-import { MovieComponent } from './movie.component';
-
-import { AuthService } from '../../shared/auth/auth.service';
-import { DatabaseService } from '../../shared/database/database.service';
-import { TmdbService } from '../../shared/tmdb/tmdb.service';
-import { StorageService } from '../../shared/storage/storage.service';
 
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { DatabaseService } from '../shared/database/database.service';
 
-import 'hammerjs';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
-
-describe('MovieComponent', () => {
-  let component: MovieComponent;
-  let fixture: ComponentFixture<MovieComponent>;
+describe('CategoriesComponent', () => {
+  let component: CategoriesComponent;
+  let fixture: ComponentFixture<CategoriesComponent>;
 
   const firebaseConfig = {
     apiKey: 'foo',
@@ -44,32 +36,26 @@ describe('MovieComponent', () => {
         AngularFireAuthModule,
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFirestoreModule,
-        BrowserAnimationsModule,
-        HttpClientTestingModule,
-        LazyLoadImageModule,
-        MatCardModule,
         MatIconModule,
         MatListModule,
         MatMenuModule,
         MatProgressSpinnerModule,
-        MatSnackBarModule,
         MatTabsModule,
+        MatTooltipModule,
+        MatSnackBarModule,
         RouterTestingModule
       ],
-      declarations: [ MovieComponent ],
+      declarations: [ CategoriesComponent ],
       providers: [
         AngularFireAuthModule,
-        AuthService,
-        DatabaseService,
-        TmdbService,
-        StorageService
+        DatabaseService
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MovieComponent);
+    fixture = TestBed.createComponent(CategoriesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

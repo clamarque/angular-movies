@@ -47,7 +47,7 @@
     </div>
   </div>
   <mat-tab-group class="movie__tab">
-    <mat-tab label="Cast">
+    <mat-tab label="CAST">
       <section class="movie--cast" *ngIf="cast">
         <mat-nav-list *ngFor="let person of cast">
           <a mat-list-item [routerLink]="['/star', person.id]">
@@ -60,12 +60,12 @@
         </mat-nav-list>
       </section>
     </mat-tab>
-    <mat-tab label="Trailer">
+    <mat-tab label="TRAILER">
       <section class="movie--trailer" *ngIf="safeUrl">
         <iframe width="560" height="315" [src]="safeUrl" frameborder="0" allowfullscreen></iframe>
       </section>
     </mat-tab>
-    <mat-tab label="Similar Movies">
+    <mat-tab label="SIMILAR MOVIES">
       <section class="similar items" *ngIf="similarMovies">
         <div class="item" *ngFor="let movie of similarMovies">
           <a [routerLink]="['/movies/movie', movie.id]">

@@ -22,6 +22,13 @@ export class DatabaseService {
     ).valueChanges()
   }
 
+  getCategoriesMovies(category: string) {
+    return this.dbf.collection(`${category}`, ref => ref
+      .where('userId', '==', this.uid)
+      .orderBy('date', 'desc')
+    ).valueChanges()
+  }
+
   updateMovie(movieId: number, watched: boolean, callback: any) {
     this.dbf.doc(`MovieLater/${this.uid}_${movieId}`)
     .update({
