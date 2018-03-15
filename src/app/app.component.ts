@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit, NgModule } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { AuthService } from './shared/auth/auth.service';
+import { AuthService } from './core/auth/auth.service';
 import { StorageService } from './shared/storage/storage.service';
 // import { SwUpdate } from '@angular/service-worker';
 
@@ -68,11 +68,5 @@ export class AppComponent implements OnInit {
                 }
             })
         } */
-
-        return this.authService.isLoggedIn().subscribe(
-            authStatus => {
-                console.log('connected:', authStatus);
-                authStatus === true ? this.isConnected = true : this.isConnected = false;
-            });
     }
 }

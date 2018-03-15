@@ -3,18 +3,20 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
-import { AuthService } from '../shared/auth/auth.service';
+import { AuthService } from '../core/auth/auth.service';
 import { DatabaseService } from '../shared/database/database.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   displayName: string;
   email: string;
   emailVerified: boolean;
   photoURL: any;
+  notPhotoURL: string;
   selectedOption: string;
   sub: Subscription;
   error: string;
@@ -26,23 +28,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private router: Router,
     private dialog: MatDialog) { }
 
-  confirmDialog() {
+  deleteAccountDialog() {
     const dialogRef = this.dialog.open(DialogDeleteUser);
-    // this.dialogRef = this.dialog.open(DialogDeleteUser, {
-      // disableClose: true
-    // });
-     /*
-    this.sub = this.dialogRef.afterClosed().subscribe(result => {
-      this.dialogRef = null;
-      if (result === 'yes') this.deleteAccount()
-      else console.log('cancel')
-    });*/
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') { this.deleteAccount(); }
     });
   }
   deleteAccount() {
-    this.databaseService.deleteDatafromUser();
     this.authService.deleteUser((error) => {
       if (error) {
         this.error = error;
@@ -53,19 +45,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
     });
   }
-  onSubmit(formData) {
-    if (formData.valid) {
-      this.authService.updateUser(formData, (error) => {
-        if (error) {
-          this.error = error;
-          this.snackbar.open(this.error, 'hide', { duration: 10000 });
-        } else {
-          this.snackbar.open('Success ! Your modifications was been applicated', '', { duration: 5000 });
-          this.router.navigate(['/profile']);
-        }
-      });
-    }
-  }
 
   ngOnInit() {
     this.sub = this.authService.readUser().subscribe(authData => {
@@ -74,6 +53,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.email = authData.email;
         this.emailVerified = authData.emailVerified;
         this.photoURL = authData.photoURL;
+        this.notPhotoURL = authData.displayName.slice(0, 1);
       }
     });
   }

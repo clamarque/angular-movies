@@ -1,0 +1,24 @@
+.btn-social {
+  margin: 0.625rem auto;
+  min-width: 220px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+.btn-twitter {
+  background-color: #fff;
+}
+.btn-facebook {
+  background-color: #4267b2;
+  color: #fff;
+}
+.btn-google {
+  background-color: #4285f4;
+  color: #fff;
+}
+svg {
+  height: 24px;
+  width: 24px;
+  margin: 0 10px 0 -6px;
+}

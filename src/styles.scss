@@ -22,7 +22,7 @@ body {
 }
 /* Launcher */
 
-[id="launcher"] {
+.launcher {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,6 +30,14 @@ body {
     height: 100%;
     img {
         width: auto;
+
+        @media only screen and (max-width: 731px) {
+            width: 192px;
+        }
+    }
+
+    p {
+        font-family: inherit;
     }
 }
 a {
@@ -87,15 +95,19 @@ md-card-header .mat-card-header-text {
         color: #FFF !important;
     }
 }
+
+/* img poster movie */
+img[ng-reflect-default-image] {
+    width: 185px;
+    height: 278px;
+}
 [alt="No poster available"] {
     width: 185px;
     height: 278px;
 }
 
 /* Container principal */
-
 [id="hub-movies"] {
-    // margin: 1rem;
     text-align: center;
 }
 /* Navigation */
@@ -161,16 +173,13 @@ a, button {
         outline: none;
     }
 }
-md-sidenav-container {
-    height: 100%;
-}
-/* Dialog */
 
+/* Dialog */
 h1.mat-dialog-title {
     color: $primary-dark;
 }
-/* Column Flex */
 
+/* Column Flex */
 .items {
     display: flex;
     flex-wrap: wrap;
@@ -205,8 +214,8 @@ h1.mat-dialog-title {
         }
     }
 }
-/* Pagination */
 
+/* Pagination */
 .pagination {
     ul {
         -webkit-padding-start: 0;
@@ -222,35 +231,7 @@ h1.mat-dialog-title {
         color: $disable;
     }
 }
-
-/* Sign in */
-
-app-sign-in {
-    .btn-social {
-        margin: .625rem auto;
-        border: none;
-        background: transparent;
-        outline: none;
-        height: 40px;
-    }
-    .btn-twitter {
-        background-color: #FFF;
-    }
-    .btn-facebook {
-        background-color: #4267b2;
-        color: #FFF;
-    }
-    .btn-google {
-        background-color: #4285f4;
-        color: #FFF;
-    }
-    svg {
-        height: 24px;
-        width: 24px;
-        margin: 0 10px 0 -6px;
-    }
-}
-
+/* button return top*/
 [id="return-to-top"] {
     position: fixed;
     bottom: 40px;
@@ -267,6 +248,7 @@ app-sign-in {
     display: none;
 }
 
+/* spinner */
 .loading-shade {
     position: fixed;
     top: 0;
@@ -278,9 +260,4 @@ app-sign-in {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-img[ng-reflect-default-image] {
-    width: 185px;
-    height: 278px;
 }

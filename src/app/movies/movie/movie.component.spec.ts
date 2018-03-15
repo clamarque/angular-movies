@@ -13,7 +13,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { MovieComponent } from './movie.component';
 
-import { AuthService } from '../../shared/auth/auth.service';
+import { AuthService } from '../../core/auth/auth.service';
 import { DatabaseService } from '../../shared/database/database.service';
 import { TmdbService } from '../../shared/tmdb/tmdb.service';
 import { StorageService } from '../../shared/storage/storage.service';

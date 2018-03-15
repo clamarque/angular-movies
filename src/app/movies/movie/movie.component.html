@@ -38,7 +38,7 @@
         </ul>
       </div>
       <p class="movie--overview">{{movie.overview}}</p>
-      <div [hidden]="!isConnected">
+      <div *ngIf="authService.user | async">
         <button mat-button (click)="saveMovie(movie, 'MovieLater')">
           <mat-icon class="mat-teal">watch_later</mat-icon> Watch later</button>
         <button mat-button (click)="saveMovie(movie, 'FavoriteMovie')">

@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 describe('AuthService', () => {
   const firebaseConfig = {
@@ -21,11 +22,13 @@ describe('AuthService', () => {
       imports: [
         AngularFireAuthModule,
         AngularFireModule.initializeApp(firebaseConfig),
-        RouterTestingModule
+        RouterTestingModule,
+        AngularFirestoreModule
       ],
       providers: [
         AuthService,
-        AngularFireAuthModule
+        AngularFireAuthModule,
+        AngularFirestoreModule
       ]
     });
   });

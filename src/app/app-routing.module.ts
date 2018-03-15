@@ -1,6 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './shared/guard/auth.guard';
+import { AuthGuard } from './core/guard/auth.guard';
 import { PageNotFoundComponent } from './not-found.component';
 import { MoviesComponent } from './movies/movies.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';

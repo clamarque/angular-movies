@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap, Router, Event as NavigationEvent } from '@angular/router';
 import { DatabaseService } from '../../shared/database/database.service';
-import { AuthService } from '../../shared/auth/auth.service';
+import { AuthService } from '../../core/auth/auth.service';
 import { TmdbService } from '../../shared/tmdb/tmdb.service';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
@@ -52,9 +52,9 @@ export class MovieComponent implements OnInit {
   saveMovie(movie: any, category: string) {
     this.databaseService.setMovies(movie, category, (error) => {
       if (error) {
-        this.snackBar.open(error, 'Hide', { duration: 10000 });
+        this.snackBar.open(error, 'Hide', { duration: 5000 });
       } else {
-        this.snackBar.open('Your movie was been save', '', { duration: 5000 });
+        this.snackBar.open('Your movie was been save', '', { duration: 2000 });
       }
     });
   }
@@ -84,11 +84,6 @@ export class MovieComponent implements OnInit {
         this.similarMovies = similar.results;
       })
     })
-
-    return this.authService.isLoggedIn().subscribe(
-      authStatus => {
-        authStatus === true ? this.isConnected = true : this.isConnected = false;
-      });
   }
 
   back() {

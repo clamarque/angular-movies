@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { AuthService } from '../shared/auth/auth.service';
+import { AuthService } from '../core/auth/auth.service';
 
 @Component({
   selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html'
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
   error: string;
@@ -16,7 +17,7 @@ export class SignInComponent {
     private snackbar: MatSnackBar) { }
 
   login(name: string) {
-    this.authService.signInAccount(name, (error) => {
+    this.authService.oAuthLogin(name, (error) => {
       if (error) {
         this.error = error;
         this.snackbar.open(this.error, 'hide', { duration: 10000 });
