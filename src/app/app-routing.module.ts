@@ -1,6 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './shared/guard/auth.guard';
+import { AuthGuard } from './core/guard/auth.guard';
 import { PageNotFoundComponent } from './not-found.component';
 import { MoviesComponent } from './movies/movies.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
@@ -13,8 +13,8 @@ const routes: Routes = [
     { path: 'movie/:id', component: MovieComponent},
     { path: 'search', component: MovieListComponent}
   ] },
-  { path: 'history', loadChildren: 'app/history/history.module#HistoryModule', canActivate: [AuthGuard] },
-  { path: 'playlist/:category', loadChildren: 'app/playlist/playlist.module#PlaylistModule', canActivate: [AuthGuard] },
+  { path: 'playlist', loadChildren: 'app/playlist/playlist.module#PlaylistModule', canActivate: [AuthGuard] },
+  { path: 'favorites', loadChildren: 'app/categories/categories.module#CategoriesModule', canActivate: [AuthGuard] },
   { path: 'profile', loadChildren: 'app/profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
   { path: 'sign-in', loadChildren: 'app/sign-in/sign-in.module#SignInModule' },
   { path: 'star/:id', loadChildren: 'app/star/star.module#StarModule' },

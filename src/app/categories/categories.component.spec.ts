@@ -1,19 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CdkTableModule } from '@angular/cdk/table';
-import { MatPaginatorModule, MatSnackBarModule, MatTableModule, MatProgressSpinnerModule, MatIconModule } from '@angular/material';
+
+import { CategoriesComponent } from './categories.component';
+import {
+  MatProgressSpinnerModule,
+  MatIconModule,
+  MatListModule,
+  MatMenuModule,
+  MatTabsModule,
+  MatTooltipModule,
+  MatSnackBarModule
+} from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { HistoryComponent } from './history.component';
-
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { DatabaseService } from '../shared/database/database.service';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-
-describe('HistoryComponent', () => {
-  let component: HistoryComponent;
-  let fixture: ComponentFixture<HistoryComponent>;
+describe('CategoriesComponent', () => {
+  let component: CategoriesComponent;
+  let fixture: ComponentFixture<CategoriesComponent>;
 
   const firebaseConfig = {
     apiKey: 'foo',
@@ -30,15 +36,16 @@ describe('HistoryComponent', () => {
         AngularFireAuthModule,
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFirestoreModule,
-        CdkTableModule,
         MatIconModule,
-        MatPaginatorModule,
+        MatListModule,
+        MatMenuModule,
         MatProgressSpinnerModule,
+        MatTabsModule,
+        MatTooltipModule,
         MatSnackBarModule,
-        MatTableModule,
         RouterTestingModule
       ],
-      declarations: [ HistoryComponent ],
+      declarations: [ CategoriesComponent ],
       providers: [
         AngularFireAuthModule,
         DatabaseService
@@ -48,12 +55,12 @@ describe('HistoryComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HistoryComponent);
+    fixture = TestBed.createComponent(CategoriesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

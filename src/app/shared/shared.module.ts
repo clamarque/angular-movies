@@ -20,7 +20,8 @@ import {
   MatSidenavModule,
   MatTabsModule,
   MatTableModule,
-  MatProgressSpinnerModule} from '@angular/material';
+  MatProgressSpinnerModule,
+  MatTooltipModule} from '@angular/material';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import {
     MatProgressSpinnerModule,
     MatTabsModule,
     MatTableModule,
+    MatTooltipModule,
     MatSelectModule
   ]
 })

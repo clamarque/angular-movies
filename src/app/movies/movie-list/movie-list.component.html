@@ -3,7 +3,7 @@
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
 </div>
 <div class="items" *ngIf="movies" (swipeleft)="swipe(pager.currentPage +1, $event.type)" (swiperight)="swipe(pager.currentPage -1, $event.type)">
-  <div class="item" *ngFor="let movie of movies.results">
+  <div class="item" *ngFor="let movie of movies">
     <a [routerLink]="['/movies/movie', movie.id]">
       <img *ngIf="movie.poster_path" [defaultImage]="'assets/images/no_poster_available.jpg'" [lazyLoad]="'https://image.tmdb.org/t/p/w185/' + movie.poster_path" alt="poster movie" [offset]="100">
       <img *ngIf="!movie.poster_path" src="/assets/images/no_poster_available.jpg" alt="No poster available">

@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { SignInComponent } from './sign-in.component';
 
-import { AuthService } from '../shared/auth/auth.service';
+import { AuthService } from '../core/auth/auth.service';
 
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
@@ -28,6 +28,7 @@ describe('SignInComponent', () => {
       imports: [
         AngularFireAuthModule,
         AngularFireModule,
+        AngularFirestoreModule,
         AngularFireModule.initializeApp(firebaseConfig),
         MatSnackBarModule,
         RouterTestingModule
@@ -35,6 +36,7 @@ describe('SignInComponent', () => {
       declarations: [ SignInComponent ],
       providers: [
         AngularFireAuthModule,
+        AngularFirestoreModule,
         AuthService
       ]
     })

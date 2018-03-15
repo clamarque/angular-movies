@@ -2,15 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap, Router, Event as NavigationEvent } from '@angular/router';
-import 'rxjs/add/operator/switchMap';
 import { DatabaseService } from '../../shared/database/database.service';
-import { AuthService } from '../../shared/auth/auth.service';
+import { AuthService } from '../../core/auth/auth.service';
 import { TmdbService } from '../../shared/tmdb/tmdb.service';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
-import { CastModel } from '../shared/cast.model';
-import { CastMovieModel } from '../shared/cast-movie.model';
-import { VideoMovieModel } from '../shared/video-movie.model';
+import { MovieCastModel } from '../shared/movie-cast.model';
+import { MovieCrewModel } from '../shared/movie-crew.model';
+import { MovieVideosModel } from '../shared/movie-videos.model';
+import { Location } from '@angular/common';
+import { MovieModel } from '../shared/movie.model';
+import { MovieDetailsModel } from '../shared/movie-details.model';
 
 @Component({
   selector: 'app-movie',
@@ -20,10 +22,11 @@ import { VideoMovieModel } from '../shared/video-movie.model';
 export class MovieComponent implements OnInit {
   id: number;
   url: string;
-  movie: Object;
+  movie: MovieDetailsModel;
   videos: Array<Object>;
-  similarMovies: Array<Object>;
-  cast: Array<Object>;
+  similarMovies: MovieModel[];
+  cast: MovieCastModel[];
+  crew: MovieCrewModel[];
   isConnected = false;
   baseUrl = 'https://www.youtube.com/embed/';
   safeUrl: any;
@@ -33,24 +36,25 @@ export class MovieComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private databaseService: DatabaseService,
+    private location: Location,
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private snackbar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private tmdbService: TmdbService) { }
 
   swipe(action = this.SWIPE_ACTION.RIGHT) {
     if (action === this.SWIPE_ACTION.RIGHT || action === this.SWIPE_ACTION.LEFT) {
-      window.history.back();
+      this.location.back();
     }
   }
 
   saveMovie(movie: any, category: string) {
     this.databaseService.setMovies(movie, category, (error) => {
       if (error) {
-        this.snackbar.open(error, 'Hide', { duration: 10000 });
+        this.snackBar.open(error, 'Hide', { duration: 5000 });
       } else {
-        this.snackbar.open('Your movie was been save', '', { duration: 5000 });
+        this.snackBar.open('Your movie was been save', '', { duration: 2000 });
       }
     });
   }
@@ -69,21 +73,20 @@ export class MovieComponent implements OnInit {
       const videoMovie = this.tmdbService.getVideoMovie(this.id);
       const similarVideo = this.tmdbService.getSimilarMovies(this.id);
 
-      forkJoin(dataMovie, castMovie, videoMovie, similarVideo).subscribe(results => {
+      forkJoin(dataMovie, castMovie, videoMovie, similarVideo).subscribe(([movie, credits, video, similar]) => {
         this.isLoadingResults = false;
-        this.movie = results[0];
-        this.cast = results[1]['cast'].slice(0, 9);
-        this.videos = results[2]['results'].slice(0, 1);
+        this.movie = movie;
+        this.cast = credits.cast.slice(0, 10);
+        this.videos = video.results.slice(0, 1);
         if (this.videos.length > 0) {
-          this.getMovieVideoUrl(this.videos[0]['key'])
+          this.getMovieVideoUrl(this.videos[0]['key']);
         }
-        this.similarMovies = results[3]['results'].slice(0, 9);
+        this.similarMovies = similar.results;
       })
     })
+  }
 
-    return this.authService.isLoggedIn().subscribe(
-      authStatus => {
-        authStatus === true ? this.isConnected = true : this.isConnected = false;
-      });
+  back() {
+    this.location.back();
   }
 }

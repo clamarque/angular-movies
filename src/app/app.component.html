@@ -9,7 +9,7 @@
         </li>
         <li>
           <a [routerLink]="['/movies/list', 'now-playing']" routerLinkActive="active" (click)="end.close()">
-            <mat-icon>today</mat-icon> Currently</a>
+            <mat-icon>local_movies</mat-icon> Currently</a>
         </li>
         <li>
           <a [routerLink]="['/movies/list', 'upcoming']" routerLinkActive="active" (click)="end.close()">
@@ -17,29 +17,25 @@
         </li>
         <li>
           <a [routerLink]="['/movies/list', 'discover']" routerLinkActive="active" (click)="end.close()">
-            <mat-icon>explore</mat-icon> Trending</a>
+            <mat-icon>whatshot</mat-icon> Trending</a>
         </li>
-        <li [hidden]="!isConnected">
-          <a [routerLink]="['/playlist', 'MovieLater']" routerLinkActive="active" (click)="end.close()">
+        <li *ngIf="authService.user | async">
+          <a [routerLink]="['/playlist']" routerLinkActive="active" (click)="end.close()">
             <mat-icon>watch_later</mat-icon> Watch later</a>
         </li>
-        <li [hidden]="!isConnected">
-          <a [routerLink]="['/playlist', 'FavoriteMovie']" routerLinkActive="active" (click)="end.close()">
+        <li *ngIf="authService.user | async">
+          <a [routerLink]="['/favorites']" routerLinkActive="active" (click)="end.close()">
             <mat-icon>star</mat-icon> Favorites</a>
         </li>
-        <li [hidden]="!isConnected">
-          <a routerLink="/history" routerLinkActive="active" (click)="end.close()">
-            <mat-icon>history</mat-icon> History</a>
-        </li>
-        <li [hidden]="!isConnected">
+        <li *ngIf="authService.user | async">
           <a routerLink="/profile" routerLinkActive="active" (click)="end.close()">
-            <mat-icon>account_circle</mat-icon> Profil</a>
+            <mat-icon>account_circle</mat-icon> Profile</a>
         </li>
-        <li [hidden]="isConnected">
+        <li [hidden]="authService.user | async">
           <a routerLink="/sign-in" routerLinkActive="active" (click)="end.close()">
             <mat-icon>account_circle</mat-icon> Sign in</a>
         </li>
-        <li [hidden]="!isConnected">
+        <li *ngIf="authService.user | async">
           <a (click)="end.close()" (click)="onSignOut()">
             <mat-icon>cancel</mat-icon> Sign out</a>
         </li>

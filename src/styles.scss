@@ -2,8 +2,13 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500);
 @import 'assets/scss/custom_theme';
 @import 'assets/scss/palette';
-* {
+
+html {
     box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
 }
 html,
 body {
@@ -14,9 +19,25 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     background-color: white;
+}
+/* Launcher */
 
-    @media (max-width: 960px) {
-        height: inherit;
+.launcher {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    img {
+        width: auto;
+
+        @media only screen and (max-width: 731px) {
+            width: 192px;
+        }
+    }
+
+    p {
+        font-family: inherit;
     }
 }
 a {
@@ -65,15 +86,8 @@ md-card-header .mat-card-header-text {
     &-menu-item {
         color: $primary-light;
     }
-    &-card {
-        background: $white;
-        color: $primary-dark;
-    }
 }
 .mat-tab {
-    &-group {
-        margin: 50px 0;
-    }
     &-labels {
         justify-content: center;
     }
@@ -81,26 +95,19 @@ md-card-header .mat-card-header-text {
         color: #FFF !important;
     }
 }
+
+/* img poster movie */
+img[ng-reflect-default-image] {
+    width: 185px;
+    height: 278px;
+}
 [alt="No poster available"] {
     width: 185px;
     height: 278px;
 }
-/* Launcher */
 
-[id="launcher"] {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    img {
-        width: auto;
-    }
-}
 /* Container principal */
-
 [id="hub-movies"] {
-    margin: 1rem;
     text-align: center;
 }
 /* Navigation */
@@ -153,23 +160,26 @@ md-card-header .mat-card-header-text {
     }
 }
 .app-icon-button {
-    padding: 1.25rem;
+    margin: 1.25rem;
     cursor: pointer;
     border: none;
     outline: none;
     background-color: transparent;
     color: $white;
 }
-md-sidenav-container {
-    height: 100%;
-}
-/* Dialog */
 
+a, button {
+    &:focus, &:active {
+        outline: none;
+    }
+}
+
+/* Dialog */
 h1.mat-dialog-title {
     color: $primary-dark;
 }
-/* Column Flex */
 
+/* Column Flex */
 .items {
     display: flex;
     flex-wrap: wrap;
@@ -199,10 +209,13 @@ h1.mat-dialog-title {
         @media (min-width: 1670px) {
             min-width: calc(12.5% - 10px);
         }
+        &:hover {
+            opacity: 0.5
+        }
     }
 }
-/* Pagination */
 
+/* Pagination */
 .pagination {
     ul {
         -webkit-padding-start: 0;
@@ -218,188 +231,13 @@ h1.mat-dialog-title {
         color: $disable;
     }
 }
-/* Movie */
-
-app-movie {
-    .genre {
-        display: block;
-        ul {
-            display: inline-block;
-            padding: 0 .325rem 0 0;
-        }
-    }
-    section {
-        h3 {
-            margin: .625rem 0 0;
-            color: inherit;
-        }
-    }
-    [id="trailer"] {
-        margin: 30px 0 0;
-    }
-    .mat {
-        &-green {
-            color: #4caf50
-        }
-        &-orange {
-            color: rgb(255, 87, 34);
-        }
-        &-red {
-            color: #f44336;
-        }
-        &-yellow {
-            color: #ffc107;
-        }
-        &-teal {
-            color: #009688
-        }
-    }
-    iframe {
-        display: block;
-        margin: .625rem auto;
-
-        @media only screen and (max-width: 731px) {
-            width: 100%;
-        }
-    }
-    .mat-card {
-        &-header, &-content, &-actions {
-            text-align: left;
-        }
-        &-title {
-            margin: 1rem 0;
-            font-size: 1.5rem !important;
-        }
-        &-subtitle {
-            color: inherit;
-        }
-        &-subtitle,
-        &-content {
-            font-size: inherit !important;
-        }
-    }
-    [alt="backdrop movie"] {
-        @media (min-width: 600px) {
-            width: 100%;
-        }
-    }
-    [alt="profile"] {
-        @media (min-width: 600px) {
-            width: 100%;
-        }
-    }
-    [alt="No profile available"] {
-        width: 185px;
-        height: 277px;
-    }
-    [alt="poster movie"] {
-        height: 278px;
-    }
-    [id=cast] {
-        p {
-            color: #9E9E9E;
-        }
-    }
-}
-/* Playlist */
-
-app-playlist {
-    position: relative;
-    [alt="poster movie"] {
-        width: 100%;
-    }
-
-    .mat-list {
-        width: 100%;
-        background: white;
-
-        &-item:hover {
-            background: #9E9E9E;
-            
-            h3 {
-                color: white;
-            }
-        }
-
-        h3 {
-            flex: 1;
-            margin: 0 10px;
-            color: #000;
-            text-align: left;
-        }
-
-        a {
-            display: inherit;
-            align-items: center;
-            flex: 1;
-        }
-    }
-}
-/* Sign in */
-
-app-sign-in {
-    .btn-social {
-        margin: .625rem auto;
-        border: none;
-        background: transparent;
-        outline: none;
-        height: 40px;
-    }
-    .btn-twitter {
-        background-color: #FFF;
-    }
-    .btn-facebook {
-        background-color: #4267b2;
-        color: #FFF;
-    }
-    .btn-google {
-        background-color: #4285f4;
-        color: #FFF;
-    }
-    svg {
-        height: 24px;
-        width: 24px;
-        margin: 0 10px 0 -6px;
-    }
-}
-/* Star */
-
-app-star {
-    .img_profile {
-        width: auto;
-    }
-    section:first-child {
-        p {
-            color: $white;
-        }
-    }
-    md-tab-group p:nth-child(3) {
-        color: #9E9E9E;
-    }
-}
-
-/* History */
-app-history {
-    position: relative;
-    img {
-        width: 32px;
-        vertical-align: middle;
-    }
-    md-icon {
-        cursor: pointer;
-    }
-}
-
+/* button return top*/
 [id="return-to-top"] {
     position: fixed;
     bottom: 40px;
     right: 20px;
     display: none;
     z-index: 1;
-   
-    md-icon {
-        vertical-align: inherit;
-    }
 }
 
 .show {
@@ -410,6 +248,7 @@ app-history {
     display: none;
 }
 
+/* spinner */
 .loading-shade {
     position: fixed;
     top: 0;
@@ -421,9 +260,4 @@ app-history {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-img[ng-reflect-default-image] {
-    width: 185px;
-    height: 278px;
 }

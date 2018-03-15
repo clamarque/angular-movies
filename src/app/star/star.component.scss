@@ -1,0 +1,27 @@
+app-star {
+    position: relative;
+}
+
+.btn-back {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    border: none;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.person {
+    padding: 20px;
+
+    .img_profile {
+        width: auto;
+    }
+    mat-tab-group p:nth-child(3) {
+        color: #9E9E9E;
+    }
+    p {
+        color: white;
+    }
+}

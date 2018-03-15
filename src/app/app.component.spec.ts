@@ -8,11 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
-import { AuthService } from './shared/auth/auth.service';
+import { AuthService } from './core/auth/auth.service';
 import { StorageService } from './shared/storage/storage.service';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 describe('AppComponent', () => {
   const firebaseConfig = {
@@ -38,6 +39,7 @@ describe('AppComponent', () => {
         RouterTestingModule,
         AngularFireAuthModule,
         AngularFireModule.initializeApp(firebaseConfig),
+        AngularFirestoreModule,
         HttpClientTestingModule,
       ],
       declarations: [
@@ -46,6 +48,7 @@ describe('AppComponent', () => {
       providers: [
         AuthService,
         AngularFireAuthModule,
+        AngularFirestoreModule,
         StorageService
       ]
     }).compileComponents();

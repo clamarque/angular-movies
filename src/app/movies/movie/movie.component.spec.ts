@@ -1,12 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatProgressSpinnerModule, MatCardModule, MatIconModule, MatMenuModule, MatTabsModule, MatSnackBarModule } from '@angular/material';
+import {
+  MatProgressSpinnerModule,
+  MatCardModule,
+  MatIconModule,
+  MatMenuModule,
+  MatTabsModule,
+  MatSnackBarModule,
+  MatListModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { MovieComponent } from './movie.component';
 
-import { AuthService } from '../../shared/auth/auth.service';
+import { AuthService } from '../../core/auth/auth.service';
 import { DatabaseService } from '../../shared/database/database.service';
 import { TmdbService } from '../../shared/tmdb/tmdb.service';
 import { StorageService } from '../../shared/storage/storage.service';
@@ -16,6 +23,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import 'hammerjs';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 describe('MovieComponent', () => {
   let component: MovieComponent;
@@ -38,8 +46,10 @@ describe('MovieComponent', () => {
         AngularFirestoreModule,
         BrowserAnimationsModule,
         HttpClientTestingModule,
+        LazyLoadImageModule,
         MatCardModule,
         MatIconModule,
+        MatListModule,
         MatMenuModule,
         MatProgressSpinnerModule,
         MatSnackBarModule,

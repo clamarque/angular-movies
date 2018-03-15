@@ -1,6 +1,7 @@
 {
     "name": "Movie Time",
     "short_name": "MovieTime",
+    "description": "a movie manager",
     "icons": [
         {
             "src": "assets/icons/android-chrome-192x192.png",
@@ -8,19 +9,19 @@
             "types": "image\/png"
         },
         {
-            "src": "assets/icons/android-chrome-192x192.png",
-            "sizes": "256x256",
+            "src": "assets/icons/android-chrome-384x384.png",
+            "sizes": "384x384",
             "type": "image\/png"
         },
         {
-            "src": "assets/icons/android-chrome-192x192.png",
+            "src": "assets/icons/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image\/png"
         }
     ],
-    "theme_color": "#F83745",
-    "background_color": "#FFFFFF",
+    "start_url": "index.html",
     "display": "standalone",
     "orientation": "portrait",
-    "start_url": "./?utm_source=web_app_manifest"
+    "background_color": "#FFFFFF",
+    "theme_color": "#F83745"
 }

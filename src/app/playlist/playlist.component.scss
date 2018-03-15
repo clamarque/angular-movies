@@ -1,0 +1,42 @@
+@import '../../assets/scss/palette';
+
+.mat-list {
+    margin: 30px 0 0;
+    width: 100%;
+    background: white;
+
+    &-item {
+        font-size: 1rem;
+
+        &:hover {
+            background: $grey;
+
+            h3 {
+                color: white;
+            }
+        }
+        .actions {
+            display: inherit;
+        }
+    }
+    h3 {
+        flex: 1;
+        margin: 0 10px;
+        color: #000;
+        text-align: left;
+    }
+    a {
+        display: inherit;
+        align-items: center;
+        flex: 1;
+    }
+    button {
+        &:hover {
+            color: white;
+            background: $primary-light;
+        }
+    }
+    p {
+        margin: 0 10px 0 0;
+    }
+}
