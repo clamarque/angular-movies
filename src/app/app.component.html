@@ -4,7 +4,7 @@
       <ul class="nav">
         <li>
           <mat-form-field>
-            <input matInput #search placeholder="search a movie" (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="end.close()">
+            <input matInput #search placeholder="Search a movie" (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="end.close()" tabindex="-1">
           </mat-form-field>
         </li>
         <li>
