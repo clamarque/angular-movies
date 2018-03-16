@@ -1,6 +1,6 @@
 {
-    "name": "Movie Time",
-    "short_name": "MovieTime",
+    "name": "HubMovies",
+    "short_name": "HubMovies",
     "description": "a movie manager",
     "icons": [
         {

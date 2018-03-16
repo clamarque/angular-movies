@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from '../core/auth/auth.service';
 import { DatabaseService } from '../shared/database/database.service';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -14,12 +16,11 @@ import { DatabaseService } from '../shared/database/database.service';
 export class ProfileComponent implements OnInit, OnDestroy {
   displayName: string;
   email: string;
-  emailVerified: boolean;
   photoURL: any;
   notPhotoURL: string;
-  selectedOption: string;
   sub: Subscription;
   error: string;
+  creationTime: any;
 
   constructor(
     private authService: AuthService,
@@ -49,11 +50,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.authService.readUser().subscribe(authData => {
       if (authData) {
+        console.log(authData);
         this.displayName = authData.displayName;
         this.email = authData.email;
-        this.emailVerified = authData.emailVerified;
         this.photoURL = authData.photoURL;
         this.notPhotoURL = authData.displayName.slice(0, 1);
+        this.creationTime = moment(authData.metadata['creationTime']).format('YYYY-MM-D');
       }
     });
   }
