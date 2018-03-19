@@ -8,7 +8,7 @@
                 <mat-list *ngIf="movies">
                     <mat-list-item *ngFor="let movie of movies">
                         <a [routerLink]="['/movies/movie', movie.movieId]">
-                            <img matListAvatar *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie">
+                            <img matListAvatar *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w92/{{movie.poster_path}}" alt="poster movie">
                             <img matListAvatar *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
                             <h3>{{movie.original_title}}</h3>
                             <p>{{movie.release_date | date}}</p>

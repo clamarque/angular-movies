@@ -62,9 +62,7 @@ h3,
 .date {
     color: $white;
 }
-md-card-header .mat-card-header-text {
-    margin: 1rem 0 0;
-}
+
 .mat {
     &-icon {
         vertical-align: middle;
@@ -97,11 +95,7 @@ md-card-header .mat-card-header-text {
 }
 
 /* img poster movie */
-img[ng-reflect-default-image] {
-    width: 185px;
-    height: 278px;
-}
-[alt="No poster available"] {
+img, img.ng-star-inserted {
     width: 185px;
     height: 278px;
 }
