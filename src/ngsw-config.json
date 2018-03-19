@@ -1,7 +1,7 @@
 {
   "index": "/index.html",
   "assetGroups": [{
-    "name": "Movie Time",
+    "name": "HubMovies",
     "installMode": "prefetch",
     "resources": {
       "files": [

@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
       lang = this.storageService.read('language');
 
     constructor(
-        private authService: AuthService,
+        public authService: AuthService,
         private router: Router,
         private snackbar: MatSnackBar,
         private storageService: StorageService,
