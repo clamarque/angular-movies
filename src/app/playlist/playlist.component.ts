@@ -1,7 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 import { DatabaseService } from '../shared/database/database.service';
 import { Subscription } from 'rxjs/Subscription';
+
+import { ShareModalComponent } from '../shared/share-modal/share-modal.component';
+import { MovieCategoryModel } from './shared/movie-category.model';
 
 @Component({
   selector: 'app-playlist',
@@ -16,6 +19,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
   constructor(
     private databaseService: DatabaseService,
+    public dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
 
@@ -41,6 +45,16 @@ export class PlaylistComponent implements OnInit, OnDestroy {
         this.snackBar.open('Your movie was been delete', null, { duration: 2000 });
       }
     });
+  }
+
+  shareDialog(movie: MovieCategoryModel): void {
+    console.log(movie);
+    const dialogRef = this.dialog.open(ShareModalComponent, {
+      width: '300px',
+      data: { id: movie.movieId, original_title: movie.original_title }
+    })
+
+    dialogRef.afterClosed().subscribe(result => console.log('The dialog was closed'));
   }
 
   watchedMovie(movieId: any, watched: boolean) {

@@ -47,7 +47,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     PageNotFoundComponent,
     MoviesComponent,
     MovieListComponent,
-    MovieComponent
+    MovieComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,14 +65,14 @@ export class MyHammerConfig extends HammerGestureConfig {
   providers: [
     DatabaseService,
     TmdbService,
-    { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig},
+    { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
     CheckForUpdateService,
     LogUpdateService,
     PromptUpdateService,
     StorageService
   ],
   entryComponents: [
-        DialogDeleteUser
+        DialogDeleteUser,
     ],
   bootstrap: [AppComponent]
 })

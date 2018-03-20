@@ -171,12 +171,16 @@ img[ng-reflect-default-image] {
     }
 }
 .app-icon-button {
-    margin: 1.25rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 20px;
     cursor: pointer;
     border: none;
     outline: none;
     background-color: transparent;
     color: $white;
+    z-index: 3;
 }
 
 a, button {
@@ -246,7 +250,7 @@ h1.mat-dialog-title {
 [id="return-to-top"] {
     position: fixed;
     bottom: 40px;
-    right: 20px;
+    right: 12px;
     display: none;
     z-index: 1;
 }

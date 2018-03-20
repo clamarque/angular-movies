@@ -3,73 +3,70 @@
         <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     </div>
     <ng-template [ngIf]="!isLoadingResults">
-        <mat-tab-group>
+        <mat-tab-group class="playlist__tab">
             <mat-tab label="TO WATCH">
-                <mat-list *ngIf="moviesToWatch">
-                    <mat-list-item *ngFor="let movie of moviesToWatch">
-                        <a [routerLink]="['/movies/movie', movie.movieId]">
+                <ng-template [ngIf]="moviesToWatch">
+                    <mat-nav-list *ngFor="let movie of moviesToWatch">
+                        <a mat-list-item [routerLink]="['/movies/movie', movie.movieId]">
                             <div matListAvatar class="icon-container" [ngStyle]="{'background-image': 'url('+'https://image.tmdb.org/t/p/original'+movie.poster_path+')'}">
                                 <mat-icon *ngIf="!movie.poster_path" class="icon-movie">movie</mat-icon>
                             </div>
-                            <h3>{{movie.original_title}}</h3>
-                            <p>{{movie.release_date | date}}</p>
-                        </a>
-                        <div class="actions">
-                            <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Shared ?">
-                                <mat-icon>share</mat-icon>
-                            </button>
-                            <mat-menu #menu="matMenu">
-                                <a mat-menu-item href="https://plus.google.com/share?url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}"
-                                    onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                                    Google +
-                                </a>
-                                <a mat-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}">Facebook</a>
-                                <a mat-menu-item href="https://twitter.com/intent/tweet?text={{movie.original_title}}%20on%20&url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}&hashtags=hubmovies, {{movie.original_title}}">Twitter</a>
-                                <a mat-menu-item href="mailto:?subject={{movie.original_title}} on Hubmovies&body=Discovers the movie on https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}">Email</a>
-                            </mat-menu>
-                            <button mat-icon-button (click)="deleteMovie(movie.movieId)" matTooltip="Delete ?">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                            <button mat-icon-button (click)="watchedMovie(movie.movieId, true)" matTooltip="Watched ?">
-                                <mat-icon>visibility</mat-icon>
-                            </button>
-                        </div>
-                    </mat-list-item>
-                </mat-list>
-            </mat-tab>
-            <mat-tab label="WATCHED">
-                <mat-list *ngIf="moviesWatched">
-                    <mat-list-item *ngFor="let movie of moviesWatched">
-                        <a [routerLink]="['/movies/movie', movie.movieId]">
-                            <div matListAvatar class="icon-container" [ngStyle]="{'background-image': 'url('+'https://image.tmdb.org/t/p/original'+movie.poster_path+')'}">
-                                <mat-icon *ngIf="!movie.poster_path" class="icon-movie">movie</mat-icon>
-                            </div>
-                            <h3>{{movie.original_title}}</h3>
-                            <p>{{movie.release_date | date}}</p>
+                            <h3 matLine>{{movie.original_title}}</h3>
+                            <p matLine>{{movie.release_date | date}}</p>
                         </a>
                         <div class="actions">
                             <button mat-icon-button [matMenuTriggerFor]="menu">
-                                <mat-icon>share</mat-icon>
+                                <mat-icon>more_vert</mat-icon>
                             </button>
                             <mat-menu #menu="matMenu">
-                                <a mat-menu-item href="https://plus.google.com/share?url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}"
-                                    onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                                    Google +
-                                </a>
-                                <a mat-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}">Facebook</a>
-                                <a mat-menu-item href="https://twitter.com/intent/tweet?text={{movie.original_title}}%20on%20&url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}&hashtags=hubmovies, {{movie.original_title}}">Twitter</a>
-                                <a mat-menu-item href="mailto:?subject={{movie.original_title}} on Hubmovies&body=Discovers the movie on https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.movieId}}">Email</a>
+                                <button mat-menu-item (click)="shareDialog(movie)">
+                                    <mat-icon>share</mat-icon>
+                                    <span>Share</span>
+                                </button>
+                                <button mat-menu-item (click)="deleteMovie(movie.movieId)">
+                                    <mat-icon>delete</mat-icon>
+                                    <span>Delete</span>
+                                </button>
+                                <button mat-menu-item (click)="watchedMovie(movie.movieId, true)">
+                                    <mat-icon>visibility</mat-icon>
+                                    <span>Watched</span>
+                                </button>
                             </mat-menu>
-                            <button mat-icon-button (click)="deleteMovie(movie.movieId)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                            <button mat-icon-button (click)="watchedMovie(movie.movieId, false)">
-                                <mat-icon>visibility_off</mat-icon>
-                            </button>
                         </div>
-                    </mat-list-item>
-                </mat-list>
-
+                    </mat-nav-list>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="WATCHED">
+                <section *ngIf="moviesWatched">
+                    <mat-nav-list *ngFor="let movie of moviesWatched">
+                        <a mat-list-item [routerLink]="['/movies/movie', movie.movieId]">
+                            <div matListAvatar class="icon-container" [ngStyle]="{'background-image': 'url('+'https://image.tmdb.org/t/p/original'+movie.poster_path+')'}">
+                                <mat-icon *ngIf="!movie.poster_path" class="icon-movie">movie</mat-icon>
+                            </div>
+                            <h3 matLine>{{movie.original_title}}</h3>
+                            <p matLine>{{movie.release_date | date}}</p>
+                        </a>
+                        <div class="actions">
+                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="shareDialog(movie)">
+                                    <mat-icon>share</mat-icon>
+                                    <span>Share</span>
+                                </button>
+                                <button mat-menu-item (click)="deleteMovie(movie.movieId)">
+                                    <mat-icon>delete</mat-icon>
+                                    <span>Delete</span>
+                                </button>
+                                <button mat-menu-item (click)="watchedMovie(movie.movieId, false)">
+                                    <mat-icon>visibility_off</mat-icon>
+                                    <span>Not watched</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-nav-list>
+                </section>
             </mat-tab>
         </mat-tab-group>
     </ng-template>

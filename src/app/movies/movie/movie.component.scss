@@ -8,7 +8,7 @@ app-movie {
     display: flex;
     flex-direction: column;
     position: relative;
-    margin: 20px 0;
+    margin: 0 0 20px;
     padding: 20px;
     height: auto;
     background-position: top;
@@ -30,6 +30,10 @@ app-movie {
             overflow: hidden;
             background-size: cover;
             background-position: center;
+
+            @media only screen and (min-width: 731px) {
+                background-position: initial;
+            }
         }
         
         .vignette {
@@ -47,7 +51,7 @@ app-movie {
                 top: 0;
                 left: 100%;
                 bottom: 0;
-                width: 275px;
+                width: 100%;
                 background-image: linear-gradient(to right,#000,transparent);
             }
         }

@@ -10,14 +10,12 @@ import { StorageService } from './shared/storage/storage.service';
     templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-    movieSearching: any[];
-    isConnected = false;
-    color = 'primary';
     languages = [
-        {value: 'en-En', viewValue: 'English'},
+        {value: 'en-US', viewValue: 'English'},
         {value: 'fr-FR', viewValue: 'French'},
+        {value: 'es-ES', viewValue: 'Spanish'}
       ];
-      lang = this.storageService.read('language');
+    lang = this.storageService.read('language');
 
     constructor(
         private authService: AuthService,
@@ -30,7 +28,7 @@ export class AppComponent implements OnInit {
     @HostListener('window:scroll', ['$event']) scrollHandler(event) {
         const number = window.scrollY;
         const el = document.getElementById('return-to-top');
-        if (number >= 50) {
+        if (number >= 500) {
             el.className = 'show';
 
         } else {
@@ -39,7 +37,7 @@ export class AppComponent implements OnInit {
     }
 
     scrollTop() {
-        window.scrollTo(0, 0);
+        window.scrollTo({left: 0, top: 0, behavior: 'smooth'});
     }
     getChangedValue(event) {
         this.storageService.save('language', event.value);
@@ -61,10 +59,13 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (this.lang === undefined) {
+            this.storageService.save('language', 'en-US');
+        }
        /* if (this.swUpdate.isEnabled) {
             this.swUpdate.available.subscribe(() => {
                 if (confirm('New version available. Load New Version?')) {
-                    window.location.reload();
+                    location.reload();
                 }
             })
         } */
