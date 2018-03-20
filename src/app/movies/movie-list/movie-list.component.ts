@@ -35,14 +35,11 @@ export class MovieListComponent implements OnInit {
   }
 
   setPage(param: any, page: number) {
-    console.log(page);
     this.isLoadingResults = true;
     if (page < 1 || page > this.pager.totalPages) { return; }
 
     this.pager = this.tmdbService.getPager(this.totalPages, page);
-    console.log('pager', this.pager);
     this.currentPage = this.pager.currentPage;
-    console.log(this.currentPage);
     if (typeof param === 'string') {
       if (param === 'discover' || param === 'upcoming' || param === 'now-playing') {
         this.request = this.tmdbService.getMovie(this.currentPage, param);
@@ -87,7 +84,6 @@ export class MovieListComponent implements OnInit {
       }
       if (this.request) {
         this.request.subscribe(response => {
-          console.log(response);
           this.isLoadingResults = false;
           this.title = this.parameter;
           this.totalPages = response.total_pages;
