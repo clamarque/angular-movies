@@ -8,8 +8,9 @@
                 <mat-list *ngIf="moviesToWatch">
                     <mat-list-item *ngFor="let movie of moviesToWatch">
                         <a [routerLink]="['/movies/movie', movie.movieId]">
-                            <img matListAvatar *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie">
-                            <img matListAvatar *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+                            <div matListAvatar class="icon-container" [ngStyle]="{'background-image': 'url('+'https://image.tmdb.org/t/p/original'+movie.poster_path+')'}">
+                                <mat-icon *ngIf="!movie.poster_path" class="icon-movie">movie</mat-icon>
+                            </div>
                             <h3>{{movie.original_title}}</h3>
                             <p>{{movie.release_date | date}}</p>
                         </a>
@@ -40,8 +41,9 @@
                 <mat-list *ngIf="moviesWatched">
                     <mat-list-item *ngFor="let movie of moviesWatched">
                         <a [routerLink]="['/movies/movie', movie.movieId]">
-                            <img matListAvatar *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="poster movie">
-                            <img matListAvatar *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+                            <div matListAvatar class="icon-container" [ngStyle]="{'background-image': 'url('+'https://image.tmdb.org/t/p/original'+movie.poster_path+')'}">
+                                <mat-icon *ngIf="!movie.poster_path" class="icon-movie">movie</mat-icon>
+                            </div>
                             <h3>{{movie.original_title}}</h3>
                             <p>{{movie.release_date | date}}</p>
                         </a>

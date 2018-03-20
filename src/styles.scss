@@ -106,6 +106,17 @@ img[ng-reflect-default-image] {
     height: 278px;
 }
 
+.icon-container {
+    background-position: center;
+    background-size: cover;
+    border: 1px solid $primary-light;
+    line-height: 2;
+
+    .icon-person, .icon-movie {
+        color: $primary-light;
+    }
+}
+
 /* Container principal */
 [id="hub-movies"] {
     text-align: center;

@@ -3,9 +3,12 @@
 </div>
 <ng-template [ngIf]="!isLoadingResults">
 
-  <div class="movie" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" *ngIf="movie" [ngStyle]="{
-  'background-image': 'linear-gradient(to right, rgba(25,28,31, 1), rgba(25,28,31,0.2)), url('+'https://image.tmdb.org/t/p/original'+movie.backdrop_path+')'}">
-
+  <div class="movie" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" *ngIf="movie">
+    <div class="movie--background">
+      <div class="image-rotator" [ngStyle]="{'background-image': 'url('+'https://image.tmdb.org/t/p/original'+movie.backdrop_path+')'}">
+      </div>
+      <div class="vignette"></div>
+    </div>
     <div class="movie__head">
       <button class="btn-back" (click)="back()">
         <mat-icon>arrow_back</mat-icon>

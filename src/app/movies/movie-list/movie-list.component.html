@@ -8,7 +8,6 @@
       <img *ngIf="movie.poster_path" [defaultImage]="'assets/images/no_poster_available.jpg'" [lazyLoad]="'https://image.tmdb.org/t/p/w185/' + movie.poster_path" alt="poster movie" [offset]="100">
       <img *ngIf="!movie.poster_path" src="/assets/images/no_poster_available.jpg" alt="No poster available">
       <h4>{{movie.title}}</h4>
-      {{action}}
     </a>
     <p class="date">{{movie.release_date | date}}</p>
   </div>
@@ -26,16 +25,16 @@
           <mat-icon>chevron_left</mat-icon>
         </a>
       </li>
-      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-        <a (click)="setPage(page, action)">{{page}}</a>
+      <li *ngFor="let page of pager.pages" [ngClass]="{disabled:pager.currentPage === page}">
+        <a (click)="setPage(parameter, page)">{{page}}</a>
       </li>
-      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages - 1}">
         <a (click)="setPage(parameter, pager.currentPage + 1)">
           <mat-icon>chevron_right</mat-icon>
         </a>
       </li>
-      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <a (click)="setPage(parameter, pager.totalPages)">
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages - 1}">
+        <a (click)="setPage(parameter, pager.totalPages - 1)">
           <mat-icon>last_page</mat-icon>
         </a>
       </li>
