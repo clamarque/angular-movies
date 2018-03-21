@@ -20,8 +20,23 @@ body {
     font-size: 1rem;
     background-color: white;
 }
-/* Launcher */
 
+/*
+body::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px red;
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: blue;
+  outline: 1px solid blue;
+}
+*/
+
+/* Launcher */
 .launcher {
     display: flex;
     flex-direction: column;
@@ -46,6 +61,11 @@ a {
     color: $primary-light;
     outline: none;
 }
+a, button {
+    &:focus, &:active {
+        outline: none;
+    }
+}
 li {
     list-style: none;
 }
@@ -55,20 +75,14 @@ h3,
 h4 {
     font-weight: normal;
     text-align: center;
+    color: white;
 }
-h1,
-h2,
-h3,
-.date {
-    color: $white;
-}
-md-card-header .mat-card-header-text {
-    margin: 1rem 0 0;
-}
+
 .mat {
     &-icon {
         vertical-align: middle;
     }
+    /*
     &-sidenav-container {
         min-height: 100vh;
         background-color: $primary-dark;
@@ -86,6 +100,7 @@ md-card-header .mat-card-header-text {
     &-menu-item {
         color: $primary-light;
     }
+    */
 }
 .mat-tab {
     &-labels {
@@ -122,72 +137,11 @@ img[ng-reflect-default-image] {
     text-align: center;
 }
 /* Navigation */
+/*
 .mat-drawer.mat-drawer-push {
     background-color: $primary-dark;
 }
-
-[id="navigation"] {
-    li {
-        min-height: 3rem;
-        line-height: 3;
-        &:first-child:hover {
-            background-color: transparent;
-        }
-        &:hover {
-            background-color: $background-color;
-        }
-
-        &:last-child {
-            color: white;
-        }
-    }
-    a {
-        display: block;
-        padding: .625rem 0;
-        color: $white;
-        &:hover {
-            color: $primary-light;
-        }
-    }
-    .active {
-        color: $primary-light;
-    }
-    .mat-input {
-        &-underline {
-            background-color: $white;
-        }
-        &-placeholder,
-        &-element {
-            color: $white;
-        }
-    }
-    .mat-select {
-        padding: .625rem 0;
-        width: 140px;
-
-        &-placeholder, &-value {
-            color: white;
-        }
-    }
-}
-.app-icon-button {
-    position: fixed;
-    top: 0;
-    left: 0;
-    margin: 20px;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    color: $white;
-    z-index: 3;
-}
-
-a, button {
-    &:focus, &:active {
-        outline: none;
-    }
-}
+*/
 
 /* Dialog */
 h1.mat-dialog-title {
@@ -243,24 +197,8 @@ h1.mat-dialog-title {
     .disabled a {
         cursor: default;
         pointer-events: none;
-        color: $disable;
+        color: $grey;
     }
-}
-/* button return top*/
-[id="return-to-top"] {
-    position: fixed;
-    bottom: 40px;
-    right: 12px;
-    display: none;
-    z-index: 1;
-}
-
-.show {
-    display: block;
-}
-
-.hide {
-    display: none;
 }
 
 /* spinner */

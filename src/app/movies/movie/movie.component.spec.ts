@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {
   MatProgressSpinnerModule,
-  MatCardModule,
   MatIconModule,
   MatMenuModule,
   MatTabsModule,
@@ -47,7 +46,6 @@ describe('MovieComponent', () => {
         BrowserAnimationsModule,
         HttpClientTestingModule,
         LazyLoadImageModule,
-        MatCardModule,
         MatIconModule,
         MatListModule,
         MatMenuModule,

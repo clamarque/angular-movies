@@ -1,3 +1,15 @@
-app-movie-list {
-    position: relative;
+@import '../../../assets/scss/palette';
+
+h1 {
+    color: $primary-dark;
+}
+
+h4 {
+    margin: 15px 0 5px;
+    color: $primary-light;
+}
+
+.date {
+    margin: 0;
+    color: white;
 }

@@ -8,7 +8,7 @@ app-movie {
     display: flex;
     flex-direction: column;
     position: relative;
-    margin: 0 0 20px;
+    margin: 0;
     padding: 20px;
     height: auto;
     background-position: top;
@@ -60,15 +60,17 @@ app-movie {
     &__head {
         display: inherit;
         z-index: 2;
+
         .btn-back {
-        border: none;
-        background: transparent;
-        color: white;
-        cursor: pointer;
+            border: none;
+            background: transparent;
+            color: white;
+            cursor: pointer;
         }
+
         h1 {
-        color: white;
-        text-align: left !important;
+            color: white;
+            text-align: left !important;
         }
     }
     &__body {
@@ -76,9 +78,6 @@ app-movie {
         .mat {
         &-green {
             color: #4caf50
-        }
-        &-orange {
-            color: rgb(255, 87, 34);
         }
         &-red {
             color: #f44336;
@@ -91,14 +90,44 @@ app-movie {
         }
         }
         .movie {
+
+            &--infos {
+                display: flex;
+                align-items: center;
+
+                span {
+                    margin: 0 5px 0 0;
+                }
+                .mat-icon {
+                    width: 20px;
+                    font-size: 20px;
+                }
+            }
         &--overview {
             font-weight: 500;
             text-align: justify;
         }
         &--genre {
             ul {
-            display: inline-block;
-            padding: 0 5px 0 0;
+                padding: 0;
+
+                li {
+                    display: inline-block;
+                    padding: 0 5px 0 0;
+
+                    &::after {
+                        content: '•';
+                        color: $primary-light;
+                    }
+                    &:last-child:after {
+                        content: '';
+                    }
+                }
+            }
+        }
+        &--actions {
+            button {
+                padding: 0;
             }
         }
         }

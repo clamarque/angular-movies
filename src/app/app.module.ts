@@ -13,10 +13,9 @@ import { AngularFireModule } from 'angularfire2';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 /* ROUTING */
-import { routing } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 /* COMPONENT */
 import { AppComponent } from './app.component';
-import { DialogDeleteUser } from './profile/profile.component';
 import { MoviesComponent } from './movies/movies.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieComponent } from './movies/movie/movie.component';
@@ -43,13 +42,13 @@ export class MyHammerConfig extends HammerGestureConfig {
 @NgModule({
   declarations: [
     AppComponent,
-    DialogDeleteUser,
     PageNotFoundComponent,
     MoviesComponent,
     MovieListComponent,
     MovieComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
@@ -59,7 +58,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     SharedModule,
     LazyLoadImageModule,
     AngularFireModule.initializeApp(environment.firebase),
-    routing,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
@@ -71,9 +69,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     PromptUpdateService,
     StorageService
   ],
-  entryComponents: [
-        DialogDeleteUser,
-    ],
+  entryComponents: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit, NgModule } from '@angular/core';
+import { Component, HostListener, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './core/auth/auth.service';
@@ -7,27 +8,36 @@ import { StorageService } from './shared/storage/storage.service';
 
 @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html'
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+    mobileQuery: MediaQueryList;
     languages = [
         {value: 'en-US', viewValue: 'English'},
         {value: 'fr-FR', viewValue: 'French'},
         {value: 'es-ES', viewValue: 'Spanish'}
       ];
     lang = this.storageService.read('language');
+    private _mobileQueryListener: () => void;
 
     constructor(
         private authService: AuthService,
+        changeDetectorRef: ChangeDetectorRef,
+        media: MediaMatcher,
         private router: Router,
         private snackbar: MatSnackBar,
         private storageService: StorageService,
         // private swUpdate: SwUpdate
-    ) { }
+    ) {
+        this.mobileQuery = media.matchMedia('(max-width: 600px)');
+        this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+        this.mobileQuery.addListener(this._mobileQueryListener);
+    }
 
     @HostListener('window:scroll', ['$event']) scrollHandler(event) {
         const number = window.scrollY;
-        const el = document.getElementById('return-to-top');
+        const el = document.getElementById('btn-returnToTop');
         if (number >= 500) {
             el.className = 'show';
 
@@ -70,4 +80,9 @@ export class AppComponent implements OnInit {
             })
         } */
     }
+
+    ngOnDestroy(): void {
+        this.mobileQuery.removeListener(this._mobileQueryListener);
+      }
+
 }

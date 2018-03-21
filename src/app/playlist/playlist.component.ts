@@ -48,7 +48,6 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   }
 
   shareDialog(movie: MovieCategoryModel): void {
-    console.log(movie);
     const dialogRef = this.dialog.open(ShareModalComponent, {
       width: '300px',
       data: { id: movie.movieId, original_title: movie.original_title }
