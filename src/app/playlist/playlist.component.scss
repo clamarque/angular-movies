@@ -2,39 +2,32 @@
 
 .playlist {
     &__tab {
-        margin: 30px 0 0;
 
         .mat-nav-list {
             display: flex;
             flex-direction: row;
             align-items: center;
         }
-
         a.mat-list-item {
             flex: 1;
 
             &:hover {
-                background: rgba(192, 138, 138, 0.1);
+                background: $background;
             }
         }
         .actions {
             display: flex;
-            color: white;
+            color: $white;
         }
         /deep/ .mat-list-text {
             h3 {
                 color: $primary-light;
                 text-align: left;
             }
-        
             p {
-                color: white;
+                color: $white;
                 text-align: left;
             }
         }
     }
-}
-
-/deep/ .mat-menu-content {
-    background: white;
 }

@@ -1,6 +1,4 @@
-app-star {
-    position: relative;
-}
+@import '../../assets/scss/palette';
 
 .btn-back {
     position: absolute;
@@ -8,7 +6,7 @@ app-star {
     left: 20px;
     border: none;
     background: transparent;
-    color: white;
+    color: $white;
     cursor: pointer;
 }
 
@@ -19,9 +17,9 @@ app-star {
         width: auto;
     }
     mat-tab-group p:nth-child(3) {
-        color: #9E9E9E;
+        color: $grey;
     }
     p {
-        color: white;
+        color: $white;
     }
 }

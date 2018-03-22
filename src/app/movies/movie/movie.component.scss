@@ -1,9 +1,5 @@
 @import '../../../assets/scss/palette';
 
-app-movie {
-    position: relative;
-}
-
 .movie {
     display: flex;
     flex-direction: column;
@@ -13,7 +9,7 @@ app-movie {
     height: auto;
     background-position: top;
     background-size: cover;
-    color: white;
+    color: $white;
     text-align: left;
     @media only screen and (min-width: 731px) {
         min-height: 500px;
@@ -42,7 +38,7 @@ app-movie {
             left: 0;
             bottom: 0;
             width: 30%;
-            background: #000;
+            background: $black;
             z-index: 2;
         
             &::before {
@@ -52,7 +48,7 @@ app-movie {
                 left: 100%;
                 bottom: 0;
                 width: 100%;
-                background-image: linear-gradient(to right,#000,transparent);
+                background-image: linear-gradient(to right,$black,transparent);
             }
         }
     }
@@ -64,12 +60,12 @@ app-movie {
         .btn-back {
             border: none;
             background: transparent;
-            color: white;
+            color: $white;
             cursor: pointer;
         }
 
         h1 {
-            color: white;
+            color: $white;
             text-align: left !important;
         }
     }
@@ -77,16 +73,16 @@ app-movie {
         z-index: 2;
         .mat {
         &-green {
-            color: #4caf50
+            color: $green;
         }
         &-red {
-            color: #f44336;
+            color: $red;
         }
         &-yellow {
-            color: #ffc107;
+            color: $yellow;
         }
         &-teal {
-            color: #009688
+            color: $teal;
         }
         }
         .movie {
@@ -141,7 +137,7 @@ app-movie {
             &--cast {
                 a.mat-list-item {
                     &:hover {
-                        background: rgba(192, 138, 138, 0.1);
+                        background: $background;
                     }
                 }
                 /deep/ .mat-list-text {
@@ -169,8 +165,8 @@ app-movie {
                 }
             }
             &--similar {
-                [alt="poster movie"] {
-                    height: 278px;
+                h3 {
+                    color: $primary-light;
                 }
             }
         }

@@ -1,5 +1,11 @@
 @import '../assets/scss/palette';
 
+/* Container principal */
+[id="hub-movies"] {
+    position: relative;
+    text-align: center;
+}
+
 .app-toolbar {
     display: none;
 
@@ -8,20 +14,26 @@
     }
     .mat-toolbar {
         background: $primary-light;
-        color: white;
+        color: $white;
     }
 }
 
 .app-sidenav {
     min-height: 100vh;
-    background: $primary-dark;
+    background: $black;
 
     /deep/ .mat-sidenav {
-        position: fixed;
-        background: inherit;
+        background: $background;
+
+        @media only screen and (max-width: 731px) {
+            position: fixed;
+        }
 
         &-content {
             background: inherit;
+        }
+        .mat-nav-list {
+            padding: 0;
         }
     }
 
@@ -49,10 +61,10 @@
         }
 
         /deep/ .mat-input-ripple {
-            background: $primary-dark;
+            background: $black;
         }
         .mat-icon {
-            color: white;
+            color: $white;
         }
     }
 
@@ -62,11 +74,11 @@
             line-height: 3;
 
             &:hover {
-                background-color: $background-color;
+                background-color: $black;
             }
     
             &:last-child {
-                color: white;
+                color: $white;
             }
         }
         a {
@@ -83,9 +95,13 @@
         /deep/ .mat-select {
             padding: .625rem 0;
             width: 140px;
+
+            &-arrow {
+                color: $white;
+            }
     
             &-placeholder, &-value {
-                color: white;
+                color: $white;
             }
         }
     }

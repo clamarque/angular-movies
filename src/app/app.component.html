@@ -8,54 +8,50 @@
 </div>
 <mat-sidenav-container class="app-sidenav">
   <mat-sidenav [opened]="mobileQuery.matches ? 'false': 'true'" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches">
-    <nav class="navigation" role="navigation">
+    <nav class="navigation">
       <div class="navigation--search">
         <mat-form-field>
-          <input matInput #search placeholder="Search a movie" (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="end.close()"
+          <input matInput #search placeholder="Search a movie" (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="closeSidenav()"
             tabindex="-1">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
       </div>
       <ul class="navigation--links">
         <li>
-          <a [routerLink]="['/movies/list', 'now-playing']" routerLinkActive="active" (click)="end.close()">
+          <a [routerLink]="['/movies/list', 'now-playing']" routerLinkActive="active" (click)="closeSidenav()">
             <mat-icon>local_movies</mat-icon> Currently</a>
         </li>
         <li>
-          <a [routerLink]="['/movies/list', 'upcoming']" routerLinkActive="active" (click)="end.close()">
+          <a [routerLink]="['/movies/list', 'upcoming']" routerLinkActive="active" (click)="closeSidenav()">
             <mat-icon>date_range</mat-icon> Coming soon</a>
         </li>
         <li>
-          <a [routerLink]="['/movies/list', 'discover']" routerLinkActive="active" (click)="end.close()">
+          <a [routerLink]="['/movies/list', 'discover']" routerLinkActive="active" (click)="closeSidenav()">
             <mat-icon>whatshot</mat-icon> Trending</a>
         </li>
         <li *ngIf="authService.user | async">
-          <a [routerLink]="['/playlist']" routerLinkActive="active" (click)="end.close()">
+          <a [routerLink]="['/playlist']" routerLinkActive="active" (click)="closeSidenav()">
             <mat-icon>watch_later</mat-icon> Watch later</a>
         </li>
         <li *ngIf="authService.user | async">
-          <a [routerLink]="['/favorites']" routerLinkActive="active" (click)="end.close()">
+          <a [routerLink]="['/favorites']" routerLinkActive="active" (click)="closeSidenav()">
             <mat-icon>favorite</mat-icon> Favorites</a>
         </li>
         <li *ngIf="authService.user | async">
-          <a routerLink="/account" routerLinkActive="active" (click)="end.close()">
+          <a routerLink="/account" routerLinkActive="active" (click)="closeSidenav()">
             <mat-icon>account_box</mat-icon> Account</a>
         </li>
         <li [hidden]="authService.user | async">
-          <a routerLink="/sign-in" routerLinkActive="active" (click)="end.close()">
+          <a routerLink="/sign-in" routerLinkActive="active" (click)="closeSidenav()">
             <mat-icon>account_circle</mat-icon> Sign in</a>
         </li>
         <li *ngIf="authService.user | async">
-          <a (click)="end.close()" (click)="onSignOut()">
+          <a (click)="closeSidenav()" (click)="onSignOut()">
             <mat-icon>cancel</mat-icon> Sign out</a>
         </li>
         <li>
           <a href="mailto:chabox59@gmail.com">
             <mat-icon>bug_report</mat-icon> Feebacks</a>
-        </li>
-        <li>
-          <a href="https://github.com/clamarque/angular-movies">
-            <mat-icon>star_rate</mat-icon> Star me</a>
         </li>
         <li>
           <mat-icon>language</mat-icon>
@@ -66,6 +62,7 @@
           </mat-select>
         </li>
       </ul>
+
     </nav>
   </mat-sidenav>
   <div id="hub-movies">

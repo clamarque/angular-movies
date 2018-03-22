@@ -1,9 +1,12 @@
-import { Component, HostListener, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './core/auth/auth.service';
 import { StorageService } from './shared/storage/storage.service';
+import { Observable } from '@firebase/util';
+import 'rxjs/add/observable/fromEvent';
+
 // import { SwUpdate } from '@angular/service-worker';
 
 @Component({
@@ -20,6 +23,8 @@ export class AppComponent implements OnInit, OnDestroy {
       ];
     lang = this.storageService.read('language');
     private _mobileQueryListener: () => void;
+    @ViewChild('snav') snav: any;
+    snav$: Observable<any>;
 
     constructor(
         private authService: AuthService,
@@ -30,10 +35,27 @@ export class AppComponent implements OnInit, OnDestroy {
         private storageService: StorageService,
         // private swUpdate: SwUpdate
     ) {
-        this.mobileQuery = media.matchMedia('(max-width: 600px)');
+        this.mobileQuery = media.matchMedia('(max-width: 731px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
     }
+
+    ngOnInit() {
+        if (this.lang === undefined) {
+            this.storageService.save('language', 'en-US');
+        }
+       /* if (this.swUpdate.isEnabled) {
+            this.swUpdate.available.subscribe(() => {
+                if (confirm('New version available. Load New Version?')) {
+                    location.reload();
+                }
+            })
+        } */
+    }
+
+    ngOnDestroy(): void {
+        this.mobileQuery.removeListener(this._mobileQueryListener);
+      }
 
     @HostListener('window:scroll', ['$event']) scrollHandler(event) {
         const number = window.scrollY;
@@ -68,21 +90,10 @@ export class AppComponent implements OnInit, OnDestroy {
         this.router.navigate(['/movies/list/now-playing']);
     }
 
-    ngOnInit() {
-        if (this.lang === undefined) {
-            this.storageService.save('language', 'en-US');
+    closeSidenav() {
+        if (this.mobileQuery.matches !== false) {
+            this.snav.close();
         }
-       /* if (this.swUpdate.isEnabled) {
-            this.swUpdate.available.subscribe(() => {
-                if (confirm('New version available. Load New Version?')) {
-                    location.reload();
-                }
-            })
-        } */
     }
-
-    ngOnDestroy(): void {
-        this.mobileQuery.removeListener(this._mobileQueryListener);
-      }
 
 }

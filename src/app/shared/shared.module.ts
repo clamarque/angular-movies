@@ -22,6 +22,8 @@ import {
   MatProgressSpinnerModule,
   MatTooltipModule} from '@angular/material';
 
+  import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component'
+
 
 @NgModule({
   imports: [
@@ -47,6 +49,7 @@ import {
   exports: [
     CommonModule,
     FormsModule,
+    ShareModalComponent,
     MatDialogModule,
     MatToolbarModule,
     MatButtonModule,
@@ -66,6 +69,12 @@ import {
     MatTableModule,
     MatTooltipModule,
     MatSelectModule
-  ]
+  ],
+  declarations: [
+    ShareModalComponent
+  ],
+  entryComponents: [
+    ShareModalComponent
+  ],
 })
 export class SharedModule { }

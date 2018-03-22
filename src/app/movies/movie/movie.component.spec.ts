@@ -6,7 +6,8 @@ import {
   MatMenuModule,
   MatTabsModule,
   MatSnackBarModule,
-  MatListModule } from '@angular/material';
+  MatListModule, 
+  MatDialogModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -46,6 +47,7 @@ describe('MovieComponent', () => {
         BrowserAnimationsModule,
         HttpClientTestingModule,
         LazyLoadImageModule,
+        MatDialogModule,
         MatIconModule,
         MatListModule,
         MatMenuModule,

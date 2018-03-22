@@ -3,8 +3,8 @@ import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 import { DatabaseService } from '../shared/database/database.service';
 import { Subscription } from 'rxjs/Subscription';
 
-import { ShareModalComponent } from '../shared/share-modal/share-modal.component';
-import { MovieCategoryModel } from './shared/movie-category.model';
+import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component';
+import { MovieCategoryModel } from '../shared/model/movie-category.model';
 
 @Component({
   selector: 'app-playlist',
@@ -13,9 +13,10 @@ import { MovieCategoryModel } from './shared/movie-category.model';
 })
 export class PlaylistComponent implements OnInit, OnDestroy {
   isLoadingResults = true;
-  moviesToWatch: any;
-  moviesWatched: any;
-  sub: Subscription
+  moviesToWatch: Array<any> = [];
+  moviesWatched: Array<any> = [];
+  title = 'Playlist';
+  sub: Subscription;
 
   constructor(
     private databaseService: DatabaseService,
@@ -25,7 +26,6 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoadingResults = true;
-
     this.sub = this.databaseService.getMovies('MovieLater').subscribe(response => {
       this.moviesToWatch = response.filter(val => val['watched'] === false);
       this.moviesWatched = response.filter(val => val['watched'] === true);
@@ -49,11 +49,8 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
   shareDialog(movie: MovieCategoryModel): void {
     const dialogRef = this.dialog.open(ShareModalComponent, {
-      width: '300px',
       data: { id: movie.movieId, original_title: movie.original_title }
     })
-
-    dialogRef.afterClosed().subscribe(result => console.log('The dialog was closed'));
   }
 
   watchedMovie(movieId: any, watched: boolean) {

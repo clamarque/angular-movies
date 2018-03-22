@@ -18,6 +18,7 @@ export class MovieListComponent implements OnInit {
   dataTitle: any;
   dataParam: any;
   movies: MovieModel[];
+  moviesLength: number;
   currentPage: number;
   parameter: any;
   pager: any = {};
@@ -84,6 +85,7 @@ export class MovieListComponent implements OnInit {
       }
       if (this.request) {
         this.request.subscribe(response => {
+          this.moviesLength = response.results.length;
           this.isLoadingResults = false;
           this.title = this.parameter;
           this.totalPages = response.total_pages;

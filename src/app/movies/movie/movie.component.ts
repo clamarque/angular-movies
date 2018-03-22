@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap, Router, Event as NavigationEvent } from '@angular/router';
 import { DatabaseService } from '../../shared/database/database.service';
@@ -13,6 +13,9 @@ import { MovieVideosModel } from '../shared/movie-videos.model';
 import { Location } from '@angular/common';
 import { MovieModel } from '../shared/movie.model';
 import { MovieDetailsModel } from '../shared/movie-details.model';
+import { MovieCategoryModel } from '../../shared/model/movie-category.model';
+
+import { ShareModalComponent } from '../../shared/component/share-modal/share-modal.component';
 
 @Component({
   selector: 'app-movie',
@@ -36,32 +39,14 @@ export class MovieComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private databaseService: DatabaseService,
+    public dialog: MatDialog,
     private location: Location,
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
     private snackBar: MatSnackBar,
-    private tmdbService: TmdbService) { }
-
-  swipe(action = this.SWIPE_ACTION.RIGHT) {
-    if (action === this.SWIPE_ACTION.RIGHT || action === this.SWIPE_ACTION.LEFT) {
-      this.location.back();
-    }
-  }
-
-  saveMovie(movie: any, category: string) {
-    this.databaseService.setMovies(movie, category, (error) => {
-      if (error) {
-        this.snackBar.open(error, 'Hide', { duration: 5000 });
-      } else {
-        this.snackBar.open('Your movie was been save', '', { duration: 2000 });
-      }
-    });
-  }
-
-  getMovieVideoUrl(id: string) {
-    return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + id);
-  }
+    private tmdbService: TmdbService
+  ) { }
 
   ngOnInit() {
     this.isLoadingResults = true;
@@ -88,5 +73,31 @@ export class MovieComponent implements OnInit {
 
   back() {
     this.location.back();
+  }
+
+  swipe(action = this.SWIPE_ACTION.RIGHT) {
+    if (action === this.SWIPE_ACTION.RIGHT || action === this.SWIPE_ACTION.LEFT) {
+      this.location.back();
+    }
+  }
+
+  saveMovie(movie: any, category: string) {
+    this.databaseService.setMovies(movie, category, (error) => {
+      if (error) {
+        this.snackBar.open(error, 'Hide', { duration: 5000 });
+      } else {
+        this.snackBar.open('Your movie was been save', '', { duration: 2000 });
+      }
+    });
+  }
+
+  getMovieVideoUrl(id: string) {
+    return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + id);
+  }
+
+  shareDialog(movie: MovieCategoryModel): void {
+    const dialogRef = this.dialog.open(ShareModalComponent, {
+      data: { id: movie.movieId, original_title: movie.original_title }
+    })
   }
 }
