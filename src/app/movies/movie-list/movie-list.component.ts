@@ -18,6 +18,7 @@ export class MovieListComponent implements OnInit {
   dataTitle: any;
   dataParam: any;
   movies: MovieModel[];
+  moviesLength: number;
   currentPage: number;
   parameter: any;
   pager: any = {};
@@ -40,7 +41,6 @@ export class MovieListComponent implements OnInit {
 
     this.pager = this.tmdbService.getPager(this.totalPages, page);
     this.currentPage = this.pager.currentPage;
-
     if (typeof param === 'string') {
       if (param === 'discover' || param === 'upcoming' || param === 'now-playing') {
         this.request = this.tmdbService.getMovie(this.currentPage, param);
@@ -85,9 +85,10 @@ export class MovieListComponent implements OnInit {
       }
       if (this.request) {
         this.request.subscribe(response => {
+          this.moviesLength = response.results.length;
           this.isLoadingResults = false;
           this.title = this.parameter;
-          this.totalPages = response.totalPages;
+          this.totalPages = response.total_pages;
           this.setPage(this.parameter, 1);
         });
       }

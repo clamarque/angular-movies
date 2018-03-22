@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatCheckboxModule, MatCardModule, MatSnackBarModule, MatDialogModule } from '@angular/material';
+import { MatInputModule, MatCheckboxModule, MatSnackBarModule, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ProfileComponent } from './profile.component';
+import { AccountComponent } from './account.component';
 
 import { AuthService } from '../core/auth/auth.service';
 import { DatabaseService } from '../shared/database/database.service';
@@ -13,9 +13,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
-describe('ProfileComponent', () => {
-  let component: ProfileComponent;
-  let fixture: ComponentFixture<ProfileComponent>;
+describe('AccountComponent', () => {
+  let component: AccountComponent;
+  let fixture: ComponentFixture<AccountComponent>;
 
   const firebaseConfig = {
     apiKey: 'foo',
@@ -35,14 +35,13 @@ describe('ProfileComponent', () => {
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        MatCardModule,
         MatCheckboxModule,
         MatDialogModule,
         MatInputModule,
         MatSnackBarModule,
         RouterTestingModule
       ],
-      declarations: [ ProfileComponent ],
+      declarations: [ AccountComponent ],
       providers: [
         AuthService,
         AngularFireAuthModule,
@@ -53,7 +52,7 @@ describe('ProfileComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProfileComponent);
+    fixture = TestBed.createComponent(AccountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

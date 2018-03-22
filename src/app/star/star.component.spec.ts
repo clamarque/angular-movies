@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatTabsModule, MatIconModule } from '@angular/material';
+import { MatTabsModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -21,6 +21,7 @@ describe('StarComponent', () => {
         NoopAnimationsModule,
         LazyLoadImageModule,
         MatIconModule,
+        MatProgressSpinnerModule,
         MatTabsModule,
         HttpClientTestingModule,
         RouterTestingModule,

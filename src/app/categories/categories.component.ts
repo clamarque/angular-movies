@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DatabaseService } from '../shared/database/database.service';
-import { MatSnackBar } from '@angular/material';
-import { MovieCategoryModel } from '../movies/shared/movie-category.model';
+import { MatDialog, MatDialogRef , MatSnackBar } from '@angular/material';
+import { MovieCategoryModel } from '../shared/model/movie-category.model';
 import { Subscription } from 'rxjs/Subscription';
+import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component';
 
 @Component({
   selector: 'app-categories',
@@ -13,9 +14,11 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   movies: any;
   isLoadingResults: boolean;
   sub: Subscription;
+  title = 'Categories';
 
   constructor(
     private databaseService: DatabaseService,
+    public dialog: MatDialog,
     private snackBar: MatSnackBar
   ) { }
 
@@ -39,6 +42,12 @@ export class CategoriesComponent implements OnInit, OnDestroy {
           this.snackBar.open('Your movie was been delete', null , { duration: 2000 });
         }
     })
+}
+
+shareDialog(movie: MovieCategoryModel): void {
+  const dialogRef = this.dialog.open(ShareModalComponent, {
+    data: { id: movie.movieId, original_title: movie.original_title }
+  })
 }
 
 }

@@ -16,12 +16,13 @@ import {
   MatSelectModule,
   MatListModule,
   MatProgressBarModule,
-  MatCardModule,
   MatSidenavModule,
   MatTabsModule,
   MatTableModule,
   MatProgressSpinnerModule,
   MatTooltipModule} from '@angular/material';
+
+  import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component'
 
 
 @NgModule({
@@ -40,7 +41,6 @@ import {
     MatSnackBarModule,
     MatListModule,
     MatProgressBarModule,
-    MatCardModule,
     CdkTableModule,
     MatSidenavModule,
     MatTabsModule,
@@ -49,6 +49,7 @@ import {
   exports: [
     CommonModule,
     FormsModule,
+    ShareModalComponent,
     MatDialogModule,
     MatToolbarModule,
     MatButtonModule,
@@ -61,7 +62,6 @@ import {
     MatSnackBarModule,
     MatListModule,
     MatProgressBarModule,
-    MatCardModule,
     CdkTableModule,
     MatSidenavModule,
     MatProgressSpinnerModule,
@@ -69,6 +69,12 @@ import {
     MatTableModule,
     MatTooltipModule,
     MatSelectModule
-  ]
+  ],
+  declarations: [
+    ShareModalComponent
+  ],
+  entryComponents: [
+    ShareModalComponent
+  ],
 })
 export class SharedModule { }

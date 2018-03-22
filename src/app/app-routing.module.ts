@@ -1,4 +1,4 @@
-import { ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
 import { PageNotFoundComponent } from './not-found.component';
@@ -15,11 +15,16 @@ const routes: Routes = [
   ] },
   { path: 'playlist', loadChildren: 'app/playlist/playlist.module#PlaylistModule', canActivate: [AuthGuard] },
   { path: 'favorites', loadChildren: 'app/categories/categories.module#CategoriesModule', canActivate: [AuthGuard] },
-  { path: 'profile', loadChildren: 'app/profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
+  { path: 'account', loadChildren: 'app/account/account.module#AccountModule', canActivate: [AuthGuard] },
   { path: 'sign-in', loadChildren: 'app/sign-in/sign-in.module#SignInModule' },
   { path: 'star/:id', loadChildren: 'app/star/star.module#StarModule' },
   { path: '', redirectTo: '/movies/list/now-playing', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(routes);
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+
+export class AppRoutingModule {}

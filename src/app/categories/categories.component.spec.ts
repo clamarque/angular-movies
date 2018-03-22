@@ -8,7 +8,8 @@ import {
   MatMenuModule,
   MatTabsModule,
   MatTooltipModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatDialogModule
 } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -36,6 +37,7 @@ describe('CategoriesComponent', () => {
         AngularFireAuthModule,
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFirestoreModule,
+        MatDialogModule,
         MatIconModule,
         MatListModule,
         MatMenuModule,

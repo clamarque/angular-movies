@@ -1,42 +1,33 @@
 @import '../../assets/scss/palette';
 
-.mat-list {
-    margin: 30px 0 0;
-    width: 100%;
-    background: white;
+.categories {
+    &__tab {
 
-    &-item {
-        font-size: 1rem;
+        .mat-nav-list {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        a.mat-list-item {
+            flex: 1;
 
-        &:hover {
-            background: $grey;
-
-            h3 {
-                color: white;
+            &:hover {
+                background: $background;
             }
         }
         .actions {
-            display: inherit;
+            display: flex;
+            color: $white;
         }
-    }
-    h3 {
-        flex: 1;
-        margin: 0 10px;
-        color: #000;
-        text-align: left;
-    }
-    a {
-        display: inherit;
-        align-items: center;
-        flex: 1;
-    }
-    button {
-        &:hover {
-            color: white;
-            background: $primary-light;
+        /deep/ .mat-list-text {
+            h3 {
+                color: $primary-light;
+                text-align: left;
+            }
+            p {
+                color: $white;
+                text-align: left;
+            }
         }
-    }
-    p {
-        margin: 0 10px 0 0;
     }
 }

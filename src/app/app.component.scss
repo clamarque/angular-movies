@@ -1,0 +1,138 @@
+@import '../assets/scss/palette';
+
+/* Container principal */
+[id="hub-movies"] {
+    position: relative;
+    text-align: center;
+}
+
+.app-toolbar {
+    display: none;
+
+    &--mobile {
+        display: block;
+    }
+    .mat-toolbar {
+        background: $primary-light;
+        color: $white;
+    }
+}
+
+.app-sidenav {
+    min-height: 100vh;
+    background: $black;
+
+    /deep/ .mat-sidenav {
+        background: $background;
+
+        @media only screen and (max-width: 731px) {
+            position: fixed;
+        }
+
+        &-content {
+            background: inherit;
+        }
+        .mat-nav-list {
+            padding: 0;
+        }
+    }
+
+}
+
+.navigation {
+    &--search {
+        background: $primary-light;
+        min-height: 3rem;
+        line-height: 3;
+        padding: 16px 0 0 20px;
+
+        .mat-form-field {
+            width: 180px;
+            padding: 0 20px;
+        }
+        /deep/ .mat-input {
+            &-underline {
+                background-color: $white;
+            }
+            &-placeholder,
+            &-element {
+                color: $white;
+            }
+        }
+
+        /deep/ .mat-input-ripple {
+            background: $black;
+        }
+        .mat-icon {
+            color: $white;
+        }
+    }
+
+    &--links {
+        li {
+            min-height: 3rem;
+            line-height: 3;
+
+            &:hover {
+                background-color: $black;
+            }
+    
+            &:last-child {
+                color: $white;
+            }
+        }
+        a {
+            display: block;
+            padding: .625rem 0;
+            color: $white;
+            &:hover {
+                color: $primary-light;
+            }
+        }
+        .active {
+            color: $primary-light;
+        }
+        /deep/ .mat-select {
+            padding: .625rem 0;
+            width: 140px;
+
+            &-arrow {
+                color: $white;
+            }
+    
+            &-placeholder, &-value {
+                color: $white;
+            }
+        }
+    }
+}
+
+.btn-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 20px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: $white;
+    z-index: 3;
+}
+
+/* button return top*/
+[id="btn-returnToTop"] {
+    position: fixed;
+    bottom: 40px;
+    right: 12px;
+    display: none;
+    z-index: 1;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
