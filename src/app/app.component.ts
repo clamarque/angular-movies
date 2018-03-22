@@ -24,7 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
     @ViewChild('snav') snav: any;
 
     constructor(
-        authService: AuthService,
+        public authService: AuthService,
         changeDetectorRef: ChangeDetectorRef,
         media: MediaMatcher,
         private router: Router,
