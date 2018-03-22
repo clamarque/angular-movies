@@ -95,9 +95,9 @@ export class MovieComponent implements OnInit {
     return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + id);
   }
 
-  shareDialog(movie: MovieCategoryModel): void {
+  shareDialog(movieId: MovieCategoryModel, movieTitle: MovieCategoryModel): void {
     const dialogRef = this.dialog.open(ShareModalComponent, {
-      data: { id: movie.movieId, original_title: movie.original_title }
+      data: { id: movieId, original_title: movieTitle }
     })
   }
 }

@@ -38,7 +38,7 @@
         <button *ngIf="authService.user | async" mat-button (click)="saveMovie(movie, 'FavoriteMovie')">
           <mat-icon class="mat-red">favorite_border</mat-icon> Favorite
         </button>
-        <button mat-button (click)="shareDialog(movie)">
+        <button mat-button (click)="shareDialog(movie.id, movie.title)">
           <mat-icon class="mat-yellow">share</mat-icon> Share
         </button>
       </div>

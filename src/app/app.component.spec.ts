@@ -31,7 +31,6 @@ describe('AppComponent', () => {
     storageBucket: 'foo',
     messagingSenderId: 'bar'
   };
-  const mediaMatcher = jasmine.createSpyObj('MediaMatcher', ['']);
 
   beforeEach(async(() => {
 

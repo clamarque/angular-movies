@@ -4,8 +4,6 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './core/auth/auth.service';
 import { StorageService } from './shared/storage/storage.service';
-import { Observable } from '@firebase/util';
-import 'rxjs/add/observable/fromEvent';
 
 // import { SwUpdate } from '@angular/service-worker';
 
@@ -24,7 +22,6 @@ export class AppComponent implements OnInit, OnDestroy {
     lang = this.storageService.read('language');
     private _mobileQueryListener: () => void;
     @ViewChild('snav') snav: any;
-    snav$: Observable<any>;
 
     constructor(
         private authService: AuthService,
