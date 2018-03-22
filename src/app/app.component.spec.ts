@@ -3,7 +3,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatIconModule, MatSidenavModule, MatSnackBarModule, MatSelectModule } from '@angular/material';
+import {
+  MatFormFieldModule,
+  MatIconModule,
+  MatSidenavModule,
+  MatSnackBarModule,
+  MatSelectModule,
+  MatToolbarModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -36,6 +43,7 @@ describe('AppComponent', () => {
         MatSelectModule,
         MatSidenavModule,
         MatSnackBarModule,
+        MatToolbarModule,
         RouterTestingModule,
         AngularFireAuthModule,
         AngularFireModule.initializeApp(firebaseConfig),

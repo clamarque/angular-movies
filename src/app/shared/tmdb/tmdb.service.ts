@@ -94,7 +94,7 @@ export class TmdbService {
     }
 
     // create an array of pages to ng-repeat in the pager control
-    const pages = new Array(startPage, endPage + 1);
+    const pages = new Array(startPage, currentPage, endPage);
 
     // return object with all pager properties required by the view
     return {

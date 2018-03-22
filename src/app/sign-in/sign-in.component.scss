@@ -1,3 +1,5 @@
+@import '../../assets/scss/palette';
+
 .btn-social {
   margin: 0.625rem auto;
   min-width: 220px;
@@ -7,15 +9,15 @@
   outline: none;
 }
 .btn-twitter {
-  background-color: #fff;
+  background-color: $white;
 }
 .btn-facebook {
-  background-color: #4267b2;
-  color: #fff;
+  background-color: $facebook;
+  color: $white;
 }
 .btn-google {
-  background-color: #4285f4;
-  color: #fff;
+  background-color: $twitter;
+  color: $white;
 }
 svg {
   height: 24px;

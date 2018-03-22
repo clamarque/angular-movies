@@ -18,10 +18,10 @@ body {
     height: 100%;
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
-    background-color: white;
+    background-color: $white;
 }
-/* Launcher */
 
+/* Launcher */
 .launcher {
     display: flex;
     flex-direction: column;
@@ -46,6 +46,11 @@ a {
     color: $primary-light;
     outline: none;
 }
+a, button {
+    &:focus, &:active {
+        outline: none;
+    }
+}
 li {
     list-style: none;
 }
@@ -55,33 +60,12 @@ h3,
 h4 {
     font-weight: normal;
     text-align: center;
-}
-h1,
-h2,
-h3,
-.date {
     color: $white;
 }
-md-card-header .mat-card-header-text {
-    margin: 1rem 0 0;
-}
+
 .mat {
     &-icon {
         vertical-align: middle;
-    }
-    &-sidenav-container {
-        min-height: 100vh;
-        background-color: $primary-dark;
-        color: $dark;
-    }
-    &-sidenav.mat-sidenav-push {
-        background-color: $accent-dark;
-    }
-    &-input-ripple {
-        background-color: $primary-light;
-    }
-    &-menu-content {
-        background: $primary-dark;
     }
     &-menu-item {
         color: $primary-light;
@@ -92,91 +76,32 @@ md-card-header .mat-card-header-text {
         justify-content: center;
     }
     &-label {
-        color: #FFF !important;
+        color: $white;
     }
 }
 
 /* img poster movie */
-img[ng-reflect-default-image] {
-    width: 185px;
-    height: 278px;
-}
+img[ng-reflect-default-image],
 [alt="No poster available"] {
     width: 185px;
     height: 278px;
+    border-radius: 2px;
 }
 
-/* Container principal */
-[id="hub-movies"] {
-    text-align: center;
-}
-/* Navigation */
-.mat-drawer.mat-drawer-push {
-    background-color: $primary-dark;
-}
+.icon-container {
+    background-position: center;
+    background-size: cover;
+    border: 1px solid $primary-light;
+    line-height: 2;
 
-[id="navigation"] {
-    li {
-        min-height: 3rem;
-        line-height: 3;
-        &:first-child:hover {
-            background-color: transparent;
-        }
-        &:hover {
-            background-color: $background-color;
-        }
-
-        &:last-child {
-            color: white;
-        }
-    }
-    a {
-        display: block;
-        padding: .625rem 0;
-        color: $white;
-        &:hover {
-            color: $primary-light;
-        }
-    }
-    .active {
+    .icon-person, .icon-movie {
         color: $primary-light;
-    }
-    .mat-input {
-        &-underline {
-            background-color: $white;
-        }
-        &-placeholder,
-        &-element {
-            color: $white;
-        }
-    }
-    .mat-select {
-        padding: .625rem 0;
-        width: 140px;
-
-        &-placeholder, &-value {
-            color: white;
-        }
-    }
-}
-.app-icon-button {
-    margin: 1.25rem;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    color: $white;
-}
-
-a, button {
-    &:focus, &:active {
-        outline: none;
     }
 }
 
 /* Dialog */
 h1.mat-dialog-title {
-    color: $primary-dark;
+    color: $black;
 }
 
 /* Column Flex */
@@ -228,24 +153,8 @@ h1.mat-dialog-title {
     .disabled a {
         cursor: default;
         pointer-events: none;
-        color: $disable;
+        color: $grey;
     }
-}
-/* button return top*/
-[id="return-to-top"] {
-    position: fixed;
-    bottom: 40px;
-    right: 20px;
-    display: none;
-    z-index: 1;
-}
-
-.show {
-    display: block;
-}
-
-.hide {
-    display: none;
 }
 
 /* spinner */
@@ -255,9 +164,13 @@ h1.mat-dialog-title {
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
+    background: rgba(34, 43, 49, 0.5);
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media only screen and (min-width: 731px){
+        left: 208px;  
+    }
 }

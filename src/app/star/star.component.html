@@ -1,10 +1,13 @@
+<div class="loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+</div>
 <div class="person">
   <button class="btn-back" (click)="back()">
     <mat-icon>arrow_back</mat-icon>
   </button>
   <section *ngIf="person">
     <img class="img_profile" src="https://image.tmdb.org/t/p/w185/{{person.profile_path}}" alt="profile">
-    <h1>{{person.name}}</h1>
+    <h2>{{person.name}}</h2>
     <p>{{person.birthday | date}}</p>
     <p>{{person.biography}}</p>
   </section>

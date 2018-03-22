@@ -7,6 +7,7 @@
     align-items: center;
     width: 100%;
     color: white;
+    margin: 20px 0;
 
     @media only screen and (max-width: 731px) {
         flex-direction: column;
@@ -53,7 +54,7 @@
 .avatar {
     width: 50px;
     height: 50px;
-    background: #FFF;
+    background: $white;
     border-radius: 50%;
     line-height: 3;
     text-transform: capitalize;

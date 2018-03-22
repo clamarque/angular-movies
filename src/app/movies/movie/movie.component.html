@@ -3,46 +3,44 @@
 </div>
 <ng-template [ngIf]="!isLoadingResults">
 
-  <div class="movie" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" *ngIf="movie" [ngStyle]="{
-  'background-image': 'linear-gradient(to right, rgba(25,28,31, 1), rgba(25,28,31,0.2)), url('+'https://image.tmdb.org/t/p/original'+movie.backdrop_path+')'}">
-
+  <div class="movie" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" *ngIf="movie">
+    <div class="movie--background">
+      <div class="image-rotator" [ngStyle]="{'background-image': 'url('+'https://image.tmdb.org/t/p/original'+movie.backdrop_path+')'}">
+      </div>
+      <div class="vignette"></div>
+    </div>
     <div class="movie__head">
       <button class="btn-back" (click)="back()">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <h1>{{movie.title}}</h1>
+      <h2>{{movie.title}}</h2>
     </div>
     <div class="movie__body">
       <div class="movie--infos">
-        <mat-icon>date_range</mat-icon> {{movie.release_date | date}}
-        <span *ngIf="movie.vote_average >= 5">
-          <mat-icon class="mat-green">thumb_up</mat-icon> {{movie.vote_average}} </span>
-        <span *ngIf="movie.vote_average < 5">
-          <mat-icon class="mat-red">thumb_down</mat-icon> {{movie.vote_average}} </span>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>share</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <a mat-menu-item href="https://plus.google.com/share?url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">Google +
-          </a>
-          <a mat-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}">Facebook</a>
-          <a mat-menu-item href="https://twitter.com/intent/tweet?text=Discovers the movie {{movie.title}}%20on%20&url=https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}&hashtags=hubmovies, {{movie.title}}">Twitter</a>
-          <a mat-menu-item href="mailto:?subject={{movie.title}} on Hubmovies&body=Discovers the movie on https://hubmovies-a26fc.firebaseapp.com/movie/{{movie.id}}">Email</a>
-        </mat-menu>
+        <p>
+          <mat-icon>date_range</mat-icon> {{movie.release_date | date: 'y'}} •
+          <mat-icon>timer</mat-icon> {{movie.runtime}} minutes •
+          <mat-icon [ngClass]="{'mat-green': movie.vote_average >= 5, 'mat-red': movie.vote_average < 5}">star</mat-icon> {{movie.vote_average}}
+        </p>
       </div>
       <div class="movie--genre">
-        <ul *ngFor="let genre of movie.genres; let i=index">
-          <li *ngIf="i < 3">
+        <ul>
+          <li *ngFor="let genre of movie.genres">
             <a [routerLink]="['/movies/genre', {id: genre.id, name: genre.name}]"> {{genre.name}}</a>
           </li>
         </ul>
       </div>
       <p class="movie--overview">{{movie.overview}}</p>
-      <div *ngIf="authService.user | async">
-        <button mat-button (click)="saveMovie(movie, 'MovieLater')">
-          <mat-icon class="mat-teal">watch_later</mat-icon> Watch later</button>
-        <button mat-button (click)="saveMovie(movie, 'FavoriteMovie')">
-          <mat-icon class="mat-yellow">star</mat-icon> Favorite</button>
+      <div class=" movie--actions">
+        <button *ngIf="authService.user | async" mat-button (click)="saveMovie(movie, 'MovieLater')">
+          <mat-icon class="mat-teal">watch_later</mat-icon> Watch later
+        </button>
+        <button *ngIf="authService.user | async" mat-button (click)="saveMovie(movie, 'FavoriteMovie')">
+          <mat-icon class="mat-red">favorite_border</mat-icon> Favorite
+        </button>
+        <button mat-button (click)="shareDialog(movie.id, movie.title)">
+          <mat-icon class="mat-yellow">share</mat-icon> Share
+        </button>
       </div>
     </div>
   </div>
@@ -61,18 +59,23 @@
       </section>
     </mat-tab>
     <mat-tab label="TRAILER">
-      <section class="movie--trailer" *ngIf="safeUrl">
+      <section class="movie--trailer" *ngIf="safeUrl; else noTrailer">
         <iframe width="560" height="315" [src]="safeUrl" frameborder="0" allowfullscreen></iframe>
       </section>
+      <ng-template #noTrailer>
+        <h3>No trailer available
+          <mat-icon>sentiment_very_dissatisfied</mat-icon>
+        </h3>
+      </ng-template>
     </mat-tab>
     <mat-tab label="SIMILAR MOVIES">
-      <section class="similar items" *ngIf="similarMovies">
+      <section class="movie--similar items" *ngIf="similarMovies">
         <div class="item" *ngFor="let movie of similarMovies">
           <a [routerLink]="['/movies/movie', movie.id]">
             <img *ngIf="movie.poster_path" [defaultImage]="'assets/images/no_poster_available.jpg'" [lazyLoad]="'https://image.tmdb.org/t/p/w185/' + movie.poster_path"
               alt="poster movie">
             <img *ngIf="!movie.poster_path" src="assets/images/no_poster_available.jpg" alt="No poster available">
-            <p>{{movie.title}}</p>
+            <h3>{{movie.title}}</h3>
           </a>
         </div>
       </section>

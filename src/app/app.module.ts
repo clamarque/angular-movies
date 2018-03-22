@@ -1,8 +1,8 @@
 import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import 'hammerjs';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
@@ -13,10 +13,9 @@ import { AngularFireModule } from 'angularfire2';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 /* ROUTING */
-import { routing } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 /* COMPONENT */
 import { AppComponent } from './app.component';
-import { DialogDeleteUser } from './profile/profile.component';
 import { MoviesComponent } from './movies/movies.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieComponent } from './movies/movie/movie.component';
@@ -43,13 +42,13 @@ export class MyHammerConfig extends HammerGestureConfig {
 @NgModule({
   declarations: [
     AppComponent,
-    DialogDeleteUser,
     PageNotFoundComponent,
     MoviesComponent,
     MovieListComponent,
-    MovieComponent
+    MovieComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
@@ -59,21 +58,18 @@ export class MyHammerConfig extends HammerGestureConfig {
     SharedModule,
     LazyLoadImageModule,
     AngularFireModule.initializeApp(environment.firebase),
-    routing,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     DatabaseService,
     TmdbService,
-    { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig},
+    { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
     CheckForUpdateService,
     LogUpdateService,
     PromptUpdateService,
     StorageService
   ],
-  entryComponents: [
-        DialogDeleteUser
-    ],
+  entryComponents: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

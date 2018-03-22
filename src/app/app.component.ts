@@ -1,36 +1,63 @@
-import { Component, HostListener, OnInit, NgModule } from '@angular/core';
+import { Component, HostListener, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './core/auth/auth.service';
 import { StorageService } from './shared/storage/storage.service';
+
 // import { SwUpdate } from '@angular/service-worker';
 
 @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html'
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-    movieSearching: any[];
-    isConnected = false;
-    color = 'primary';
+export class AppComponent implements OnInit, OnDestroy {
+    mobileQuery: MediaQueryList;
     languages = [
-        {value: 'en-En', viewValue: 'English'},
+        {value: 'en-US', viewValue: 'English'},
         {value: 'fr-FR', viewValue: 'French'},
+        {value: 'es-ES', viewValue: 'Spanish'}
       ];
-      lang = this.storageService.read('language');
+    lang = this.storageService.read('language');
+    private _mobileQueryListener: () => void;
+    @ViewChild('snav') snav: any;
 
     constructor(
-        public authService: AuthService,
+        authService: AuthService,
+        changeDetectorRef: ChangeDetectorRef,
+        media: MediaMatcher,
         private router: Router,
         private snackbar: MatSnackBar,
         private storageService: StorageService,
         // private swUpdate: SwUpdate
-    ) { }
+    ) {
+        this.mobileQuery = media.matchMedia('(max-width: 731px)');
+        this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+        this.mobileQuery.addListener(this._mobileQueryListener);
+    }
+
+    ngOnInit() {
+        if (this.lang === undefined) {
+            this.storageService.save('language', 'en-US');
+        }
+       /* if (this.swUpdate.isEnabled) {
+            this.swUpdate.available.subscribe(() => {
+                if (confirm('New version available. Load New Version?')) {
+                    location.reload();
+                }
+            })
+        } */
+    }
+
+    ngOnDestroy(): void {
+        this.mobileQuery.removeListener(this._mobileQueryListener);
+      }
 
     @HostListener('window:scroll', ['$event']) scrollHandler(event) {
         const number = window.scrollY;
-        const el = document.getElementById('return-to-top');
-        if (number >= 50) {
+        const el = document.getElementById('btn-returnToTop');
+        if (number >= 500) {
             el.className = 'show';
 
         } else {
@@ -39,7 +66,7 @@ export class AppComponent implements OnInit {
     }
 
     scrollTop() {
-        window.scrollTo(0, 0);
+        window.scrollTo({left: 0, top: 0, behavior: 'smooth'});
     }
     getChangedValue(event) {
         this.storageService.save('language', event.value);
@@ -60,13 +87,10 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/movies/list/now-playing']);
     }
 
-    ngOnInit() {
-       /* if (this.swUpdate.isEnabled) {
-            this.swUpdate.available.subscribe(() => {
-                if (confirm('New version available. Load New Version?')) {
-                    window.location.reload();
-                }
-            })
-        } */
+    closeSidenav() {
+        if (this.mobileQuery.matches !== false) {
+            this.snav.close();
+        }
     }
+
 }
