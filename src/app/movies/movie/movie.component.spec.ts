@@ -6,7 +6,7 @@ import {
   MatMenuModule,
   MatTabsModule,
   MatSnackBarModule,
-  MatListModule, 
+  MatListModule,
   MatDialogModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -14,9 +14,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MovieComponent } from './movie.component';
 
 import { AuthService } from '../../core/auth/auth.service';
-import { DatabaseService } from '../../shared/database/database.service';
-import { TmdbService } from '../../shared/tmdb/tmdb.service';
-import { StorageService } from '../../shared/storage/storage.service';
+import { DatabaseService } from '../../shared/service/database/database.service';
+import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
+import { StorageService } from '../../shared/service/storage/storage.service';
 
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';

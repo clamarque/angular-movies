@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, ParamMap } from '@angular/router';
-import { DatabaseService } from '../../shared/database/database.service';
-import { TmdbService } from '../../shared/tmdb/tmdb.service';
+import { DatabaseService } from '../../shared/service/database/database.service';
+import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
 import { MatSnackBar } from '@angular/material';
 import { MovieModel } from '../shared/movie.model';
 
@@ -43,7 +43,7 @@ export class MovieListComponent implements OnInit {
     this.currentPage = this.pager.currentPage;
     if (typeof param === 'string') {
       if (param === 'discover' || param === 'upcoming' || param === 'now-playing') {
-        this.request = this.tmdbService.getMovie(this.currentPage, param);
+        this.request = this.tmdbService.getMovie(param, this.currentPage);
       } else {
         this.request = this.tmdbService.getSearchMovie(param, this.currentPage);
       }
@@ -74,7 +74,7 @@ export class MovieListComponent implements OnInit {
         this.request = this.tmdbService.getSearchMovie(params['term'], 1);
         this.parameter = params['term'];
       } else if (params['category']) {
-        this.request = this.tmdbService.getMovie(1, params['category'])
+        this.request = this.tmdbService.getMovie(params['category'], 1)
         this.parameter = params['category'];
       } else if (params['id'] && params['name']) {
         this.request = this.tmdbService.getGenreMovie(+params['id'], 1);

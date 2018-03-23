@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { StorageService } from '../../shared/storage/storage.service';
+import { StorageService } from '../../../shared/service/storage/storage.service';
 
-import { MovieDetailsModel } from '../../movies/shared/movie-details.model';
-import { MovieCategoryModel } from '../../movies/shared/movie-category.model';
-import { MovieCreditsModel } from '../../movies/shared/movie-credits.model';
-import { MoviePersonModel } from '../../movies/shared/movie-person.model';
-import { MovieVideosModel } from '../../movies/shared/movie-videos.model';
-import { TvCreditsModel } from '../../movies/shared/tv-credits.model';
+import { MovieDetailsModel } from '../../../movies/shared/movie-details.model';
+import { MovieCategoryModel } from '../../../movies/shared/movie-category.model';
+import { MovieCreditsModel } from '../../../movies/shared/movie-credits.model';
+import { MoviePersonModel } from '../../../movies/shared/movie-person.model';
+import { MovieVideosModel } from '../../../movies/shared/movie-videos.model';
+import { TvCreditsModel } from '../../../movies/shared/tv-credits.model';
 
 @Injectable()
 export class TmdbService {
@@ -24,7 +24,7 @@ export class TmdbService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
-  getMovie(page: number, category: string) {
+  getMovie(category: string, page: number) {
     switch (category) {
       case 'now-playing': return this.getNowPlaying(page);
       case 'upcoming': return this.getUpComing(page);
@@ -72,7 +72,7 @@ export class TmdbService {
     return this.http.get<TvCreditsModel>(`${this.url_person}/${person_id}/tv_credits?api_key=${this.api_key}&language=${this.lang}`);
   }
   getPager(totalItems: number, currentPage: number = 1) {
-    const totalPages = totalItems;
+    let totalPages = totalItems;
     let startPage = 0;
     let endPage = 0;
     if (totalPages <= 10) {
@@ -85,6 +85,10 @@ export class TmdbService {
         startPage = 1;
         endPage = 10;
       } else if (currentPage + 4 >= totalPages) {
+        if (currentPage >= 1000) {
+          currentPage = 1000;
+          totalPages = 1000;
+        }
         startPage = totalPages - 9;
         endPage = totalPages;
       } else {

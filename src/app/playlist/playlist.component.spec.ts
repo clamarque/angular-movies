@@ -1,10 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatProgressSpinnerModule, MatIconModule, MatMenuModule, MatListModule, MatSnackBarModule, MatTabsModule, MatTooltipModule, MatDialogModule } from '@angular/material';
+import {
+  MatProgressSpinnerModule,
+  MatIconModule,
+  MatMenuModule,
+  MatListModule,
+  MatSnackBarModule,
+  MatTabsModule,
+  MatTooltipModule,
+  MatDialogModule
+} from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { PlaylistComponent } from './playlist.component';
 
-import { DatabaseService } from '../shared/database/database.service';
+import { DatabaseService } from '../shared/service/database/database.service';
 
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';

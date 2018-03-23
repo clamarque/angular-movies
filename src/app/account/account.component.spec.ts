@@ -7,7 +7,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AccountComponent } from './account.component';
 
 import { AuthService } from '../core/auth/auth.service';
-import { DatabaseService } from '../shared/database/database.service';
 
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
@@ -45,7 +44,6 @@ describe('AccountComponent', () => {
       providers: [
         AuthService,
         AngularFireAuthModule,
-        DatabaseService
       ]
     })
     .compileComponents();

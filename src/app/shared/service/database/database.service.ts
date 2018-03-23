@@ -3,7 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import * as firebase from 'firebase';
 import { Observable } from '@firebase/util';
-import { MovieCategoryModel } from '../../shared/model/movie-category.model';
+import { MovieCategoryModel } from '../../../shared/model/movie-category.model';
 
 @Injectable()
 export class DatabaseService {

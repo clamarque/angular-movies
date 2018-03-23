@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 /* SERVICES */
-import { TmdbService } from '../shared/tmdb/tmdb.service';
+import { TmdbService } from '../shared/service/tmdb/tmdb.service';
 /* MODEL */
 import { MoviePersonModel } from '../movies/shared/movie-person.model';
 import { TvCastModel } from '../movies/shared/tv-cast.model';

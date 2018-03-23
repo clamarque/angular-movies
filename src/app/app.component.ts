@@ -3,7 +3,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './core/auth/auth.service';
-import { StorageService } from './shared/storage/storage.service';
+import { StorageService } from './shared/service/storage/storage.service';
 
 // import { SwUpdate } from '@angular/service-worker';
 

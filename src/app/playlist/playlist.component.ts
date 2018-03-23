@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
-import { DatabaseService } from '../shared/database/database.service';
+import { DatabaseService } from '../shared/service/database/database.service';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component';
