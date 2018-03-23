@@ -27,7 +27,12 @@ export class MovieListComponent implements OnInit {
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
   isLoadingResults: boolean;
 
-  constructor(private tmdbService: TmdbService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
+  constructor(
+    private databaseService: DatabaseService,
+    private tmdbService: TmdbService,
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
+  ) { }
 
   swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT) {
     if (action === this.SWIPE_ACTION.RIGHT || action === this.SWIPE_ACTION.LEFT) {
@@ -91,6 +96,17 @@ export class MovieListComponent implements OnInit {
           this.totalPages = response.total_pages;
           this.setPage(this.parameter, 1);
         });
+      }
+    });
+  }
+
+  addMovie(movie: Object) {
+    console.log(movie);
+    this.databaseService.setMovies(movie, 'MovieLater', (error) => {
+      if (error) {
+        this.snackBar.open(error, 'Hide', { duration: 5000 });
+      } else {
+        this.snackBar.open('Your movie was been save', '', { duration: 2000 });
       }
     });
   }

@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500);
 @import 'assets/scss/custom_theme';
 @import 'assets/scss/palette';
 
@@ -30,6 +28,7 @@ body {
     height: 100%;
     img {
         width: auto;
+        height: auto;
 
         @media only screen and (max-width: 731px) {
             width: 192px;
@@ -84,9 +83,10 @@ h4 {
 img,
 img[ng-reflect-default-image],
 [alt="No poster available"] {
-    width: 185px;
+    /*width: 185px;
     height: 278px;
-    border-radius: 2px;
+    */
+    // border-radius: 2px;
 }
 
 .icon-container {
@@ -111,6 +111,7 @@ h1.mat-dialog-title {
     flex-wrap: wrap;
     justify-content: center;
     .item {
+        position: relative;
         margin: 1rem .625rem;
         text-align: center;
         flex: 1 0 200px;
@@ -135,11 +136,21 @@ h1.mat-dialog-title {
         @media (min-width: 1670px) {
             min-width: calc(12.5% - 10px);
         }
-        &:hover {
-            opacity: 0.5
+
+        a {
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+        .btn-add {
+            &:hover {
+                opacity: 0.5;
+            }
         }
     }
 }
+
+
 
 /* Pagination */
 .pagination {

@@ -39,6 +39,7 @@ export class DatabaseService {
   }
 
   setMovies(movie: any, category: string, callback: any) {
+    console.log(movie, category);
     const movieDetails = {
       userId: this.uid,
       movieId: movie.id,
@@ -49,7 +50,7 @@ export class DatabaseService {
       release_date: movie.release_date,
       poster_path: movie.poster_path,
       category: category,
-      status: movie.status,
+      status: movie.status || null,
       watched: false
     }
 
