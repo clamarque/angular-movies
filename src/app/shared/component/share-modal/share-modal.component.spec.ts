@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ShareModalComponent } from './share-modal.component';
 import { MAT_DIALOG_DATA, MatFormFieldModule, MatDialogRef, MatInputModule, MatSnackBarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from '../../shared.module';
 
 describe('ShareModalComponent', () => {
   let component: ShareModalComponent;
@@ -11,13 +12,13 @@ describe('ShareModalComponent', () => {
   const matDialogRef = jasmine.createSpyObj('MatDialogRef', ['afterClose']);
   const matDialogData = jasmine.createSpyObj('MAT_DIALOG_DATA', ['']);
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSnackBarModule
+        MatSnackBarModule,
       ],
       declarations: [ ShareModalComponent ],
       providers: [
@@ -26,7 +27,7 @@ describe('ShareModalComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShareModalComponent);

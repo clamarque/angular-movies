@@ -6,8 +6,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { StarComponent } from './star.component';
 
-import { TmdbService } from '../shared/tmdb/tmdb.service';
-import { StorageService } from '../shared/storage/storage.service';
+import { TmdbService } from '../shared/service/tmdb/tmdb.service';
+import { StorageService } from '../shared/service/storage/storage.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 describe('StarComponent', () => {

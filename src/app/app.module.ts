@@ -21,12 +21,10 @@ import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieComponent } from './movies/movie/movie.component';
 import { PageNotFoundComponent } from './not-found.component';
 /* SERVICES */
-import { DatabaseService } from './shared/database/database.service';
-import { TmdbService } from './shared/tmdb/tmdb.service';
-import { CheckForUpdateService } from './shared/sw/check-for-update.service';
-import { LogUpdateService } from './shared/sw/log-update.service';
-import { PromptUpdateService } from './shared/sw/prompt-update.service';
-import { StorageService } from './shared/storage/storage.service';
+import { CheckForUpdateService } from './shared/service/sw/check-for-update.service';
+import { LogUpdateService } from './shared/service/sw/log-update.service';
+import { PromptUpdateService } from './shared/service/sw/prompt-update.service';
+import { StorageService } from './shared/service/storage/storage.service';
 /* SHARED */
 import { SharedModule } from './shared/shared.module';
 /* CORE MODULE */
@@ -55,21 +53,18 @@ export class MyHammerConfig extends HammerGestureConfig {
     CoreModule,
     HttpClientModule,
     CdkTableModule,
-    SharedModule,
+    SharedModule.forRoot(),
     LazyLoadImageModule,
     AngularFireModule.initializeApp(environment.firebase),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
-    DatabaseService,
-    TmdbService,
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
     CheckForUpdateService,
     LogUpdateService,
     PromptUpdateService,
     StorageService
   ],
-  entryComponents: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

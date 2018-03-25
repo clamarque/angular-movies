@@ -7,8 +7,8 @@ import { MovieListComponent } from './movie-list.component';
 
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
-import { TmdbService } from '../../shared/tmdb/tmdb.service';
-import { StorageService } from '../../shared/storage/storage.service';
+import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
+import { StorageService } from '../../shared/service/storage/storage.service';
 
 describe('MovieListComponent', () => {
   let component: MovieListComponent;

@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from '../core/auth/auth.service';
-import { DatabaseService } from '../shared/database/database.service';
 import { AccountDeleteModalComponent } from './account-delete-modal/account-delete-modal.component';
 import * as moment from 'moment';
 
@@ -23,7 +22,6 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private databaseService: DatabaseService,
     private snackbar: MatSnackBar,
     private router: Router,
     private dialog: MatDialog

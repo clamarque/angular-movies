@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -22,8 +22,9 @@ import {
   MatProgressSpinnerModule,
   MatTooltipModule} from '@angular/material';
 
-  import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component'
-
+import { ShareModalComponent } from './component/share-modal/share-modal.component'
+import { DatabaseService } from './service/database/database.service';
+import { TmdbService } from './service/tmdb/tmdb.service';
 
 @NgModule({
   imports: [
@@ -77,4 +78,15 @@ import {
     ShareModalComponent
   ],
 })
-export class SharedModule { }
+export class SharedModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [
+        DatabaseService,
+        TmdbService
+      ]
+    }
+  }
+
+}

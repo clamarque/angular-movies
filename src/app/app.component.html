@@ -3,7 +3,7 @@
     <button mat-icon-button (click)="snav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <h1>hubMovies</h1>
+    <h1>HubMovies</h1>
   </mat-toolbar>
 </div>
 <mat-sidenav-container class="app-sidenav">
@@ -11,7 +11,7 @@
     <nav class="navigation">
       <div class="navigation--search">
         <mat-form-field>
-          <input matInput #search placeholder="Search a movie" (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="closeSidenav()"
+          <input matInput #search placeholder="Search movies..." (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="closeSidenav()"
             tabindex="-1">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>

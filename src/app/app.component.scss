@@ -13,7 +13,7 @@
         display: block;
     }
     .mat-toolbar {
-        background: $primary-light;
+        background-color: $primary-light;
         color: $white;
     }
 }
@@ -61,7 +61,7 @@
         }
 
         /deep/ .mat-input-ripple {
-            background: $black;
+            background: $white;
         }
         .mat-icon {
             color: $white;

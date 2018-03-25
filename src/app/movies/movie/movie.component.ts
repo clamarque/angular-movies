@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, ParamMap, Router, Event as NavigationEvent } from '@angular/router';
-import { DatabaseService } from '../../shared/database/database.service';
+import { ActivatedRoute, ParamMap, Event as NavigationEvent } from '@angular/router';
+import { DatabaseService } from '../../shared/service/database/database.service';
 import { AuthService } from '../../core/auth/auth.service';
-import { TmdbService } from '../../shared/tmdb/tmdb.service';
+import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
 import { MovieCastModel } from '../shared/movie-cast.model';
@@ -42,7 +42,6 @@ export class MovieComponent implements OnInit {
     public dialog: MatDialog,
     private location: Location,
     private route: ActivatedRoute,
-    private router: Router,
     private sanitizer: DomSanitizer,
     private snackBar: MatSnackBar,
     private tmdbService: TmdbService

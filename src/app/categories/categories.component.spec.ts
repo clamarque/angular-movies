@@ -16,7 +16,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { DatabaseService } from '../shared/database/database.service';
+import { DatabaseService } from '../shared/service/database/database.service';
 
 describe('CategoriesComponent', () => {
   let component: CategoriesComponent;

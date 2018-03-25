@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DatabaseService } from '../shared/database/database.service';
+import { DatabaseService } from '../shared/service/database/database.service';
 import { MatDialog, MatDialogRef , MatSnackBar } from '@angular/material';
 import { MovieCategoryModel } from '../shared/model/movie-category.model';
 import { Subscription } from 'rxjs/Subscription';
