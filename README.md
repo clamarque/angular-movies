@@ -33,7 +33,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## How to use it ?
 
 <p align="center">
-    <a href="https://hubmovies-a26fc.firebaseapp.com"><img src="https://github.com/clamarque/hub-movies/blob/master/src/assets/images/demo.gif" alt="demo" />
+    <a href="https://hubmovies-a26fc.firebaseapp.com"><img src="https://github.com/clamarque/hub-movies/blob/master/src/assets/images/demo.jpg" alt="demo" />
     </a>
 </p>
 

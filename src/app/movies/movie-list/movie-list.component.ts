@@ -7,6 +7,7 @@ import { MovieModel } from '../shared/movie.model';
 
 import * as moment from 'moment';
 import { MovieCategoryModel } from '../shared/movie-category.model';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -28,6 +29,7 @@ export class MovieListComponent implements OnInit {
   isLoadingResults: boolean;
 
   constructor(
+    public authService: AuthService,
     private databaseService: DatabaseService,
     private tmdbService: TmdbService,
     private route: ActivatedRoute,
