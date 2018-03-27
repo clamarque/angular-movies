@@ -38,6 +38,12 @@
         <button *ngIf="authService.user | async" mat-button (click)="saveMovie(movie, 'FavoriteMovie')">
           <mat-icon class="mat-red">favorite_border</mat-icon> Favorite
         </button>
+        <button *ngIf="authService.user | async" mat-button [matMenuTriggerFor]="menu" (click)="getAllCategories()">
+          <mat-icon>create_new_folder</mat-icon> Categories
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngFor="let category of categories" (click)="updateMovie(movie, category)">{{category}}</button>
+        </mat-menu>
         <button mat-button (click)="shareDialog(movie.id, movie.title)">
           <mat-icon class="mat-yellow">share</mat-icon> Share
         </button>

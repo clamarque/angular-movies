@@ -3,7 +3,13 @@
 </div>
 <ng-template [ngIf]="!isLoadingResults">
     <h2>{{title}}</h2>
-    <mat-tab-group class="categories__tab">
+    <button class="btn-add-category" mat-icon-button (click)="addCategoryDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
+    <button class="btn-delete-category" mat-icon-button (click)="deleteCategoryDialog()">
+        <mat-icon>delete_forever</mat-icon>
+    </button>
+    <mat-tab-group class="categories__tab" #tabGroup (selectedTabChange)="tabChanged($event)">
         <mat-tab label="FAVORITES">
             <div *ngIf="movies.length > 0; else noData">
                 <mat-nav-list *ngFor="let movie of movies">
@@ -23,13 +29,9 @@
                                 <mat-icon>share</mat-icon>
                                 <span>Share</span>
                             </button>
-                            <button mat-menu-item (click)="deleteMovie(movie.movieId)">
+                            <button mat-menu-item (click)="deleteMovieFromFavorites(movie.movieId)">
                                 <mat-icon>delete</mat-icon>
                                 <span>Delete</span>
-                            </button>
-                            <button mat-menu-item (click)="watchedMovie(movie.movieId, true)">
-                                <mat-icon>visibility</mat-icon>
-                                <span>Watched</span>
                             </button>
                         </mat-menu>
                     </div>
@@ -37,6 +39,39 @@
             </div>
             <ng-template #noData>
                 <h3>No favorites yet
+                    <mat-icon>sentiment_very_dissatisfied</mat-icon>
+                </h3>
+            </ng-template>
+        </mat-tab>
+        <mat-tab *ngFor="let category of categories" [label]="category">
+            <div *ngIf="movies.length > 0; else noData">
+                <mat-nav-list *ngFor="let movie of movies">
+                    <a mat-list-item [routerLink]="['/movies/movie', movie.movieId]">
+                        <div matListAvatar class="icon-container" [ngStyle]="{'background-image': 'url('+'https://image.tmdb.org/t/p/original'+movie.poster_path+')'}">
+                            <mat-icon *ngIf="!movie.poster_path" class="icon-movie">movie</mat-icon>
+                        </div>
+                        <h3 matLine>{{movie.original_title}}</h3>
+                        <p matLine>{{movie.release_date | date}}</p>
+                    </a>
+                    <div class="actions">
+                        <button mat-icon-button [matMenuTriggerFor]="menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="shareDialog(movie)">
+                                <mat-icon>share</mat-icon>
+                                <span>Share</span>
+                            </button>
+                            <button mat-menu-item (click)="deleteMovieFromCategory(movie.category, movie.movieId)">
+                                <mat-icon>delete</mat-icon>
+                                <span>Delete</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </mat-nav-list>
+            </div>
+            <ng-template #noData>
+                <h3>No movies yet
                     <mat-icon>sentiment_very_dissatisfied</mat-icon>
                 </h3>
             </ng-template>

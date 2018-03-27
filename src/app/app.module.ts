@@ -4,7 +4,6 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import 'hammerjs';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 /* FIREBASE */
 import * as firebase from 'firebase/app';

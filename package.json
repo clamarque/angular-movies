@@ -57,7 +57,12 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.3.0",
     "ts-node": "~4.1.0",
-    "tslint": "~5.9.1"
+    "tslint": "~5.9.1",
+    "webdash": "^1.0.0",
+    "webdash-npm-scripts": "^1.0.0",
+    "webdash-package-json": "^1.0.0",
+    "webdash-performance-budget": "^1.2.0",
+    "webdash-pwa-manifest": "^1.1.0"
   },
   "browserslist": [
     "last 2 versions",

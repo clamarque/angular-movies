@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Delete a category</h1>
+<div mat-dialog-content>
+  <p>Are you sure to delete this category as well as all the movies inside? Type the name of category</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Ok</button>
+</div>

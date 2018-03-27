@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap, Event as NavigationEvent } from '@angular/router';
@@ -17,12 +17,14 @@ import { MovieCategoryModel } from '../../shared/model/movie-category.model';
 
 import { ShareModalComponent } from '../../shared/component/share-modal/share-modal.component';
 
+import { Subscription } from 'rxjs/Subscription';
+
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
   styleUrls: ['./movie.component.scss']
 })
-export class MovieComponent implements OnInit {
+export class MovieComponent implements OnInit, AfterViewInit {
   id: number;
   url: string;
   movie: MovieDetailsModel;
@@ -35,6 +37,9 @@ export class MovieComponent implements OnInit {
   safeUrl: any;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
   isLoadingResults = false;
+  sub: Subscription;
+  getCategories: any;
+  categories = [];
 
   constructor(
     private authService: AuthService,
@@ -70,8 +75,20 @@ export class MovieComponent implements OnInit {
     })
   }
 
+  ngAfterViewInit() {
+
+  }
+
   back() {
     this.location.back();
+  }
+
+  getAllCategories() {
+    this.sub = this.databaseService.getAllCategoriesUser().subscribe(response => {
+      console.log(response);
+      this.getCategories = response;
+      this.categories = this.getCategories.map(value => value['name']);
+    })
   }
 
   swipe(action = this.SWIPE_ACTION.RIGHT) {
@@ -92,6 +109,16 @@ export class MovieComponent implements OnInit {
 
   getMovieVideoUrl(id: string) {
     return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + id);
+  }
+
+  updateMovie(movie: any, category: string) {
+    this.databaseService.updateCategories(movie, category, (error) => {
+      if (error) {
+        this.snackBar.open(error, 'Hide', { duration: 5000 });
+      } else {
+        this.snackBar.open('Your movie was been save', '', { duration: 2000 });
+      }
+    })
   }
 
   shareDialog(movieId: MovieCategoryModel, movieTitle: MovieCategoryModel): void {

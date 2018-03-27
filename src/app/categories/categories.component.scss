@@ -1,5 +1,10 @@
 @import '../../assets/scss/palette';
 
+.btn-add-category,
+.btn-delete-category {
+    color: white;
+}
+
 .categories {
     &__tab {
 
