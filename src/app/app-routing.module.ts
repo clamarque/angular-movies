@@ -14,7 +14,7 @@ const routes: Routes = [
     { path: 'search', component: MovieListComponent}
   ] },
   { path: 'playlist', loadChildren: 'app/playlist/playlist.module#PlaylistModule', canActivate: [AuthGuard] },
-  { path: 'favorites', loadChildren: 'app/categories/categories.module#CategoriesModule', canActivate: [AuthGuard] },
+  { path: 'categories', loadChildren: 'app/categories/categories.module#CategoriesModule', canActivate: [AuthGuard] },
   { path: 'account', loadChildren: 'app/account/account.module#AccountModule', canActivate: [AuthGuard] },
   { path: 'sign-in', loadChildren: 'app/sign-in/sign-in.module#SignInModule' },
   { path: 'star/:id', loadChildren: 'app/star/star.module#StarModule' },

@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './core/auth/auth.service';
 import { StorageService } from './shared/service/storage/storage.service';
+import { TranslateService } from '@ngx-translate/core';
 
 // import { SwUpdate } from '@angular/service-worker';
 
@@ -30,11 +31,14 @@ export class AppComponent implements OnInit, OnDestroy {
         private router: Router,
         private snackbar: MatSnackBar,
         private storageService: StorageService,
+        public translate: TranslateService
         // private swUpdate: SwUpdate
     ) {
         this.mobileQuery = media.matchMedia('(max-width: 731px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
+        this.translate.setDefaultLang('en-US');
+        this.translate.use('en-US');
     }
 
     ngOnInit() {
@@ -70,7 +74,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     getChangedValue(event) {
         this.storageService.save('language', event.value);
-        location.reload();
+        this.translate.use(event.value);
+        // location.reload();
     }
 
     searchMovie(term: string) {

@@ -3,10 +3,10 @@
 </div>
 <ng-template [ngIf]="!isLoadingResults">
     <h2>{{title}}</h2>
-    <button class="btn-add-category" mat-icon-button (click)="addCategoryDialog()">
+    <button class="btn-add-category" mat-icon-button (click)="addCategoryDialog()" matTooltip="Create a category">
         <mat-icon>add</mat-icon>
     </button>
-    <button class="btn-delete-category" mat-icon-button (click)="deleteCategoryDialog()">
+    <button class="btn-delete-category" mat-icon-button (click)="deleteCategoryDialog()" matTooltip="Delete a category">
         <mat-icon>delete_forever</mat-icon>
     </button>
     <mat-tab-group class="categories__tab" #tabGroup (selectedTabChange)="tabChanged($event)">

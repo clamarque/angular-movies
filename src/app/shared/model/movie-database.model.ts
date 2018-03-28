@@ -1,4 +1,4 @@
-export interface MovieCategoryModel {
+export interface MovieDatabaseModel {
     category: string;
     date: string;
     movieId: number;

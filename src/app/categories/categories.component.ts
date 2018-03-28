@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DatabaseService } from '../shared/service/database/database.service';
 import { MatDialog, MatDialogRef , MatSnackBar, MatTabChangeEvent } from '@angular/material';
-import { MovieCategoryModel } from '../shared/model/movie-category.model';
+import { MovieDatabaseModel } from '../shared/model/movie-database.model';
 import { Subscription } from 'rxjs/Subscription';
 import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component';
 import { CategoriesAddModalComponent } from './categories-add-modal/categories-add-modal.component';
@@ -28,14 +28,12 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoadingResults = true;
-    this.sub = this.databaseService.getCategoriesMovies('FavoriteMovie').subscribe(response => {
-      console.log(response);
+    this.sub = this.databaseService.getMoviesCategoriesDefault('FavoriteMovie').subscribe(response => {
       this.movies = response;
       this.isLoadingResults = false;
     });
 
     this.sub = this.databaseService.getAllCategoriesUser().subscribe(response => {
-      console.log(response);
       this.getCategories = response;
       this.categories = this.getCategories.map(value => value['name']);
     })
@@ -48,20 +46,19 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   tabChanged(event: MatTabChangeEvent) {
     const name = event.tab.textLabel;
     if (name !== 'FAVORITES') {
-      this.sub = this.databaseService.getCategoryUser(name).subscribe(response => {
+      this.sub = this.databaseService.getMovieCategory(name).subscribe(response => {
         this.movies = response;
-        console.log(response);
       })
     } else {
-      this.sub = this.databaseService.getCategoriesMovies('FavoriteMovie').subscribe(response => {
+      this.sub = this.databaseService.getMoviesCategoriesDefault('FavoriteMovie').subscribe(response => {
         this.movies = response;
         this.isLoadingResults = false;
       });
     }
   }
 
-  deleteMovieFromFavorites(key: any) {
-    this.databaseService.deleteMovies('FavoriteMovie', key, (error) => {
+  deleteMovieFromFavorites(id: number) {
+    this.databaseService.deleteMoviesCategoriesDefault('FavoriteMovie', id, (error) => {
         if (error) {
           this.snackBar.open(error, 'Hide', { duration: 5000 });
         } else {
@@ -71,7 +68,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   }
 
   deleteMovieFromCategory(category: string, id: number) {
-    this.databaseService.deleteMovieFromCategory(category, id, (error) => {
+    this.databaseService.deleteMovieCategory(category, id, (error) => {
       if (error) {
         this.snackBar.open(error, 'Hide', { duration: 5000 });
       } else {
@@ -80,7 +77,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     })
   }
 
-  shareDialog(movie: MovieCategoryModel): void {
+  shareDialog(movie: MovieDatabaseModel): void {
     const dialogRef = this.dialog.open(ShareModalComponent, {
       data: { id: movie.movieId, original_title: movie.original_title }
     })

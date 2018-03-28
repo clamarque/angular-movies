@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShareModalComponent } from './share-modal.component';
-import { MAT_DIALOG_DATA, MatFormFieldModule, MatDialogRef, MatInputModule, MatSnackBarModule } from '@angular/material';
+import { MAT_DIALOG_DATA, MatFormFieldModule, MatDialogRef, MatInputModule, MatSnackBarModule, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../../shared.module';
 
@@ -16,6 +16,7 @@ describe('ShareModalComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
+        MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
         MatSnackBarModule,

@@ -32,19 +32,19 @@
       </div>
       <p class="movie--overview">{{movie.overview}}</p>
       <div class=" movie--actions">
-        <button *ngIf="authService.user | async" mat-button (click)="saveMovie(movie, 'MovieLater')">
+        <button *ngIf="authService.user | async" mat-button (click)="pushMovieCategoryDefault(movie, 'MovieLater')">
           <mat-icon class="mat-teal">watch_later</mat-icon> Watch later
         </button>
-        <button *ngIf="authService.user | async" mat-button (click)="saveMovie(movie, 'FavoriteMovie')">
+        <button *ngIf="authService.user | async" mat-button (click)="pushMovieCategoryDefault(movie, 'FavoriteMovie')">
           <mat-icon class="mat-red">favorite_border</mat-icon> Favorite
         </button>
         <button *ngIf="authService.user | async" mat-button [matMenuTriggerFor]="menu" (click)="getAllCategories()">
           <mat-icon>create_new_folder</mat-icon> Categories
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item *ngFor="let category of categories" (click)="updateMovie(movie, category)">{{category}}</button>
+          <button mat-menu-item *ngFor="let category of categories" (click)="pushMovieCategory(movie, category)">{{category}}</button>
         </mat-menu>
-        <button mat-button (click)="shareDialog(movie.id, movie.title)">
+        <button mat-button (click)="shareDialog(movie)">
           <mat-icon class="mat-yellow">share</mat-icon> Share
         </button>
       </div>

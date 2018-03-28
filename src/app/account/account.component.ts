@@ -15,10 +15,10 @@ import * as moment from 'moment';
 export class AccountComponent implements OnInit, OnDestroy {
   displayName: string;
   email: string;
-  photoURL: any;
+  photoURL: Object;
   notPhotoURL: string;
   sub: Subscription;
-  creationTime: any;
+  creationTime: string;
 
   constructor(
     private authService: AuthService,

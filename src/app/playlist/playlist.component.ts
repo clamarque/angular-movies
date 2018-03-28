@@ -4,7 +4,7 @@ import { DatabaseService } from '../shared/service/database/database.service';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component';
-import { MovieCategoryModel } from '../shared/model/movie-category.model';
+import { MovieDatabaseModel } from '../shared/model/movie-database.model';
 
 @Component({
   selector: 'app-playlist',
@@ -12,9 +12,9 @@ import { MovieCategoryModel } from '../shared/model/movie-category.model';
   styleUrls: ['./playlist.component.scss']
 })
 export class PlaylistComponent implements OnInit, OnDestroy {
-  isLoadingResults = true;
-  moviesToWatch: Array<any> = [];
-  moviesWatched: Array<any> = [];
+  isLoadingResults: boolean;
+  moviesToWatch: Array<Object> = [];
+  moviesWatched: Array<Object> = [];
   title = 'Playlist';
   sub: Subscription;
 
@@ -26,7 +26,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoadingResults = true;
-    this.sub = this.databaseService.getMovies('MovieLater').subscribe(response => {
+    this.sub = this.databaseService.getMoviesCategoriesDefault('MovieLater').subscribe(response => {
       this.moviesToWatch = response.filter(val => val['watched'] === false);
       this.moviesWatched = response.filter(val => val['watched'] === true);
       this.isLoadingResults = false;
@@ -37,8 +37,8 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  deleteMovie(key: any) {
-    this.databaseService.deleteMovies('MovieLater', key, error => {
+  deleteMovie(id: number) {
+    this.databaseService.deleteMoviesCategoriesDefault('MovieLater', id, error => {
       if (error) {
         this.snackBar.open(error, 'Hide', { duration: 5000 });
       } else {
@@ -47,14 +47,14 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     });
   }
 
-  shareDialog(movie: MovieCategoryModel): void {
+  shareDialog(movie: MovieDatabaseModel): void {
     const dialogRef = this.dialog.open(ShareModalComponent, {
       data: { id: movie.movieId, original_title: movie.original_title }
     })
   }
 
-  watchedMovie(movieId: any, watched: boolean) {
-    this.databaseService.updateMovie(movieId, watched, error => {
+  watchedMovie(movieId: number, watched: boolean) {
+    this.databaseService.updateMovieCategoriesDefault(movieId, watched, error => {
       if (error) {
         this.snackBar.open(error, 'Hide', { duration: 5000 });
       } else {

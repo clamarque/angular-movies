@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatCheckboxModule, MatSnackBarModule, MatDialogModule } from '@angular/material';
+import { MatInputModule, MatSnackBarModule, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -34,7 +34,6 @@ describe('AccountComponent', () => {
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        MatCheckboxModule,
         MatDialogModule,
         MatInputModule,
         MatSnackBarModule,
