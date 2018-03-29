@@ -13,6 +13,7 @@ const routes: Routes = [
     { path: 'movie/:id', component: MovieComponent},
     { path: 'search', component: MovieListComponent}
   ] },
+  { path: 'about', loadChildren: 'app/about/about.module#AboutModule'},
   { path: 'playlist', loadChildren: 'app/playlist/playlist.module#PlaylistModule', canActivate: [AuthGuard] },
   { path: 'categories', loadChildren: 'app/categories/categories.module#CategoriesModule', canActivate: [AuthGuard] },
   { path: 'account', loadChildren: 'app/account/account.module#AccountModule', canActivate: [AuthGuard] },
