@@ -17,8 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
     mobileQuery: MediaQueryList;
     languages = [
         {value: 'en-US', viewValue: 'English'},
-        {value: 'fr-FR', viewValue: 'French'},
-        {value: 'es-ES', viewValue: 'Spanish'}
+        {value: 'fr-FR', viewValue: 'French'}
       ];
     lang = this.storageService.read('language');
     private _mobileQueryListener: () => void;
@@ -31,20 +30,21 @@ export class AppComponent implements OnInit, OnDestroy {
         private router: Router,
         private snackbar: MatSnackBar,
         private storageService: StorageService,
-        public translate: TranslateService
+        public translateService: TranslateService
         // private swUpdate: SwUpdate
     ) {
         this.mobileQuery = media.matchMedia('(max-width: 731px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
-        this.translate.setDefaultLang('en-US');
-        this.translate.use('en-US');
+        this.translateService.setDefaultLang('en-US');
     }
 
     ngOnInit() {
-        if (this.lang === undefined) {
+        if (!this.lang) {
             this.storageService.save('language', 'en-US');
         }
+        const lang = this.storageService.read('language');
+        this.translateService.use(lang);
        /* if (this.swUpdate.isEnabled) {
             this.swUpdate.available.subscribe(() => {
                 if (confirm('New version available. Load New Version?')) {
@@ -72,10 +72,10 @@ export class AppComponent implements OnInit, OnDestroy {
     scrollTop() {
         window.scrollTo({left: 0, top: 0, behavior: 'smooth'});
     }
+
     getChangedValue(event) {
         this.storageService.save('language', event.value);
-        this.translate.use(event.value);
-        // location.reload();
+        this.translateService.use(event.value);
     }
 
     searchMovie(term: string) {
@@ -88,7 +88,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     onSignOut() {
         this.authService.signOut();
-        this.snackbar.open('Already Gone ? We Hope to see you again soon', '', { duration: 5000 });
+        this.translateService.get('Error.Goodbye').subscribe(results => this.snackbar.open(results, '', { duration: 2000 }));
         this.router.navigate(['/movies/list/now-playing']);
     }
 

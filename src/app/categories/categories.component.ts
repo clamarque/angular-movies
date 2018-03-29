@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component';
 import { CategoriesAddModalComponent } from './categories-add-modal/categories-add-modal.component';
 import { CategoriesDeleteModalComponent } from './categories-delete-modal/categories-delete-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-categories',
@@ -17,13 +18,13 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   getCategories: Array<Object>;
   isLoadingResults: boolean;
   sub: Subscription;
-  title = 'Categories';
   categories = [];
 
   constructor(
     private databaseService: DatabaseService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -62,7 +63,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         if (error) {
           this.snackBar.open(error, 'Hide', { duration: 5000 });
         } else {
-          this.snackBar.open('Your movie was been delete', null , { duration: 2000 });
+          this.translateService.get('Error.List-updated').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
         }
     })
   }
@@ -72,7 +73,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       if (error) {
         this.snackBar.open(error, 'Hide', { duration: 5000 });
       } else {
-        this.snackBar.open('Your movie was been delete', null , { duration: 2000 });
+        this.translateService.get('Error.List-updated').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
       }
     })
   }
@@ -94,7 +95,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
           if (error) {
             this.snackBar.open(error, 'hide', { duration: 5000});
           } else {
-            this.snackBar.open('Categories updated', null, { duration: 2000});
+            this.translateService.get('Error.List-updated').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
           }
         })
       }
@@ -113,7 +114,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
           if (error) {
             this.snackBar.open(error, 'hide', { duration: 5000});
           } else {
-            this.snackBar.open('Categories updated', null, { duration: 2000});
+            this.translateService.get('Error.List-updated').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
           }
         })
       }

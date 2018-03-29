@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -12,7 +13,8 @@ export class ShareModalComponent {
   constructor(
     public dialogRef: MatDialogRef<ShareModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private translateService: TranslateService
   ) { }
 
   onNoClick(): void {
@@ -24,7 +26,7 @@ export class ShareModalComponent {
     (<any>inputElement).select();
     document.execCommand('copy');
     inputElement.blur();
-    this.snackBar.open('The link has been copied', null, { duration: 2000});
+    this.translateService.get('Error.Link').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
     this.dialogRef.close();
   }
 

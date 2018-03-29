@@ -2,9 +2,9 @@
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
 </div>
 <ng-template [ngIf]="!isLoadingResults">
-    <h2>{{title}}</h2>
+    <h2>{{'Watch later.Title' | translate}}</h2>
     <mat-tab-group class="playlist__tab">
-        <mat-tab label="TO WATCH">
+        <mat-tab label="{{'Watch later.To watch' | translate}}">
             <div *ngIf="moviesToWatch.length > 0; else noData">
                 <mat-nav-list *ngFor="let movie of moviesToWatch">
                     <a mat-list-item [routerLink]="['/movies/movie', movie.movieId]">
@@ -21,27 +21,27 @@
                         <mat-menu #menu="matMenu">
                             <button mat-menu-item (click)="shareDialog(movie)">
                                 <mat-icon>share</mat-icon>
-                                <span>Share</span>
+                                <span>{{'Btn-share' | translate}}</span>
                             </button>
                             <button mat-menu-item (click)="deleteMovie(movie.movieId)">
                                 <mat-icon>delete</mat-icon>
-                                <span>Delete</span>
+                                <span>{{'Btn-delete' | translate}}</span>
                             </button>
                             <button mat-menu-item (click)="watchedMovie(movie.movieId, true)">
                                 <mat-icon>visibility</mat-icon>
-                                <span>Watched</span>
+                                <span>{{'Watch later.Watched?' | translate}}</span>
                             </button>
                         </mat-menu>
                     </div>
                 </mat-nav-list>
             </div>
             <ng-template #noData>
-                <h3>No Movies
+                <h3>{{'Watch later.No movies' | translate}}
                     <mat-icon>sentiment_very_dissatisfied</mat-icon>
                 </h3>
             </ng-template>
         </mat-tab>
-        <mat-tab label="WATCHED">
+        <mat-tab label="{{'Watch later.Watched' | translate}}">
             <div *ngIf="moviesWatched.length > 0, else noData">
                 <mat-nav-list *ngFor="let movie of moviesWatched">
                     <a mat-list-item [routerLink]="['/movies/movie', movie.movieId]">
@@ -58,22 +58,22 @@
                         <mat-menu #menu="matMenu">
                             <button mat-menu-item (click)="shareDialog(movie)">
                                 <mat-icon>share</mat-icon>
-                                <span>Share</span>
+                                <span>{{'Btn-share' | translate}}</span>
                             </button>
                             <button mat-menu-item (click)="deleteMovie(movie.movieId)">
                                 <mat-icon>delete</mat-icon>
-                                <span>Delete</span>
+                                <span>{{'Btn-delete' | translate}}</span>
                             </button>
                             <button mat-menu-item (click)="watchedMovie(movie.movieId, false)">
                                 <mat-icon>visibility_off</mat-icon>
-                                <span>Not watched</span>
+                                <span>{{'Watch later.Not Watched' | translate}}</span>
                             </button>
                         </mat-menu>
                     </div>
                 </mat-nav-list>
             </div>
             <ng-template #nodata>
-                <h3>No movies
+                <h3>{{'Watch later.No movies' | translate}}
                     <mat-icon>sentiment_very_dissatisfied</mat-icon>
                 </h3>
             </ng-template>

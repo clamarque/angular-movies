@@ -13,7 +13,7 @@
   </section>
 
   <mat-tab-group>
-    <mat-tab label="Known in movies for">
+    <mat-tab label="{{'Star.Known in movies' | translate}}">
       <section class="items" *ngIf="movies">
         <div class="item" *ngFor="let movie of movies">
           <a [routerLink]="['/movies/movie', movie.id]">
@@ -26,7 +26,7 @@
         </div>
       </section>
     </mat-tab>
-    <mat-tab label="Known in TV for">
+    <mat-tab label="{{'Star.Known in TV' | translate}}">
       <section class="items" *ngIf="tv_credits">
         <div class="item" *ngFor="let tv of tv_credits">
           <img *ngIf="tv.poster_path" [defaultImage]="'assets/images/no_poster_available.jpg'" [lazyLoad]="'https://image.tmdb.org/t/p/w185/' + tv.poster_path"

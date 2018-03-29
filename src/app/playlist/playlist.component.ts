@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component';
 import { MovieDatabaseModel } from '../shared/model/movie-database.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-playlist',
@@ -15,13 +16,13 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   isLoadingResults: boolean;
   moviesToWatch: Array<Object> = [];
   moviesWatched: Array<Object> = [];
-  title = 'Playlist';
   sub: Subscription;
 
   constructor(
     private databaseService: DatabaseService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
@@ -42,8 +43,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
       if (error) {
         this.snackBar.open(error, 'Hide', { duration: 5000 });
       } else {
-        this.snackBar.open('Your movie was been delete', null, { duration: 2000 });
-      }
+        this.translateService.get('Error.List-updated').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));      }
     });
   }
 
@@ -58,8 +58,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
       if (error) {
         this.snackBar.open(error, 'Hide', { duration: 5000 });
       } else {
-        this.snackBar.open('Your movie was been update', null, { duration: 2000 });
-      }
+        this.translateService.get('Error.List-updated').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));      }
     });
   }
 }

@@ -2,15 +2,15 @@
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
 </div>
 <ng-template [ngIf]="!isLoadingResults">
-    <h2>{{title}}</h2>
-    <button class="btn-add-category" mat-icon-button (click)="addCategoryDialog()" matTooltip="Create a category">
+    <h2>{{'Categories.Title' | translate}}</h2>
+    <button class="btn-add-category" mat-icon-button (click)="addCategoryDialog()" matTooltip="{{'Categories.Btn-add' | translate}}">
         <mat-icon>add</mat-icon>
     </button>
-    <button class="btn-delete-category" mat-icon-button (click)="deleteCategoryDialog()" matTooltip="Delete a category">
+    <button class="btn-delete-category" mat-icon-button (click)="deleteCategoryDialog()" matTooltip="{{'Categories.Btn-delete' | translate}}">
         <mat-icon>delete_forever</mat-icon>
     </button>
     <mat-tab-group class="categories__tab" #tabGroup (selectedTabChange)="tabChanged($event)">
-        <mat-tab label="FAVORITES">
+        <mat-tab label="{{'Categories.Favorites' | translate}}">
             <div *ngIf="movies.length > 0; else noData">
                 <mat-nav-list *ngFor="let movie of movies">
                     <a mat-list-item [routerLink]="['/movies/movie', movie.movieId]">
@@ -27,18 +27,18 @@
                         <mat-menu #menu="matMenu">
                             <button mat-menu-item (click)="shareDialog(movie)">
                                 <mat-icon>share</mat-icon>
-                                <span>Share</span>
+                                <span>{{'Btn-share' | translate}}</span>
                             </button>
                             <button mat-menu-item (click)="deleteMovieFromFavorites(movie.movieId)">
                                 <mat-icon>delete</mat-icon>
-                                <span>Delete</span>
+                                <span>{{'Btn-delete' | translate}}</span>
                             </button>
                         </mat-menu>
                     </div>
                 </mat-nav-list>
             </div>
             <ng-template #noData>
-                <h3>No favorites yet
+                <h3>{{'Categories.No favorites' | translate}}
                     <mat-icon>sentiment_very_dissatisfied</mat-icon>
                 </h3>
             </ng-template>
@@ -60,18 +60,18 @@
                         <mat-menu #menu="matMenu">
                             <button mat-menu-item (click)="shareDialog(movie)">
                                 <mat-icon>share</mat-icon>
-                                <span>Share</span>
+                                <span>{{'Btn-share' | translate}}</span>
                             </button>
                             <button mat-menu-item (click)="deleteMovieFromCategory(movie.category, movie.movieId)">
                                 <mat-icon>delete</mat-icon>
-                                <span>Delete</span>
+                                <span>{{'Btn-delete' | translate}}</span>
                             </button>
                         </mat-menu>
                     </div>
                 </mat-nav-list>
             </div>
             <ng-template #noData>
-                <h3>No movies yet
+                <h3>{{'Categories.No movies' | translate}}
                     <mat-icon>sentiment_very_dissatisfied</mat-icon>
                 </h3>
             </ng-template>

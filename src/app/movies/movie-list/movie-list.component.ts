@@ -11,6 +11,7 @@ import { MovieCategoryModel } from '../shared/movie-category.model';
 import { AuthService } from '../../core/auth/auth.service';
 import { Observable } from 'rxjs/Rx';
 import { StorageService } from '../../shared/service/storage/storage.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-movie-list',
@@ -37,7 +38,8 @@ export class MovieListComponent implements OnInit {
     private tmdbService: TmdbService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -114,7 +116,7 @@ export class MovieListComponent implements OnInit {
       if (error) {
         this.snackBar.open(error, 'Hide', { duration: 5000 });
       } else {
-        this.snackBar.open('Your movie was been save', '', { duration: 2000 });
+        this.translateService.get('Error.Movie-added').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
       }
     });
   }

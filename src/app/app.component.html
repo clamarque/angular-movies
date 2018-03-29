@@ -11,7 +11,7 @@
     <nav class="navigation">
       <div class="navigation--search">
         <mat-form-field>
-          <input matInput #search placeholder="{{'Search movies' |translate}}..." (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="closeSidenav()"
+          <input matInput #search placeholder="{{'App.Search movies' |translate}}..." (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="closeSidenav()"
             tabindex="-1">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
@@ -19,43 +19,43 @@
       <ul class="navigation--links">
         <li>
           <a [routerLink]="['/movies/list', 'now-playing']" routerLinkActive="active" (click)="closeSidenav()">
-            <mat-icon>local_movies</mat-icon> {{'Now-playing' | translate}}</a>
+            <mat-icon>local_movies</mat-icon> {{'App.Now-playing' | translate}}</a>
         </li>
         <li>
           <a [routerLink]="['/movies/list', 'upcoming']" routerLinkActive="active" (click)="closeSidenav()">
-            <mat-icon>date_range</mat-icon> {{'Coming soon' | translate}}</a>
+            <mat-icon>date_range</mat-icon> {{'App.Coming soon' | translate}}</a>
         </li>
         <li>
           <a [routerLink]="['/movies/list', 'discover']" routerLinkActive="active" (click)="closeSidenav()">
-            <mat-icon>whatshot</mat-icon> {{'Trending' | translate}}</a>
+            <mat-icon>whatshot</mat-icon> {{'App.Trending' | translate}}</a>
         </li>
         <li *ngIf="authService.user | async">
           <a [routerLink]="['/playlist']" routerLinkActive="active" (click)="closeSidenav()">
-            <mat-icon>watch_later</mat-icon> Watch later</a>
+            <mat-icon>watch_later</mat-icon> {{'App.Watch later' | translate}}</a>
         </li>
         <li *ngIf="authService.user | async">
           <a [routerLink]="['/categories']" routerLinkActive="active" (click)="closeSidenav()">
-            <mat-icon>folder</mat-icon> Categories</a>
+            <mat-icon>folder</mat-icon> {{'App.Categories' | translate}}</a>
         </li>
         <li *ngIf="authService.user | async">
           <a routerLink="/account" routerLinkActive="active" (click)="closeSidenav()">
-            <mat-icon>account_box</mat-icon> Account</a>
+            <mat-icon>account_box</mat-icon> {{'App.Account' | translate}}</a>
         </li>
         <li [hidden]="authService.user | async">
           <a routerLink="/sign-in" routerLinkActive="active" (click)="closeSidenav()">
-            <mat-icon>account_circle</mat-icon> {{'Sign in' | translate}}</a>
+            <mat-icon>account_circle</mat-icon> {{'App.Sign in' | translate}}</a>
         </li>
         <li *ngIf="authService.user | async">
           <a (click)="closeSidenav()" (click)="onSignOut()">
-            <mat-icon>cancel</mat-icon> Sign out</a>
+            <mat-icon>cancel</mat-icon> {{'App.Sign out' | translate}}</a>
         </li>
         <li>
           <a href="mailto:chabox59@gmail.com">
-            <mat-icon>bug_report</mat-icon> Feebacks</a>
+            <mat-icon>info</mat-icon> {{'App.About' | translate}}</a>
         </li>
         <li>
           <mat-icon>language</mat-icon>
-          <mat-select placeholder="{{'Language' | translate}}" [ngModel]="lang" (selectionChange)="getChangedValue($event)">
+          <mat-select placeholder="{{'App.Language' | translate}}" [ngModel]="lang" (selectionChange)="getChangedValue($event)">
             <mat-option *ngFor="let language of languages" [value]="language.value">
               {{ language.viewValue }}
             </mat-option>

@@ -19,6 +19,7 @@ import { ShareModalComponent } from '../../shared/component/share-modal/share-mo
 
 import { Subscription } from 'rxjs/Subscription';
 import { StorageService } from '../../shared/service/storage/storage.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-movie',
@@ -52,7 +53,8 @@ export class MovieComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private snackBar: MatSnackBar,
     private tmdbService: TmdbService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -101,7 +103,7 @@ export class MovieComponent implements OnInit {
       if (error) {
         this.snackBar.open(error, 'Hide', { duration: 5000 });
       } else {
-        this.snackBar.open('Your movie was been save', '', { duration: 2000 });
+        this.translateService.get('Error.Movie-added').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
       }
     });
   }
@@ -115,7 +117,7 @@ export class MovieComponent implements OnInit {
       if (error) {
         this.snackBar.open(error, 'Hide', { duration: 5000 });
       } else {
-        this.snackBar.open('Your movie was been save', '', { duration: 2000 });
+        this.translateService.get('Error.Movie-added').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
       }
     })
   }
