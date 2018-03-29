@@ -4,6 +4,16 @@ import { CategoriesAddModalComponent } from './categories-add-modal.component';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule, MAT_DIALOG_DATA , MatDialogModule, MatDialogRef, MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import {Observable} from 'rxjs/Observable';
+
+const translations: any = {'foo': 'bar'};
+
+class FakeLoader implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return Observable.of(translations);
+  }
+}
 
 describe('CategoriesAddModalComponent', () => {
   let component: CategoriesAddModalComponent;
@@ -19,7 +29,10 @@ describe('CategoriesAddModalComponent', () => {
         FormsModule,
         MatDialogModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: FakeLoader},
+        })
       ],
       declarations: [ CategoriesAddModalComponent ],
       providers: [

@@ -18,6 +18,16 @@ import { DatabaseService } from '../shared/service/database/database.service';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import {Observable} from 'rxjs/Observable';
+
+const translations: any = {'foo': 'bar'};
+
+class FakeLoader implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return Observable.of(translations);
+  }
+}
 
 describe('PlaylistComponent', () => {
   let component: PlaylistComponent;
@@ -46,7 +56,10 @@ describe('PlaylistComponent', () => {
         MatTabsModule,
         MatTooltipModule,
         MatSnackBarModule,
-        RouterTestingModule
+        RouterTestingModule,
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: FakeLoader},
+        })
       ],
       declarations: [ PlaylistComponent ],
       providers: [

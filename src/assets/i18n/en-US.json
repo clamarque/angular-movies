@@ -14,7 +14,8 @@
     },
     "Movie-list": {
         "Title": "Title",
-        "No results": "No Results"
+        "No results": "No Results",
+        "Watch later": "Watch later"
     },
     "Movie": {
         "Watch later": "Watch later",
@@ -23,7 +24,9 @@
         "Share": "Share",
         "Cast": "CAST",
         "Trailer": "TRAILER",
-        "Similar": "SIMILAR MOVIES"
+        "Similar": "SIMILAR MOVIES",
+        "No lists": "No list available",
+        "No trailer": "No trailer available"
     },
     "Star": {
         "Known in movies": "KNOWN IN MOVIES FOR",
@@ -65,7 +68,8 @@
         "Btn-copy": "Copy the link"
     },
     "Sign-in": {
-        "Title": "Sign in"
+        "Title": "Sign in",
+        "Btn-sign": "Sign In with"
     },
     "Btn-cancel": "CANCEL",
     "Btn-share": "Share",

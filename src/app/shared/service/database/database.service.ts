@@ -39,10 +39,10 @@ export class DatabaseService {
       .catch(err => callback(err))
   }
   /* MOVIES TO CATEGORY */
-  addMovieCategory(movie: MovieDatabaseModel, category: string, callback: any) {
+  addMovieCategory(movie: any, category: string, callback: any) {
     const movieDetails = {
           userId: this.uid,
-          movieId: movie.movieId,
+          movieId: movie.id,
           date: new Date(),
           original_title: movie.original_title,
           overview: movie.overview,
@@ -54,7 +54,7 @@ export class DatabaseService {
           watched: false
         }
 
-    return this.dbf.doc(`Categories/${this.uid}_${category}`).collection('movies').doc(`${this.uid}_${movie.movieId}`)
+    return this.dbf.doc(`Categories/${this.uid}_${category}`).collection('movies').doc(`${this.uid}_${movie.id}`)
       .set(movieDetails, {merge: true})
       .then(success => callback())
       .catch(err => callback(err));
@@ -96,14 +96,6 @@ export class DatabaseService {
       .orderBy('date', 'desc')
     ).valueChanges()
   }
-  /*
-  getCategoriesMovies(category: string) {
-    return this.dbf.collection(`${category}`, ref => ref
-      .where('userId', '==', this.uid)
-      .orderBy('date', 'desc')
-    ).valueChanges()
-  }
-  */
   updateMovieCategoriesDefault(movieId: number, watched: boolean, callback: any) {
     this.dbf.doc(`MovieLater/${this.uid}_${movieId}`)
     .update({
@@ -112,7 +104,6 @@ export class DatabaseService {
     .then(success => callback())
     .catch(err => callback(err));
   }
-
   deleteMoviesCategoriesDefault(category: string, id: number, callback: any) {
     return this.dbf.doc(`${category}/${this.uid}_${id}`)
       .delete()

@@ -24,6 +24,16 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import 'hammerjs';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import {Observable} from 'rxjs/Observable';
+
+const translations: any = {'foo': 'bar'};
+
+class FakeLoader implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return Observable.of(translations);
+  }
+}
 
 describe('MovieComponent', () => {
   let component: MovieComponent;
@@ -54,7 +64,10 @@ describe('MovieComponent', () => {
         MatProgressSpinnerModule,
         MatSnackBarModule,
         MatTabsModule,
-        RouterTestingModule
+        RouterTestingModule,
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: FakeLoader},
+        })
       ],
       declarations: [ MovieComponent ],
       providers: [

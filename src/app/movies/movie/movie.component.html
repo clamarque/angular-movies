@@ -42,7 +42,12 @@
           <mat-icon>create_new_folder</mat-icon> {{'Movie.Categories' | translate}}
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item *ngFor="let category of categories" (click)="pushMovieCategory(movie, category)">{{category}}</button>
+          <div *ngIf="categories.length > 0; else noData">
+            <button mat-menu-item *ngFor="let category of categories" (click)="pushMovieCategory(movie, category)">{{category}}</button>
+          </div>
+          <ng-template #noData>
+            <small>{{'Movie.No lists' | translate}}</small>
+          </ng-template>
         </mat-menu>
         <button mat-button (click)="shareDialog(movie)">
           <mat-icon class="mat-yellow">share</mat-icon> {{'Movie.Share' | translate}}
@@ -69,7 +74,7 @@
         <iframe width="560" height="315" [src]="safeUrl" frameborder="0" allowfullscreen></iframe>
       </section>
       <ng-template #noTrailer>
-        <h3>No trailer available
+        <h3>{{'Movie.No trailer' | translate}}
           <mat-icon>sentiment_very_dissatisfied</mat-icon>
         </h3>
       </ng-template>

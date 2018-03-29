@@ -45,7 +45,6 @@ export class MovieListComponent implements OnInit {
   ngOnInit() {
     this.isLoadingResults = true;
     this.lang = this.storageService.read('language');
-    console.log(this.lang);
 
     this.route.params.subscribe((params: Params) => {
       if (params['term']) {

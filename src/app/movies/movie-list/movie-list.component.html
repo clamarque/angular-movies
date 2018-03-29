@@ -11,9 +11,10 @@
       <img *ngIf="!movie.poster_path" src="/assets/images/no_poster_available.jpg" alt="No poster available">
     </a>
     <h3>{{movie.title}}</h3>
-    <button *ngIf="authService.user | async" aria-hidden="true" mat-icon-button class="btn-add" color="primary" (click)="addMovie(movie)">
-        <mat-icon>visibility</mat-icon>
-      </button>
+    <button *ngIf="authService.user | async" aria-hidden="true" mat-icon-button class="btn-add" color="primary" (click)="addMovie(movie)"
+      matTooltip="{{'Movie-list.Watch later' | translate}}">
+      <mat-icon>visibility</mat-icon>
+    </button>
     <p class="date">{{movie.release_date | date}}</p>
   </div>
 </div>

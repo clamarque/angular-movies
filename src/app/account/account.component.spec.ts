@@ -11,6 +11,16 @@ import { AuthService } from '../core/auth/auth.service';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import {Observable} from 'rxjs/Observable';
+
+const translations: any = {'foo': 'bar'};
+
+class FakeLoader implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return Observable.of(translations);
+  }
+}
 
 describe('AccountComponent', () => {
   let component: AccountComponent;
@@ -37,7 +47,10 @@ describe('AccountComponent', () => {
         MatDialogModule,
         MatInputModule,
         MatSnackBarModule,
-        RouterTestingModule
+        RouterTestingModule,
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: FakeLoader},
+        })
       ],
       declarations: [ AccountComponent ],
       providers: [

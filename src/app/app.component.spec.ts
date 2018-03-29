@@ -21,6 +21,17 @@ import { StorageService } from './shared/service/storage/storage.service';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import {Observable} from 'rxjs/Observable';
+import { ServiceWorkerModule } from '@angular/service-worker';
+
+const translations: any = {'foo': 'bar'};
+
+class FakeLoader implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return Observable.of(translations);
+  }
+}
 
 describe('AppComponent', () => {
   const firebaseConfig = {
@@ -49,6 +60,10 @@ describe('AppComponent', () => {
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFirestoreModule,
         HttpClientTestingModule,
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: FakeLoader},
+        }),
+        ServiceWorkerModule.register('', {enabled: false})
       ],
       declarations: [
         AppComponent

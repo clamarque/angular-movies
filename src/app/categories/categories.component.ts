@@ -46,14 +46,13 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   tabChanged(event: MatTabChangeEvent) {
     const name = event.tab.textLabel;
-    if (name !== 'FAVORITES') {
+    if (event.index !== 0) {
       this.sub = this.databaseService.getMovieCategory(name).subscribe(response => {
         this.movies = response;
       })
     } else {
       this.sub = this.databaseService.getMoviesCategoriesDefault('FavoriteMovie').subscribe(response => {
         this.movies = response;
-        this.isLoadingResults = false;
       });
     }
   }

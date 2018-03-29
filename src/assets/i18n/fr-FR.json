@@ -14,7 +14,8 @@
     },
     "Movie-list": {
         "Title": "Title",
-        "No results": "Aucun résultats"
+        "No results": "Aucun résultats",
+        "Watch later": "À regarder plus tard"
     },
     "Movie": {
         "Watch later": "À regarder",
@@ -23,7 +24,9 @@
         "Share": "Partager",
         "Cast": "CASTING",
         "Trailer": "BANDE ANNONCE",
-        "Similar": "FILMS RECOMMANDÉS"
+        "Similar": "FILMS RECOMMANDÉS",
+        "No lists": "Aucune listes disponibles",
+        "No trailer": "Aucune bande-annonce disponible"
     },
     "Star": {
         "Known in movies": "CONNU DANS LES FILMS POUR",
@@ -65,7 +68,8 @@
         "Btn-copy": "COPIER LE LIEN"
     },
     "Sign-in": {
-        "Title": "Se connecter"
+        "Title": "Se connecter",
+        "Btn-sign": "Se connecter avec"
     },
     "Btn-cancel": "ANNULER",
     "Btn-share": "Partager",

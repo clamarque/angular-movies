@@ -6,7 +6,7 @@ import { AuthService } from './core/auth/auth.service';
 import { StorageService } from './shared/service/storage/storage.service';
 import { TranslateService } from '@ngx-translate/core';
 
-// import { SwUpdate } from '@angular/service-worker';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
     selector: 'app-root',
@@ -30,8 +30,8 @@ export class AppComponent implements OnInit, OnDestroy {
         private router: Router,
         private snackbar: MatSnackBar,
         private storageService: StorageService,
-        public translateService: TranslateService
-        // private swUpdate: SwUpdate
+        public translateService: TranslateService,
+        private swUpdate: SwUpdate
     ) {
         this.mobileQuery = media.matchMedia('(max-width: 731px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -45,13 +45,13 @@ export class AppComponent implements OnInit, OnDestroy {
         }
         const lang = this.storageService.read('language');
         this.translateService.use(lang);
-       /* if (this.swUpdate.isEnabled) {
+        if (this.swUpdate.isEnabled) {
             this.swUpdate.available.subscribe(() => {
                 if (confirm('New version available. Load New Version?')) {
                     location.reload();
                 }
             })
-        } */
+        }
     }
 
     ngOnDestroy(): void {
