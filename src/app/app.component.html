@@ -50,6 +50,10 @@
             <mat-icon>cancel</mat-icon> {{'App.Sign out' | translate}}</a>
         </li>
         <li>
+            <a routerLink="/settings" routerLinkActive="active" (click)="closeSidenav()">
+              <mat-icon>settings</mat-icon> {{'App.Settings' | translate}}</a>
+        </li>
+        <li>
           <a routerLink="/about" routerLinkActive="active" (click)="closeSidenav()">
             <mat-icon>info</mat-icon> {{'App.About' | translate}}</a>
         </li>

@@ -22,6 +22,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieComponent } from './movies/movie/movie.component';
 import { PageNotFoundComponent } from './not-found.component';
+import { SettingsComponent } from './settings/settings.component';
 /* SERVICES */
 import { CheckForUpdateService } from './shared/service/sw/check-for-update.service';
 import { LogUpdateService } from './shared/service/sw/log-update.service';
@@ -49,6 +50,7 @@ export function createTranslateLoader(http: HttpClient) {
     MoviesComponent,
     MovieListComponent,
     MovieComponent,
+    SettingsComponent
   ],
   imports: [
     AppRoutingModule,
