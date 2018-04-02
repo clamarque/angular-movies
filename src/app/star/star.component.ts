@@ -8,6 +8,7 @@ import { MoviePersonModel } from '../movies/shared/movie-person.model';
 import { TvCastModel } from '../movies/shared/tv-cast.model';
 import { MovieCastModel } from '../movies/shared/movie-cast.model';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { StorageService } from '../shared/service/storage/storage.service';
 
 @Component({
   selector: 'app-star',
@@ -18,20 +19,23 @@ export class StarComponent implements OnInit {
   person: MoviePersonModel;
   movies: MovieCastModel[];
   tv_credits: TvCastModel[];
-  isLoadingResults = false;
+  isLoadingResults: boolean;
+  lang: string;
 
   constructor(
     private location: Location,
     private route: ActivatedRoute,
-    private tmdbService: TmdbService
+    private tmdbService: TmdbService,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
     this.isLoadingResults = true;
+    this.lang = this.storageService.read('language');
     const id = this.route.snapshot.paramMap.get('id');
-    const getPerson = this.tmdbService.getPerson(+id);
-    const getPersonMovies = this.tmdbService.getPersonMovies(+id);
-    const getPersonTv = this.tmdbService.getPersonTv(+id);
+    const getPerson = this.tmdbService.getPerson(+id, this.lang);
+    const getPersonMovies = this.tmdbService.getPersonMovies(+id, this.lang);
+    const getPersonTv = this.tmdbService.getPersonTv(+id, this.lang);
 
     forkJoin(getPerson, getPersonMovies, getPersonTv).subscribe(([person, movies, tv_credits]) => {
       this.isLoadingResults = false;

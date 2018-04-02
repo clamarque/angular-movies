@@ -13,9 +13,13 @@ import { MovieVideosModel } from '../shared/movie-videos.model';
 import { Location } from '@angular/common';
 import { MovieModel } from '../shared/movie.model';
 import { MovieDetailsModel } from '../shared/movie-details.model';
-import { MovieCategoryModel } from '../../shared/model/movie-category.model';
+import { MovieDatabaseModel } from '../../shared/model/movie-database.model';
 
 import { ShareModalComponent } from '../../shared/component/share-modal/share-modal.component';
+
+import { Subscription } from 'rxjs/Subscription';
+import { StorageService } from '../../shared/service/storage/storage.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-movie',
@@ -32,9 +36,13 @@ export class MovieComponent implements OnInit {
   crew: MovieCrewModel[];
   isConnected = false;
   baseUrl = 'https://www.youtube.com/embed/';
-  safeUrl: any;
+  safeUrl: Object;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
-  isLoadingResults = false;
+  isLoadingResults: boolean;
+  sub: Subscription;
+  getCategories: Array<Object>;
+  categories = [];
+  lang: string;
 
   constructor(
     private authService: AuthService,
@@ -44,18 +52,21 @@ export class MovieComponent implements OnInit {
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private snackBar: MatSnackBar,
-    private tmdbService: TmdbService
+    private tmdbService: TmdbService,
+    private storageService: StorageService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
     this.isLoadingResults = true;
+    this.lang = this.storageService.read('language');
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = +params.get('id');
-      const dataMovie = this.tmdbService.getDetailsMovie(this.id);
+      const dataMovie = this.tmdbService.getDetailsMovie(this.id, this.lang);
       const castMovie = this.tmdbService.getCastMovie(this.id);
-      const videoMovie = this.tmdbService.getVideoMovie(this.id);
-      const similarVideo = this.tmdbService.getSimilarMovies(this.id);
+      const videoMovie = this.tmdbService.getVideoMovie(this.id, this.lang);
+      const similarVideo = this.tmdbService.getSimilarMovies(this.id, this.lang);
 
       forkJoin(dataMovie, castMovie, videoMovie, similarVideo).subscribe(([movie, credits, video, similar]) => {
         this.isLoadingResults = false;
@@ -74,18 +85,25 @@ export class MovieComponent implements OnInit {
     this.location.back();
   }
 
+  getAllCategories() {
+    this.sub = this.databaseService.getAllCategoriesUser().subscribe(response => {
+      this.getCategories = response;
+      this.categories = this.getCategories.map(value => value['name']);
+    })
+  }
+
   swipe(action = this.SWIPE_ACTION.RIGHT) {
     if (action === this.SWIPE_ACTION.RIGHT || action === this.SWIPE_ACTION.LEFT) {
       this.location.back();
     }
   }
 
-  saveMovie(movie: any, category: string) {
-    this.databaseService.setMovies(movie, category, (error) => {
+  pushMovieCategoryDefault(movie: MovieDatabaseModel, category: string) {
+    this.databaseService.addMovieCategoriesDefault(movie, category, (error) => {
       if (error) {
         this.snackBar.open(error, 'Hide', { duration: 5000 });
       } else {
-        this.snackBar.open('Your movie was been save', '', { duration: 2000 });
+        this.translateService.get('Error.Movie-added').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
       }
     });
   }
@@ -94,9 +112,19 @@ export class MovieComponent implements OnInit {
     return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + id);
   }
 
-  shareDialog(movieId: MovieCategoryModel, movieTitle: MovieCategoryModel): void {
+  pushMovieCategory(movie: any, category: string) {
+    this.databaseService.addMovieCategory(movie, category, (error) => {
+      if (error) {
+        this.snackBar.open(error, 'Hide', { duration: 5000 });
+      } else {
+        this.translateService.get('Error.Movie-added').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
+      }
+    })
+  }
+
+  shareDialog(movie: MovieDatabaseModel): void {
     const dialogRef = this.dialog.open(ShareModalComponent, {
-      data: { id: movieId, original_title: movieTitle }
+      data: { id: movie.movieId, original_title: movie.original_title }
     })
   }
 }

@@ -1,10 +1,12 @@
 import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import 'hammerjs';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 /* FIREBASE */
 import * as firebase from 'firebase/app';
@@ -20,6 +22,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieComponent } from './movies/movie/movie.component';
 import { PageNotFoundComponent } from './not-found.component';
+import { SettingsComponent } from './settings/settings.component';
 /* SERVICES */
 import { CheckForUpdateService } from './shared/service/sw/check-for-update.service';
 import { LogUpdateService } from './shared/service/sw/log-update.service';
@@ -36,6 +39,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     'rotate': { enable: false}
   }
 }
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -44,6 +50,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     MoviesComponent,
     MovieListComponent,
     MovieComponent,
+    SettingsComponent
   ],
   imports: [
     AppRoutingModule,
@@ -52,6 +59,13 @@ export class MyHammerConfig extends HammerGestureConfig {
     NoopAnimationsModule,
     CoreModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient],
+      }
+    }),
     CdkTableModule,
     SharedModule.forRoot(),
     LazyLoadImageModule,

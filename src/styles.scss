@@ -26,18 +26,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%;
-    img {
-        width: auto;
-        height: auto;
-
-        @media only screen and (max-width: 731px) {
-            width: 192px;
-        }
-    }
-
-    p {
-        font-family: inherit;
-    }
 }
 a {
     cursor: pointer;
@@ -61,11 +49,13 @@ h4 {
     text-align: center;
     color: $white;
 }
-
+.material-icons {
+    vertical-align: middle;
+}
+.mat-dialog-actions {
+    color: $primary-light;
+}
 .mat {
-    &-icon {
-        vertical-align: middle;
-    }
     &-menu-item {
         color: $primary-light;
     }
@@ -76,19 +66,14 @@ h4 {
     }
     &-label {
         color: $white;
+        opacity: 1 !important;
+    }
+    &-header-pagination-chevron {
+        border-color: white;
     }
 }
 
 /* img poster movie */
-img,
-img[ng-reflect-default-image],
-[alt="No poster available"] {
-    /*width: 185px;
-    height: 278px;
-    */
-    // border-radius: 2px;
-}
-
 .icon-container {
     background-position: center;
     background-size: cover;
@@ -113,29 +98,8 @@ h1.mat-dialog-title {
     .item {
         position: relative;
         margin: 1rem .625rem;
+        width: 200px;
         text-align: center;
-        flex: 1 0 200px;
-        @media screen and (min-width: 410) {
-            max-width: calc(50% - 10px);
-        }
-        @media (min-width: 620px) {
-            max-width: calc(33.33333% - 10px);
-        }
-        @media (min-width: 830px) {
-            max-width: calc(25% - 10px);
-        }
-        @media (min-width: 1040px) {
-            max-width: calc(20% - 10px);
-        }
-        @media (min-width: 1250px) {
-            max-width: calc(16.66667% - 10px);
-        }
-        @media (min-width: 1460px) {
-            max-width: calc(14.28571% - 10px);
-        }
-        @media (min-width: 1670px) {
-            min-width: calc(12.5% - 10px);
-        }
 
         a {
             &:hover {
@@ -149,8 +113,6 @@ h1.mat-dialog-title {
         }
     }
 }
-
-
 
 /* Pagination */
 .pagination {

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from '../core/auth/auth.service';
 import { AccountDeleteModalComponent } from './account-delete-modal/account-delete-modal.component';
 import * as moment from 'moment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-account',
@@ -15,16 +16,17 @@ import * as moment from 'moment';
 export class AccountComponent implements OnInit, OnDestroy {
   displayName: string;
   email: string;
-  photoURL: any;
+  photoURL: Object;
   notPhotoURL: string;
   sub: Subscription;
-  creationTime: any;
+  creationTime: string;
 
   constructor(
     private authService: AuthService,
-    private snackbar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -50,9 +52,9 @@ export class AccountComponent implements OnInit, OnDestroy {
       if (result) {
         this.authService.deleteUser(error => {
           if (error) {
-            this.snackbar.open(error, 'hide', { duration: 5000})
+            this.snackBar.open(error, 'hide', { duration: 5000})
           } else {
-            this.snackbar.open('Good bye ! We hope that our site has pleased you.', '', { duration: 5000 });
+            this.translateService.get('Error.Delete').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
             this.router.navigate(['/movies/list/now-playing']);
           }
         })

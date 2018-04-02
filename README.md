@@ -28,12 +28,14 @@ This app has been checked by the open source tool, [**lighthouse**](https://gith
 
 - :thumbsup: **Best Practices**: 100 / 100
 
+- :grinning: **SEO**: 100/100
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
 ## How to use it ?
 
 <p align="center">
-    <a href="https://hubmovies-a26fc.firebaseapp.com"><img src="https://github.com/clamarque/hub-movies/blob/master/src/assets/images/demo.gif" alt="demo" />
+    <a href="https://hubmovies-a26fc.firebaseapp.com"><img src="https://github.com/clamarque/hub-movies/blob/master/src/assets/images/demo.jpg" alt="demo" />
     </a>
 </p>
 

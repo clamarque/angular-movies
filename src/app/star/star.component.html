@@ -13,26 +13,25 @@
   </section>
 
   <mat-tab-group>
-    <mat-tab label="Known in movies for">
+    <mat-tab label="{{'Star.Known in movies' | translate}}">
       <section class="items" *ngIf="movies">
         <div class="item" *ngFor="let movie of movies">
           <a [routerLink]="['/movies/movie', movie.id]">
             <img *ngIf="movie.poster_path" [defaultImage]="'assets/images/no_poster_available.jpg'" [lazyLoad]="'https://image.tmdb.org/t/p/w185/' + movie.poster_path"
               alt="poster movie">
-            <img *ngIf="!movie.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available"
-              width="185">
+            <img *ngIf="!movie.poster_path" src="assets/images/no_poster_available.jpg" alt="No poster available">
             <p>{{movie.title}}</p>
             <p>{{movie.character}}</p>
           </a>
         </div>
       </section>
     </mat-tab>
-    <mat-tab label="Known in TV for">
+    <mat-tab label="{{'Star.Known in TV' | translate}}">
       <section class="items" *ngIf="tv_credits">
         <div class="item" *ngFor="let tv of tv_credits">
           <img *ngIf="tv.poster_path" [defaultImage]="'assets/images/no_poster_available.jpg'" [lazyLoad]="'https://image.tmdb.org/t/p/w185/' + tv.poster_path"
             alt="poster movie">
-          <img *ngIf="!tv.poster_path" src="http://ddbu.billiardport.com/img/posters/no_poster_available.jpg" alt="No poster available">
+          <img *ngIf="!tv.poster_path" src="assets/images/no_poster_available.jpg" alt="No poster available">
           <p>{{tv.name}}</p>
           <p>{{tv.character}}</p>
         </div>

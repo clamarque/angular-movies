@@ -4,8 +4,9 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './core/auth/auth.service';
 import { StorageService } from './shared/service/storage/storage.service';
+import { TranslateService } from '@ngx-translate/core';
 
-// import { SwUpdate } from '@angular/service-worker';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
     selector: 'app-root',
@@ -14,12 +15,7 @@ import { StorageService } from './shared/service/storage/storage.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
     mobileQuery: MediaQueryList;
-    languages = [
-        {value: 'en-US', viewValue: 'English'},
-        {value: 'fr-FR', viewValue: 'French'},
-        {value: 'es-ES', viewValue: 'Spanish'}
-      ];
-    lang = this.storageService.read('language');
+    lang: string = this.storageService.read('language');
     private _mobileQueryListener: () => void;
     @ViewChild('snav') snav: any;
 
@@ -30,24 +26,28 @@ export class AppComponent implements OnInit, OnDestroy {
         private router: Router,
         private snackbar: MatSnackBar,
         private storageService: StorageService,
-        // private swUpdate: SwUpdate
+        public translateService: TranslateService,
+        private swUpdate: SwUpdate
     ) {
         this.mobileQuery = media.matchMedia('(max-width: 731px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
+        this.translateService.setDefaultLang('en-US');
     }
 
     ngOnInit() {
-        if (this.lang === undefined) {
+        if (!this.lang) {
             this.storageService.save('language', 'en-US');
         }
-       /* if (this.swUpdate.isEnabled) {
+        const lang = this.storageService.read('language');
+        this.translateService.use(lang);
+        if (this.swUpdate.isEnabled) {
             this.swUpdate.available.subscribe(() => {
                 if (confirm('New version available. Load New Version?')) {
                     location.reload();
                 }
             })
-        } */
+        }
     }
 
     ngOnDestroy(): void {
@@ -68,10 +68,6 @@ export class AppComponent implements OnInit, OnDestroy {
     scrollTop() {
         window.scrollTo({left: 0, top: 0, behavior: 'smooth'});
     }
-    getChangedValue(event) {
-        this.storageService.save('language', event.value);
-        location.reload();
-    }
 
     searchMovie(term: string) {
         if (term === '') {
@@ -83,7 +79,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     onSignOut() {
         this.authService.signOut();
-        this.snackbar.open('Already Gone ? We Hope to see you again soon', '', { duration: 5000 });
+        this.translateService.get('Error.Goodbye').subscribe(results => this.snackbar.open(results, '', { duration: 2000 }));
         this.router.navigate(['/movies/list/now-playing']);
     }
 

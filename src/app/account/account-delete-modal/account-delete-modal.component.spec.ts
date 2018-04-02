@@ -2,6 +2,16 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccountDeleteModalComponent } from './account-delete-modal.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import {Observable} from 'rxjs/Observable';
+
+const translations: any = {'foo': 'bar'};
+
+class FakeLoader implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return Observable.of(translations);
+  }
+}
 
 describe('AccountDeleteModalComponent', () => {
   let component: AccountDeleteModalComponent;
@@ -12,7 +22,10 @@ describe('AccountDeleteModalComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MatDialogModule
+        MatDialogModule,
+        TranslateModule.forRoot({
+          loader: {provide: TranslateLoader, useClass: FakeLoader},
+        })
       ],
       declarations: [ AccountDeleteModalComponent ],
       providers: [

@@ -76,7 +76,7 @@
             color: $green;
         }
         &-red {
-            color: $red;
+            color: $primary-light;
         }
         &-yellow {
             color: $yellow;
@@ -171,4 +171,8 @@
             }
         }
     }
+}
+
+small {
+    padding: 5px;
 }

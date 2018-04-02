@@ -32,9 +32,6 @@
         &-content {
             background: inherit;
         }
-        .mat-nav-list {
-            padding: 0;
-        }
     }
 
 }
@@ -65,6 +62,7 @@
         }
         .mat-icon {
             color: $white;
+            height: 1.75rem;
         }
     }
 
@@ -88,21 +86,12 @@
             &:hover {
                 color: $primary-light;
             }
+            .mat-icon {
+                height: 1.75rem;
+            }
         }
         .active {
             color: $primary-light;
-        }
-        /deep/ .mat-select {
-            padding: 0 0 10px;
-            width: 140px;
-
-            &-arrow {
-                color: $white;
-            }
-    
-            &-placeholder, &-value {
-                color: $white;
-            }
         }
     }
 }
