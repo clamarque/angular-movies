@@ -72,6 +72,9 @@
         "Title": "Se connecter",
         "Btn-sign": "Se connecter avec"
     },
+    "Settings": {
+        "label": "Inclure le contenu pour adulte"
+    },
     "Btn-cancel": "ANNULER",
     "Btn-share": "Partager",
     "Btn-delete": "Supprimer",

@@ -72,6 +72,9 @@
         "Title": "Sign in",
         "Btn-sign": "Sign In with"
     },
+    "Settings": {
+        "label": "Include adult content"
+    },
     "Btn-cancel": "CANCEL",
     "Btn-share": "Share",
     "Btn-delete": "Delete",

@@ -93,18 +93,6 @@
         .active {
             color: $primary-light;
         }
-        /deep/ .mat-select {
-            padding: 0 0 10px;
-            width: 140px;
-
-            &-arrow {
-                color: $white;
-            }
-    
-            &-placeholder, &-value {
-                color: $white;
-            }
-        }
     }
 }
 

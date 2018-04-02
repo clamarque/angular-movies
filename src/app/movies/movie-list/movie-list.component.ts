@@ -31,6 +31,7 @@ export class MovieListComponent implements OnInit {
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
   isLoadingResults: boolean;
   lang: string;
+  adult: string;
 
   constructor(
     public authService: AuthService,
@@ -45,16 +46,17 @@ export class MovieListComponent implements OnInit {
   ngOnInit() {
     this.isLoadingResults = true;
     this.lang = this.storageService.read('language');
+    this.adult = this.storageService.read('adult');
 
     this.route.params.subscribe((params: Params) => {
       if (params['term']) {
-        this.request = this.tmdbService.getSearchMovie(params['term'], 1, this.lang);
+        this.request = this.tmdbService.getSearchMovie(params['term'], 1, this.lang, this.adult);
         this.parameter = params['term'];
       } else if (params['category']) {
-        this.request = this.tmdbService.getMovie(params['category'], 1, this.lang)
+        this.request = this.tmdbService.getMovie(params['category'], 1, this.lang, this.adult)
         this.parameter = params['category'];
       } else if (params['id'] && params['name']) {
-        this.request = this.tmdbService.getGenreMovie(+params['id'], 1, this.lang);
+        this.request = this.tmdbService.getGenreMovie(+params['id'], 1, this.lang, this.adult);
         this.parameter = +params['id'];
         this.dataParam = params['name'];
       } else {
@@ -62,11 +64,15 @@ export class MovieListComponent implements OnInit {
       }
       if (this.request) {
         this.request.subscribe(response => {
+          if (this.parameter === 'upcoming') {
+            this.movies = response.results.filter(val => moment(val.release_date).isAfter(moment().startOf('year')));
+          } else {
+            this.movies = response.results;
+          }
           this.moviesLength = response.results.length;
           this.isLoadingResults = false;
           this.title = this.parameter;
           this.totalPages = response.total_pages;
-          this.movies = response.results;
           this.pager = this.tmdbService.getPager(this.totalPages, 1);
         });
       }
@@ -87,14 +93,14 @@ export class MovieListComponent implements OnInit {
     this.currentPage = this.pager.currentPage;
     if (typeof param === 'string') {
       if (param === 'discover' || param === 'upcoming' || param === 'now-playing') {
-        this.request = this.tmdbService.getMovie(param, this.currentPage, this.lang);
+        this.request = this.tmdbService.getMovie(param, this.currentPage, this.lang, this.adult);
       } else {
-        this.request = this.tmdbService.getSearchMovie(param, this.currentPage, this.lang);
+        this.request = this.tmdbService.getSearchMovie(param, this.currentPage, this.lang, this.adult);
       }
     }
 
     if (typeof param === 'number') {
-      this.request = this.tmdbService.getGenreMovie(param, this.currentPage, this.lang);
+      this.request = this.tmdbService.getGenreMovie(param, this.currentPage, this.lang, this.adult);
     }
     if (!navigator.onLine) {
       this.snackBar.open('Sorry, you\'re offline', null, { duration: 5000});

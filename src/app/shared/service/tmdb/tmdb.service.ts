@@ -25,15 +25,17 @@ export class TmdbService {
   constructor(private http: HttpClient, private storageService: StorageService) {
   }
 
-  getMovie(category: string, page: number, lang: string) {
+  getMovie(category: string, page: number, lang: string, adult?: string) {
     switch (category) {
       case 'now-playing': return this.getNowPlaying(page, lang);
       case 'upcoming': return this.getUpComing(page, lang);
-      case 'discover': return this.getMovieDiscover(page, lang);
+      case 'discover': return this.getMovieDiscover(page, lang, adult);
     }
   }
-  getSearchMovie(name: string, page: number, lang: string): Observable<MovieCategoryModel> {
-    return this.http.get<MovieCategoryModel>(`${this.url_search}?api_key=${this.api_key}&language=${lang}&query=${name}&page=${page}`);
+  getSearchMovie(name: string, page: number, lang: string, adult: string): Observable<MovieCategoryModel> {
+    return this.http.get<MovieCategoryModel>(`
+      ${this.url_search}?api_key=${this.api_key}&language=${lang}&query=${name}&page=${page}&include_adult=${adult}
+    `);
   }
   getNowPlaying(page: number, lang: string): Observable<MovieCategoryModel> {
     return this.http.get<MovieCategoryModel>(`${this.url_movie}/now_playing?api_key=${this.api_key}&language=${lang}&page=${page}`);
@@ -41,9 +43,9 @@ export class TmdbService {
   getDetailsMovie(movie_id: number, lang: string): Observable<MovieDetailsModel> {
     return this.http.get<MovieDetailsModel>(`${this.url_movie}/${movie_id}?api_key=${this.api_key}&language=${lang}`);
   }
-  getMovieDiscover(page: number, lang: string): Observable<MovieCategoryModel> {
+  getMovieDiscover(page: number, lang: string, adult: string): Observable<MovieCategoryModel> {
     return this.http.get<MovieCategoryModel>(`
-      ${this.url_discover}?api_key=${this.api_key}&language=${lang}&sort_by=popularity.desc&page=${page}
+      ${this.url_discover}?api_key=${this.api_key}&language=${lang}&sort_by=popularity.desc&page=${page}&include_adult=${adult}
     `);
   }
   getCastMovie(movie_id: number): Observable<MovieCreditsModel> {
@@ -52,9 +54,9 @@ export class TmdbService {
   getVideoMovie(movie_id: number, lang: string): Observable<MovieVideosModel> {
     return this.http.get<MovieVideosModel>(`${this.url_movie}/${movie_id}/videos?api_key=${this.api_key}&language=${lang}`);
   }
-  getGenreMovie(genre_id: number, page: number, lang: string): Observable<MovieCategoryModel> {
+  getGenreMovie(genre_id: number, page: number, lang: string, adult: string): Observable<MovieCategoryModel> {
     return this.http.get<MovieCategoryModel>(`
-      ${this.url_genre}/${genre_id}/movies?api_key=${this.api_key}&language=${lang}&page=${page}
+      ${this.url_genre}/${genre_id}/movies?api_key=${this.api_key}&language=${lang}&page=${page}&include_adult=${adult}
     `);
   }
   getSimilarMovies(movie_id: number, lang: string): Observable<MovieCategoryModel> {

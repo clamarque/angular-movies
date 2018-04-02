@@ -57,14 +57,6 @@
           <a routerLink="/about" routerLinkActive="active" (click)="closeSidenav()">
             <mat-icon>info</mat-icon> {{'App.About' | translate}}</a>
         </li>
-        <li>
-          <mat-icon>language</mat-icon>
-          <mat-select placeholder="{{'App.Language' | translate}}" [ngModel]="lang" (selectionChange)="getChangedValue($event)">
-            <mat-option *ngFor="let language of languages" [value]="language.value">
-              {{ language.viewValue }}
-            </mat-option>
-          </mat-select>
-        </li>
       </ul>
 
     </nav>

@@ -15,11 +15,7 @@ import { SwUpdate } from '@angular/service-worker';
 })
 export class AppComponent implements OnInit, OnDestroy {
     mobileQuery: MediaQueryList;
-    languages = [
-        {value: 'en-US', viewValue: 'English'},
-        {value: 'fr-FR', viewValue: 'French'}
-      ];
-    lang = this.storageService.read('language');
+    lang: string = this.storageService.read('language');
     private _mobileQueryListener: () => void;
     @ViewChild('snav') snav: any;
 
@@ -71,11 +67,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     scrollTop() {
         window.scrollTo({left: 0, top: 0, behavior: 'smooth'});
-    }
-
-    getChangedValue(event) {
-        this.storageService.save('language', event.value);
-        this.translateService.use(event.value);
     }
 
     searchMovie(term: string) {
