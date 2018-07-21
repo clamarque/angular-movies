@@ -5,7 +5,8 @@ import * as firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 
 interface User {
@@ -29,14 +30,15 @@ export class AuthService {
         private afs: AngularFirestore,
         private router: Router
     ) {
-        this.user = this.afAuth.authState
-            .switchMap(user => {
+        this.user = this.afAuth.authState.pipe(
+            switchMap(user => {
                 if (user) {
                     return this.afs.doc<User>(`Users/${user.uid}`).valueChanges();
                 } else {
-                    return Observable.of(null);
+                    return of(null);
                 }
             })
+        );
     }
 
     oAuthLogin(name: string, callback: any) {
@@ -82,7 +84,7 @@ export class AuthService {
             phoneNumber: user.phoneNumber,
             uid: user.uid,
             pseudo: null
-        }
+        };
 
         return userRef.set(data, { merge: true});
     }
