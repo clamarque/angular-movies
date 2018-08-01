@@ -7,7 +7,7 @@ import { TmdbService } from '../shared/service/tmdb/tmdb.service';
 import { MoviePersonModel } from '../movies/shared/movie-person.model';
 import { TvCastModel } from '../movies/shared/tv-cast.model';
 import { MovieCastModel } from '../movies/shared/movie-cast.model';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+import { forkJoin } from 'rxjs';
 import { StorageService } from '../shared/service/storage/storage.service';
 
 @Component({
