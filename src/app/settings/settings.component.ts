@@ -26,7 +26,6 @@ export class SettingsComponent implements OnInit {
     if (!this.adult) {
       this.storageService.save('adult', false);
     }
-    console.log(this.adult);
   }
 
   languageChange(event: MatSelectChange) {
