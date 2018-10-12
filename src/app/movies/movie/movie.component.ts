@@ -5,7 +5,7 @@ import { ActivatedRoute, ParamMap, Event as NavigationEvent } from '@angular/rou
 import { DatabaseService } from '../../shared/service/database/database.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+import { forkJoin ,  Subscription } from 'rxjs';
 
 import { MovieCastModel } from '../shared/movie-cast.model';
 import { MovieCrewModel } from '../shared/movie-crew.model';
@@ -16,8 +16,6 @@ import { MovieDetailsModel } from '../shared/movie-details.model';
 import { MovieDatabaseModel } from '../../shared/model/movie-database.model';
 
 import { ShareModalComponent } from '../../shared/component/share-modal/share-modal.component';
-
-import { Subscription } from 'rxjs/Subscription';
 import { StorageService } from '../../shared/service/storage/storage.service';
 import { TranslateService } from '@ngx-translate/core';
 

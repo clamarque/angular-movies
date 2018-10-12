@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 import { DatabaseService } from '../shared/service/database/database.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component';
 import { MovieDatabaseModel } from '../shared/model/movie-database.model';

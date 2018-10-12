@@ -9,7 +9,7 @@ import * as moment from 'moment';
 import { MovieDatabaseModel } from '../../shared/model/movie-database.model';
 import { MovieCategoryModel } from '../shared/movie-category.model';
 import { AuthService } from '../../core/auth/auth.service';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { StorageService } from '../../shared/service/storage/storage.service';
 import { TranslateService } from '@ngx-translate/core';
 

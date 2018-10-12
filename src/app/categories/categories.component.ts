@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DatabaseService } from '../shared/service/database/database.service';
 import { MatDialog, MatDialogRef , MatSnackBar, MatTabChangeEvent } from '@angular/material';
 import { MovieDatabaseModel } from '../shared/model/movie-database.model';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { ShareModalComponent } from '../shared/component/share-modal/share-modal.component';
 import { CategoriesAddModalComponent } from './categories-add-modal/categories-add-modal.component';
 import { CategoriesDeleteModalComponent } from './categories-delete-modal/categories-delete-modal.component';
