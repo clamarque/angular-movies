@@ -67,9 +67,12 @@
     }
 
     &--links {
+        padding-inline-start: 30px;
+
         li {
             min-height: 3rem;
             line-height: 3;
+            padding-left: 10px;
 
             &:hover {
                 background-color: $black;
