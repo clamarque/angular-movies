@@ -12,7 +12,8 @@ const routes: Routes = [
     { path: 'list/:category', component: MovieListComponent },
     { path: 'genre', component: MovieListComponent },
     { path: 'movie/:id', component: MovieComponent},
-    { path: 'search', component: MovieListComponent}
+    { path: 'search', component: MovieListComponent},
+    { path: '', redirectTo: '/movies/list/now-playing', pathMatch: 'full' }
   ] },
   { path: 'about', loadChildren: 'app/about/about.module#AboutModule'},
   { path: 'playlist', loadChildren: 'app/playlist/playlist.module#PlaylistModule', canActivate: [AuthGuard] },
