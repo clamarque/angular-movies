@@ -1,9 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SettingsComponent } from './settings.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import {Observable} from 'rxjs/Observable';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { Observable , of } from 'rxjs';
 import { MatIconModule, MatSlideToggleModule, MatSelectModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { StorageService } from '../shared/service/storage/storage.service';
@@ -12,7 +10,7 @@ const translations: any = {'foo': 'bar'};
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {
-    return Observable.of(translations);
+    return of(translations);
   }
 }
 

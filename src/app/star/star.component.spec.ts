@@ -10,13 +10,13 @@ import { TmdbService } from '../shared/service/tmdb/tmdb.service';
 import { StorageService } from '../shared/service/storage/storage.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import {Observable} from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 const translations: any = {'foo': 'bar'};
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {
-    return Observable.of(translations);
+    return of(translations);
   }
 }
 

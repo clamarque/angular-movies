@@ -3,13 +3,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AccountDeleteModalComponent } from './account-delete-modal.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import {Observable} from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 const translations: any = {'foo': 'bar'};
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {
-    return Observable.of(translations);
+    return of(translations);
   }
 }
 

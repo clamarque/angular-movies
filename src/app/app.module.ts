@@ -6,7 +6,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 /* FIREBASE */
 import * as firebase from 'firebase/app';
@@ -37,7 +36,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any> {
     'pinch': { enable: false},
     'rotate': { enable: false}
-  }
+  };
 }
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

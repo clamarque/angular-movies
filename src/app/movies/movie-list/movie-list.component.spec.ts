@@ -16,13 +16,13 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import {Observable} from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 const translations: any = {'foo': 'bar'};
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {
-    return Observable.of(translations);
+    return of(translations);
   }
 }
 

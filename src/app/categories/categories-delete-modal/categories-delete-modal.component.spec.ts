@@ -1,17 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CategoriesDeleteModalComponent } from './categories-delete-modal.component';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import {Observable} from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 const translations: any = {'foo': 'bar'};
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {
-    return Observable.of(translations);
+    return of(translations);
   }
 }
 
