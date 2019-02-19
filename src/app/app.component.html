@@ -10,8 +10,9 @@
   <mat-sidenav [opened]="mobileQuery.matches ? 'false': 'true'" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches">
     <nav class="navigation">
       <div class="navigation--search">
-        <mat-form-field>
-          <input matInput #search placeholder="{{'App.Search movies' |translate}}..." (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="closeSidenav()"
+        <mat-form-field appearance="outline">
+          <mat-label>{{'App.Search movies' |translate}}...</mat-label>
+          <input matInput #search (keyup.enter)="searchMovie(search.value); search.value=''" (keyup.enter)="closeSidenav()"
             tabindex="-1">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>

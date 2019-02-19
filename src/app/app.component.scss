@@ -46,19 +46,13 @@
         .mat-form-field {
             width: 180px;
             padding: 0 20px;
+            font-size: 13px;
         }
-        /deep/ .mat-input {
-            &-underline {
-                background-color: $white;
-            }
-            &-placeholder,
-            &-element {
-                color: $white;
-            }
+        /deep/ .mat-form-field-outline {
+            color: $white;
         }
-
-        /deep/ .mat-form-field-ripple {
-            background: $white;
+        /deep/ .mat-form-field-label {
+            color: $white;
         }
         .mat-icon {
             color: $white;

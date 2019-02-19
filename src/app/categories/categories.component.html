@@ -19,8 +19,18 @@
                         </div>
                         <h3 matLine>{{movie.original_title}}</h3>
                         <p matLine>{{movie.release_date | date}}</p>
+                        <mat-action-list>
+                                <button mat-list-item (click)="shareDialog(movie)">
+                                    <mat-icon>share</mat-icon>
+                                    <!-- <span>{{'Btn-share' | translate}}</span>  -->
+                                </button>
+                                <button mat-list-item (click)="deleteMovieFromFavorites(movie.movieId)">
+                                    <mat-icon>delete</mat-icon>
+                                    <!-- <span>{{'Btn-delete' | translate}}</span> -->
+                                </button>
+                        </mat-action-list>
                     </a>
-                    <div class="actions">
+                    <!-- <div class="actions">
                         <button mat-icon-button [matMenuTriggerFor]="menu">
                             <mat-icon>more_vert</mat-icon>
                         </button>
@@ -34,7 +44,7 @@
                                 <span>{{'Btn-delete' | translate}}</span>
                             </button>
                         </mat-menu>
-                    </div>
+                    </div> -->
                 </mat-nav-list>
             </div>
             <ng-template #noData>

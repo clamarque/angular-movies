@@ -20,6 +20,13 @@
                 background: $background;
             }
         }
+        .mat-list-base {
+            display: flex;
+            
+            button {
+                color: white;
+            }
+        }
         .actions {
             display: flex;
             color: $white;
