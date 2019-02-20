@@ -52,12 +52,12 @@ export class AccountComponent implements OnInit, OnDestroy {
       if (result) {
         this.authService.deleteUser(error => {
           if (error) {
-            this.snackBar.open(error, 'hide', { duration: 5000})
+            this.snackBar.open(error, 'hide', { duration: 5000});
           } else {
             this.translateService.get('Error.Delete').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
             this.router.navigate(['/movies/list/now-playing']);
           }
-        })
+        });
       }
     });
   }

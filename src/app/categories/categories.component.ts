@@ -37,11 +37,15 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     this.sub = this.databaseService.getAllCategoriesUser().subscribe(response => {
       this.getCategories = response;
       this.categories = this.getCategories.map(value => value['name']);
-    })
+    });
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  cancelClick(event) {
+    event.stopPropagation();
   }
 
   tabChanged(event: MatTabChangeEvent) {
@@ -49,7 +53,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     if (event.index !== 0) {
       this.sub = this.databaseService.getMovieCategory(name).subscribe(response => {
         this.movies = response;
-      })
+      });
     } else {
       this.sub = this.databaseService.getMoviesCategoriesDefault('FavoriteMovie').subscribe(response => {
         this.movies = response;
@@ -57,14 +61,15 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     }
   }
 
-  deleteMovieFromFavorites(id: number) {
+  deleteMovieFromFavorites(id: number, event) {
+    event.stopPropagation();
     this.databaseService.deleteMoviesCategoriesDefault('FavoriteMovie', id, (error) => {
         if (error) {
           this.snackBar.open(error, 'Hide', { duration: 5000 });
         } else {
           this.translateService.get('Error.List-updated').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
         }
-    })
+    });
   }
 
   deleteMovieFromCategory(category: string, id: number) {
@@ -74,13 +79,14 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       } else {
         this.translateService.get('Error.List-updated').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
       }
-    })
+    });
   }
 
-  shareDialog(movie: MovieDatabaseModel): void {
+  shareDialog(movie: MovieDatabaseModel) {
+    console.log('e', event);
     const dialogRef = this.dialog.open(ShareModalComponent, {
       data: { id: movie.movieId, original_title: movie.original_title }
-    })
+    });
   }
 
   addCategoryDialog() {
@@ -96,7 +102,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
           } else {
             this.translateService.get('Error.List-updated').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
           }
-        })
+        });
       }
     });
   }
@@ -115,7 +121,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
           } else {
             this.translateService.get('Error.List-updated').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
           }
-        })
+        });
       }
     });
   }

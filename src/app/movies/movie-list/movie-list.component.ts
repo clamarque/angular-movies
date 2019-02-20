@@ -53,7 +53,7 @@ export class MovieListComponent implements OnInit {
         this.request = this.tmdbService.getSearchMovie(params['term'], 1, this.lang, this.adult);
         this.parameter = params['term'];
       } else if (params['category']) {
-        this.request = this.tmdbService.getMovie(params['category'], 1, this.lang, this.adult)
+        this.request = this.tmdbService.getMovie(params['category'], 1, this.lang, this.adult);
         this.parameter = params['category'];
       } else if (params['id'] && params['name']) {
         this.request = this.tmdbService.getGenreMovie(+params['id'], 1, this.lang, this.adult);

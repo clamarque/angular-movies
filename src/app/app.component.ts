@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 if (confirm('New version available. Load New Version?')) {
                     location.reload();
                 }
-            })
+            });
         }
     }
 

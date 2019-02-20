@@ -49,7 +49,7 @@ export class TmdbService {
     `);
   }
   getCastMovie(movie_id: number): Observable<MovieCreditsModel> {
-    return this.http.get<MovieCreditsModel>(`${this.url_movie}/${movie_id}/credits?api_key=${this.api_key}`)
+    return this.http.get<MovieCreditsModel>(`${this.url_movie}/${movie_id}/credits?api_key=${this.api_key}`);
   }
   getVideoMovie(movie_id: number, lang: string): Observable<MovieVideosModel> {
     return this.http.get<MovieVideosModel>(`${this.url_movie}/${movie_id}/videos?api_key=${this.api_key}&language=${lang}`);

@@ -19,17 +19,15 @@
                         </div>
                         <h3 matLine>{{movie.original_title}}</h3>
                         <p matLine>{{movie.release_date | date}}</p>
-                        <mat-action-list>
-                                <button mat-list-item (click)="shareDialog(movie)">
-                                    <mat-icon>share</mat-icon>
-                                    <!-- <span>{{'Btn-share' | translate}}</span>  -->
-                                </button>
-                                <button mat-list-item (click)="deleteMovieFromFavorites(movie.movieId)">
-                                    <mat-icon>delete</mat-icon>
-                                    <!-- <span>{{'Btn-delete' | translate}}</span> -->
-                                </button>
-                        </mat-action-list>
                     </a>
+                    <mat-action-list>
+                        <button mat-icon-button (click)="shareDialog(movie)">
+                            <mat-icon>share</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="deleteMovieFromFavorites(movie.movieId)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                </mat-action-list>
                     <!-- <div class="actions">
                         <button mat-icon-button [matMenuTriggerFor]="menu">
                             <mat-icon>more_vert</mat-icon>
@@ -63,21 +61,14 @@
                         <h3 matLine>{{movie.original_title}}</h3>
                         <p matLine>{{movie.release_date | date}}</p>
                     </a>
-                    <div class="actions">
-                        <button mat-icon-button [matMenuTriggerFor]="menu">
-                            <mat-icon>more_vert</mat-icon>
+                    <mat-action-list>
+                        <button mat-icon-button (click)="shareDialog(movie)">
+                            <mat-icon>share</mat-icon>
                         </button>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item (click)="shareDialog(movie)">
-                                <mat-icon>share</mat-icon>
-                                <span>{{'Btn-share' | translate}}</span>
-                            </button>
-                            <button mat-menu-item (click)="deleteMovieFromCategory(movie.category, movie.movieId)">
-                                <mat-icon>delete</mat-icon>
-                                <span>{{'Btn-delete' | translate}}</span>
-                            </button>
-                        </mat-menu>
-                    </div>
+                        <button mat-icon-button (click)="deleteMovieFromCategory(movie.category, movie.movieId)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                </mat-action-list>
                 </mat-nav-list>
             </div>
             <ng-template #noData>

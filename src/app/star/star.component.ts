@@ -42,7 +42,7 @@ export class StarComponent implements OnInit {
       this.person = person;
       this.movies = movies.cast.slice(0, 10);
       this.tv_credits = tv_credits.cast.slice(0, 10);
-    })
+    });
 
   }
 

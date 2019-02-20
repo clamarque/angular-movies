@@ -75,8 +75,8 @@ export class MovieComponent implements OnInit {
           this.getMovieVideoUrl(this.videos[0]['key']);
         }
         this.similarMovies = similar.results;
-      })
-    })
+      });
+    });
   }
 
   back() {
@@ -87,7 +87,7 @@ export class MovieComponent implements OnInit {
     this.sub = this.databaseService.getAllCategoriesUser().subscribe(response => {
       this.getCategories = response;
       this.categories = this.getCategories.map(value => value['name']);
-    })
+    });
   }
 
   swipe(action = this.SWIPE_ACTION.RIGHT) {
@@ -117,12 +117,12 @@ export class MovieComponent implements OnInit {
       } else {
         this.translateService.get('Error.Movie-added').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
       }
-    })
+    });
   }
 
   shareDialog(movie: MovieDatabaseModel): void {
     const dialogRef = this.dialog.open(ShareModalComponent, {
       data: { id: movie.movieId, original_title: movie.original_title }
-    })
+    });
   }
 }

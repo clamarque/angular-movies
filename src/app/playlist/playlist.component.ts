@@ -50,7 +50,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   shareDialog(movie: MovieDatabaseModel): void {
     const dialogRef = this.dialog.open(ShareModalComponent, {
       data: { id: movie.movieId, original_title: movie.original_title }
-    })
+    });
   }
 
   watchedMovie(movieId: number, watched: boolean) {
