@@ -22,9 +22,6 @@ jobs:
           name: Install local dependencies
           command: npm install
       - run:
-          name: Node Sass
-          command: npm install --unsafe-perm=true node-sass
-      - run:
           name: Rebuild Node Sass
           command: sudo npm rebuild node-sass
       - save_cache:
