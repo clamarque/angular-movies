@@ -20,7 +20,7 @@ jobs:
           command: sudo npm i @angular/cli -g
       - run:
           name: Install local dependencies
-          command: sudo npm install
+          command: npm install
       - run:
           name: Node Sass
           command: sudo npm install --unsafe-perm -g node-sass
