@@ -10,9 +10,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Node version
-          command: node -v
-      - run:
           name: Show current branch
           command: echo ${CIRCLE_BRANCH}
       - restore_cache:
