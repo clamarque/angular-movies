@@ -20,7 +20,7 @@ jobs:
           command: npm install
       - run:
           name: Node Sass
-          command: npm install node-sass@4.10.0
+          command: npm install node-sass@4.11.0
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
