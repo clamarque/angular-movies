@@ -35,7 +35,7 @@
     "material-design-icons": "^3.0.1",
     "moment": "^2.24.0",
     "ng-lazyload-image": "4.0.0",
-    "node-sass": "^4.10.0",
+    "node-sass": "^4.11.0",
     "rxjs": "^6.4.0",
     "tslib": "^1.9.0",
     "typescript": "3.2.4",
