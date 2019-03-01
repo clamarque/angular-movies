@@ -5,84 +5,83 @@ defaults: &defaults
 
 version: 2
 jobs:
-    build:
-        <<: *defaults    
-        steps:
-            - checkout
-            - run:
-                name: Show current branch
-                command: echo ${CIRCLE_BRANCH}
-            - run:
-                name: Show current directory
-                command: pwd
-            - restore_cache:
-                keys:
-                    - v1-dependencies-{{ checksum "package.json" }}
-            - run:
-                name: Install dependencies
-                command: npm install
-            - run:
-                name: Install angular CLI global
-                command: npm install -g @angular/cli
-            - save_cache:
-                key: v1-dependencies-{{ checksum "package.json" }}
-                paths:
-                    - node_modules
-            - run:
-                name: Linting
-                command: ng lint
-            - run:
-                name: Testing
-                command: ng test
-            - run:
-                name: Building
-                command: npm run build --prod
-            - save_cache:
-                key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-                paths:
-                    - dist
-                    - package.json
-                    - firebase.json
-                    - .firebaserc
-            
-    deploy_develop:
-      <<: *defaults
-      steps:
-        - run:
-            name: Deploy Development Branch
-            command: echo ${CIRCLE_BRANCH}
-
-    deploy-master:
-      <<: *defaults
-      steps:
-        - run:
-          name: Deploy Master Branch
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Show current branch
           command: echo ${CIRCLE_BRANCH}
-        - restore_cache:
-            key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-        - run:
-            name: Install Firebase
-            command: npm install --save-dev firebase-tools
-        - run:
-            name: Deploy Master to Firebase
-            command: npm run firebase-deploy
+      - run:
+          name: Show current directory
+          command: pwd
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Install angular CLI global
+          command: npm install -g @angular/cli
+      - save_cache:
+          key: v1-dependencies-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Linting
+          command: ng lint
+      - run:
+          name: Testing
+          command: ng test
+      - run:
+          name: Building
+          command: npm run build --prod
+      - save_cache:
+          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - dist
+            - package.json
+            - firebase.json
+            - .firebaserc
+
+  deploy_develop:
+    <<: *defaults
+    steps:
+      - run:
+          name: Deploy Development Branch
+          command: echo ${CIRCLE_BRANCH}
+
+  deploy-master:
+    <<: *defaults
+    steps:
+      - run:
+        name: Deploy Master Branch
+        command: echo ${CIRCLE_BRANCH}
+      - restore_cache:
+          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Install Firebase
+          command: npm install --save-dev firebase-tools
+      - run:
+          name: Deploy Master to Firebase
+          command: npm run firebase-deploy
 
 workflows:
-    version: 2
-    -deploy:
-        jobs:
-          - build
-          - deploy_develop:
-              requires:
-                - build
-              filters:
-                - branches: 
-                    only: develop
+  version: 2
+  -deploy:
+    jobs:
+      - build
+      - deploy_develop:
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
 
-          - deploy_master:
-              requires:
-                - build
-              filters:
-                branches:
-                  only: master
-
+      - deploy_master:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
