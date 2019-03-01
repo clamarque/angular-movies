@@ -69,7 +69,6 @@ jobs:
 
 workflows:
     version: 2
-      notify_deploy:
         jobs:
           - build
           - deploy_develop:
