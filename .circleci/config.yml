@@ -23,7 +23,7 @@ jobs:
           command: rm package-lock.json
       - run:
           name: Install dependencies
-          command: npm install
+          command: npm install && rm -rf node_modules
       - run:
           name: Install angular CLI global
           command: sudo npm install -g @angular/cli
