@@ -23,7 +23,7 @@ jobs:
           command: sudo npm install
       - run:
           name: Node Sass
-          command: npm install node-sass@4.10.0
+          command: sudo npm install --unsafe-perm -g node-sass@4.10.0
       - run:
           name: Rebuild Node Sass
           command: sudo npm rebuild node-sass
