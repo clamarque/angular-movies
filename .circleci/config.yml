@@ -33,10 +33,10 @@ jobs:
             - node_modules
       - run:
           name: Linting
-          command: ng lint
+          command: npm run lint
       - run:
           name: Testing
-          command: ng test --watch=false
+          command: npm run test --watch=false
       - run:
           name: Building
           command: npm run build --prod
