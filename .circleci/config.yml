@@ -23,7 +23,7 @@ jobs:
           command: npm install
       - run:
           name: Install angular CLI global
-          command: npm install -g @angular/cli
+          command: sudo npm install -g @angular/cli
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
