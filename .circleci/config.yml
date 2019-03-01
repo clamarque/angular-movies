@@ -33,13 +33,13 @@ jobs:
             - node_modules
       - run:
           name: Linting
-          command: npm run lint
+          command: ng lint
       - run:
           name: Testing
-          command: npm run test --watch=false
+          command: ng test --watch=false
       - run:
           name: Building
-          command: npm run build --prod
+          command: ng build --prod
       - save_cache:
           key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
