@@ -25,9 +25,6 @@ jobs:
           name: Install dependencies
           command: npm install
       - run:
-          name: Install angular CLI global
-          command: sudo npm install -g @angular/cli
-      - run:
           name: Rebuild NPM
           command: npm rebuild --force
       - save_cache:
