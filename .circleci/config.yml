@@ -19,6 +19,9 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
       - run:
+          name: Delete package lock
+          command: rm package-lock.json
+      - run:
           name: Install dependencies
           command: npm install
       - run:
