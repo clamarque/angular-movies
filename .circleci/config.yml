@@ -27,6 +27,9 @@ jobs:
       - run:
           name: Install angular CLI global
           command: sudo npm install -g @angular/cli
+      - run:
+          name: Rebuild NPM
+          command: npm rebuild
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
