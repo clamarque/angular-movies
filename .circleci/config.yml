@@ -12,12 +12,21 @@ jobs:
       - run:
           name: Show current branch
           command: echo ${CIRCLE_BRANCH}
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Install Angular
+          command: sudo npm i @angular/cli -g
       - run:
           name: Install local dependencies
-          command: npm install
+          command: sudo npm install
       - run:
           name: Node Sass
-          command: npm uninstall node-sass && npm install node-sass@4.11.0
+          command: npm install node-sass@4.10.0
+      - run:
+          name: Rebuild Node Sass
+          command: sudo npm rebuild node-sass
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
