@@ -20,9 +20,14 @@
                 background: $background;
             }
         }
+        .mat-list {
+            display: none;
+            @media only screen and (min-width: 731px) {
+                display: flex;
+            }
+        }
         .mat-list-base {
-            display: flex;
-            
+  
             button {
                 color: $grey;
             }
@@ -30,6 +35,10 @@
         .actions {
             display: flex;
             color: $white;
+
+            @media only screen and (min-width: 731px) {
+                display: none;
+            }
         }
         /deep/ .mat-list-text {
             h3 {

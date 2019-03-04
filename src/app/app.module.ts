@@ -9,7 +9,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 /* FIREBASE */
 import * as firebase from 'firebase/app';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule } from '@angular/fire';
 /* Environment & ServiceWorker */
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';

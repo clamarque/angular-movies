@@ -1,12 +1,10 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RouterTestingModule } from '@angular/router/testing';
-
-import { AuthGuard } from './auth.guard';
 import { AuthService } from '../auth/auth.service';
-
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AuthGuard } from './auth.guard';
 
 describe('AuthGuard', () => {
 

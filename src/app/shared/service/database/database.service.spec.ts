@@ -1,10 +1,8 @@
-import { TestBed, inject } from '@angular/core/testing';
-
+import { inject, TestBed } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { DatabaseService } from './database.service';
-
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 describe('DatabaseService', () => {
 

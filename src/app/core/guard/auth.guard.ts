@@ -10,11 +10,9 @@ import {
     RouterStateSnapshot
 } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {

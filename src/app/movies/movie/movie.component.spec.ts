@@ -18,9 +18,9 @@ import { DatabaseService } from '../../shared/service/database/database.service'
 import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
 import { StorageService } from '../../shared/service/storage/storage.service';
 
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import 'hammerjs';
 import { LazyLoadImageModule } from 'ng-lazyload-image';

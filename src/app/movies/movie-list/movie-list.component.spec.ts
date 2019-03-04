@@ -1,22 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatProgressSpinnerModule, MatIconModule, MatSnackBarModule, MatTooltipModule } from '@angular/material';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { MatIconModule, MatProgressSpinnerModule, MatSnackBarModule, MatTooltipModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
-
-import { MovieListComponent } from './movie-list.component';
-
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-
+import { Observable, of } from 'rxjs';
 import { AuthService } from '../../core/auth/auth.service';
 import { DatabaseService } from '../../shared/service/database/database.service';
-import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
 import { StorageService } from '../../shared/service/storage/storage.service';
-
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { Observable, of } from 'rxjs';
+import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
+import { MovieListComponent } from './movie-list.component';
 
 const translations: any = {'foo': 'bar'};
 
