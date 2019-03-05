@@ -61,11 +61,8 @@ jobs:
           name: Install Firebase
           command: sudo npm i firebase-tools -g
       - run:
-          name: Show token
-          command: $FIREBASE_TOKEN
-      - run:
           name: Deploy Master to Firebase
-          command: firebase deploy --token=$FIREBASE_TOKEN
+          command: firebase deploy --token=$FIREBASE_TOKEN --debug
 
 workflows:
   version: 2
