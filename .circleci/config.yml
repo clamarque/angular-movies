@@ -62,7 +62,7 @@ jobs:
           command: sudo npm i firebase-tools -g
       - run:
           name: Deploy Master to Firebase
-          command: npm run firebase deploy
+          command: firebase deploy
 
 workflows:
   version: 2
