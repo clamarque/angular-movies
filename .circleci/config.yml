@@ -62,7 +62,7 @@ jobs:
           command: sudo npm i firebase-tools -g
       - run:
           name: Deploy Master to Firebase
-          command: firebase deploy --token=$FIREBASE_TOKEN --non-interactive
+          command: firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
   version: 2
