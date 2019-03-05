@@ -53,8 +53,8 @@ jobs:
     <<: *defaults
     steps:
       - run:
-        name: Deploy Master Branch
-        command: echo ${CIRCLE_BRANCH}
+          name: Deploy Master Branch
+          command: echo ${CIRCLE_BRANCH}
       - restore_cache:
           key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
       - run:
