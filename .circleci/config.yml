@@ -49,7 +49,7 @@ jobs:
           name: Deploy Development Branch
           command: echo ${CIRCLE_BRANCH}
 
-  deploy-master:
+  deploy_master:
     <<: *defaults
     steps:
       - run:
