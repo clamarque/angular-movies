@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import * as firebase from 'firebase/app';
+import { auth } from 'firebase/app';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -49,9 +49,9 @@ export class AuthService {
 
     getProvider(name: string) {
         switch (name) {
-            case 'google': return new firebase.auth.GoogleAuthProvider();
-            case 'facebook': return new firebase.auth.FacebookAuthProvider();
-            case 'twitter': return new firebase.auth.TwitterAuthProvider();
+            case 'google': return new auth.GoogleAuthProvider();
+            case 'facebook': return new auth.FacebookAuthProvider();
+            case 'twitter': return new auth.TwitterAuthProvider();
         }
     }
 
