@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, ParamMap } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { DatabaseService } from '../../shared/service/database/database.service';
 import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
 import { MatSnackBar } from '@angular/material';
 import { MovieModel } from '../shared/movie.model';
 
-import * as moment from 'moment';
-import { MovieDatabaseModel } from '../../shared/model/movie-database.model';
+import * as dayjs from 'dayjs';
 import { MovieCategoryModel } from '../shared/movie-category.model';
 import { AuthService } from '../../core/auth/auth.service';
 import { Observable } from 'rxjs';
@@ -44,6 +43,7 @@ export class MovieListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.isLoadingResults = true;
     this.lang = this.storageService.read('language');
     this.adult = this.storageService.read('adult');
@@ -65,7 +65,7 @@ export class MovieListComponent implements OnInit {
       if (this.request) {
         this.request.subscribe(response => {
           if (this.parameter === 'upcoming') {
-            this.movies = response.results.filter(val => moment(val.release_date).isAfter(moment().startOf('year')));
+            this.movies = response.results.filter(val => dayjs(val.release_date).isAfter(dayjs().startOf('year')));
           } else {
             this.movies = response.results;
           }
@@ -108,7 +108,7 @@ export class MovieListComponent implements OnInit {
       this.request.subscribe(response => {
         this.isLoadingResults = false;
         if (param === 'upcoming') {
-          this.movies = response.results.filter(val => moment(val.release_date).isAfter(moment().startOf('year')));
+          this.movies = response.results.filter(val => dayjs(val.release_date).isAfter(dayjs().startOf('year')));
         } else {
           this.movies = response.results;
         }

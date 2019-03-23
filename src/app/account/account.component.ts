@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../core/auth/auth.service';
 import { AccountDeleteModalComponent } from './account-delete-modal/account-delete-modal.component';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -36,7 +36,7 @@ export class AccountComponent implements OnInit, OnDestroy {
         this.email = authData.email;
         this.photoURL = authData.photoURL;
         this.notPhotoURL = authData.displayName.slice(0, 1);
-        this.creationTime = moment(authData.metadata['creationTime']).format('YYYY-MM-D');
+        this.creationTime = dayjs(authData.metadata['creationTime']).format('YYYY-MM-D');
       }
     });
   }
