@@ -1,6 +1,12 @@
 @import 'assets/scss/custom_theme';
 @import 'assets/scss/palette';
 
+@font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    src: local("Roboto"), url("./assets/fonts/roboto-v18-latin-regular.woff2") format("woff2");
+  }
 html {
     box-sizing: border-box;
 }
@@ -14,7 +20,7 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto";
     font-size: 1rem;
     background-color: $white;
 }
@@ -148,3 +154,21 @@ h1.mat-dialog-title {
         left: 208px;  
     }
 }
+
+
+.cdk-virtual-scroll-data-source-example .example-viewport {
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+  }
+  
+  .cdk-virtual-scroll-data-source-example .example-viewport .cdk-virtual-scroll-content-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .cdk-virtual-scroll-data-source-example .example-item {
+    width: 50px;
+    height: 100%;
+    writing-mode: vertical-lr;
+  }
