@@ -6,6 +6,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieComponent } from './movies/movie/movie.component';
 import { SettingsComponent } from './settings/settings.component';
+import { MovieGenresComponent } from './movies/movie-genres/movie-genres.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesComponent, children: [
@@ -13,6 +14,7 @@ const routes: Routes = [
     { path: 'genre', component: MovieListComponent },
     { path: 'movie/:id', component: MovieComponent},
     { path: 'search', component: MovieListComponent},
+    { path: 'test', component: MovieGenresComponent},
     { path: '', redirectTo: '/movies/list/now-playing', pathMatch: 'full' }
   ] },
   { path: 'about', loadChildren: 'app/about/about.module#AboutModule'},

@@ -27,6 +27,9 @@ import { LogUpdateService } from './shared/service/sw/log-update.service';
 import { PromptUpdateService } from './shared/service/sw/prompt-update.service';
 /* SHARED */
 import { SharedModule } from './shared/shared.module';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MovieGenresComponent } from './movies/movie-genres/movie-genres.component';
+
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any> {
@@ -45,7 +48,8 @@ export function createTranslateLoader(http: HttpClient) {
     MoviesComponent,
     MovieListComponent,
     MovieComponent,
-    SettingsComponent
+    SettingsComponent,
+    MovieGenresComponent
   ],
   imports: [
     AppRoutingModule,
@@ -65,7 +69,8 @@ export function createTranslateLoader(http: HttpClient) {
     SharedModule.forRoot(),
     LazyLoadImageModule,
     AngularFireModule.initializeApp(environment.firebase),
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    ScrollingModule
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },

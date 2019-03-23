@@ -1,0 +1,7 @@
+<p>
+  movie-genres works!
+</p>
+
+<cdk-virtual-scroll-viewport orientation="horizontal" itemSize="3" class="example-viewport">
+  <div *cdkVirtualFor="let item of request" class="example-item">{{item.name}}</div>
+</cdk-virtual-scroll-viewport>

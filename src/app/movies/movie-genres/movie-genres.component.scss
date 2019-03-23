@@ -1,0 +1,16 @@
+.example-viewport {
+    height: 50px;
+    width: 200px;
+    margin: 0 auto;
+  }
+
+.example-viewport .cdk-virtual-scroll-content-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+.example-item {
+    margin: 0 5px;
+    color: white;
+  }
+  

@@ -25,6 +25,10 @@ export class TmdbService {
   constructor(private http: HttpClient, private storageService: StorageService) {
   }
 
+  getGenre() {
+    return this.http.get<any>(`${this.url_genre}/movie/list?api_key=${this.api_key}`);
+  }
+
   getMovie(category: string, page: number, lang: string, adult?: string) {
     switch (category) {
       case 'now-playing': return this.getNowPlaying(page, lang);
