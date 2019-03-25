@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ngsw-config": "node_modules/.bin/ngsw-config dist ./src/ngsw-config.json",
-    "serve:ngsw": "npm run ngsw-config && http-server dist -p 8080"
+    "serve:ngsw": "npm run ngsw-config && http-server dist -p 8080",
+    "bundle-report": "ng build --prod --stats-json && webpack-bundle-analyzer dist/hub-movies/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -48,6 +49,7 @@
     "@types/jasmine": "2.8.9",
     "@types/node": "~8.0.30",
     "codelyzer": "4.5.0",
+    "http-server": "^0.11.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^4.0.0",
@@ -58,6 +60,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.4.2",
     "ts-node": "~5.0.1",
-    "tslint": "~5.11.0"
+    "tslint": "~5.11.0",
+    "webpack-bundle-analyzer": "^3.1.0"
   }
 }
