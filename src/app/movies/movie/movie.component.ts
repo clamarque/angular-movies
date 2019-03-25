@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, ParamMap, Event as NavigationEvent } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DatabaseService } from '../../shared/service/database/database.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
@@ -9,7 +9,6 @@ import { forkJoin ,  Subscription } from 'rxjs';
 
 import { MovieCastModel } from '../shared/movie-cast.model';
 import { MovieCrewModel } from '../shared/movie-crew.model';
-import { MovieVideosModel } from '../shared/movie-videos.model';
 import { Location } from '@angular/common';
 import { MovieModel } from '../shared/movie.model';
 import { MovieDetailsModel } from '../shared/movie-details.model';

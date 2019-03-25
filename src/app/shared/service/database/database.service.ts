@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
-import { Observable } from '@firebase/util';
-import { MovieDatabaseModel } from '../../../shared/model/movie-database.model';
-import { MovieModel } from '../../../movies/shared/movie.model';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 @Injectable()
 export class DatabaseService {
   uid = '';

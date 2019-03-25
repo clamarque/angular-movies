@@ -1,4 +1,3 @@
-import { MovieVideosModel } from './movie-videos.model';
 import { MovieGenreModel } from './movie-genre.model';
 
 export interface MovieModel {

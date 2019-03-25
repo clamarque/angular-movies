@@ -1,5 +1,4 @@
 import { MovieModel } from './movie.model';
-import { MovieGenreModel } from './movie-genre.model';
 
 export interface MovieCategoryModel {
     page: number;

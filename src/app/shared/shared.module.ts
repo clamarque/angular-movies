@@ -3,7 +3,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedMaterialModule } from './shared-material.module';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { ShareModalComponent } from './component/share-modal/share-modal.component';
 import { DatabaseService } from './service/database/database.service';
 import { TmdbService } from './service/tmdb/tmdb.service';
