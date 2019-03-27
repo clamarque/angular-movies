@@ -22,7 +22,7 @@ This app has been checked by the open source tool, [**lighthouse**](https://gith
 
 - :heart_eyes: **Progressive Web App**: 100 / 100
 
-- :cry: **Performance**: 35 / 100
+- :cry: **Performance**: 83 / 100
 
 - :ok_hand: **Accessibility**: 100 / 100
 
@@ -47,6 +47,23 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 * Keep navigation when you are offline !
 
 My purpose is to built a great application as allocine or tv show time, using the power of Angular.
+
+## Update font
+
+Enter in navigator, this URL: https://fonts.googleapis.com/icon?family=Material+Icons
+
+Get the URL in code, like this: 
+
+<code>
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
+}
+</code>
+
+Put the URL in the navigator for download the file.
 
 ## Become a contributor ?
 
