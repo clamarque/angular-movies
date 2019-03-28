@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
-
 
 @Component({
   selector: 'app-share-modal',
@@ -23,7 +22,7 @@ export class ShareModalComponent {
 
   copyLink(movieId) {
     const inputElement = document.getElementById('inputId');
-    (<any>inputElement).select();
+    (inputElement as any).select();
     document.execCommand('copy');
     inputElement.blur();
     this.translateService.get('Error.Link').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));

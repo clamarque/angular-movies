@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 
-const translations: any = {'foo': 'bar'};
+const translations: any = {foo: 'bar'};
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {

@@ -6,7 +6,7 @@ import { MatIconModule, MatSlideToggleModule, MatSelectModule } from '@angular/m
 import { FormsModule } from '@angular/forms';
 import { StorageService } from '../shared/service/storage/storage.service';
 
-const translations: any = {'foo': 'bar'};
+const translations: any = {foo: 'bar'};
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {

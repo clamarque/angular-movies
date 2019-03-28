@@ -16,7 +16,7 @@ export class DatabaseService {
   addCategories(name: string, callback: any) {
     const category = {
       userId: this.uid,
-      name: name
+      name
     };
 
     return this.dbf.doc(`Categories/${this.uid}_${name}`)
@@ -46,7 +46,7 @@ export class DatabaseService {
           popularity: movie.popularity,
           release_date: movie.release_date,
           poster_path: movie.poster_path,
-          category: category,
+          category,
           status: movie.status || null,
           watched: false
         };
@@ -77,7 +77,7 @@ export class DatabaseService {
       popularity: movie.popularity,
       release_date: movie.release_date,
       poster_path: movie.poster_path,
-      category: category,
+      category,
       status: movie.status || null,
       watched: false
     };
@@ -96,7 +96,7 @@ export class DatabaseService {
   updateMovieCategoriesDefault(movieId: number, watched: boolean, callback: any) {
     this.dbf.doc(`MovieLater/${this.uid}_${movieId}`)
     .update({
-      'watched': watched
+      watched
     })
     .then(success => callback())
     .catch(err => callback(err));

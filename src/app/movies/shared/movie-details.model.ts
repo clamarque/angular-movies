@@ -3,7 +3,7 @@ import { MovieGenreModel } from './movie-genre.model';
 export interface MovieDetailsModel {
     adult: boolean;
     backdrop_path: string;
-    belongs_to_collection: Object;
+    belongs_to_collection: any;
     budget: number;
     genres: MovieGenreModel[];
     homepage: string;

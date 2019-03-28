@@ -1,26 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CategoriesComponent } from './categories.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import {
-  MatProgressSpinnerModule,
+  MatDialogModule,
   MatIconModule,
   MatListModule,
   MatMenuModule,
-  MatTabsModule,
-  MatTooltipModule,
+  MatProgressSpinnerModule,
   MatSnackBarModule,
-  MatDialogModule
+  MatTabsModule,
+  MatTooltipModule
 } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
-
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { DatabaseService } from '../shared/service/database/database.service';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
+import { DatabaseService } from '../shared/service/database/database.service';
+import { CategoriesComponent } from './categories.component';
 
-const translations: any = {'foo': 'bar'};
+const translations: any = {foo: 'bar'};
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {

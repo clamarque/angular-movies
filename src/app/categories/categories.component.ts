@@ -14,8 +14,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit, OnDestroy {
-  movies: Array<Object>;
-  getCategories: Array<Object>;
+  movies: Array<any>;
+  getCategories: Array<any>;
   isLoadingResults: boolean;
   sub: Subscription;
   categories = [];
@@ -36,7 +36,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
     this.sub = this.databaseService.getAllCategoriesUser().subscribe(response => {
       this.getCategories = response;
-      this.categories = this.getCategories.map(value => value['name']);
+      this.categories = this.getCategories.map(value => value.name);
     });
   }
 
@@ -83,8 +83,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   }
 
   shareDialog(movie: MovieDatabaseModel) {
-    console.log('e', event);
-    const dialogRef = this.dialog.open(ShareModalComponent, {
+    this.dialog.open(ShareModalComponent, {
       data: { id: movie.movieId, original_title: movie.original_title }
     });
   }

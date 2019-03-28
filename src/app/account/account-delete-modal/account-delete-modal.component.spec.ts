@@ -1,11 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { AccountDeleteModalComponent } from './account-delete-modal.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
+import { AccountDeleteModalComponent } from './account-delete-modal.component';
 
-const translations: any = {'foo': 'bar'};
+const translations: any = {foo: 'bar'};
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {

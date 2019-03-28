@@ -1,31 +1,27 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
+import { async, TestBed } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import {
   MatFormFieldModule,
   MatIconModule,
+  MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
-  MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { Observable, of } from 'rxjs';
 import { AppComponent } from './app.component';
-
 import { AuthService } from './core/auth/auth.service';
 import { StorageService } from './shared/service/storage/storage.service';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { Observable, of} from 'rxjs';
-import { ServiceWorkerModule } from '@angular/service-worker';
-
-const translations: any = {'foo': 'bar'};
+const translations: any = {foo: 'bar'};
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {

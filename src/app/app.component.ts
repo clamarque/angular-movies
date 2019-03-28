@@ -6,8 +6,6 @@ import { AuthService } from './core/auth/auth.service';
 import { StorageService } from './shared/service/storage/storage.service';
 import { TranslateService } from '@ngx-translate/core';
 
-import { SwUpdate } from '@angular/service-worker';
-
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -15,7 +13,8 @@ import { SwUpdate } from '@angular/service-worker';
 })
 export class AppComponent implements OnInit, OnDestroy {
     mobileQuery: MediaQueryList;
-    lang: string = this.storageService.read('language');
+    lang: string;
+// tslint:disable-next-line: variable-name
     private _mobileQueryListener: () => void;
     @ViewChild('snav') snav: any;
 
@@ -27,42 +26,29 @@ export class AppComponent implements OnInit, OnDestroy {
         private snackbar: MatSnackBar,
         private storageService: StorageService,
         public translateService: TranslateService,
-        private swUpdate: SwUpdate
     ) {
         this.mobileQuery = media.matchMedia('(max-width: 731px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+// tslint:disable-next-line: deprecation
         this.mobileQuery.addListener(this._mobileQueryListener);
         this.translateService.setDefaultLang('en-US');
     }
 
     ngOnInit() {
-        if (!this.lang) {
-            this.storageService.save('language', 'en-US');
-        }
-        const lang = this.storageService.read('language');
-        this.translateService.use(lang);
-        if (this.swUpdate.isEnabled) {
-            this.swUpdate.available.subscribe(() => {
-                if (confirm('New version available. Load New Version?')) {
-                    location.reload();
-                }
-            });
-        }
+        this.lang = this.storageService.read('language');
+        !this.lang ? this.storageService.save('language', 'en-US') : this.lang = this.lang;
+        this.translateService.use(this.lang);
     }
 
     ngOnDestroy(): void {
+// tslint:disable-next-line: deprecation
         this.mobileQuery.removeListener(this._mobileQueryListener);
       }
 
     @HostListener('window:scroll', ['$event']) scrollHandler(event) {
-        const number = window.scrollY;
+        const height = window.scrollY;
         const el = document.getElementById('btn-returnToTop');
-        if (number >= 500) {
-            el.className = 'show';
-
-        } else {
-            el.className = 'hide';
-        }
+        height >= 500 ? el.className = 'show' : el.className = 'hide';
     }
 
     scrollTop() {
@@ -70,11 +56,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     searchMovie(term: string) {
-        if (term === '') {
-            this.router.navigate(['/movies/list/now-playing']);
-        } else {
-            this.router.navigate(['/movies/search', { term: term }]);
-        }
+        term === '' ? this.router.navigate(['/movies/list/now-playing']) : this.router.navigate(['/movies/search', { term }]);
     }
 
     onSignOut() {

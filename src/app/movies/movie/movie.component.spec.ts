@@ -1,33 +1,30 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import {
-  MatProgressSpinnerModule,
+  MatDialogModule,
   MatIconModule,
-  MatMenuModule,
-  MatTabsModule,
-  MatSnackBarModule,
   MatListModule,
-  MatDialogModule} from '@angular/material';
+  MatMenuModule,
+  MatProgressSpinnerModule,
+  MatSnackBarModule,
+  MatTabsModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-
-import { MovieComponent } from './movie.component';
-
-import { AuthService } from '../../core/auth/auth.service';
-import { DatabaseService } from '../../shared/service/database/database.service';
-import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
-import { StorageService } from '../../shared/service/storage/storage.service';
-
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import 'hammerjs';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
+import { AuthService } from '../../core/auth/auth.service';
+import { DatabaseService } from '../../shared/service/database/database.service';
+import { StorageService } from '../../shared/service/storage/storage.service';
+import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
+import { MovieComponent } from './movie.component';
 
-const translations: any = {'foo': 'bar'};
+const translations: any = {foo: 'bar'};
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {

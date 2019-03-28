@@ -18,7 +18,7 @@ import { StorageService } from '../shared/service/storage/storage.service';
 export class StarComponent implements OnInit {
   person: MoviePersonModel;
   movies: MovieCastModel[];
-  tv_credits: TvCastModel[];
+  tvCredits: TvCastModel[];
   isLoadingResults: boolean;
   lang: string;
 
@@ -37,11 +37,11 @@ export class StarComponent implements OnInit {
     const getPersonMovies = this.tmdbService.getPersonMovies(+id, this.lang);
     const getPersonTv = this.tmdbService.getPersonTv(+id, this.lang);
 
-    forkJoin(getPerson, getPersonMovies, getPersonTv).subscribe(([person, movies, tv_credits]) => {
+    forkJoin(getPerson, getPersonMovies, getPersonTv).subscribe(([person, movies, tvCredits]) => {
       this.isLoadingResults = false;
       this.person = person;
       this.movies = movies.cast.slice(0, 10);
-      this.tv_credits = tv_credits.cast.slice(0, 10);
+      this.tvCredits = tvCredits.cast.slice(0, 10);
     });
 
   }

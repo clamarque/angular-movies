@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs';
 import { AuthService } from '../core/auth/auth.service';
 import { SignInComponent } from './sign-in.component';
 
-const translations: any = {'foo': 'bar'};
+const translations: any = {foo: 'bar'};
 
 class FakeLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {

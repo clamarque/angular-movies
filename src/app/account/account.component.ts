@@ -16,7 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class AccountComponent implements OnInit, OnDestroy {
   displayName: string;
   email: string;
-  photoURL: Object;
+  photoURL: string;
   notPhotoURL: string;
   sub: Subscription;
   creationTime: string;
@@ -36,7 +36,7 @@ export class AccountComponent implements OnInit, OnDestroy {
         this.email = authData.email;
         this.photoURL = authData.photoURL;
         this.notPhotoURL = authData.displayName.slice(0, 1);
-        this.creationTime = dayjs(authData.metadata['creationTime']).format('YYYY-MM-D');
+        this.creationTime = dayjs(authData.metadata.creationTime).format('YYYY-MM-D');
       }
     });
   }

@@ -23,9 +23,9 @@ export class StorageService {
   clear() {
     sessionStorage.clear();
   }
-
-  /**
- * private function settable or gettable data
+/**
+ *
+ * Private function settable or gettable data
  */
 
   private getSettable(value: any): string {
@@ -43,8 +43,10 @@ export class StorageService {
   }
 
   /**
- * private function to encrypt and decrypt data in local storage
- */
+   *
+   * Private function to encrypt and decrypt data in localstorage
+   */
+
   private encode(value: string) {
     let encodedItem = btoa(value);
     encodedItem = encodedItem + '/d6mTWZon';

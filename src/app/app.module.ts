@@ -21,18 +21,14 @@ import { MoviesComponent } from './movies/movies.component';
 import { PageNotFoundComponent } from './not-found.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StorageService } from './shared/service/storage/storage.service';
-/* SERVICES */
-import { CheckForUpdateService } from './shared/service/sw/check-for-update.service';
-import { LogUpdateService } from './shared/service/sw/log-update.service';
-import { PromptUpdateService } from './shared/service/sw/prompt-update.service';
 /* SHARED */
 import { SharedModule } from './shared/shared.module';
 
 export class MyHammerConfig extends HammerGestureConfig {
-  overrides = <any> {
-    'pinch': { enable: false},
-    'rotate': { enable: false}
-  };
+  overrides = {
+    pinch: { enable: false},
+    rotate: { enable: false}
+  } as any;
 }
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -69,9 +65,6 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
-    CheckForUpdateService,
-    LogUpdateService,
-    PromptUpdateService,
     StorageService
   ],
   bootstrap: [AppComponent]
