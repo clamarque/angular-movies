@@ -21,8 +21,8 @@
     "@angular/compiler": "7.2.10",
     "@angular/core": "7.2.10",
     "@angular/fire": "^5.1.2",
-    "@angular/forms": "7.2.10",
     "@angular/http": "7.2.10",
+    "@angular/forms": "~7.2.10",
     "@angular/material": "^7.3.5",
     "@angular/platform-browser": "7.2.10",
     "@angular/platform-browser-dynamic": "7.2.10",
@@ -37,7 +37,6 @@
     "ng-lazyload-image": "4.0.0",
     "rxjs": "^6.4.0",
     "tslib": "^1.9.0",
-    "typescript": "3.2.4",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
@@ -60,6 +59,7 @@
     "protractor": "~5.4.2",
     "ts-node": "~5.0.1",
     "tslint": "~5.11.0",
+    "typescript": "3.2.4",
     "webpack-bundle-analyzer": "^3.1.0"
   }
 }
