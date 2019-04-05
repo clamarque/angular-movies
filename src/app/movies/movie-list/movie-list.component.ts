@@ -39,7 +39,7 @@ export class MovieListComponent implements OnInit {
     private snackBar: MatSnackBar,
     private storageService: StorageService,
     private translateService: TranslateService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.isLoadingResults = true;
@@ -47,6 +47,7 @@ export class MovieListComponent implements OnInit {
     this.adult = this.storageService.read('adult');
 
     this.route.params.subscribe((params: Params) => {
+      console.log(params);
       if (params.term) {
         this.request = this.tmdbService.getSearchMovie(
           params.term,
@@ -74,13 +75,14 @@ export class MovieListComponent implements OnInit {
         this.dataParam = params.name;
       } else {
         this.request = null;
+        this.isLoadingResults = false;
       }
       if (this.request) {
         this.request.subscribe(response => {
           this.parameter === 'upcoming'
             ? (this.movies = response.results.filter(val =>
-                dayjs(val.release_date).isAfter(dayjs().startOf('year'))
-              ))
+              dayjs(val.release_date).isAfter(dayjs().startOf('year'))
+            ))
             : (this.movies = response.results);
 
           this.moviesLength = response.results.length;
@@ -88,7 +90,11 @@ export class MovieListComponent implements OnInit {
           this.title = this.parameter;
           this.totalPages = response.total_pages;
           this.pager = this.tmdbService.getPager(this.totalPages, 1);
+        }, error => {
+          this.isLoadingResults = false;
         });
+      } else {
+        this.isLoadingResults = false;
       }
     });
   }
@@ -147,9 +153,11 @@ export class MovieListComponent implements OnInit {
         this.isLoadingResults = false;
         param === 'upcoming'
           ? (this.movies = response.results.filter(val =>
-              dayjs(val.release_date).isAfter(dayjs().startOf('year'))
-            ))
+            dayjs(val.release_date).isAfter(dayjs().startOf('year'))
+          ))
           : (this.movies = response.results);
+      }, error => {
+        this.isLoadingResults = false;
       });
     }
   }

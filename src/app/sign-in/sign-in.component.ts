@@ -30,7 +30,7 @@ export class SignInComponent {
             this.translateService.get('Error.Welcome').subscribe(results =>
               this.snackBar.open(results + ' ' + authData.displayName , '', { duration: 2000 })
             );
-            this.router.navigate(['/movies/list/now-playing']);
+            this.router.navigate(['/movies/now-playing']);
           }
         });
       }

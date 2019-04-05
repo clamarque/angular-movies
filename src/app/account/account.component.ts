@@ -55,7 +55,7 @@ export class AccountComponent implements OnInit, OnDestroy {
             this.snackBar.open(error, 'hide', { duration: 5000});
           } else {
             this.translateService.get('Error.Delete').subscribe(results => this.snackBar.open(results, '', { duration: 2000 }));
-            this.router.navigate(['/movies/list/now-playing']);
+            this.router.navigate(['/movies/now-playing']);
           }
         });
       }

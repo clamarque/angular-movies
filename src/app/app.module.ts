@@ -18,7 +18,6 @@ import { AppComponent } from './app.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieComponent } from './movies/movie/movie.component';
 import { MoviesComponent } from './movies/movies.component';
-import { PageNotFoundComponent } from './not-found.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StorageService } from './shared/service/storage/storage.service';
 /* SHARED */
@@ -37,7 +36,6 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent,
     MoviesComponent,
     MovieListComponent,
     MovieComponent,

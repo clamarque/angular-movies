@@ -56,13 +56,13 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     searchMovie(term: string) {
-        term === '' ? this.router.navigate(['/movies/list/now-playing']) : this.router.navigate(['/movies/search', { term }]);
+        term === '' ? this.router.navigate(['/movies/now-playing']) : this.router.navigate(['/movies/search', { term }]);
     }
 
     onSignOut() {
         this.authService.signOut();
         this.translateService.get('Error.Goodbye').subscribe(results => this.snackbar.open(results, '', { duration: 2000 }));
-        this.router.navigate(['/movies/list/now-playing']);
+        this.router.navigate(['/movies/now-playing']);
     }
 
     closeSidenav() {
