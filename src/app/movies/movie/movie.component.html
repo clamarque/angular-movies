@@ -82,7 +82,7 @@
     <mat-tab label="{{'Movie.Similar' | translate}}">
       <section class="movie--similar items" *ngIf="similarMovies">
         <div class="item" *ngFor="let movie of similarMovies">
-          <a [routerLink]="['/movies/movie', movie.id]">
+          <a [routerLink]="['/movie', movie.id]">
             <img *ngIf="movie.poster_path" [defaultImage]="'assets/images/no_poster_available.jpg'" [lazyLoad]="'https://image.tmdb.org/t/p/w185/' + movie.poster_path"
               alt="poster movie">
             <img *ngIf="!movie.poster_path" src="assets/images/no_poster_available.jpg" alt="No poster available">

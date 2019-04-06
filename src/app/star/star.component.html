@@ -16,7 +16,7 @@
     <mat-tab label="{{'Star.Known in movies' | translate}}">
       <section class="items" *ngIf="movies">
         <div class="item" *ngFor="let movie of movies">
-          <a [routerLink]="['/movies/movie', movie.id]">
+          <a [routerLink]="['/movie', movie.id]">
             <img *ngIf="movie.poster_path" [defaultImage]="'assets/images/no_poster_available.jpg'" [lazyLoad]="'https://image.tmdb.org/t/p/w185/' + movie.poster_path"
               alt="poster movie">
             <img *ngIf="!movie.poster_path" src="assets/images/no_poster_available.jpg" alt="No poster available">
