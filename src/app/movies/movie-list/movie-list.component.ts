@@ -47,7 +47,6 @@ export class MovieListComponent implements OnInit {
     this.adult = this.storageService.read('adult');
 
     this.route.params.subscribe((params: Params) => {
-      console.log(params);
       if (params.term) {
         this.request = this.tmdbService.getSearchMovie(
           params.term,
