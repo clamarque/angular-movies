@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
-import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieComponent } from './movies/movie/movie.component';
 import { MoviesComponent } from './movies/movies.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -9,7 +8,7 @@ import { SettingsComponent } from './settings/settings.component';
 const routes: Routes = [
   { path: 'movies/:category', component: MoviesComponent },
   { path: 'movie/:id', component: MovieComponent },
-  { path: 'genre', component: MovieListComponent },
+  { path: 'genre', component: MoviesComponent },
   { path: 'about', loadChildren: 'app/about/about.module#AboutModule' },
   { path: 'playlist', loadChildren: 'app/playlist/playlist.module#PlaylistModule', canActivate: [AuthGuard] },
   { path: 'categories', loadChildren: 'app/categories/categories.module#CategoriesModule', canActivate: [AuthGuard] },

@@ -1,9 +1,9 @@
 <h2 *ngIf="!dataParam">{{title}}</h2>
 <h2 *ngIf="dataParam">{{dataParam}}</h2>
-<div class="loading-shade" *ngIf="isLoadingResults">
-  <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+<div class="loading-shade" *ngIf="loading">
+  <mat-spinner *ngIf="loading"></mat-spinner>
 </div>
-<div class="items" *ngIf="moviesLength > 0; else noData" (swipeleft)="swipe(pager.currentPage +1, $event.type)" (swiperight)="swipe(pager.currentPage -1, $event.type)">
+<div class="items" *ngIf="movies && movies.length > 0; else noData">
   <div class="item" *ngFor="let movie of movies trackBy: movieById">
     <a [routerLink]="['/movie', movie.id]">
       <img *ngIf="movie.poster_path" [defaultImage]="'assets/images/no_poster_available.jpg'" [lazyLoad]="'https://image.tmdb.org/t/p/w185/' + movie.poster_path"
@@ -24,32 +24,3 @@
     <mat-icon>sentiment_very_dissatisfied</mat-icon>
   </h3>
 </ng-template>
-<footer class="pagination" *ngIf="moviesLength > 0">
-  <nav>
-    <ul>
-      <li [ngClass]="{disabled:pager.currentPage === 1}">
-        <a (click)="setPage(parameter, 1)">
-          <mat-icon>first_page</mat-icon>
-        </a>
-      </li>
-      <li [ngClass]="{disabled:pager.currentPage === 1}">
-        <a (click)="setPage(parameter, pager.currentPage - 1)">
-          <mat-icon>chevron_left</mat-icon>
-        </a>
-      </li>
-      <li *ngFor="let page of pager.pages" [ngClass]="{disabled:pager.currentPage === page}">
-        <a (click)="setPage(parameter, page)">{{page}}</a>
-      </li>
-      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <a (click)="setPage(parameter, pager.currentPage + 1)">
-          <mat-icon>chevron_right</mat-icon>
-        </a>
-      </li>
-      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <a (click)="setPage(parameter, pager.totalPages)">
-          <mat-icon>last_page</mat-icon>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</footer>

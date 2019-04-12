@@ -1,1 +1,21 @@
-<app-movie-list></app-movie-list>
+<div (swipeleft)="swipe(pager.currentPage -1)" (swiperight)="swipe(pager.currentPage +1)">
+<ng-template [ngIf]="movies">
+  <app-movie-list
+    [loading]="isLoadingResults"
+    [movies]="movies"
+    [lang]="lang"
+    [adult]="adult"
+    [totalPages]="totalPages"
+    [currentPage]="currentPage"
+    [title]="title"
+    [dataParam]="dataParam"
+  >
+  </app-movie-list>
+</ng-template>
+<ng-template [ngIf]="movies">
+  <app-pagination
+    [pager]="pager"
+    (currentPage)="setPage($event)">
+  ></app-pagination>
+</ng-template>
+</div>

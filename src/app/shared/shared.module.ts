@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ShareModalComponent } from './component/share-modal/share-modal.component';
 import { DatabaseService } from './service/database/database.service';
 import { TmdbService } from './service/tmdb/tmdb.service';
+import { PaginationComponent } from './component/pagination/pagination.component';
 
 @NgModule({
   imports: [
@@ -20,15 +21,18 @@ import { TmdbService } from './service/tmdb/tmdb.service';
     CommonModule,
     FormsModule,
     ShareModalComponent,
+    PaginationComponent,
     CdkTableModule,
     SharedMaterialModule,
     TranslateModule
   ],
   declarations: [
-    ShareModalComponent
+    ShareModalComponent,
+    PaginationComponent
   ],
   entryComponents: [
-    ShareModalComponent
+    ShareModalComponent,
+    PaginationComponent
   ],
 })
 export class SharedModule {
