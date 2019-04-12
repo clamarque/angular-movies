@@ -16,9 +16,6 @@ export class MovieListComponent {
   @Input() movies: MovieModel[];
   @Input() adult: string;
   @Input() lang: string;
-  @Input() currentPage: number;
-  @Input() totalPages: number;
-  @Input() pager: any;
   @Input() dataParam: string;
 
   constructor(
