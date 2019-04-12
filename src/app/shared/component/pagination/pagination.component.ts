@@ -6,7 +6,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent {
-  @Input() pager: any;
+  @Input() pager: any = {};
   @Output() currentPage = new EventEmitter<number>();
 
   setPage(page: number) {

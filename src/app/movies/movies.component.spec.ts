@@ -14,6 +14,7 @@ import { Observable, of } from 'rxjs';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { MoviesComponent } from './movies.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { PaginationComponent } from 'app/shared/component/pagination/pagination.component';
 
 const firebaseConfig = {
   apiKey: 'foo',
@@ -51,7 +52,7 @@ describe('MoviesComponent', () => {
           loader: {provide: TranslateLoader, useClass: FakeLoader},
         })
       ],
-      declarations: [ MoviesComponent, MovieListComponent ],
+      declarations: [ MoviesComponent, MovieListComponent, PaginationComponent ],
       providers: [
         AuthService,
         AngularFireAuthModule,
