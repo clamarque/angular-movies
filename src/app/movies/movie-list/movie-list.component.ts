@@ -98,6 +98,10 @@ export class MovieListComponent implements OnInit {
     });
   }
 
+  movieById(movie: MovieModel) {
+    return movie.id;
+  }
+
   swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT) {
     if (
       action === this.SWIPE_ACTION.RIGHT ||
