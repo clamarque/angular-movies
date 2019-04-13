@@ -48,7 +48,6 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    console.log(this.loading);
     this.lang = this.storageService.read('language');
     this.adult = this.storageService.read('adult');
     this.currentPage = 1;
