@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieCategoryModel } from './shared/movie-category.model';
 import { MovieModel } from './shared/movie.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'app/core/auth/auth.service';
 import { TmdbService } from 'app/shared/service/tmdb/tmdb.service';
-import { ActivatedRoute, Params } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { ActivatedRoute, Params, NavigationEnd, Router } from '@angular/router';
 import { StorageService } from 'app/shared/service/storage/storage.service';
 import * as dayjs from 'dayjs';
 
@@ -23,47 +22,38 @@ export class MoviesComponent implements OnInit {
   pager: any = {};
   totalPages: number;
   title: string | number;
-  isLoadingResults: boolean;
+  loading: boolean;
   lang: string;
   adult: string;
   moviesType: any;
+  navigationSubscription: Subscription;
 
   constructor(
     public authService: AuthService,
     private tmdbService: TmdbService,
     private route: ActivatedRoute,
     private storageService: StorageService,
-  ) { }
+    private router: Router
+  ) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.reloadPagination();
+      }
+    });
+    this.route.params.subscribe((params: Params) => {
+      this.moviesType = params;
+    });
+  }
 
   ngOnInit() {
-    this.isLoadingResults = true;
+    this.loading = true;
+    console.log(this.loading);
     this.lang = this.storageService.read('language');
     this.adult = this.storageService.read('adult');
     this.currentPage = 1;
     const getCurrentPage: string = sessionStorage.getItem('hubmovies-current-page');
     getCurrentPage ? this.currentPage = Number(getCurrentPage) : this.currentPage = 1;
-
-    this.route.params.subscribe((params: Params) => {
-      this.moviesType = params;
-      this.getMovies(this.currentPage, this.moviesType);
-    });
-  }
-
-  swipe(currentIndex: number) {
-    this.setPage(currentIndex);
-  }
-
-  setPage(page: number) {
-    this.isLoadingResults = true;
-    if (page < 1 || page > this.pager.totalPages) {
-      this.isLoadingResults = false;
-      return;
-    }
-
-    this.pager = this.tmdbService.getPager(this.totalPages, page);
-    this.currentPage = this.pager.currentPage;
-    sessionStorage.setItem('hubmovies-current-page', this.currentPage.toString());
-    this.getMovies(this.currentPage, this.moviesType );
   }
 
   getMovies(currentPage: number, params: any) {
@@ -94,7 +84,7 @@ export class MoviesComponent implements OnInit {
       this.dataParam = params.name;
     } else {
       this.request = null;
-      this.isLoadingResults = false;
+      this.loading = false;
     }
 
     if (this.request) {
@@ -105,15 +95,41 @@ export class MoviesComponent implements OnInit {
           ))
           : (this.movies = response.results);
 
-        this.isLoadingResults = false;
+        this.loading = false;
         this.title = this.parameter;
         this.totalPages = response.total_pages;
         this.pager = this.tmdbService.getPager(this.totalPages, currentPage);
       }, error => {
-        this.isLoadingResults = false;
+        this.loading = false;
       });
     }
-    this.isLoadingResults = false;
+    this.loading = false;
+  }
+
+  reloadPagination() {
+    const findPagination = sessionStorage.getItem('hubmovies-current-page');
+    findPagination
+      ? (this.currentPage = Number(findPagination))
+      : (this.currentPage = 1);
+    // this.setPage(this.currentPage);
+    this.getMovies(this.currentPage, this.moviesType);
+  }
+
+  swipe(currentIndex: number) {
+    this.setPage(currentIndex);
+  }
+
+  setPage(page: number) {
+    this.loading = true;
+    if (page < 1 || page > this.pager.totalPages) {
+      this.loading = false;
+      return;
+    }
+    this.pager = this.tmdbService.getPager(this.totalPages, page);
+    this.currentPage = this.pager.currentPage;
+    sessionStorage.setItem('hubmovies-current-page', this.currentPage.toString());
+
+    this.getMovies(this.currentPage, this.moviesType);
   }
 
 }

@@ -72,10 +72,12 @@ export class TmdbService {
   getPersonTv(personID: number, lang: string): Observable<TvCreditsModel> {
     return this.http.get<TvCreditsModel>(`${this.URL_PERSON}/${personID}/tv_credits?api_key=${this.API_KEY}&language=${lang}`);
   }
-  getPager(totalItems: number, currentPage: number = 1) {
-    let totalPages = totalItems;
+  getPager(totalPages: number, currentPage: number = 1) {
     let startPage = 0;
     let endPage = 0;
+    if (totalPages >= 1000) {
+      totalPages = 1000;
+    }
     if (totalPages <= 10) {
       // less than 10 total pages so show all
       startPage = 1;
@@ -86,12 +88,13 @@ export class TmdbService {
         startPage = 1;
         endPage = 10;
       } else if (currentPage + 4 >= totalPages) {
-        if (currentPage >= 1000) {
-          currentPage = 1000;
-          totalPages = 1000;
-        }
         startPage = totalPages - 9;
         endPage = totalPages;
+      } else if (currentPage >= 1000) {
+        startPage = currentPage - 5;
+        currentPage = 1000;
+        totalPages = 1000;
+        endPage = 1000;
       } else {
         startPage = currentPage - 5;
         endPage = currentPage + 4;
@@ -103,7 +106,6 @@ export class TmdbService {
 
     // return object with all pager properties required by the view
     return {
-      totalItems,
       currentPage,
       totalPages,
       startPage,

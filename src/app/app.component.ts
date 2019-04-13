@@ -71,4 +71,8 @@ export class AppComponent implements OnInit, OnDestroy {
         }
     }
 
+    resetPagination() {
+        sessionStorage.setItem('hubmovies-current-page', '1');
+    }
+
 }

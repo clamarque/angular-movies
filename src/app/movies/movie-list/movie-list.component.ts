@@ -12,7 +12,6 @@ import { MovieModel } from '../shared/movie.model';
 })
 export class MovieListComponent {
   @Input() title: string | number;
-  @Input() loading: boolean;
   @Input() movies: MovieModel[];
   @Input() adult: string;
   @Input() lang: string;

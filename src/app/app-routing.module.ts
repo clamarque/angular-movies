@@ -6,9 +6,9 @@ import { MoviesComponent } from './movies/movies.component';
 import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
-  { path: 'movies/:category', component: MoviesComponent },
+  { path: 'movies/:category', component: MoviesComponent, runGuardsAndResolvers: 'always' },
   { path: 'movie/:id', component: MovieComponent },
-  { path: 'genre', component: MoviesComponent },
+  { path: 'genre', component: MoviesComponent, runGuardsAndResolvers: 'always' },
   { path: 'about', loadChildren: 'app/about/about.module#AboutModule' },
   { path: 'playlist', loadChildren: 'app/playlist/playlist.module#PlaylistModule', canActivate: [AuthGuard] },
   { path: 'categories', loadChildren: 'app/categories/categories.module#CategoriesModule', canActivate: [AuthGuard] },
@@ -21,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 
