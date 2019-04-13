@@ -19,14 +19,14 @@ export class MoviesComponent implements OnInit {
   movies: MovieModel[];
   currentPage: number;
   parameter: string | number;
-  pager: any = {};
+  pager: { currentPage: number; totalPages: number; startPage: number; endPage: number; pages: number[]; };
   totalPages: number;
   title: string | number;
   loading: boolean;
   lang: string;
   adult: string;
-  moviesType: any;
   navigationSubscription: Subscription;
+  moviesType: Params;
 
   constructor(
     public authService: AuthService,
@@ -55,7 +55,7 @@ export class MoviesComponent implements OnInit {
     getCurrentPage ? this.currentPage = Number(getCurrentPage) : this.currentPage = 1;
   }
 
-  getMovies(currentPage: number, params: any) {
+  getMovies(currentPage: number, params: Params) {
     if (params.term) {
       this.request = this.tmdbService.getSearchMovie(
         params.term,

@@ -10,7 +10,8 @@ import {
   MatMenuModule,
   MatProgressSpinnerModule,
   MatSnackBarModule,
-  MatTabsModule
+  MatTabsModule,
+  MatTooltipModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -23,6 +24,7 @@ import { DatabaseService } from '../../shared/service/database/database.service'
 import { StorageService } from '../../shared/service/storage/storage.service';
 import { TmdbService } from '../../shared/service/tmdb/tmdb.service';
 import { MovieComponent } from './movie.component';
+import { MovieListComponent } from '../movie-list/movie-list.component';
 
 const translations: any = {foo: 'bar'};
 
@@ -61,12 +63,13 @@ describe('MovieComponent', () => {
         MatProgressSpinnerModule,
         MatSnackBarModule,
         MatTabsModule,
+        MatTooltipModule,
         RouterTestingModule,
         TranslateModule.forRoot({
           loader: {provide: TranslateLoader, useClass: FakeLoader},
         })
       ],
-      declarations: [ MovieComponent ],
+      declarations: [ MovieComponent, MovieListComponent ],
       providers: [
         AngularFireAuthModule,
         AuthService,
