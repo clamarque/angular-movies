@@ -135,22 +135,49 @@
     &__tab {
         .movie {
             &--cast {
-                a.mat-list-item {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                margin-top: 30px;
+
+                @media only screen and (max-width: 731px) {
+                    flex-direction: column;
+                }
+
+                .cast {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    align-items: center;
+                    min-width: 200px;
+                    padding: 5px;
+                }
+
+                a {
+                    display: contents;
+
                     &:hover {
                         background: $background;
                     }
                 }
-                /deep/ .mat-list-text {
-                    h3 {
-                        color: $primary-light;
-                        text-align: left;
-                    }
-                
-                    p {
-                        color: $grey;
-                        text-align: left;
-                    }
+
+                .avatar {
+                    flex-shrink: 0;
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    object-fit: cover;
                 }
+            
+                h3 {
+                    color: $primary-light;
+                    margin: 20px 0 0;
+                }
+                
+                p {
+                    color: $grey;
+                    margin: 0 0 20px;
+                }  
             }
             &--trailer {
                 margin: 30px 0;
