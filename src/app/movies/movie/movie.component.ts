@@ -66,7 +66,7 @@ export class MovieComponent implements OnInit {
       forkJoin(dataMovie, castMovie, videoMovie, similarVideo).subscribe(([movie, credits, video, similar]) => {
         this.isLoadingResults = false;
         this.movie = movie;
-        this.cast = credits.cast.slice(0, 10);
+        this.cast = credits.cast;
         this.videos = video.results.slice(0, 1);
         if (this.videos.length > 0) {
           this.getMovieVideoUrl(this.videos[0].key);
