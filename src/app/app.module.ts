@@ -22,6 +22,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { StorageService } from './shared/service/storage/storage.service';
 /* SHARED */
 import { SharedModule } from './shared/shared.module';
+import { MovieTrailerComponent } from './movies/movie/movie-trailer/movie-trailer.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -39,7 +40,8 @@ export function createTranslateLoader(http: HttpClient) {
     MoviesComponent,
     MovieListComponent,
     MovieComponent,
-    SettingsComponent
+    SettingsComponent,
+    MovieTrailerComponent
   ],
   imports: [
     AppRoutingModule,
@@ -61,6 +63,7 @@ export function createTranslateLoader(http: HttpClient) {
     AngularFireModule.initializeApp(environment.firebase),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
+  entryComponents: [MovieTrailerComponent],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
     StorageService

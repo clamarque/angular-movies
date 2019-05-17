@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { MovieCastModel } from '../shared/movie-cast.model';
 import { MovieCrewModel } from '../shared/movie-crew.model';
 import { MovieDetailsModel } from '../shared/movie-details.model';
 import { MovieModel } from '../shared/movie.model';
-
+import { MovieTrailerComponent } from './movie-trailer/movie-trailer.component';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
@@ -25,6 +25,7 @@ export class MovieComponent implements OnInit {
   id: number;
   url: string;
   movie: MovieDetailsModel;
+  moviesUrl: Array<SafeResourceUrl>;
   videos: Array<any>;
   similarMovies: MovieModel[];
   cast: MovieCastModel[];
@@ -67,10 +68,8 @@ export class MovieComponent implements OnInit {
         this.isLoadingResults = false;
         this.movie = movie;
         this.cast = credits.cast;
-        this.videos = video.results.slice(0, 1);
-        if (this.videos.length > 0) {
-          this.getMovieVideoUrl(this.videos[0].key);
-        }
+        this.videos = video.results;
+        this.getUrlFromVideos(this.videos);
         this.similarMovies = similar.results;
       });
     });
@@ -103,8 +102,22 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  getMovieVideoUrl(id: string) {
-    return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + id);
+  getUrlFromVideos(videos: any) {
+    if (!videos || videos.length === 0) {
+      return;
+    }
+    this.moviesUrl = [];
+    for (const video of videos) {
+      const url = this.createUrlFromVideo(video.key);
+      this.moviesUrl.push({
+        name: video.name,
+        url
+      });
+    }
+  }
+
+  createUrlFromVideo(id: string) {
+    return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.baseUrl}/${id}?rel=0;&autoplay=1&mute=1`);
   }
 
   pushMovieCategory(movie: any, category: string) {
@@ -122,4 +135,13 @@ export class MovieComponent implements OnInit {
       data: { id: movie.id, original_title: movie.original_title }
     });
   }
+
+  openDialogTrailer(url: any): void {
+    const dialogRef = this.dialog.open(MovieTrailerComponent, {
+      height: '400px',
+      width: '600px',
+      data: {url}
+    });
+  }
+
 }

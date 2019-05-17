@@ -99,7 +99,7 @@
   </div>
   <mat-tab-group class="movie__tab">
     <mat-tab label="{{ 'Movie.Cast' | translate }}">
-      <section class="movie--cast" *ngIf="cast">
+      <section class="movie--cast" *ngIf="cast.length > 0; else noCast">
         <div class="cast" *ngFor="let person of cast">
           <a [routerLink]="['/star', person.id]">
             <div
@@ -119,16 +119,22 @@
           </a>
         </div>
       </section>
+      <ng-template #noCast>
+        <h3>
+          {{ "Movie-list.No results" | translate }}
+          <mat-icon>sentiment_very_dissatisfied</mat-icon>
+        </h3>
+      </ng-template>
     </mat-tab>
     <mat-tab label="{{ 'Movie.Trailer' | translate }}">
-      <section class="movie--trailer" *ngIf="safeUrl; else noTrailer">
-        <iframe
-          width="560"
-          height="315"
-          [src]="safeUrl"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
+      <section class="movie--trailers" *ngIf="videos.length > 0; else noTrailer">
+        <div class="btn-play" *ngFor="let url of moviesUrl">
+            <button mat-mini-fab color="primary" (click)="openDialogTrailer(url.url)">
+                <mat-icon aria-label="Example icon-button with a heart icon">play_circle_filled_white
+                </mat-icon>
+            </button>
+            <p>{{url.name}}</p>
+        </div>
       </section>
       <ng-template #noTrailer>
         <h3>
