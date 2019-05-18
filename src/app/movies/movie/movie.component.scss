@@ -201,6 +201,10 @@
                     color: #FFF;
                     width: 250px;
                 }
+
+                /deep/ .mat-button-wrapper {
+                    line-height: 21px;
+                }
             }
             &--similar {
                 h3 {
