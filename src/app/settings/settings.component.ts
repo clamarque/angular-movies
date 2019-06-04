@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../shared/service/storage/storage.service';
 import { TranslateService } from '@ngx-translate/core';
-import { MatSlideToggleChange, MatSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-settings',
