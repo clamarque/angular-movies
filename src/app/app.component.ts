@@ -16,7 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
     lang: string;
 // tslint:disable-next-line: variable-name
     private _mobileQueryListener: () => void;
-    @ViewChild('snav') snav: any;
+    @ViewChild('snav', { static: true }) snav: any;
 
     constructor(
         public authService: AuthService,
