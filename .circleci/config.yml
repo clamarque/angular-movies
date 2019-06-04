@@ -17,7 +17,7 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Install Angular
-          command: sudo npm i @angular/cli -g
+          command: sudo npm i @angular/cli -g > /dev/null
       - run:
           name: Install local dependencies
           command: npm install
