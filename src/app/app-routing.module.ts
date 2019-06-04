@@ -11,7 +11,10 @@ const routes: Routes = [
   { path: 'genre', component: MoviesComponent, runGuardsAndResolvers: 'always' },
   { path: 'about', loadChildren: () => import('app/about/about.module').then(m => m.AboutModule) },
   { path: 'playlist', loadChildren: () => import('app/playlist/playlist.module').then(m => m.PlaylistModule), canActivate: [AuthGuard] },
-  { path: 'categories', loadChildren: () => import('app/categories/categories.module').then(m => m.CategoriesModule), canActivate: [AuthGuard] },
+  {
+    path: 'categories',
+    loadChildren: () => import('app/categories/categories.module').then(m => m.CategoriesModule), canActivate: [AuthGuard]
+  },
   { path: 'account', loadChildren: () => import('app/account/account.module').then(m => m.AccountModule), canActivate: [AuthGuard] },
   { path: 'sign-in', loadChildren: () => import('app/sign-in/sign-in.module').then(m => m.SignInModule) },
   { path: 'star/:id', loadChildren: () => import('app/star/star.module').then(m => m.StarModule) },
