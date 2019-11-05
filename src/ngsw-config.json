@@ -12,7 +12,8 @@
         "/*.chunk.js"
       ]
     }
-  }, {
+  },
+   {
     "name": "assets",
     "installMode": "lazy",
     "updateMode": "prefetch",
@@ -21,5 +22,19 @@
         "/assets/**"
       ]
     }
-  }]
+  }],
+  "dataGroups": [
+    {
+      "name": "api-tmdb",
+      "urls": [
+        "https://api.themoviedb.org/3/"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "3d",
+        "timeout": "10s"
+      }
+    }
+  ]
 }
