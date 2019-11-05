@@ -39,24 +39,29 @@
 .navigation {
     &--search {
         background: $primary-light;
-        min-height: 3rem;
+        min-height: 78px;
         line-height: 3;
-        padding: 16px 0 0 20px;
+        padding: 16px 20px 0 40px;
+        color: #222B31;
+        // padding: 16px 0 0 20px;
+        a {
+            color: inherit;
+        }
 
         .mat-form-field {
             width: 180px;
             padding: 0 20px;
             font-size: 13px;
         }
-        /deep/ .mat-form-field-outline {
-            color: $white;
-        }
-        /deep/ .mat-form-field-label {
-            color: $white;
-        }
+        // /deep/ .mat-form-field-outline {
+        //     color: $white;
+        // }
+        // /deep/ .mat-form-field-label {
+        //     color: $white;
+        // }
         .mat-icon {
-            color: $white;
-            height: 1.75rem;
+            // color: $white;
+            // height: 1.75rem;
         }
     }
 
