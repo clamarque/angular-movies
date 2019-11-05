@@ -12,5 +12,6 @@ export const environment = {
     projectId: 'hubmovies-a26fc',
     storageBucket: 'hubmovies-a26fc.appspot.com',
     messagingSenderId: '559417527686'
-  }
+  },
+  API: 'API_TMDB'
 };
