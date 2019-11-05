@@ -32,6 +32,13 @@ jobs:
           name: Testing
           command: ng test --watch=false
       - run:
+          name: SET ENV
+          command: |
+            echo $API_TMDB
+            cat src/environments/environment.prod.ts
+            sed -i "s/API_TMDB/$API_TMDB/g" src/environments/environment.prod.ts
+            cat src/environments/environment.prod.ts
+      - run:
           name: Building
           command: ng build --prod
       - save_cache:
@@ -48,7 +55,8 @@ jobs:
     steps:
       - run:
           name: Deploy Development Branch
-          command: echo ${CIRCLE_BRANCH}
+          command: 
+            echo ${CIRCLE_BRANCH}
 
   deploy_master:
     <<: *defaults
