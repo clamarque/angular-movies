@@ -57,6 +57,17 @@ jobs:
           name: Deploy Development Branch
           command: 
             echo ${CIRCLE_BRANCH}
+      - restore_cache:
+          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Install Firebase
+          command: sudo npm i firebase-tools -g
+      - run:
+          name: use Firebase hosting
+          command: firebase target:apply hosting develop dev-hubmovies
+      - run:
+          name: Deploy Develop to Firebase Dev
+          command: firebase deploy --only hosting:develop --token=$FIREBASE_TOKEN --debug
 
   deploy_master:
     <<: *defaults
