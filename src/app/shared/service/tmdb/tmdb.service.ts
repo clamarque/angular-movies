@@ -11,8 +11,7 @@ import { TvCreditsModel } from '../../../movies/shared/tv-credits.model';
 import { environment } from '../../../../environments/environment';
 @Injectable()
 export class TmdbService {
-  private API_KEY = '431bc17da732dfb3be082e58f7a5cf27';
-  private TEST = environment.API;
+  private API_KEY = environment.API;
   private URL_DISCOVER = 'https://api.themoviedb.org/3/discover/movie';
   private URL_SEARCH = 'https://api.themoviedb.org/3/search/movie';
   private URL_MOVIE = 'https://api.themoviedb.org/3/movie';
@@ -25,7 +24,6 @@ export class TmdbService {
   }
 
   getMovie(category: string, page: number, lang: string, adult?: string) {
-    console.log(this.TEST);
     switch (category) {
       case 'now-playing': return this.getNowPlaying(page, lang);
       case 'upcoming': return this.getUpComing(page, lang);
