@@ -57,6 +57,12 @@ jobs:
           name: Deploy Development Branch
           command: 
             echo ${CIRCLE_BRANCH}
+      - run:
+          name: Install Firebase
+          command: sudo npm i firebase-tools -g
+      - run:
+          name: Deploy Develop to Firebase Dev
+          command: firebase target:apply hosting env dev-hubmovies
 
   deploy_master:
     <<: *defaults
